@@ -5,16 +5,16 @@
 @section('content')
 <div class="container mt-4">
     <h3 class="mb-3">📖 Knowledge & Research</h3>
-    <p>This section will host blog posts, insights, field research data, and articles from the TGG team and global collaborators.</p>
+    <!-- <p>This section will host blog posts, insights, field research data, and articles from the TGG team and global collaborators.</p>
     <ul>
         <li><strong>Blog:</strong> Rethinking Rural Sustainability in India</li>
         <li><strong>Insight:</strong> Digital Tools for Grassroots Empowerment</li>
         <li><strong>Report:</strong> AI-Powered Solutions in Agriculture</li>
-    </ul>
+    </ul> -->
     <div class="input-group search-container">
         <form id="search_form" method="POST" class="col-md-10">
             @csrf
-            <input type="text" class="col-md-11" placeholder="Example: What are some fun things to do in New York?" name="searchData">
+            <input type="text" class="col-md-11" placeholder="Example: Rural Development and Sustainable Living..." name="searchData">
 			<button type="submit" id="searchAI" type="button"><i class="fa fa-search"></i></button>
         </form>
     </div>
