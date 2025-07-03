@@ -22,8 +22,8 @@ Route::middleware('web')->prefix('user')->name('user.')->group(function () {
     Route::get('/linkedin', [ResearchAssistanceController::class, 'linkedin'])->name('linkedin');
     });
 
-    Route::get('/knowledge-research', [KnowledgeResearchController::class, 'knowledge-research'])->name('knowledge-research.index');
-
+    Route::get('/knowledge-research', [KnowledgeResearchController::class, 'knowledgeAndResearch'])->name('knowledge-research.index');
+    Route::post('/search-knowledge', [KnowledgeResearchController::class, 'searchKnowledge'])->name('knowledge-research.search-knowledge');
 
 
 
