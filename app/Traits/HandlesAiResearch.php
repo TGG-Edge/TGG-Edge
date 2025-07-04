@@ -36,91 +36,76 @@ trait HandlesAiResearch
     {
         $project = $user->project;
         $academic_level = 'Graduate';
-        $research_area = '';
-        $keywords = '';
-        $user_context = $user->name;
+        $research_area = ''; // Optional: set dynamically
+        $keywords = '';      // Optional: set dynamically
+        $user_id = $user->id;
+        $user_name = $user->name;
 
         return <<<EOT
-            You are an advanced research assistant. Generate comprehensive research content for: "{$project}"
+            You are a smart AI research assistant. Generate useful research content for the topic: "{$project}"
 
-            Context:
-            - Academic Level: {$academic_level}
-            - Research Area: {$research_area}
-            - Keywords: {$keywords}
-            - User: {$user_context}
+            This request is associated with the user: {User ID: $user_id | User Name: $user_name}. Generate a unique research output for this user every time, ensuring that the response varies even when the base topic remains the same
 
-            Return ONLY a valid JSON object with these keys:
+            Return only a valid JSON object with the following structure:
+
             {
-                "literature": [...],
-                "videos": [...],
-                "links": [...],
-                "linkedin_profiles": [...]
+            "literature": [
+                {
+                "title": "Literature Title",
+                "description": "Description (500-1000)",
+                }
+            ],
+            "videos": [
+                {
+                "title": "Video Title",
+                "channel": "YouTube Channel Name",
+                "url": "Video Url",
+                "thumbnail": "Thumbnail Url",
+                "description": "Short summary",
+                "duration": "Estimated duration",
+                }
+            ],
+            "links": [
+                {
+                "title": "Resource Title",
+                "url": "https://example.com",
+                "description": "Brief explanation",
+                "type": "database / organization / tool",
+                }
+            ],
+            "linkedin_profiles": [
+                {
+                "name": "Expert Name",
+                "title": "Position",
+                "institution": "Organization",
+                "linkedin_url": "https://linkedin.com/in/username",
+                "expertise": "Fields of knowledge",
+                "background": "Professional experience",
+                "contact_potential": "High / Medium / Low"
+                }
+            ]
             }
 
             Requirements:
-            - 8-10 items per list
-            - Real accessible URLs
-            - JSON only
+            - Include 1 to 2 items in each section.
+            - All URLs must be real and working.
+            - Return only the JSON. No extra text.
             EOT;
     }
-
-    // private function callAiApi($prompt)
-    // {
-    //     try {
-    //         $response = Http::withToken('e92a90d4ebefc6be4da08b35deeab6593f3e84111fbae36219cb2415b8ad0be4')->post('https://api.together.xyz/v1/chat/completions', [
-    //             'model' => 'deepseek-ai/DeepSeek-V3',
-    //             'messages' => [
-    //                 ['role' => 'system', 'content' => 'You are a research assistant that provides valid JSON only.'],
-    //                 ['role' => 'user', 'content' => $prompt]
-    //             ],
-    //             'temperature' => 0.7,
-    //             'max_tokens' => 4000,
-    //         ]);
-
-    //         if (!$response->ok()) return ['success' => false];
-
-    //         $text = $response->json('choices')[0]['message']['content'] ?? '';
-    //         $jsonStart = strpos($text, '{');
-    //         $jsonEnd = strrpos($text, '}');
-
-    //         if ($jsonStart !== false && $jsonEnd !== false) {
-    //             $clean = substr($text, $jsonStart, $jsonEnd - $jsonStart + 1);
-    //             $parsed = json_decode($clean, true);
-
-    //             if (json_last_error() === JSON_ERROR_NONE) {
-    //                 return [
-    //                     'success' => true,
-    //                     'data' => [
-    //                         'literature' => $parsed['literature'] ?? [],
-    //                         'videos' => $parsed['videos'] ?? [],
-    //                         'links' => $parsed['links'] ?? [],
-    //                         'linkedin_profiles' => $parsed['linkedin_profiles'] ?? [],
-    //                     ]
-    //                 ];
-    //             }
-    //         }
-
-    //         return ['success' => false];
-
-    //     } catch (\Exception $e) {
-    //         Log::error('AI API call failed: ' . $e->getMessage());
-    //         return ['success' => false,'error' => $e->getMessage()];
-    //     }
-    // }
 
     private function callAiApi($prompt)
     {
         try {
             $client = new \GuzzleHttp\Client();
 
-            $response = $client->post('https://openrouter.ai/api/v1/chat/completions', [
+            $response = $client->post('https://api.together.xyz/v1/chat/completions', [
                 'headers' => [
                     'Content-Type'  => 'application/json',
-                    'Authorization' => 'Bearer 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',
+                    'Authorization' => 'Bearer e92a90d4ebefc6be4da08b35deeab6593f3e84111fbae36219cb2415b8ad0be4',
                 ],
-                'timeout' => 60, // adjust as needed
+                'timeout' => 240, // adjust as needed
                 'json' => [
-                    'model' => 'deepseek/deepseek-r1:free',
+                    'model' => 'deepseek-ai/DeepSeek-V3',
                     'messages' => [
                         [
                             'role' => 'user',
@@ -131,7 +116,7 @@ trait HandlesAiResearch
             ]);
 
             if ($response->getStatusCode() !== 200) {
-                return ['success' => false];
+                return ['success' => false,'error' => 'okagt'];
             }
 
             $body = json_decode($response->getBody(), true);
@@ -158,11 +143,11 @@ trait HandlesAiResearch
                 }
             }
 
-            return ['success' => false];
+            return ['success' => false,'error' =>  $jsonStart.$jsonEnd];
 
         } catch (\Exception $e) {
             Log::error('OpenRouter AI API error: ' . $e->getMessage());
-            return ['success' => false];
+            return ['success' => false,'error' => $e->getMessage()];
         }
     }
 
