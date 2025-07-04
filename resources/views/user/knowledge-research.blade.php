@@ -14,8 +14,8 @@
     <div class="input-group search-container">
         <form id="search_form" method="POST" class="col-md-10">
             @csrf
-            <input type="text" class="col-md-11" placeholder="Example: Rural Development and Sustainable Living..." name="searchData">
-			<button type="submit" id="searchAI" type="button"><i class="fa fa-search"></i></button>
+            <input type="text" class="col-md-11" style="padding: 1%;margin-top: 8px;font-size: 17px;" placeholder="Example: Rural Development and Sustainable Living..." name="searchData">
+			<button type="submit" style="font-size: larger;padding: 1%;" id="searchAI" type="button"><i class="fa fa-search"></i></button>
         </form>
     </div>
 	<button class="btn btn-primary" type="button" id="loaderIcon" style="display:none" disabled>

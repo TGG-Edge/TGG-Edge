@@ -43,13 +43,6 @@
 	float: right;
 }
 
-input[type=text] {
-	padding: 6px;
-	margin-top: 8px;
-	font-size: 17px;
-	/* border: none; */
-}
-
 .search-container button {
 	/* float: right; */
 	padding: 10px 10px;

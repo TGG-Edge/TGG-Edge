@@ -98,10 +98,13 @@ trait HandlesAiResearch
         try {
             $client = new \GuzzleHttp\Client();
 
+            // Get API key from environment variable
+		    $apiKey = env("TOGETHER_API_KEY", "null");
+
             $response = $client->post('https://api.together.xyz/v1/chat/completions', [
                 'headers' => [
                     'Content-Type'  => 'application/json',
-                    'Authorization' => 'Bearer e92a90d4ebefc6be4da08b35deeab6593f3e84111fbae36219cb2415b8ad0be4',
+                    'Authorization' => 'Bearer '. $apiKey
                 ],
                 'timeout' => 240, // adjust as needed
                 'json' => [
