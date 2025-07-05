@@ -6,6 +6,8 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>User Profile</h2>
+    {{-- @if(Auth::check() && Auth::user()->user_role != 1) --}}
+
     <div>
         <span class="fw-bold">Account Status: </span>
             <span class="badge 
@@ -15,6 +17,7 @@
                 {{ ucfirst($user->approval) }}
         </span>
     </div>
+    {{-- @endif --}}
     </div>
     
     @if(session('success'))

@@ -43,12 +43,12 @@
 	float: right;
 }
 
-input[type=text] {
+/* input[type=text] {
 	padding: 6px;
 	margin-top: 8px;
 	font-size: 17px;
-	/* border: none; */
-}
+	border: none;
+} */
 
 .search-container button {
 	/* float: right; */
@@ -69,7 +69,8 @@ input[type=text] {
 	.search-container {
 		float: none;
 	}
-	a,  input[type=text],  .search-container button {
+	/* a,  input[type=text],  */
+	 .search-container button {
 		float: none;
 		display: block;
 		text-align: left;
@@ -77,7 +78,7 @@ input[type=text] {
 		margin: 0;
 		padding: 14px;
 	}
-	input[type=text] {
+	/* input[type=text] {
 		border: 1px solid #ccc;  
-	}
+	} */
 }
