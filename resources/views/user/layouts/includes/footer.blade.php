@@ -54,15 +54,16 @@
             <!-- Member Login -->
             <div class="col-md-3 mb-4">
                 <h5 class="fw-bold mb-3">Member Login</h5>
-                <form method="post" action="https://tggindia.com/wp-login.php">
-                    <input type="hidden" name="redirect_to" value="https://tggindia.com/my-account/">
+                <form method="POST" action="{{route('user.login')}}">
+                    @csrf
+                    {{-- <input type="hidden" name="redirect_to" value="https://tggindia.com/my-account/"> --}}
                     <div class="mb-2">
-                        <label class="form-label small">Username or Email</label>
-                        <input type="text" name="log" class="form-control form-control-sm" required>
+                        <label class="form-label small">Email</label>
+                        <input type="text" name="email" class="form-control form-control-sm" required>
                     </div>
                     <div class="mb-2">
                         <label class="form-label small">Password</label>
-                        <input type="password" name="pwd" class="form-control form-control-sm" required>
+                        <input type="password" name="password" class="form-control form-control-sm" required>
                     </div>
                     <div class="form-check mb-2">
                         <input type="checkbox" class="form-check-input" id="rememberme" name="rememberme">
@@ -70,7 +71,7 @@
                     </div>
                     <button type="submit" class="btn btn-light btn-sm w-100">Log In</button>
                     <div class="mt-2">
-                        <a href="https://tggindia.com/my-account/lost-password/" class="text-white text-decoration-none small">Lost your password?</a>
+                        <a href="#" class="text-white text-decoration-none small">Lost your password?</a>
                     </div>
                 </form>
             </div>

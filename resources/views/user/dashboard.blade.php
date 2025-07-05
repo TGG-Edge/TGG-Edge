@@ -4,7 +4,7 @@
 
 
 @section('content')
-            <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="#">Log out</a>)</p>
+            <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('user.logout') }}">Log out</a>)</p>
 
             <p><strong>Welcome to TGG India!</strong></p>
 

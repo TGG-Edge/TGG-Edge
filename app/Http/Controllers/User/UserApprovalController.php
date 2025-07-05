@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\AiResearchAssistance;
 use App\Models\User;
+use App\Services\AIService;
+use App\Services\YouTubeService;
 use Illuminate\Http\Request;
 use App\Traits\HandlesAiResearch;
 
@@ -17,11 +20,11 @@ class UserApprovalController extends Controller
 
     public function index()
     {
-        $users = User::where('user_role', 4)->get();
+        $users = User::where('user_role', 4)->latest()->paginate(5);
         return view('user.user-approval', compact('users'));
     }
 
-    public function updateApproval(Request $request, $id)
+    public function updateApproval(Request $request, $id, AIService $aiService, YouTubeService $yt)
     {
         
 
@@ -30,17 +33,45 @@ class UserApprovalController extends Controller
         ]);
 
         $user = User::findOrFail($id);
+        $message = "";
+        if( $request->approval == 'accepted' && $user->approval !== 'accepted'){
+            $topic =$user->project;
+            $academicLevel =  'Graduate';
+            $prompt = $aiService->createPrompt($topic, $academicLevel);
+            $response = $aiService->getAiResponseWithFallback($prompt);
+            if (!$response) {
+                return response()->json(['success' => false, 'error' => 'AI failed'], 500);
+            }
+            $parsed = $aiService->parseJsonResponse($response['content']);
+
+            $videos = [];
+            foreach ($parsed['video_search_queries'] ?? [] as $query) {
+                $videos = array_merge($videos, $yt->fetchVideos($query));
+            }
+
+            $parsed['videos'] = array_slice($videos, 0, 10);
+
+            
+            $ai_research_assistance_store = AiResearchAssistance::create([
+            'user_id'   => $user->id,
+            'literature'=> json_encode($parsed['literature']),
+            'videos'    => json_encode($parsed['videos']),
+            'links'     => json_encode($parsed['links']),
+            'linkedin'  => json_encode($parsed['linkedin_profiles']),
+            ]);
+
+            $message = " And Research Assistance Contents Generated";
+
+            // $result = $this->generateResearchForUser($user); // ✅ Call from Trait
+            // if (!$result['success']) {
+            //     return back()->with('error', 'User approved, but AI generation failed: ' . ($result['error'] ?? 'Unknown error'));
+            // }
+        }
+
         $user->approval = $request->approval;
         $user->save();
-        
 
-        if($user->approval == 'accepted'){
-            $result = $this->generateResearchForUser($user); // ✅ Call from Trait
-            if (!$result['success']) {
-                return back()->with('error', 'User approved, but AI generation failed: ' . ($result['error'] ?? 'Unknown error'));
-            }
-        }
-        return back()->with('success', 'User approval status updated.');
+        return back()->with('success', 'User approval status updated.' . $message);
     }
 
     public function updateProject(Request $request, $id)

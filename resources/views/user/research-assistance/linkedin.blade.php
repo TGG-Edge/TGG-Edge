@@ -18,6 +18,9 @@
             <li class="list-group-item">No LinkedIn data available.</li>
         @endforelse
     </ul>
+     <div class="mt-4">
+        {{ $linkedin->links() }}
+    </div>
 </div>
 
 @endsection
