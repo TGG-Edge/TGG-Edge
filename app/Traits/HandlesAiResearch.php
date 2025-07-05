@@ -59,7 +59,7 @@ trait HandlesAiResearch
                 {
                 "title": "Video Title",
                 "channel": "YouTube Channel Name",
-                "url": "Video Url",
+                "url": "Video Url [https://youtu.be/DxXo4x2lp94?feature=shared]",
                 "thumbnail": "Thumbnail Url",
                 "description": "Short summary",
                 "duration": "Estimated duration",
@@ -93,39 +93,98 @@ trait HandlesAiResearch
             EOT;
     }
 
+    // private function callAiApi($prompt)
+    // {
+    //     try {
+    //         $client = new \GuzzleHttp\Client();
+
+    //         $response = $client->post('https://api.together.xyz/v1/chat/completions', [
+    //             'headers' => [
+    //                 'Content-Type'  => 'application/json',
+    //                 'Authorization' => #,
+    //             ],
+    //             'timeout' => 240, // adjust as needed
+    //             'json' => [
+    //                 'model' => 'deepseek-ai/DeepSeek-V3',
+    //                 'messages' => [
+    //                     [
+    //                         'role' => 'user',
+    //                         'content' => $prompt
+    //                     ]
+    //                 ]
+    //             ]
+    //         ]);
+
+    //         if ($response->getStatusCode() !== 200) {
+    //             return ['success' => false,'error' => 'okagt'];
+    //         }
+
+    //         $body = json_decode($response->getBody(), true);
+    //         $text = $body['choices'][0]['message']['content'] ?? '';
+
+    //         // Extract valid JSON from response
+    //         $jsonStart = strpos($text, '{');
+    //         $jsonEnd = strrpos($text, '}');
+
+    //         if ($jsonStart !== false && $jsonEnd !== false) {
+    //             $clean = substr($text, $jsonStart, $jsonEnd - $jsonStart + 1);
+    //             $parsed = json_decode($clean, true);
+
+    //             if (json_last_error() === JSON_ERROR_NONE) {
+    //                 return [
+    //                     'success' => true,
+    //                     'data' => [
+    //                         'literature' => $parsed['literature'] ?? [],
+    //                         'videos' => $parsed['videos'] ?? [],
+    //                         'links' => $parsed['links'] ?? [],
+    //                         'linkedin_profiles' => $parsed['linkedin_profiles'] ?? [],
+    //                     ]
+    //                 ];
+    //             }
+    //         }
+
+    //         return ['success' => false,'error' =>  $jsonStart.$jsonEnd];
+
+    //     } catch (\Exception $e) {
+    //         Log::error('OpenRouter AI API error: ' . $e->getMessage());
+    //         return ['success' => false,'error' => $e->getMessage()];
+    //     }
+    // }
+
+
+
     private function callAiApi($prompt)
     {
         try {
+            return 'https://generativelanguage.googleapis.com/v1beta';
             $client = new \GuzzleHttp\Client();
 
-            // Get API key from environment variable
-		    $apiKey = env("TOGETHER_API_KEY", "null");
-
-            $response = $client->post('https://api.together.xyz/v1/chat/completions', [
+            $response = $client->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent', [
                 'headers' => [
-                    'Content-Type'  => 'application/json',
-                    'Authorization' => 'Bearer '. $apiKey
+                    'Content-Type'    => 'application/json',
+                    'X-goog-api-key'  => env('GEMINI_API_KEY'),
+
                 ],
-                'timeout' => 240, // adjust as needed
+                'timeout' => 240,
                 'json' => [
-                    'model' => 'deepseek-ai/DeepSeek-V3',
-                    'messages' => [
+                    'contents' => [
                         [
-                            'role' => 'user',
-                            'content' => $prompt
+                            'parts' => [
+                                ['text' => $prompt]
+                            ]
                         ]
                     ]
                 ]
             ]);
 
             if ($response->getStatusCode() !== 200) {
-                return ['success' => false,'error' => 'okagt'];
+                return ['success' => false, 'error' => 'Unexpected status code'];
             }
 
             $body = json_decode($response->getBody(), true);
-            $text = $body['choices'][0]['message']['content'] ?? '';
+            $text = $body['candidates'][0]['content']['parts'][0]['text'] ?? '';
 
-            // Extract valid JSON from response
+            // Optional JSON extraction from AI response
             $jsonStart = strpos($text, '{');
             $jsonEnd = strrpos($text, '}');
 
@@ -146,11 +205,11 @@ trait HandlesAiResearch
                 }
             }
 
-            return ['success' => false,'error' =>  $jsonStart.$jsonEnd];
+            return ['success' => true, 'data' => ['raw' => $text]];
 
         } catch (\Exception $e) {
-            Log::error('OpenRouter AI API error: ' . $e->getMessage());
-            return ['success' => false,'error' => $e->getMessage()];
+            Log::error('Gemini API Error: ' . $e->getMessage());
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 

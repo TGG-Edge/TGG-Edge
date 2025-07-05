@@ -52,8 +52,8 @@ class RegisterController extends Controller
             'email' => $request->email,
 
             'address' => $request->address,
-            'id_type' => $request->id_type,
-            'id_number' => $request->id_number,
+            'document_type' => $request->id_type,
+            'document_number' => $request->id_number,
             'user_type' => $user_type,
             'user_role' => 4,
             'rhm_number' => $request->rhm_number,

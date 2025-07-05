@@ -21,6 +21,9 @@
             <p>No video data available.</p>
         @endforelse
     </div>
+     <div class="mt-4">
+        {{ $videos->links() }}
+    </div>
 </div>
 
 @endsection

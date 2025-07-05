@@ -18,7 +18,7 @@ class KnowledgeResearchController extends Controller
     public function searchKnowledge(Request $request)
     {
         // Get API key from environment variable
-		$apiKey = env("TOGETHER_API_KEY", "null");
+	    $apiKey = env("TOGETHER_API_KEY", "null");
 
         // API endpoint
         $url = 'https://api.together.xyz/v1/chat/completions';

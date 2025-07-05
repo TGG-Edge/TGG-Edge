@@ -10,14 +10,17 @@
         @forelse ($literature as $item)
             <li class="list-group-item">
                 <strong>{{ $item['title'] }}</strong><br>
-                <small>{{ $item['authors'] ?? 'N/A' }} | {{ $item['year'] ?? 'N/A'  }} | {{ $item['source'] ?? 'N/A' }}</small><br>
+                {{-- <small>{{ $item['authors'] ?? 'N/A' }} | {{ $item['year'] ?? 'N/A'  }} | {{ $item['source'] ?? 'N/A' }}</small><br> --}}
                 <p>{{ $item['description'] ?? 'N/A' }}</p>
-                <a href="{{ $item['url'] ?? 'N/A' }}" target="_blank">View</a>
+                {{-- <a href="{{ $item['url'] ?? 'N/A' }}" target="_blank">View</a> --}}
             </li>
         @empty
             <li class="list-group-item">No literature data available.</li>
         @endforelse
     </ul>
+      <div class="mt-4">
+        {{ $literature->links() }}
+    </div>
 </div>
 
 @endsection

@@ -16,6 +16,9 @@
             <li class="list-group-item">No link data available.</li>
         @endforelse
     </ul>
+     <div class="mt-4">
+        {{ $links->links() }}
+    </div>
 </div>
 
 @endsection

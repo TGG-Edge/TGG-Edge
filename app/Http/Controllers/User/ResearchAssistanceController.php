@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+use App\Services\CollectionPaginationService;
+
 
 class ResearchAssistanceController extends Controller
 {
@@ -17,35 +21,42 @@ class ResearchAssistanceController extends Controller
      */
     
 
-     public function literature()
+    public function literature(CollectionPaginationService $paginationService)
     {
-        
-       
+        $data = AiResearchAssistance::where('user_id', Auth::id())->latest()->first();
+        $literatureArray = json_decode($data->literature ?? '[]', true);
 
-        $data = AiResearchAssistance::where('user_id', 1)->latest()->first();
-        $literature = json_decode($data->literature ?? '[]', true);
+        $literature = $paginationService->paginate($literatureArray, 5);
         return view('user.research-assistance.literature', compact('literature'));
     }
 
-    public function videos()
+    public function videos(CollectionPaginationService $paginationService)
     {
-        $data = AiResearchAssistance::where('user_id', 1)->latest()->first();
-        $videos = json_decode($data->videos ?? '[]', true);
+        $data = AiResearchAssistance::where('user_id', Auth::id())->latest()->first();
+        $videoArray = json_decode($data->videos ?? '[]', true);
+
+        $videos = $paginationService->paginate($videoArray, 5);
+
         return view('user.research-assistance.videos', compact('videos'));
     }
 
-    public function links()
+    public function links(CollectionPaginationService $paginationService)
     {
-        
-        $data = AiResearchAssistance::where('user_id', 1)->latest()->first();
-        $links = json_decode($data->links ?? '[]', true);
-        return view('user.research-assistance.links',compact('links'));
+        $data = AiResearchAssistance::where('user_id', Auth::id())->latest()->first();
+        $linkArray = json_decode($data->links ?? '[]', true);
+
+        $links = $paginationService->paginate($linkArray, 5); // Adjust per-page as needed
+
+        return view('user.research-assistance.links', compact('links'));
     }
 
-    public function linkedin()
+    public function linkedin(CollectionPaginationService $paginationService)
     {
-        $data = AiResearchAssistance::where('user_id', 1)->latest()->first();
-        $linkedin = json_decode($data->linkedin ?? '[]', true);
+        $data = AiResearchAssistance::where('user_id', Auth::id())->latest()->first();
+        $linkedinArray = json_decode($data->linkedin ?? '[]', true);
+
+        $linkedin = $paginationService->paginate($linkedinArray, 5); // Change 10 to your preferred per-page count
+
         return view('user.research-assistance.linkedin', compact('linkedin'));
     }
     
