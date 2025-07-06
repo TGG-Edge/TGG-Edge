@@ -7,8 +7,9 @@
   <link rel="icon" href="{{ asset('assets/user/images/tgg-edge-logo.jpg') }}" type="image/x-icon">
 
   <!-- Fonts and Styles -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap">
-  <link rel="stylesheet" href="{{ asset('assets/user/fonts/fontawesome.css') }}">
+   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap"> -->
+  <!-- <link rel="stylesheet" href="{{ asset('assets/user/fonts/fontawesome.css') }}"> -->
   <link rel="stylesheet" href="{{ asset('assets/user/css/style.css') }}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
@@ -17,7 +18,7 @@
   
 </head>
 
-<body>
+<body style="font-family: 'POPPINS'">
   @include('user.layouts.includes.header')
 
   <div class="container-fluid">
