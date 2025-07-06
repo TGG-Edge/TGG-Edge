@@ -43,6 +43,9 @@ class UserApprovalController extends Controller
                 return response()->json(['success' => false, 'error' => 'AI failed'], 500);
             }
             $parsed = $aiService->parseJsonResponse($response['content']);
+            if($parsed == NULL) {
+                return response()->json(['success' => false, 'error' => 'AI response failed'], 500);
+            }
 
             $videos = [];
             foreach ($parsed['video_search_queries'] ?? [] as $query) {
