@@ -20,6 +20,8 @@ class KnowledgeResearchController extends Controller
         // Get API key from environment variable
 	    $apiKey = env("TOGETHER_API_KEY", "null");
 
+        $prompt = $this->createResearchPrompt($request->input('searchData'));
+
         // API endpoint
         $url = 'https://api.together.xyz/v1/chat/completions';
 
@@ -27,9 +29,13 @@ class KnowledgeResearchController extends Controller
 		$data = [
 			'model' => 'deepseek-ai/DeepSeek-V3',
 			'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => 'You are a research assistant...'
+                ],
 				[
 					'role' => 'user',
-					'content' => $request->input('searchData')
+					'content' => $prompt
 				]
 			]
 		];
@@ -66,16 +72,36 @@ class KnowledgeResearchController extends Controller
 
 		// Print the response content
 		if (isset($responseData['choices'][0]['message']['content'])) {
-			return response()->json( [ 'success' => $responseData['choices'][0]['message']['content'] ] );
+            $responseResult = $responseData['choices'][0]['message']['content'];
+			return response()->json( [ 'success' => $responseResult ] );
 		} else {
 			return response()->json( [ 'error' => 'Could not get response content' ] );
 			// echo "\nFull response: " . $response;
 		}
 	}
+
+    public function createResearchPrompt($topic, $academicLevel = "Graduate", $researchArea = "", $keywords = "", $userContext = "")
+    {
+        return <<<EOT
+            You are an advanced research assistant. Generate comprehensive research content for: "{$topic}"
+
+            Context:
+            - Academic Level: {$academicLevel}
+            - Research Area: {$researchArea}
+            - Keywords: {$keywords}
+            - User: {$userContext}
+
+            Return ONLY a valid TEXT:
+
+            Requirements:
+            - Return TEXT only
+            - Return You are a 1-response API. Your output must strictly be provided in HTML format
+            EOT;
+    }
     
     public function index()
     {
-        //
+        // - Do not user markdown formatting, * or #"
     }
 
     /**

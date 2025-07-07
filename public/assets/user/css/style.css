@@ -67,6 +67,18 @@
 	background: #ccc;
 }
 
+.api-msg {
+	font-size: medium !important;
+	border: 1px, solid, #80808059;
+	border-radius: 2%;
+	padding: 2%;
+	display: none;
+}
+
+.error {
+	color: red;
+}
+
 @media screen and (max-width: 600px) {
 	.search-container {
 		float: none;
