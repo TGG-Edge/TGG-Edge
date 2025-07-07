@@ -29,7 +29,8 @@ class KnowledgeResearchController extends Controller
 			'messages' => [
 				[
 					'role' => 'user',
-					'content' => $request->input('searchData')
+					// 'content' => $request->input('searchData')
+                    'content' => $request->input('searchData') . ' - Note: Don’t add any extra *, special characters, or anything else. Just give me plain text output.'
 				]
 			]
 		];

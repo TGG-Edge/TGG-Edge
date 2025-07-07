@@ -115,7 +115,6 @@ class AIService
             unset($providers[$key]);
             array_unshift($providers, $preferred);
         }
-
         foreach ($providers as $provider) {
             $models = $provider === 'gemini' ? $this->geminiModels : $this->togetherModels;
 
