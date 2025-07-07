@@ -36,6 +36,7 @@ class KnowledgeResearchController extends Controller
 				[
 					'role' => 'user',
 					'content' => $prompt
+
 				]
 			]
 		];
