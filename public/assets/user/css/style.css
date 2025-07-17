@@ -68,11 +68,19 @@
 }
 
 .api-msg {
-	font-size: medium !important;
+	width: 80% !important;
+	max-height: 500px;
+	font-size: small !important;
 	border: 1px, solid, #80808059;
 	border-radius: 2%;
 	padding: 2%;
 	display: none;
+	overflow: auto;
+	margin-left: 1%;
+}
+
+.tgg-content > .row {
+    margin-left: 0 !important;
 }
 
 .error {

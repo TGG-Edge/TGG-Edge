@@ -27,7 +27,7 @@
                         <p>GUIDESTAR INDIA (TRANSPARENCY): 10456</p>
                     </div>
 
-                    <div class="col-lg-4 col-md-4 footer-links">
+                    <div class="col-lg-2 col-md-2 footer-links">
                         <h3>IMPORTANT LINKS</h3>
                         <ul>
                             <li><a href="https://tggfct.org/privacy-policy/">Privacy Policy</a></li>

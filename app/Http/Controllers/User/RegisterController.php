@@ -31,26 +31,45 @@ class RegisterController extends Controller
     public function store(Request $request, $user_type)
     {
         //
-         $request->validate([
-            'name' => 'required|string',
-            'age' => 'required|integer',
-            'project' => 'required|string',
-            'number' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'address' => 'required|string',
-            'id_type' => 'required|string',
-            'id_number' => 'required|string',
-            'photo' => 'required|image|max:50', // max in kilobytes
-        ]);
+        if($user_type == 'researcher' || $user_type == 'freelance' ){
+            $request->validate([
+               'name' => 'required|string',
+               'age' => 'required|integer',
+               'project' => 'required|string',
+               'number' => 'required|string',
+               'email' => 'required|email|unique:users,email',
+               'address' => 'required|string',
+               'id_type' => 'required|string',
+               'id_number' => 'required|string',
+               'photo' => 'required|image|max:50', // max in kilobytes
+           ]);
+        }else{
+           $request->validate([
+               'name' => 'required|string',
+               'age' => 'required|integer',
+               'number' => 'required|string',
+               'email' => 'required|email|unique:users,email',
+               'address' => 'required|string',
+               'id_type' => 'required|string',
+               'id_number' => 'required|string',
+               'photo' => 'required|image|max:50', // max in kilobytes
+           ]);
+        }
+
+
+        if($user_type == 'researcher'){
+            $user_type = 1;
+        }else{
+            $user_type = 2;
+        }
 
         // Store user
         User::create([
             'name' => $request->name,
             'age' => $request->age,
-            'project' => $request->project,
+            'project' => $request->project ?? 'volunteer',
             'phone' => $request->number,
             'email' => $request->email,
-
             'address' => $request->address,
             'document_type' => $request->id_type,
             'document_number' => $request->id_number,
@@ -71,11 +90,18 @@ class RegisterController extends Controller
      */
     public function show($user_type)
     {
-         $userTypes = [
+        $userTypes = [
             1 => 'RHM Club',
             2 => 'NCRH',
             3 => 'Freelance'
         ];
+
+        $userTypes = [
+            'researcher' => 'RHM Club',
+            'volunteer' => 'NCRH',
+            'freelance' => 'Freelance'
+        ];
+
 
         if (!array_key_exists($user_type, $userTypes)) {
             abort(404);

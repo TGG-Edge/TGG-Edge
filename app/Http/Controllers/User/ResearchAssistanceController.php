@@ -290,7 +290,7 @@ class ResearchAssistanceController extends Controller
         $existing->save();
 
         // Increment attempt
-        $user->increment('research_assistance_attempts');
+        $user->increment('research_assistance_attempts  ');
 
         return response()->json([
             'success' => true,

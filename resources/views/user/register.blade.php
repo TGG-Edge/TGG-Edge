@@ -56,11 +56,13 @@
                     <input type="number" class="form-control" name="age" placeholder="Your age" required>
                 </div>
 
+                @if($user_type == 'researcher')
                 {{-- Project Description --}}
                 <div class="mb-3 col-12">
                     <label class="form-label">Project (Research Topic Description) *</label>
                     <textarea class="form-control" name="project" placeholder="Describe your research project here" rows="3" required></textarea>
                 </div>
+                @endif
 
                 <div class="mb-3 col-md-6">
                     <label class="form-label">Email *</label>
@@ -109,6 +111,7 @@
                     <small class="text-muted">Please upload a recent passport-size photo.</small>
                 </div>
 
+                @if($user_type == 'researcher')
                 {{-- Research Assistance Checkbox --}}
                 <div class="mb-3 col-12">
                     <div class="form-check">
@@ -118,6 +121,7 @@
                         </label>
                     </div>
                 </div>
+                @endif
             </div>
 
             {{-- Submit --}}
