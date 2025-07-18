@@ -42,5 +42,9 @@
   </div>
 
   @include('user.layouts.includes.footer')
+  
+  {{-- Dashboard Volunteer Javascipt support --}}
+  @stack('scripts')
+
 </body>
 </html>
