@@ -40,11 +40,13 @@ class UserApprovalController extends Controller
             $prompt = $aiService->createPrompt($topic, $academicLevel);
             $response = $aiService->getAiResponseWithFallback($prompt);
             if (!$response) {
-                return response()->json(['success' => false, 'error' => 'AI failed'], 500);
+                return back()->with('success', 'AI failed to generate content, Please try again.');
+                // return response()->json(['success' => false, 'error' => 'AI failed'], 500);
             }
             $parsed = $aiService->parseJsonResponse($response['content']);
             if($parsed == NULL) {
-                return response()->json(['success' => false, 'error' => 'AI response failed'], 500);
+                return back()->with('success', 'AI failed to generate parse data, Please try again.');
+                // return response()->json(['success' => false, 'error' => 'AI response failed'], 500);
             }
 
             $videos = [];
@@ -74,7 +76,7 @@ class UserApprovalController extends Controller
         $user->approval = $request->approval;
         $user->save();
 
-        return back()->with('success', 'User approval status updated.' . $message);
+        return back()->with('success', 'User '.$request->approval.' status updated.' . $message);
     }
 
     public function updateProject(Request $request, $id)

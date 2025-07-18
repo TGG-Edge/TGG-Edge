@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-                        $table->enum('approval', ['pending', 'accepted', 'rejected'])->default('pending');
+        Schema::create('article_category', function (Blueprint $table) {
+             $table->id();
+            $table->foreignId('article_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -22,9 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-                        $table->dropColumn('approval');
-        });
+        Schema::dropIfExists('article_category');
     }
 };

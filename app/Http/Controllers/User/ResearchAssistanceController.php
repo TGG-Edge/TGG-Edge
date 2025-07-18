@@ -13,6 +13,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use App\Services\CollectionPaginationService;
 
+use App\Services\AIService;
+use App\Services\YoutubeService;
 
 class ResearchAssistanceController extends Controller
 {
@@ -228,6 +230,72 @@ class ResearchAssistanceController extends Controller
             Log::error('AI API call failed: ' . $e->getMessage());
             return ['success' => false];
         }
+    }
+
+
+    public function CronGenerateRA()
+    {
+        // Prevent external access (optional)
+        // if (request()->ip() !== '127.0.0.1' && !request()->has('key')) {
+        //     return response()->json(['error' => 'Unauthorized'], 403);
+        // }
+
+        $user = User::where('approval', 'accepted')
+                    ->where('research_assistance_attempts', '<', 2)
+                    ->whereNotNull('project')
+                    ->first();
+
+        if (!$user) {
+            return response()->json(['success' => false, 'message' => 'No eligible user found.']);
+        }
+
+        $aiService = app(AIService::class);
+        $yt = app(YoutubeService::class); // your YouTube service
+        $prompt = $aiService->createPrompt($user->project, 'Graduate');
+        $response = $aiService->getAiResponseWithFallback($prompt);
+
+        if (!$response) {
+            Log::error("AI failed for user ID {$user->id}");
+            return response()->json(['success' => false, 'error' => 'AI failed']);
+        }
+
+        $parsed = $aiService->parseJsonResponse($response['content']);
+
+        // YouTube video merging
+        $videos = [];
+        foreach ($parsed['video_search_queries'] ?? [] as $query) {
+            $videos = array_merge($videos, $yt->fetchVideos($query));
+        }
+        $parsed['videos'] = array_slice($videos, 0, 10);
+
+        // Merge with existing
+        $existing = AiResearchAssistance::firstOrNew(['user_id' => $user->id]);
+
+        $existing->literature = json_encode(array_merge(
+            json_decode($existing->literature ?? '[]', true),
+            $parsed['literature'] ?? []
+        ));
+        $existing->videos = json_encode(array_merge(
+            json_decode($existing->videos ?? '[]', true),
+            $parsed['videos'] ?? []
+        ));
+        $existing->links = json_encode(array_merge(
+            json_decode($existing->links ?? '[]', true),
+            $parsed['links'] ?? []
+        ));
+        $existing->linkedin = json_encode(array_merge(
+            json_decode($existing->linkedin ?? '[]', true),
+            $parsed['linkedin_profiles'] ?? []
+        ));
+        $existing->save();
+
+        // Increment attempt
+        $user->increment('research_assistance_attempts  ');
+
+        return response()->json([
+            'success' => true,
+            'message' => "Research content generated and merged for user {$user->name}"
+        ]);
     }
 
 

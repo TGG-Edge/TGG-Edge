@@ -3,7 +3,7 @@
 </a>
 <a href="{{ route('user.profile') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
 
-@if(Auth::check() && Auth::user()->user_role != 1)
+@if(Auth::check() && Auth::user()->user_role != 1 && Auth::user()->research_assistance == 1)
 <div class="dropdown">
     <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/*') ? 'active ' : '' }}"
        data-bs-toggle="collapse" data-bs-target="#researchDropdown" aria-expanded="false">

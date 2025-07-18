@@ -6,9 +6,9 @@
 @section('content')
             <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('user.logout') }}">Log out</a>)</p>
 
-            <p><strong>Welcome to TGG India!</strong></p>
+            <p><strong>Welcome to TGG Edge!</strong></p>
 
-            <p>We are delighted to have you join us on this transformative journey. TGG India has been initiated with the vision of providing a holistic learning experience, remote working opportunities, and impactful community development initiatives. Our collective goal is to foster happiness and mindful living, which is at the core of Project Shambala.</p>
+            <p>We are delighted to have you join us on this transformative journey. TGG Edge has been initiated with the vision of providing a holistic learning experience, remote working opportunities, and impactful community development initiatives. Our collective goal is to foster happiness and mindful living, which is at the core of Project Shambala.</p>
 
             <p>As the world evolves with rapid technological advancements, the challenges of navigating this complex landscape are becoming increasingly evident. Unfortunately, technology’s misuse has led to disconnection, stress, and uncertainty for many. Project Shambala stands as a beacon of hope, guiding individuals toward a more meaningful and balanced life.</p>
 

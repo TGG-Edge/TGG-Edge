@@ -64,21 +64,72 @@ class AIService
             EOT;
     }
 
-    public function getFromGemini($prompt, $model = null)
+    // public function getFromGemini($prompt, $model = null)
+    // {
+
+    //     $model = $model ?: $this->geminiModels[0];
+
+    //     try {
+    //     $response = Http::timeout(90)
+    //         ->withHeaders(['Content-Type' => 'application/json'])
+    //         ->post("https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key=" . env('GEMINI_API_KEY'), [
+    //             "contents" => [["parts" => [["text" => $prompt]]]],
+    //             "generationConfig" => ["temperature" => 0.7, "maxOutputTokens" => 8192],
+    //         ]);
+
+    //     if ($response->successful()) {
+    //         return $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? null;
+    //     }
+
+    //     Log::error('Gemini Error', ['response' => $response->body()]);
+    //     return null;
+    //     } catch (\Exception $e) {
+    //     Log::error('Unexpected error in getFromGemini', [
+    //         'message' => $e->getMessage(),
+    //         'code' => $e->getCode(),
+    //     ]);
+    //     return null;
+    //     }
+    // }
+
+     public function getFromGemini($prompt, $model = null)
     {
         $model = $model ?: $this->geminiModels[0];
-        $response = Http::timeout(90)
-            ->withHeaders(['Content-Type' => 'application/json'])
-            ->post("https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key=" . env('GEMINI_API_KEY'), [
-                "contents" => [["parts" => [["text" => $prompt]]]],
-                "generationConfig" => ["temperature" => 0.7, "maxOutputTokens" => 8192],
-            ]);
 
-        if ($response->successful()) {
-            return $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? null;
+        // Register shutdown handler for fatal errors
+        register_shutdown_function(function () {
+            $error = error_get_last();
+            if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+                Log::error('Fatal error in getFromGemini', ['error' => $error]);
+            }
+        });
+
+        try {
+            // Increase time limit to reduce fatal error chance
+            set_time_limit(120); 
+
+            $response = Http::timeout(90)
+                ->withHeaders(['Content-Type' => 'application/json'])
+                ->post("https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key=" . env('GEMINI_API_KEY'), [
+                    "contents" => [["parts" => [["text" => $prompt]]]],
+                    "generationConfig" => ["temperature" => 0.7, "maxOutputTokens" => 8192],
+                ]);
+
+            if ($response->successful()) {
+                return $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? null;
+            }
+
+            Log::error('Gemini API error response', ['status' => $response->status(), 'body' => $response->body()]);
+            return null;
+        } catch (\Throwable $e) {
+            Log::error('Exception in getFromGemini', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ]);
+            return null;
         }
 
-        Log::error('Gemini Error', ['response' => $response->body()]);
+        // Always return null in fallback (redundant but safe)
         return null;
     }
 
@@ -115,7 +166,6 @@ class AIService
             unset($providers[$key]);
             array_unshift($providers, $preferred);
         }
-
         foreach ($providers as $provider) {
             $models = $provider === 'gemini' ? $this->geminiModels : $this->togetherModels;
 
