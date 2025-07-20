@@ -13,13 +13,8 @@ use Illuminate\Auth\Middleware\AuthenticateSession;
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
        using: function (Router $router) {
-            $router->group(['prefix' => 'api', 'middleware' => 'web'], function () {
-                require base_path('routes/api.php');
-            });
-
-            $router->group(['middleware' => 'web'], function () {
-                require base_path('routes/web.php');
-            });
+            require base_path('routes/user.php');
+            require base_path('routes/web.php');
         },
         commands: base_path('routes/console.php'),
         health: '/up',

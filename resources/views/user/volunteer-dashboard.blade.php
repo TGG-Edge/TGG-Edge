@@ -45,20 +45,9 @@
                 <h3>List of Projects</h3>
                 <p>Choose a project that interests you, click GO to view details, then APPLY.</p>
                 <div class="scroll-box" id="projectList">
-                    @foreach([
-                        'Anganwadi improvement',
-                        'AI tool for video creation',
-                        'Organic skin care lotion',
-                        'Smart irrigation',
-                        'AI voice assistant',
-                        'Drone-based delivery',
-                        'Healthcare chatbot',
-                        'Smart traffic monitoring',
-                        'Waste management tracker',
-                        'Mobile farming app'
-                    ] as $index => $title)
+                    @foreach($users as $index => $user)
                         <div class="project-item">
-                            <span>{{ $title }}</span><button onclick="viewProject({{ $index }})">GO</button>
+                            <span>{{ $user->project }}</span><button onclick="viewProject({{ $index }})">GO</button>
                         </div>
                     @endforeach
                 </div>

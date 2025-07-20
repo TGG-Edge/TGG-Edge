@@ -50,7 +50,20 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('web')->attempt($request->only('email', 'password'))) {
-            return redirect()->route('user.dashboard'); // create this route later
+            if(auth()->user()->user_role == 1){
+            return redirect()->route('user.admin-dashboard'); 
+
+            }elseif(auth()->user()->user_role == 2){
+            return redirect()->route('user.researcher-dashboard'); 
+
+            }elseif(auth()->user()->user_role == 3){
+            return redirect()->route('user.volunteer-dashboard'); 
+
+            }else{
+                 return redirect()->route('user.dashboard'); 
+            }
+
+            
         }
 
         return back()->withErrors(['email' => 'Invalid credentials'])->withInput();

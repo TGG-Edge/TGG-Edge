@@ -7,19 +7,11 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\ResearchAssistanceController;
 use App\Http\Controllers\User\UserApprovalController;
+use App\Http\Controllers\VolunteerDashboardController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes (login and register)
 Route::middleware('web')->prefix('user')->name('user.')->group(function () {
-
-Route::get('/dashboard', function () {
-        return view('user.dashboard');
-    })->name('dashboard');
-
-    Route::get('/volunteer-dashboard', function () {
-        return view('user.volunteer_dashboard');
-    })->name('dashboard');
-
     // Public login routes
     Route::get('/login', [LoginController::class, 'show'])->name('show');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
@@ -34,9 +26,20 @@ Route::get('/dashboard', function () {
 // Protected routes (require login)
 Route::middleware(['web', 'auth'])->prefix('user')->name('user.')->group(function () {
 
-    // Route::get('/dashboard', function () {
-    //     return view('user.dashboard');
-    // })->name('dashboard');
+
+    Route::get('/dashboard', function () {
+        return view('user.dashboard');
+    })->name('dashboard');
+
+    Route::get('/admin-dashboard', function () {
+        return view('user.admin-dashboard');
+    })->name('admin-dashboard');
+
+    Route::get('/reseacher-dashboard', function () {
+        return view('user.reseacher-dashboard');
+    })->name('reseacher-dashboard');
+
+    Route::get('/volunteer-dashboard', [VolunteerDashboardController::class, 'index'])->name('volunteer-dashboard');
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 

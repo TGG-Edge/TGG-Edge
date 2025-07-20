@@ -57,10 +57,15 @@ class RegisterController extends Controller
         }
 
 
+
         if($user_type == 'researcher'){
+            $user_type = 2;
+        }elseif($user_type == 'volunteer'){
+            $user_type = 3;
+        }elseif($user_type == 'admin'){
             $user_type = 1;
         }else{
-            $user_type = 2;
+            $user_type = 4;
         }
 
         // Store user
