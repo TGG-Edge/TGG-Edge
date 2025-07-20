@@ -16,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             $router->group(['prefix' => 'api', 'middleware' => 'web'], function () {
                 require base_path('routes/api.php');
             });
-
+            require base_path('routes/user.php');
             $router->group(['middleware' => 'web'], function () {
                 require base_path('routes/web.php');
             });
