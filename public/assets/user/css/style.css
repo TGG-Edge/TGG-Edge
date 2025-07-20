@@ -335,6 +335,101 @@ table button:hover {
     font-weight: bold;
 }
 
+/* Dashboard Reseacher CSS */
+
+/* Reset */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Sections */
+.section {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Top Two Sections Side-by-Side */
+.top-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.update-box {
+    flex: 1;
+    min-width: 350px;
+}
+
+.volunteer-box {
+    flex: 1;
+    min-width: 350px;
+}
+
+/* Full Width Sections Below */
+.full-width {
+    width: 100%;
+}
+
+/* Input Styling */
+input[type="text"],
+input[type="url"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Button Styling */
+button {
+    padding: 8px 16px;
+    margin: 3px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
 @media screen and (max-width: 600px) {
     .search-container {
         float: none;

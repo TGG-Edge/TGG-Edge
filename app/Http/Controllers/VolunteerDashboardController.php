@@ -14,9 +14,9 @@ class VolunteerDashboardController extends Controller
     {
         //
 
-        $users = User::where('user_role',2)->get();
+        // $users = User::where('user_role',1)->get();
 
-        return view('user.volunteer-dashboard',compact('users'));
+        return view('user.volunteer-dashboard');
     }
 
     /**

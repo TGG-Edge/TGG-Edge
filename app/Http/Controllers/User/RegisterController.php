@@ -41,7 +41,6 @@ class RegisterController extends Controller
                'address' => 'required|string',
                'id_type' => 'required|string',
                'id_number' => 'required|string',
-               'photo' => 'required|image|max:50', // max in kilobytes
            ]);
         }else{
            $request->validate([
@@ -52,7 +51,6 @@ class RegisterController extends Controller
                'address' => 'required|string',
                'id_type' => 'required|string',
                'id_number' => 'required|string',
-               'photo' => 'required|image|max:50', // max in kilobytes
            ]);
         }
 
@@ -82,7 +80,6 @@ class RegisterController extends Controller
             'user_role' => 4,
             'rhm_number' => $request->rhm_number,
             'research_assistance' => $request->has('research_assistance'),
-            'image' => $request->file('photo')->store('photos', 'public'),
             'password' => Hash::make('default-password'), // change as needed
         ]);
 

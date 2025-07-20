@@ -104,13 +104,6 @@
                     <input type="text" class="form-control" name="id_number" placeholder="Enter ID number" required>
                 </div>
 
-                {{-- Photo Upload --}}
-                <div class="mb-3 col-md-12">
-                    <label class="form-label">Photo (Max 50KB) *</label>
-                    <input type="file" class="form-control" name="photo" accept="image/*" required>
-                    <small class="text-muted">Please upload a recent passport-size photo.</small>
-                </div>
-
                 @if($user_type == 'researcher')
                 {{-- Research Assistance Checkbox --}}
                 <div class="mb-3 col-12">

@@ -8,7 +8,8 @@
 
     <p><strong>Welcome to TGG India!</strong></p>
 
-    <p>We are delighted to have you join us on this transformative journey. TGG India has been initiated with the vision of providing a holistic learning experience, remote working opportunities, and impactful community development initiatives. Our collective goal is to foster happiness and mindful living, which is at the core of Project Shambala.</p>
+    <p>We are delighted to have you join us on this transformative journey. TGG India has been initiated with the vision of providing a holistic learning experience, remote working opportunities, and impactful community development initiatives. Our collective goal is to foster happiness and mindful living, which is at the core of Project Shambala.
+    </p>
 
     <div id="moreText" style="display: none;">
         <p>
@@ -32,9 +33,10 @@
         </p>
 
         <p>With gratitude,<br><strong>TGG Family</strong></p>
+
     </div>
 
-    <button id="toggleBtn" onclick="toggleReadMore()" style="background: none; border: none; color: #007BFF; cursor: pointer; padding: 0;">
+    <button id="toggleBtn" style="background: none; border: none; color: #007BFF; cursor: pointer; padding-left: 5px;">
         Read more
     </button>
 
@@ -43,11 +45,20 @@
         <div class="top-section">
             <div class="projects-list">
                 <h3>List of Projects</h3>
-                <p>Choose a project that interests you, click GO to view details, then APPLY.</p>
+                <p>Choose a project that interests you, click SHOW to view details, then APPLY.</p>
                 <div class="scroll-box" id="projectList">
+                    @php
+                    $users = [
+                        (object)['project' => 'Project Alpha'],
+                        (object)['project' => 'Project Beta'],
+                        (object)['project' => 'Project Gamma'],
+                    ];
+                    @endphp
+
                     @foreach($users as $index => $user)
                         <div class="project-item">
-                            <span>{{ $user->project }}</span><button onclick="viewProject({{ $index }})">GO</button>
+                            <span>{{ $user->project }}</span>
+                            <button onclick="viewProject({{ $index }})">SHOW</button>
                         </div>
                     @endforeach
                 </div>
@@ -57,7 +68,7 @@
             <div class="project-description">
                 <h3>Project Description</h3>
                 <p id="description" class="placeholder">
-                    This is a detailed description of the selected project. When you click GO, this area will show project details in about 200 words.
+                    This is a detailed description of the selected project. When you click SHOW, this area will show project details in about 200 words.
                 </p>
             </div>
         </div>
@@ -85,7 +96,8 @@
                         <th>Project Name</th>
                         <th>Upload your research</th>
                         <th>Date</th>
-                        <th>Progress %</th>
+                        <th>Progress% Updated by Volunteer</th>
+                        <th>Progress% Updated by Researcher</th>
                         <th>Update</th>
                     </tr>
                 </thead>
@@ -99,9 +111,12 @@
                     ] as $project)
                         <tr>
                             <td>{{ $project }}</td>
-                            <td>Google word file link created by researcher</td>
+                            <td>
+                            <input type="text" name="google_word_link" placeholder="Google word file link created by researcher" style="width: 100%;" />
+                            </td>
                             <td class="date-cell"></td>
                             <td><input type="number" min="0" max="100" class="progress-input" placeholder="Enter %" /></td>
+                            <td><input type="text" value="45%" readonly style="width: 80px; text-align: center;"/></td>
                             <td><button onclick="updateProgress(this)">UPDATE</button></td>
                         </tr>
                     @endforeach
@@ -119,18 +134,19 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         // --- Handle "Read more"
-        const toggleBtn = document.getElementById("toggleBtn");
         const moreText = document.getElementById("moreText");
+    const toggleBtn = document.getElementById("toggleBtn");
 
-        toggleBtn.addEventListener("click", () => {
-            if (moreText.style.display === "none") {
-                moreText.style.display = "block";
-                toggleBtn.textContent = "Read less";
-            } else {
-                moreText.style.display = "none";
-                toggleBtn.textContent = "Read more";
-            }
-        });
+    toggleBtn.addEventListener("click", () => {
+        if (moreText.style.display === "none" || moreText.style.display === "") {
+            moreText.style.display = "block";
+            toggleBtn.textContent = "Read less";
+            moreText.scrollIntoView({ behavior: "smooth" });
+        } else {
+            moreText.style.display = "none";
+            toggleBtn.textContent = "Read more";
+        }
+    });
 
         // --- Set today's date in all date cells
         const today = new Date();
@@ -147,7 +163,7 @@
             if (selectedProjectName) {
                 alert(`You applied for the project: "${selectedProjectName}"`);
             } else {
-                alert("Please select a project using the GO button before applying.");
+                alert("Please select a project using the SHOW button before applying.");
             }
         });
     });
@@ -167,24 +183,29 @@
     ];
 
     function viewProject(index) {
-        const desc = document.getElementById("description");
-        desc.innerText = dummyDescriptions[index];
-        desc.classList.remove("placeholder");
+         const desc = document.getElementById("description");
+    desc.innerText = dummyDescriptions[index];
+    desc.classList.remove("placeholder");
 
-        const projectTitles = [
-            "Anganwadi improvement",
-            "AI tool for video creation",
-            "Organic skin care lotion",
-            "Smart irrigation",
-            "AI voice assistant",
-            "Drone-based delivery",
-            "Healthcare chatbot",
-            "Smart traffic monitoring",
-            "Waste management tracker",
-            "Mobile farming app",
-        ];
-        selectedProjectName = projectTitles[index];
-    }
+    const projectTitles = [
+        "Anganwadi improvement",
+        "AI tool for video creation",
+        "Organic skin care lotion",
+        "Smart irrigation",
+        "AI voice assistant",
+        "Drone-based delivery",
+        "Healthcare chatbot",
+        "Smart traffic monitoring",
+        "Waste management tracker",
+        "Mobile farming app",
+    ];
+    selectedProjectName = projectTitles[index];
+
+    // -------- Highlight Selected Project --------
+    const items = document.querySelectorAll('.project-item');
+    items.forEach(item => item.classList.remove('selected'));  // remove from all
+    items[index].classList.add('selected');                    // add to selected
+}
 
     function updateProgress(button) {
         const row = button.closest("tr");
@@ -198,5 +219,6 @@
             alert("Please enter a valid percentage (0–100).");
         }
     }
+
 </script>
 @endpush

@@ -12,6 +12,21 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes (login and register)
 Route::middleware('web')->prefix('user')->name('user.')->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('user.dashboard');
+    })->name('dashboard');
+
+    Route::get('/admin-dashboard', function () {
+        return view('user.admin-dashboard');
+    })->name('admin-dashboard');
+
+    Route::get('/reseacher-dashboard', function () {
+        return view('user.reseacher-dashboard');
+    })->name('reseacher-dashboard');
+
+    Route::get('/volunteer-dashboard', [VolunteerDashboardController::class, 'index'])->name('volunteer-dashboard');
+    
     // Public login routes
     Route::get('/login', [LoginController::class, 'show'])->name('show');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
