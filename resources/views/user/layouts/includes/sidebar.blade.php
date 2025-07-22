@@ -41,7 +41,49 @@
 </a>
 
 @if(Auth::check() && Auth::user()->user_role == 1)
-        <a href="{{ route('user.users.requests') }}"><i class="fas fa-users"></i> User Requests</a>
+<div class="dropdown">
+    <a href="#"
+       class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'active' : '' }}"
+       data-bs-toggle="collapse"
+       data-bs-target="#applicationDropdown"
+       aria-expanded="{{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'true' : 'false' }}">
+        <span><i class="fas fa-file-alt me-2"></i> Applications</span>
+        <i class="fas fa-caret-down"></i>
+    </a>
+    <div class="collapse ps-3 {{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'show' : '' }}"
+         id="applicationDropdown">
+        <a href="{{ route('user.new-applications') }}" class="d-block py-1">
+            <i class="fas fa-user-plus me-2"></i> New Applications
+        </a>
+        <a href="{{ route('user.processed-applications') }}" class="d-block py-1">
+            <i class="fas fa-check-circle me-2"></i> Processed Applications
+        </a>
+    </div>
+</div>
+
+<div class="dropdown">
+    <a href="#"
+       class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/researcher-projects*') || request()->is('user/volunteer-projects*') ? 'active' : '' }}"
+       data-bs-toggle="collapse"
+       data-bs-target="#projectDropdown"
+       aria-expanded="{{ request()->is('user/researcher-projects*') || request()->is('user/volunteer-projects*') ? 'true' : 'false' }}">
+        <span><i class="fas fa-folder-open me-2"></i> Projects</span>
+        <i class="fas fa-caret-down"></i>
+    </a>
+
+    <div class="collapse ps-3 {{ request()->is('user/researcher-projects*') || request()->is('user/volunteer-projects*') ? 'show' : '' }}"
+         id="projectDropdown">
+        <a href="{{ route('user.researcher-projects') }}" class="d-block py-1">
+            <i class="fas fa-flask me-2"></i> Researcher Projects
+        </a>
+        
+        <a href="{{ route('user.volunteer-projects') }}" class="d-block py-1">
+            <i class="fas fa-hands-helping me-2"></i> Volunteer Projects
+        </a>
+    </div>
+</div>
+
+
 @endif
 
 

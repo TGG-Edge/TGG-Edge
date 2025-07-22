@@ -40,6 +40,7 @@
     </div>
 
     <div class="col-md-9 tgg-content">
+     
       @yield('content')
     </div>
     @endif

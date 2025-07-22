@@ -39,9 +39,7 @@ class RegisterController extends Controller
                'number' => 'required|string',
                'email' => 'required|email|unique:users,email',
                'address' => 'required|string',
-               'id_type' => 'required|string',
-               'id_number' => 'required|string',
-               'photo' => 'required|image|max:50', // max in kilobytes
+               'rhm_number' => 'required'
            ]);
         }else{
            $request->validate([
@@ -50,9 +48,7 @@ class RegisterController extends Controller
                'number' => 'required|string',
                'email' => 'required|email|unique:users,email',
                'address' => 'required|string',
-               'id_type' => 'required|string',
-               'id_number' => 'required|string',
-               'photo' => 'required|image|max:50', // max in kilobytes
+               'rhm_number' => 'required'
            ]);
         }
 
@@ -67,7 +63,6 @@ class RegisterController extends Controller
         }else{
             $user_type = 4;
         }
-
         // Store user
         User::create([
             'name' => $request->name,
@@ -76,13 +71,11 @@ class RegisterController extends Controller
             'phone' => $request->number,
             'email' => $request->email,
             'address' => $request->address,
-            'document_type' => $request->id_type,
-            'document_number' => $request->id_number,
-            'user_type' => $user_type,
-            'user_role' => 4,
+            'user_type' => 1,
+            'user_role' => $user_type,
             'rhm_number' => $request->rhm_number,
             'research_assistance' => $request->has('research_assistance'),
-            'image' => $request->file('photo')->store('photos', 'public'),
+            // 'image' => $request->file('photo')->store('photos', 'public'),
             'password' => Hash::make('default-password'), // change as needed
         ]);
 

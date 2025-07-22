@@ -20,21 +20,36 @@ class UserApprovalController extends Controller
 
     public function index()
     {
-        $users = User::where('user_role', 4)->latest()->paginate(5);
+        $users = User::where('user_role', 2)->latest()->paginate(5);
         return view('user.user-approval', compact('users'));
+    }
+
+    public function  newApplication()
+    {
+        $newApplications = User::whereIn('user_role', [2,3])->where('approval','pending')->latest()->paginate(10);
+        return view('user.applications.new-application', compact('newApplications'));
+    }
+
+    public function processedApplication()
+    {
+       $processedApplications = User::whereIn('user_role', [2,3])->where('approval','!=','pending')->latest()->paginate(10);
+        return view('user.applications.processed-application', compact('processedApplications'));
+    }
+
+    public function userProfile(Request $request, $id)
+    {
+        $user = User::where('id',$id)->first();
+        return view('user.user-profile', compact('user'));
     }
 
     public function updateApproval(Request $request, $id, AIService $aiService, YouTubeService $yt)
     {
         
 
-        $request->validate([
-            'approval' => 'required|in:pending,accepted,rejected',
-        ]);
-
         $user = User::findOrFail($id);
         $message = "";
-        if( $request->approval == 'accepted' && $user->approval !== 'accepted'){
+
+        if( $request->action == 'accepted' && $user->approval !== 'accepted'){
             $topic =$user->project;
             $academicLevel =  'Graduate';
             $prompt = $aiService->createPrompt($topic, $academicLevel);
@@ -73,10 +88,10 @@ class UserApprovalController extends Controller
             // }
         }
 
-        $user->approval = $request->approval;
+        $user->approval = $request->action;
         $user->save();
 
-        return back()->with('success', 'User '.$request->approval.' status updated.' . $message);
+        return back()->with('success', 'User '.$request->action.' status updated.' . $message);
     }
 
     public function updateProject(Request $request, $id)

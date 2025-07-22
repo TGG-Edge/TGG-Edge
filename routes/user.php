@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\TestController;
+use App\Http\Controllers\ProjectCollaborationController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ResearcherDashboardController;
 use App\Http\Controllers\User\KnowledgeResearchController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\ProfileController;
@@ -35,11 +38,24 @@ Route::middleware(['web', 'auth'])->prefix('user')->name('user.')->group(functio
         return view('user.admin-dashboard');
     })->name('admin-dashboard');
 
-    Route::get('/reseacher-dashboard', function () {
-        return view('user.reseacher-dashboard');
-    })->name('reseacher-dashboard');
 
+    // researcher start
+    Route::get('/researcher-dashboard', [ResearcherDashboardController::class, 'index'])->name('researcher-dashboard');
+
+    Route::post('/project', [ProjectController::class, 'store'])->name('project.store');
+    Route::post('/project-progress/update', [ProjectController::class, 'progressUpdate'])->name('project-progress.update');
+
+    // end
+
+    //volunteer start
     Route::get('/volunteer-dashboard', [VolunteerDashboardController::class, 'index'])->name('volunteer-dashboard');
+    
+    Route::post('/project-collaboration/apply', [ProjectCollaborationController::class, 'apply'])->name('project-collaboration.apply');
+    Route::post('/project-collaboration/progress/update', [ProjectCollaborationController::class, 'progressUpdate'])->name('project-collaboration.progress.update');
+    Route::post('/project-collaboration/progress/application/accept-reject', [ProjectCollaborationController::class, 'applicationAcceptReject'])->name('project-collaboration.application/accept-reject');
+    Route::post('/project-collaboration-progress/update', [ProjectCollaborationController::class, 'researcherProgressUpdate'])->name('project-collaboration-progress.update');
+    //end
+
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -56,7 +72,22 @@ Route::middleware(['web', 'auth'])->prefix('user')->name('user.')->group(functio
     Route::get('/knowledge-research', [KnowledgeResearchController::class, 'knowledgeAndResearch'])->name('knowledge-research.index');
     Route::post('/search-knowledge', [KnowledgeResearchController::class, 'searchKnowledge'])->name('knowledge-research.search-knowledge');
 
-    Route::get('/users/requests', [UserApprovalController::class, 'index'])->name('users.requests');
-    Route::post('/users/{id}/approval', [UserApprovalController::class, 'updateApproval'])->name('users.update.approval');
+    // application start
+    Route::get('/new-applications', [UserApprovalController::class, 'newApplication'])->name('new-applications');
+    Route::get('/processed-applications', [UserApprovalController::class, 'processedApplication'])->name('processed-applications');
+
+    Route::get('/user-profile/{id}', [UserApprovalController::class, 'userProfile'])->name('user-profile');
+    Route::get('/users/{id}/approval', [UserApprovalController::class, 'updateApproval'])->name('users.update.approval');
     Route::post('/users/{id}/project', [UserApprovalController::class, 'updateProject'])->name('users.update.project');
+    // end
+
+
+    // application start
+    Route::get('/researcher-projects', [ProjectController::class, 'researcherProject'])->name('researcher-projects');
+    Route::get('/volunteer-projects', [ProjectController::class, 'volunteerProject'])->name('volunteer-projects');
+    Route::get('/researcher-project/freezed/{id}', [ProjectController::class, 'researcherFreezeProject'])->name('researcher-project.freezed');
+    Route::get('/volunteer-project/freezed/{id}', [ProjectController::class, 'volunteerFreezeProject'])->name('volunteer-project.freezed');
+    
+    // end
+
 });

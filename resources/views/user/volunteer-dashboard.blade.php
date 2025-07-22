@@ -37,6 +37,8 @@
     <button id="toggleBtn" onclick="toggleReadMore()" style="background: none; border: none; color: #007BFF; cursor: pointer; padding: 0;">
         Read more
     </button>
+    @include('user.layouts.includes.message')
+
 
     {{-- Dashboard Volunteer HTML --}}
 
@@ -44,14 +46,30 @@
             <div class="projects-list">
                 <h3>List of Projects</h3>
                 <p>Choose a project that interests you, click GO to view details, then APPLY.</p>
-                <div class="scroll-box" id="projectList">
-                    @foreach($users as $index => $user)
-                        <div class="project-item">
-                            <span>{{ $user->project }}</span><button onclick="viewProject({{ $index }})">GO</button>
-                        </div>
-                    @endforeach
-                </div>
-                <button id="applyBtn">APPLY</button>
+                <form action="{{route('user.project-collaboration.apply')}}" method="POST">
+                    @csrf
+
+                    <div class="scroll-box" id="projectList">
+                        @if($projects->count() > 0)
+                            @foreach($projects as $index => $project)
+                                <div class="project-item">
+                                    <label style="cursor: pointer;">
+                                        <strong><input type="radio" name="project_id" value="{{ $project->id }}" required /> {{ $project->title }}</strong>
+                                    </label>
+                                    <button type="button" onclick="viewProject({{ json_encode($project->description) }})">GO</button>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="project-item">
+                                No Project Available
+                            </div>
+                        @endif
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <button id="applyBtn" type="submit">APPLY</button>
+                    </div>
+                </form>
             </div>
 
             <div class="project-description">
@@ -65,15 +83,15 @@
         <div class="info-fields">
             <div class="field-box">
                 <label>Selected Project</label>
-                <input type="text" readonly value="Organic skin care lotion" />
+                <input type="text" readonly value="{{ $selected_project->project->title  ?? 'N/A'}}" />
             </div>
             <div class="field-box">
                 <label>Researcher</label>
-                <input type="text" readonly value="Dr. Nisha Rao" />
+                <input type="text" readonly value="{{ $selected_project->project->researcher    ->name ?? 'N/A'}}" />
             </div>
             <div class="field-box">
                 <label>Application Status</label>
-                <input type="text" readonly value="Pending" />
+                <input type="text" readonly value="{{ $selected_project->status ?? 'N/A'}}" />
             </div>
         </div>
 
@@ -86,26 +104,55 @@
                         <th>Upload your research</th>
                         <th>Date</th>
                         <th>Progress %</th>
+                        <th>Research Progress %</th>
+
                         <th>Update</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach([
-                        'Anganwadi improvement',
-                        'AI tool for video creation',
-                        'Organic skin care lotion',
-                        'Smart irrigation',
-                        'AI voice assistant'
-                    ] as $project)
-                        <tr>
-                            <td>{{ $project }}</td>
-                            <td>Google word file link created by researcher</td>
-                            <td class="date-cell"></td>
-                            <td><input type="number" min="0" max="100" class="progress-input" placeholder="Enter %" /></td>
-                            <td><button onclick="updateProgress(this)">UPDATE</button></td>
+                <form action="{{ route('user.project-collaboration.progress.update') }}" method="POST">
+                    @csrf
+                    <tbody>
+                        @if($collaborated_projects->count() > 0){
+                            
+                            @foreach($collaborated_projects as $index => $project)
+                            
+                                <input type="hidden" name="collaborated_project_id" value="{{$project->collaborations[0]->id}}">
+                                <tr>
+                                    <td>{{ $project->title }}</td>
+                                    <td>
+                                        {{ $project->collaborations[0]->document_url ?? 'N/A'}}
+                                    </td>
+                                    <td class="date-cell">{{ $project->collaborations[0]->updated_at }}</td>
+                                    <td>
+                                        <input type="number"  name="progress_percentage" 
+                                            class="progress-input" 
+                                            min="0" 
+                                            max="100"
+                                            value="{{ old("progress_percentage", $project->collaborations[0]->progress_percentage ?? '') }}" 
+                                            placeholder="Enter %" 
+                                            required>
+                                    </td>
+    
+                                     <td>
+                                        <input type="number"  name="researcher_progress_percentage" 
+                                            class="progress-input" 
+                                            min="0" 
+                                            max="100"
+                                            value="{{  $project->progress_percentage ?? 'N/A' }}" 
+                                            placeholder="Enter %" 
+                                            required readonly>
+                                    </td>
+                                    <td><button type="submit" name="project_id" value="{{ $project->id }}">UPDATE</button></td>
+                                </tr>
+                            @endforeach
+                        }
+                        @else
+                         <tr>
+                            <td colspan="6">Collaborated projects not available</td>
                         </tr>
-                    @endforeach
-                </tbody>
+                        @endif
+                    </tbody>
+                </form>
             </table>
         </section>
 </div>
@@ -143,13 +190,13 @@
         });
 
         // --- Apply Button
-        document.getElementById("applyBtn").addEventListener("click", () => {
-            if (selectedProjectName) {
-                alert(`You applied for the project: "${selectedProjectName}"`);
-            } else {
-                alert("Please select a project using the GO button before applying.");
-            }
-        });
+        // document.getElementById("applyBtn").addEventListener("click", () => {
+        //     if (selectedProjectName) {
+        //         alert(`You applied for the project: "${selectedProjectName}"`);
+        //     } else {
+        //         alert("Please select a project using the GO button before applying.");
+        //     }
+        // });
     });
 
     let selectedProjectName = "";
@@ -166,9 +213,9 @@
         "Mobile app for farmers to monitor crop and soil health...",
     ];
 
-    function viewProject(index) {
+    function viewProject(description) {
         const desc = document.getElementById("description");
-        desc.innerText = dummyDescriptions[index];
+        desc.innerText = description;
         desc.classList.remove("placeholder");
 
         const projectTitles = [
@@ -183,7 +230,7 @@
             "Waste management tracker",
             "Mobile farming app",
         ];
-        selectedProjectName = projectTitles[index];
+        // selectedProjectName = projectTitles[index];
     }
 
     function updateProgress(button) {

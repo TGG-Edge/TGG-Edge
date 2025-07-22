@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('project_collaborations', function (Blueprint $table) {
+            //
+             $table->integer('progress_percentage')->default(0)->after('status');
         });
     }
 
@@ -23,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::table('project_collaborations', function (Blueprint $table) {
+            //
+            $table->dropColumn('progress_percentage');
+        });
     }
 };

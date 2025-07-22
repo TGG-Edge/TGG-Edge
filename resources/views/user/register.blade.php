@@ -83,32 +83,8 @@
 
                 {{-- RHM Registration Number --}}
                 <div class="mb-3 col-md-6">
-                    <label class="form-label">RHM Registration Number</label>
-                    <input type="text" class="form-control" name="rhm_number" placeholder="If applicable">
-                </div>
-
-                {{-- ID Proof Type --}}
-                <div class="mb-3 col-md-6">
-                    <label class="form-label">ID Proof Type *</label>
-                    <select name="id_type" class="form-select" required>
-                        <option selected disabled>Select</option>
-                        <option value="aadhar">Aadhar</option>
-                        <option value="voter">Voter ID</option>
-                        <option value="dl">Driving License</option>
-                    </select>
-                </div>
-
-                {{-- ID Proof Number --}}
-                <div class="mb-3 col-md-6">
-                    <label class="form-label">ID Proof Number *</label>
-                    <input type="text" class="form-control" name="id_number" placeholder="Enter ID number" required>
-                </div>
-
-                {{-- Photo Upload --}}
-                <div class="mb-3 col-md-12">
-                    <label class="form-label">Photo (Max 50KB) *</label>
-                    <input type="file" class="form-control" name="photo" accept="image/*" required>
-                    <small class="text-muted">Please upload a recent passport-size photo.</small>
+                    <label class="form-label">RHM Registration Number *</label>
+                    <input type="text" class="form-control" name="rhm_number" placeholder="If applicable" required>
                 </div>
 
                 @if($user_type == 'researcher')

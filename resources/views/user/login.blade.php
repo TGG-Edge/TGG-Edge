@@ -7,7 +7,7 @@
     {{-- Top Description --}}
     <div class="text-center mb-4">
         <h2 class="fw-bold">Welcome to TGG Edge</h2>
-        <p class="text-muted">A platform to empower research, growth, and career opportunities. Login to access your personalized dashboard.</p>
+        <p class="text-muted">TGG Foundation fosters inquiry-driven education where learners explore real-world challenges through research, reflection, and community engagement. Participants are encouraged to formulate questions, investigate ethical solutions, and apply their findings to transformative projects that promote sustainability and self-reliance. This immersive model cultivates critical thinking, creativity, and a deeper understanding of societal impact, empowering learners to become agents of meaningful change.</p>
     </div>
 
     {{-- Split Layout --}}

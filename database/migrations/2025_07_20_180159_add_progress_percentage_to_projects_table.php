@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('article_category', function (Blueprint $table) {
-             $table->id();
-            $table->foreignId('article_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+        Schema::table('projects', function (Blueprint $table) {
+            //
+            $table->integer('progress_percentage')->default(0)->after('status');
         });
     }
 
@@ -23,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('article_category');
+        Schema::table('projects', function (Blueprint $table) {
+            //
+             $table->dropColumn('progress_percentage');
+        });
     }
 };
