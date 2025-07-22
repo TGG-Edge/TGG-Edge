@@ -14,7 +14,7 @@ class ResearcherDashboardController extends Controller
     public function index()
     {
         $project = Project::where('researcher_id', auth()->id())->first();
-        if($project->status == 'freezed'){
+        if($project && $project->status == 'freezed'){
             return response('Your project is freezed, please contact the admin.');
         }
         $volunteer_applications = ProjectCollaboration::where('status','pending')->latest()->get();
