@@ -1,6 +1,6 @@
 @extends('user.layouts.app')
 
-@section('title', 'User Dashboard - TGG Edge')
+@section('title', 'Volunteer Dashboard - TGG Edge')
 
 @section('content')
 <div class="main-container">
@@ -9,7 +9,12 @@
 
         <p><strong>Welcome to TGG India!</strong></p>
 
-        <p>We are delighted to have you join us on this transformative journey. TGG India has been initiated with the vision of providing a holistic learning experience, remote working opportunities, and impactful community development initiatives. Our collective goal is to foster happiness and mindful living, which is at the core of Project Shambala.</p>
+        <p>We are delighted to have you join us on this transformative journey. TGG India has been initiated with the vision of providing a holistic learning experience, remote working opportunities, and impactful community development initiatives. Our collective goal is to foster happiness and mindful living, which is at the core of Project Shambala.
+            <!-- Read more button (visible initially) -->
+        <button id="readMoreBtn" style="background: none; border: none; color: #007BFF; cursor: pointer; padding-left: 5px; font-size: 11px; padding-top: 0;">
+            Read more
+        </button>
+        </p>
 
         <div id="moreText" style="display: none;">
             <p>
@@ -32,13 +37,15 @@
                 Welcome to a community that believes in the power of mindful transformation!
             </p>
 
-            <p>With gratitude,<br><strong>TGG Family</strong></p>
+            <p>With gratitude,<br><strong>TGG Family</strong>
+              <!-- Read less button -->
+            <button id="readLessBtn" style="background: none; border: none; color: #007BFF; cursor: pointer; padding-left: 5px; font-size: 11px;">
+                Read less
+            </button>
+            </p>
         </div>
     </div>
 
-    <button id="toggleBtn" onclick="toggleReadMore()" style="background: none; border: none; color: #007BFF; cursor: pointer; padding: 0; font-size:11px;">
-        Read more
-    </button>
     @include('user.layouts.includes.message')
 
 
@@ -93,7 +100,12 @@
             </div>
             <div class="field-box">
                 <label>Application Status</label>
+                @if( $selected_project && $selected_project->status == 'running')
+                <input type="text" class="classtext" readonly value="Processing" />
+
+                @else
                 <input type="text" class="classtext" readonly value="{{ $selected_project->status ?? 'N/A'}}" />
+                @endif
             </div>
         </div>
 
@@ -122,7 +134,7 @@
                 <form action="{{ route('user.project-collaboration.progress.update') }}" method="POST">
                     @csrf
                     <tbody>
-                        @if($collaborated_projects->count() > 0){
+                        @if($collaborated_projects->count() > 0)
                             
                             @foreach($collaborated_projects as $index => $project)
                             
@@ -132,7 +144,7 @@
                                     <td>
                                         @if(!empty($project->collaborations[0]->document_url))
                                             <a href="{{ $project->collaborations[0]->document_url }}" target="_blank">
-                                               worksheet by Researcher
+                                               Worksheet by researcher
                                             </a>
                                         @else
                                             N/A
@@ -155,14 +167,14 @@
                                             class="progress-input" 
                                             min="0" 
                                             max="100"
-                                            value="{{  $project->progress_percentage ?? 'N/A' }}" 
+                                            value="{{  $project->collaborations[0]->researcher_progress_percentage ?? 'N/A' }}" 
                                             placeholder="Enter %" 
                                             required readonly>
                                     </td>
                                     <td><button type="submit" name="project_id" value="{{ $project->id }}">UPDATE</button></td>
                                 </tr>
                             @endforeach
-                        }
+                        
                         @else
                          <tr>
                             <td colspan="6">Collaborated projects not available</td>
@@ -183,18 +195,19 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         // --- Handle "Read more"
-        const toggleBtn = document.getElementById("toggleBtn");
-        const moreText = document.getElementById("moreText");
+        const readMoreBtn = document.getElementById('readMoreBtn');
+    const readLessBtn = document.getElementById('readLessBtn');
+    const moreText = document.getElementById('moreText');
 
-        toggleBtn.addEventListener("click", () => {
-            if (moreText.style.display === "none") {
-                moreText.style.display = "block";
-                toggleBtn.textContent = "Read less";
-            } else {
-                moreText.style.display = "none";
-                toggleBtn.textContent = "Read more";
-            }
-        });
+    readMoreBtn.addEventListener('click', function () {
+        moreText.style.display = 'block';
+        readMoreBtn.style.display = 'none';
+    });
+
+    readLessBtn.addEventListener('click', function () {
+        moreText.style.display = 'none';
+        readMoreBtn.style.display = 'inline';
+    });
 
         // --- Set today's date in all date cells
         const today = new Date();

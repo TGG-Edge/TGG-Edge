@@ -10,7 +10,12 @@
         <p><strong>Welcome to TGG India!</strong></p>
 
         <p>We are delighted to have you join us on this transformative journey. TGG India has been initiated with the vision of providing a holistic learning experience, remote working opportunities, and impactful community development initiatives. Our collective goal is to foster happiness and mindful living, which is at the core of Project Shambala.
+        <!-- Read more button (visible initially) -->
+        <button id="readMoreBtn" style="background: none; border: none; color: #007BFF; cursor: pointer; padding-left: 5px; font-size: 11px; padding-top: 0;">
+            Read more
+        </button>
         </p>
+       
 
         <div id="moreText" style="display: none;">
             <p>
@@ -33,14 +38,17 @@
                 Welcome to a community that believes in the power of mindful transformation!
             </p>
 
-            <p>With gratitude,<br><strong>TGG Family</strong></p>
+            <p>With gratitude,<br><strong>TGG Family</strong>
+                <!-- Read less button -->
+            <button id="readLessBtn" style="background: none; border: none; color: #007BFF; cursor: pointer; padding-left: 5px; font-size: 11px;">
+                Read less
+            </button>
+            </p>
 
         </div>
     </div>
 
-    <button id="toggleBtn" onclick="toggleReadMore()" style="background: none; border: none; color: #007BFF; cursor: pointer; padding-left: 5px;font-size:11px;">
-        Read more
-    </button>
+    
 
     @include('user.layouts.includes.message')
 
@@ -56,13 +64,13 @@
         @csrf 
         <h3>UPDATE YOUR RESEARCH PROJECT</h3>
 
-        <label>Provide a concise research title within 20 characters here</label>
-        <input name="title" type="text" maxlength="20" 
+        <label>Provide a concise research title within 30 characters here</label>
+        <input name="title" type="text" maxlength="30" 
                placeholder="in twenty-five characters" 
                value="{{ old('title', $project->title ?? '') }}" required />
 
-        <label>Briefly describe your research project (max 200 words)</label>
-        <textarea name="description" rows="5" placeholder="in 200 words">{{ old('description', $project->description ?? '') }}</textarea>
+        <label>Briefly describe your research project (max 300 words)</label>
+        <textarea name="description" rows="5" placeholder="in 300 words">{{ old('description', $project->description ?? '') }}</textarea>
 
 
             <button type="submit">Update</button>
@@ -139,14 +147,8 @@
                 <input type="hidden" name="project_id" value="{{ $project->id }}">
                 <td>{{$project->title}}</td>
                 <td>
-                    @if(!empty($project->document_url))
-                        <a href="{{ $project->document_url }}" target="_blank">
-                            worksheet by Researcher
-                                            </a>
-                        </a>
-                    @else
-                        N/A
-                    @endif
+                    <input type="url" name="document_url" value="{{$project->document_url ?? null}}">
+                    
                 </td>
 
                 <td>{{$project->updated_at}}</td>
@@ -194,14 +196,8 @@
             <tr>
                 <td>{{ $collaborated_projects->volunteer->name }}</td>
                 <td>
-                    @if(!empty($collaborated_projects->document_url) && $collaborated_projects->document_url !== 'N/A')
-                        <a href="{{ $collaborated_projects->document_url }}" target="_blank">
-                            worksheet by Researcher
-                                            </a>
-                        </a>
-                    @else
-                        N/A
-                    @endif
+                        <input type="url" name="document_url" value="{{$collaborated_projects->document_url ?? null}}">
+
                 </td>
 
                 <td>{{$collaborated_projects->updated_at}}</td>
@@ -229,17 +225,19 @@
 @push('scripts')
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // === "Read More" toggle ===
-    const toggleBtn = document.getElementById("toggleBtn");
-    const moreText = document.getElementById("moreText");
+     const readMoreBtn = document.getElementById('readMoreBtn');
+    const readLessBtn = document.getElementById('readLessBtn');
+    const moreText = document.getElementById('moreText');
 
-    if (toggleBtn && moreText) {
-        toggleBtn.addEventListener("click", () => {
-            const isHidden = moreText.style.display === "none";
-            moreText.style.display = isHidden ? "block" : "none";
-            toggleBtn.textContent = isHidden ? "Read less" : "Read more";
-        });
-    }
+    readMoreBtn.addEventListener('click', function () {
+        moreText.style.display = 'block';
+        readMoreBtn.style.display = 'none';
+    });
+
+    readLessBtn.addEventListener('click', function () {
+        moreText.style.display = 'none';
+        readMoreBtn.style.display = 'inline';
+    });
 
     // === Auto-fill today's date ===
     const today = new Date().toISOString().split("T")[0];

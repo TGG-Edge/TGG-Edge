@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <div class="row mt-4">
-        <div class="col-md-12 mt-5 admin-newapplication">
+        <div class="col-md-12 admin-newapplication">
             <h4 class="text-uppercase font-weight-bold admin-newappheading">PROCESSED APPLICATIONS</h4>
             @include('user.layouts.includes.message')
 

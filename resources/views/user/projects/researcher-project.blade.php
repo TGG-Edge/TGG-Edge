@@ -28,7 +28,7 @@
                         <td>{{ $project->progress_percentage ?? 'N/A' }}%</td>
                         <td>
                             @if($project->document_url)
-                                <a href="{{ $project->document_url }}" target="_blank">Google word file link shared by Researcher</a>
+                                <a href="{{ $project->document_url }}" target="_blank">Worksheet by researcher</a>
                             @else
                                 N/A
                             @endif

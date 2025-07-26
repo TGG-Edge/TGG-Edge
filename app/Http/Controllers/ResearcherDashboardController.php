@@ -20,7 +20,7 @@ class ResearcherDashboardController extends Controller
         $volunteer_applications = ProjectCollaboration::where('status','pending')->latest()->get();
         $collaborated_projects = ProjectCollaboration::whereHas('project',function($q){
             return $q->where('researcher_id', auth()->id());
-        })->where('status', 'accepted')->where('status', '!=', 'freezed')->latest()->get();
+        })->whereIn('status', ['accepted','running'])->where('status', '!=', 'freezed')->latest()->get();
         return view('user.researcher-dashboard', compact('project','volunteer_applications','collaborated_projects'));
     }
 

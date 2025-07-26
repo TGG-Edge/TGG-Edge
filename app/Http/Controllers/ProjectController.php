@@ -31,8 +31,8 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:20',
-            'description' => 'nullable|string|max:200',
+            'title' => 'required|string|max:30',
+            'description' => 'nullable|string|max:300',
         ]);
 
         $researcherId = Auth::id();

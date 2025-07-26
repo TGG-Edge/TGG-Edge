@@ -110,9 +110,10 @@ class ProjectCollaborationController extends Controller
         $collaboratedProject = ProjectCollaboration::findOrFail($collaboratedProjectId);
         $collaboratedProject->update([
             'researcher_progress_percentage' => $request->researcher_progress_percentage,
-            'document_url' => $request->document_url ?? null,        ]);
+            'document_url' => $request->document_url ?? null, 
+            'status' => 'accepted',      
+         ]);
 
-        
 
         return back()->with('success', 'Collaborated Project progress updated!');
     }
@@ -128,7 +129,11 @@ class ProjectCollaborationController extends Controller
         $project_collaboration = ProjectCollaboration::find($request->project_collaboration_id);
 
         if ($request->action === 'accept') {
-            $project_collaboration->status = 'accepted';
+            if($request->action === 'accept' && $project_collaboration->document_url == null){
+              $project_collaboration->status = 'running';
+            }else{
+              $project_collaboration->status = 'accepted';
+            }
         } else {
             $project_collaboration->status = 'rejected';
         }
