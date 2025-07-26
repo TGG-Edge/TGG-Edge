@@ -14,6 +14,7 @@
     font-weight: 500;
     margin-bottom: 5px;
     border-radius: 4px;
+    font-size: 13px;
 }
 
 .tgg-sidebar a:hover,
@@ -77,6 +78,11 @@
     color: red;
 }
 
+.text-muted {
+    font-size: 13px;
+    text-align: justify;
+}
+
 /* Dashboard Volunteer CSS */
 
 body {
@@ -84,7 +90,34 @@ body {
     background-color: #ffffff; /* white background */
     color: #265475; /* primary text in teal */
     line-height: 1.5;
-    padding: 20px;
+}
+
+.para-text {
+    font-size: 13px;
+}
+
+.admin-container {
+    font-size: 13px;
+}
+
+.fw-bold {
+    font-size: 20px;
+}
+
+.custom-heading {
+    font-size: 20px;
+}
+
+.form-label {
+    font-size: 14px;
+}
+
+.form-control {
+    font-size: 13px !important;
+}
+
+.login-btn {
+    font-size: 13px !important;
 }
 
 .main-container {
@@ -107,6 +140,18 @@ body {
     flex: 1;
 }
 
+.projects-list h3 {
+    font-size: 17px;
+}
+
+.volunteer-status h3 {
+    font-size: 17px;
+}
+
+.project-description h3 {
+    font-size: 17px;
+}
+
 .projects-list h3,
 .project-description h3,
 .volunteer-status h3 {
@@ -114,9 +159,13 @@ body {
     color: #265475; /* Teal headings */
 }
 
+.projects-list p {
+    font-size: 13px;
+}
+
 /* Scrollable List */
 .scroll-box {
-    max-height: 220px;
+    max-height: 116px;
     overflow-y: auto;
     padding: 10px;
     background: #f9fdfb;
@@ -129,13 +178,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
-    padding: 6px;
+    margin-bottom: 3px;
+    padding: 1px;
+    font-size: 11px;
 }
 
 .project-item span {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
     color: #265475;
 }
 
@@ -146,7 +196,7 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 13px;
     transition: background-color 0.3s ease;
 }
 
@@ -169,12 +219,12 @@ body {
     background-color: #8f9400; /* Olive Green */
     color: white;
     border: none;
-    padding: 10px;
     width: 100%;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 12px;
 }
 
 #applyBtn:hover {
@@ -183,20 +233,21 @@ body {
 
 /* Description Styling */
 .project-description p {
-    min-height: 200px;
+    min-height: 235px;
     background-color: #f5f9f5;
-    padding: 15px;
+    padding: 10px;
     border: 1px solid #d0dce8;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 13px;
     color: #265475;
     overflow-y: auto;
+    margin-bottom: -4px;
 }
 
 /* Placeholder Style */
 .placeholder {
     color: #999;
-    font-size: 12px;
+    font-size: 11px;
     font-style: italic;
 }
 
@@ -217,10 +268,11 @@ body {
 }
 
 .field-box label {
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 5px;
     display: block;
     color: #265475;
+    font-size: 13px;
 }
 
 .field-box input {
@@ -229,7 +281,7 @@ body {
     background-color: #f9fbfd;
     border: 1px solid #ccd7e2;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 10px;
     color: #265475;
 }
 
@@ -241,20 +293,25 @@ table {
     background-color: #ffffff;
     border-radius: 8px;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 table th,
 table td {
     border: 1px solid #e0e0e0;
-    padding: 10px;
+    padding: 4px;
     text-align: center;
+    font-size: 12px;
+}
+
+.progress-input {
+    width: 80px;
 }
 
 table th {
     background-color: #f0f4f8;
     color: #265475;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 table tr:nth-child(even) {
@@ -263,7 +320,8 @@ table tr:nth-child(even) {
 
 /* Table Button */
 table button {
-    padding: 6px 10px;
+    padding: 3px;
+    width: 80px;
     background-color: #8f9400;
     border: none;
     color: white;
@@ -271,6 +329,7 @@ table button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 12px;
 }
 
 table button:hover {
@@ -297,32 +356,24 @@ table button:hover {
 
 /* Info Fields Styling */
 .info-fields .field-box {
-    background-color: #ffffff;
+    background-color: #f5f9f5;
     border: 1px solid #ccd7e2;
+    padding: 7px 20px 0px 20px;
 }
 
 /* Volunteer Status Wrapper */
 .volunteer-status {
     background-color: #f5f9f5;
     border: 1px solid #c9d9c9;
-    padding: 20px;
+    padding: 5px;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
     box-shadow: 0 1px 3px rgba(143, 148, 0, 0.1);
 }
 
 .volunteer-status h3 {
     margin-bottom: 15px;
     color: #265475;
-}
-
-.project-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
 }
 
 .project-item:hover {
@@ -353,9 +404,6 @@ table button:hover {
 	} */
 }
 
-
-
-
 /* Dashboard Reseacher CSS */
 
 /* Reset */
@@ -364,19 +412,70 @@ table button:hover {
 }
 
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     margin: 0;
-    padding: 20px;
     background-color: #f9f9f9;
 }
 
 /* Sections */
 .section {
-    background: #fff;
+    background: #f5f9f5;
     border: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 30px;
+    padding: 5px;
+    margin-bottom: 3px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.update-box {
+    background-color: #f5f9f5;
+    padding: 20px 25px 5px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+.update-box label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+}
+
+.update-box input[type="text"],
+.update-box textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.update-box input[type="text"]:focus,
+.update-box textarea:focus {
+    border-color: #265475;
+    outline: none;
+}
+
+.update-box button {
+    background-color: #8f9400;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    padding: 7px 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: -10px;
+}
+
+.update-box button:hover {
+    background-color: #6f7300;
 }
 
 /* Top Two Sections Side-by-Side */
@@ -394,24 +493,47 @@ body {
 .volunteer-box {
     flex: 1;
     min-width: 350px;
+    padding: 20px 25px 0px 25px;
 }
 
 /* Full Width Sections Below */
 .full-width {
     width: 100%;
+    padding: 20px 25px 0px 20px;
 }
 
-/* Input Styling */
-input[type="text"],
-input[type="url"],
-input[type="number"],
+/* input[type="text"],
 textarea {
-    width: 100%;
+    width: 220px;
     padding: 8px;
     margin-top: 5px;
     margin-bottom: 15px;
     border: 1px solid #bbb;
     border-radius: 4px;
+    font-size: 10px;
+    padding-right: 10px;
+} */
+
+.classurl {
+    width: 220px;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 10px;
+    padding-right: 10px;
+}
+
+.classtext {
+    width: 220px;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 10px;
+    padding-right: 10px;
 }
 
 textarea {
@@ -434,19 +556,90 @@ button:hover {
 }
 
 /* Table Styling */
-table {
+.researcher-table table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
 }
 
-th,
-td {
+.researcher-table th {
     border: 1px solid #ccc;
-    padding: 10px;
     text-align: center;
 }
 
-th {
+.researcher-table td {
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 3px;
+    font-size: 12px;
+}
+
+.researcher-table th {
     background-color: #f0f0f0;
+}
+
+.btn-accept {
+    background-color: green;
+    color: white;
+    padding: 2px 2px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 50px;
+    font-size: 11px;
+}
+
+.btn-reject {
+    background-color: red;
+    color: white;
+    padding: 2px 2px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 50px;
+    font-size: 11px;
+}
+
+.btn-accept:hover {
+    background-color: darkgreen;
+}
+
+.btn-reject:hover {
+    background-color: darkred;
+}
+
+.full-width h3 {
+    font-size: 17px;
+    color: #265475;
+}
+
+.update-box h3 {
+    font-size: 17px;
+    color: #265475;
+}
+
+.volunteer-box h3 {
+    font-size: 17px;
+    color: #265475;
+}
+
+/* Dashbaord Admin */
+/* New Application */
+
+.admin-newapplication {
+    background-color: #f5f9f5;
+    height: 400px;
+}
+
+.admin-newappheading {
+    font-size: 18px;
+    color: #265475;
+    font-weight: bold;
+}
+
+.admin-application-table {
+    font-weight: 600;
+    text-align: center;
+    font-size: 14px;
+    color: #265475 !important;
 }

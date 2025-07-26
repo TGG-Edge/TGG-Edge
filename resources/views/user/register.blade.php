@@ -56,14 +56,6 @@
                     <input type="number" class="form-control" name="age" placeholder="Your age" required>
                 </div>
 
-                @if($user_type == 'researcher')
-                {{-- Project Description --}}
-                <div class="mb-3 col-12">
-                    <label class="form-label">Project (Research Topic Description) *</label>
-                    <textarea class="form-control" name="project" placeholder="Describe your research project here" rows="3" required></textarea>
-                </div>
-                @endif
-
                 <div class="mb-3 col-md-6">
                     <label class="form-label">Email *</label>
                     <input type="email" class="form-control" name="email" placeholder="Email" required>
@@ -86,6 +78,14 @@
                     <label class="form-label">RHM Registration Number *</label>
                     <input type="text" class="form-control" name="rhm_number" placeholder="If applicable" required>
                 </div>
+
+                 @if($user_type == 'researcher')
+                {{-- Project Description --}}
+                <div class="mb-3 col-12">
+                    <label class="form-label">Project (Research Topic Description) *</label>
+                    <textarea class="form-control" name="project" placeholder="Describe your research project here" rows="3" required></textarea>
+                </div>
+                @endif
 
                 @if($user_type == 'researcher')
                 {{-- Research Assistance Checkbox --}}

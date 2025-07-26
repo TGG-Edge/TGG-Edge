@@ -75,7 +75,7 @@
                             <div  class="dropdown-menu show-on-hover " style="padding-top: 10px; background: transparent; border: none;">
 
                                 <ul class="dropdown-menu show-on-hover" aria-labelledby="interventionsDropdown" style="margin-top: 0px;">
-                                  <li><a class="dropdown-item" href="https://tggfct.org/agriculture-food-production/">Agriculture & Food Production</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/agriculture-food-production/">Production</a></li>
                                   <li><a class="dropdown-item" href="https://tggfct.org/eco-cultural-village/">Eco-Cultural Village</a></li>
                                   <li><a class="dropdown-item" href="https://tggfct.org/ayurgyanam/">Ayurgyanam</a></li>
                                   <li><a class="dropdown-item" href="https://tggfct.org/handicraft/">Handicraft</a></li>
@@ -109,6 +109,7 @@
                                 <ul class="dropdown-menu show-on-hover" aria-labelledby="interventionsDropdown" style="margin-top: 0px;">
                                   <li><a class="dropdown-item" href="https://tggfct.org/global-citizen/">Global Citizen</a></li>
                                   <li><a class="dropdown-item" href="https://tggfct.org/bridging-the-gap/">Bridging-the-gap</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/exploration-with-tgg//">Exploring with TGG</a></li>
                                   <li><a class="dropdown-item" href="https://tggfct.org/tggs-research-innovation/">Sustainability Research</a></li>
                                  
                                 </ul>
