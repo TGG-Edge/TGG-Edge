@@ -31,7 +31,13 @@ class AIService
             - Keywords: {$keywords}
             - User: {$userContext}
 
-            Return ONLY a valid JSON object with these exact keys:
+            Requirements:
+            - 10-15 literature, 10-15 links, 10-15 LinkedIn profiles, 5-10 video queries
+            - All URLs must be real and valid.
+            - linkedin_profiles url should be public and real profile url (
+            Do Webscrape for url)
+
+            Return ONLY a valid **raw JSON object** (no markdown, no explanation, no formatting). The output must contain the following **exact keys and structure**:
             {
                 "content": "Detailed summary (2000+ words)...",
                 "video_search_queries": ["Query 1", "Query 2"],
@@ -46,10 +52,10 @@ class AIService
                 "type": "database / organization / tool",
                 }],
                 "linkedin_profiles": [{
-                 "name": "Expert Name",
+                "name": "Expert Name",
                 "title": "Position",
                 "institution": "Organization",
-                "linkedin_url": "https://linkedin.com/in/username",
+                "linkedin_url": "https://www.google.com/search?q=site:linkedin.com/in+%22Expert+Name%22+%22Full+Professional+Title%22+%22Institution%22+location+keywords",
                 "expertise": "Fields of knowledge",
                 "background": "Professional experience",
                 "relevance": "Why relevant for research",
@@ -58,9 +64,11 @@ class AIService
             }
 
             Requirements:
-            - 8-10 literature, 8-10 links, 6-8 LinkedIn profiles, 3-5 video queries
-            - Use real URLs
-            - Return JSON only
+            - 10-15 literature, 10-15 links, 10-15 LinkedIn profiles, 5-10 video queries
+            - All URLs must be real and valid.
+            Note:
+            - Do **not** include any extra text, explanations, markdown syntax, or comments. Only raw JSON should be returned.
+            - Important: Output ONLY a pure JSON object. Do NOT wrap it in triple backticks, markdown, explanations, or tags.
             EOT;
     }
 
@@ -183,16 +191,43 @@ class AIService
         return null;
     }
 
-    public function parseJsonResponse($text)
+    // public function parseJsonResponse($text)
+    // {
+    //     try {
+    //         $jsonStart = strpos($text, '{');
+    //         $jsonEnd = strrpos($text, '}') + 1;
+    //         $json = substr($text, $jsonStart, $jsonEnd - $jsonStart);
+    //         return json_decode($json, true);
+    //     } catch (\Throwable $e) {
+    //         Log::error("JSON Parse Error", ['text' => $text, 'error' => $e->getMessage()]);
+    //         return null;
+    //     }
+    // }
+
+    function parseJsonResponse($response)
     {
-        try {
-            $jsonStart = strpos($text, '{');
-            $jsonEnd = strrpos($text, '}') + 1;
-            $json = substr($text, $jsonStart, $jsonEnd - $jsonStart);
-            return json_decode($json, true);
-        } catch (\Throwable $e) {
-            Log::error("JSON Parse Error", ['text' => $text, 'error' => $e->getMessage()]);
+        // Step 1: Clean up common wrapping artifacts (```json ... ```)
+        $response = trim($response);
+
+        // Remove wrapping ```json or ``` if present
+        if (preg_match('/```(?:json)?\s*(.*?)```/is', $response, $matches)) {
+            $response = $matches[1];
+        }
+
+        // Step 2: Remove any trailing non-JSON content (sometimes Gemini adds extra logs)
+        $response = preg_replace('/^[^{\[]*/', '', $response); // Remove anything before JSON starts
+        $response = preg_replace('/[^}\]]*$/', '', $response); // Remove anything after JSON ends
+
+        // Step 3: Decode JSON safely
+        $decoded = json_decode($response, true);
+
+        // Step 4: Handle errors
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            // Optionally log: error_log("JSON Decode Error: " . json_last_error_msg());
             return null;
         }
+
+        return $decoded;
     }
+
 }

@@ -33,7 +33,13 @@
                                 N/A
                             @endif
                         </td>
-                        <td><a href="{{ route('user.researcher-project.freezed', $project->id) }}" class="btn btn-sm btn-danger {{ $project->status == 'freezed' ? 'disabled' : '' }}">freeze</a></td>
+                        <td>
+                           <a href="{{ route('user.researcher-project.freezed', $project->id) }}"
+                            class="btn btn-sm {{ $project->status == 'freezed' ? 'btn-dark' : 'btn-danger' }}">
+                            {{ $project->status == 'freezed' ? 'Freezed' : 'Freeze' }}
+                            </a>
+
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

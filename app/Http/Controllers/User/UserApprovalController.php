@@ -59,6 +59,7 @@ class UserApprovalController extends Controller
                 // return response()->json(['success' => false, 'error' => 'AI failed'], 500);
             }
             $parsed = $aiService->parseJsonResponse($response['content']);
+            // return      $parsed;
             if($parsed == NULL) {
                 return back()->with('success', 'AI failed to generate parse data, Please try again.');
                 // return response()->json(['success' => false, 'error' => 'AI response failed'], 500);

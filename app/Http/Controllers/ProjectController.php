@@ -112,16 +112,24 @@ class ProjectController extends Controller
     public function researcherFreezeProject(Request $request, $id)
     {
         $project = Project::findOrFail($id);
-        $project->update(['status' => 'freezed']);
 
-        return redirect()->back()->with('success', 'Researcher project has been frozen successfully!');
+        $newStatus = $project->status === 'freezed' ? 'started' : 'freezed';
+        $project->update(['status' => $newStatus]);
+
+        $message = $newStatus === 'freezed' ? 'Researcher project has been frozen successfully!' : 'Researcher project has been unfrozen successfully!';
+        return redirect()->back()->with('success', $message);
     }
 
     public function volunteerFreezeProject(Request $request, $id)
     {
+
         $projectCollaboration = ProjectCollaboration::findOrFail($id);
-        $projectCollaboration->update(['status' => 'freezed']);
-        return redirect()->back()->with('success', 'Volunteer project collaboration has been frozen successfully!');
+
+        $newStatus = $projectCollaboration->status === 'freezed' ? 'accepted' : 'freezed';
+        $projectCollaboration->update(['status' => $newStatus]);
+
+        $message = $newStatus === 'freezed' ? 'Volunteer project collaboration has been frozen successfully!' : 'Volunteer project collaboration has been unfrozen successfully!';
+        return redirect()->back()->with('success', $message);
     }
     /**
      * Remove the specified resource from storage.
