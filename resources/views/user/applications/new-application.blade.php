@@ -4,19 +4,19 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row mt-4">
+    <div class="row mt-4 admin-newapplication">
         <div class="col-md-12">
-            <h4 class="text-uppercase font-weight-bold">New Applications</h4>
+            <h4 class="text-uppercase font-weight-bold admin-newappheading">New APPLICATIONS</h4>
             @include('user.layouts.includes.message')
 
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Name</th>
-                        <th>RHM Registration</th>
-                        <th>Engagement Type</th>
-                        <th>Profile</th>
-                        <th>Approval</th>
+                        <th class="admin-application-table">NAME</th>
+                        <th class="admin-application-table">RHM REGISTRATION</th>
+                        <th class="admin-application-table">ENGAGEMENT TYPE</th>
+                        <th class="admin-application-table">PROFILE</th>
+                        <th class="admin-application-table">APPROVAL</th>
                     </tr>
                 </thead>
                 <tbody>

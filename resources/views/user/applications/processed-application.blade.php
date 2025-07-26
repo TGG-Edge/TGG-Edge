@@ -6,18 +6,18 @@
 <div class="container-fluid">
 
     <div class="row mt-4">
-        <div class="col-md-12 mt-5">
-            <h4 class="text-uppercase font-weight-bold">Processed Application</h4>
+        <div class="col-md-12 mt-5 admin-newapplication">
+            <h4 class="text-uppercase font-weight-bold admin-newappheading">PROCESSED APPLICATIONS</h4>
             @include('user.layouts.includes.message')
 
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Name</th>
-                        <th>RHM Registration</th>
-                        <th>Engagement Type</th>
-                        <th>Profile</th>
-                        <th>Approval</th>
+                        <th class="admin-application-table">NAME</th>
+                        <th class="admin-application-table">RHM REGISTRATION</th>
+                        <th class="admin-application-table">ENGAGEMENT TYPE</th>
+                        <th class="admin-application-table">PROFILE</th>
+                        <th class="admin-application-table">APPROVAL</th>
                     </tr>
                 </thead>
                 <tbody>
