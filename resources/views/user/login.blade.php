@@ -6,7 +6,7 @@
 <div class="container py-4">
     {{-- Top Description --}}
     <div class="text-center mb-4">
-        <h2 class="fw-bold">Welcome to TGG Edge</h2>
+        <h2 class="fw-bold">WELCOME TO TGG EDGE</h2>
         <p class="text-muted">TGG Foundation fosters inquiry-driven education where learners explore real-world challenges through research, reflection, and community engagement. Participants are encouraged to formulate questions, investigate ethical solutions, and apply their findings to transformative projects that promote sustainability and self-reliance. This immersive model cultivates critical thinking, creativity, and a deeper understanding of societal impact, empowering learners to become agents of meaningful change.</p>
     </div>
 
@@ -20,7 +20,7 @@
         {{-- Right Login Form --}}
         <div class="col-md-5 col-lg-5">
             <div class="card shadow rounded-4 p-4" style="background-color: #fff;">
-                <h4 class="text-center mb-4">Login</h4>
+                <h4 class="text-center mb-4 custom-heading">Login</h4>
 
                 {{-- Flash Messages --}}
                 @if (session('success'))
@@ -57,7 +57,7 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
                     </div>
-                    <button type="submit" class="btn w-100 mt-2 text-white" style="background-color: #033576; border-color: #033576;">
+                    <button type="submit" class="btn w-100 mt-2 text-white login-btn" style="background-color: #033576; border-color: #033576;">
                         Login
                     </button>
                 </form>

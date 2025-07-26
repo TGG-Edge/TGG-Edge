@@ -4,37 +4,39 @@
 
 @section('content')
 <div class="main-container">
-    <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('user.logout') }}">Log out</a>)</p>
+    <div class="para-text">
+        <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('user.logout') }}">Log out</a>)</p>
 
-    <p><strong>Welcome to TGG India!</strong></p>
+        <p><strong>Welcome to TGG India!</strong></p>
 
-    <p>We are delighted to have you join us on this transformative journey. TGG India has been initiated with the vision of providing a holistic learning experience, remote working opportunities, and impactful community development initiatives. Our collective goal is to foster happiness and mindful living, which is at the core of Project Shambala.</p>
+        <p>We are delighted to have you join us on this transformative journey. TGG India has been initiated with the vision of providing a holistic learning experience, remote working opportunities, and impactful community development initiatives. Our collective goal is to foster happiness and mindful living, which is at the core of Project Shambala.</p>
 
-    <div id="moreText" style="display: none;">
-        <p>
-            As the world evolves with rapid technological advancements,
-            the challenges of navigating this complex landscape are becoming increasingly evident.
-            Unfortunately, technology’s misuse has led to disconnection, stress, and uncertainty for many.
-            Project Shambala stands as a beacon of hope, guiding individuals toward a more meaningful and balanced life.
-        </p>
+        <div id="moreText" style="display: none;">
+            <p>
+                As the world evolves with rapid technological advancements,
+                the challenges of navigating this complex landscape are becoming increasingly evident.
+                Unfortunately, technology’s misuse has led to disconnection, stress, and uncertainty for many.
+                Project Shambala stands as a beacon of hope, guiding individuals toward a more meaningful and balanced life.
+            </p>
 
-        <p>
-            Through our programs, we aspire to build a community that nurtures knowledge,
-            collaboration, and conscious living. Together, we can create a safe space for those seeking
-            an alternative to the fast-paced, often overwhelming modern lifestyle.
-            Our collective efforts will pave the way for many who wish to break free from the vicious cycle that entraps them.
-        </p>
+            <p>
+                Through our programs, we aspire to build a community that nurtures knowledge,
+                collaboration, and conscious living. Together, we can create a safe space for those seeking
+                an alternative to the fast-paced, often overwhelming modern lifestyle.
+                Our collective efforts will pave the way for many who wish to break free from the vicious cycle that entraps them.
+            </p>
 
-        <p>
-            Let us work hand in hand to build a future where learning, working, and living harmoniously
-            with nature and society become the foundation of true well-being.
-            Welcome to a community that believes in the power of mindful transformation!
-        </p>
+            <p>
+                Let us work hand in hand to build a future where learning, working, and living harmoniously
+                with nature and society become the foundation of true well-being.
+                Welcome to a community that believes in the power of mindful transformation!
+            </p>
 
-        <p>With gratitude,<br><strong>TGG Family</strong></p>
+            <p>With gratitude,<br><strong>TGG Family</strong></p>
+        </div>
     </div>
 
-    <button id="toggleBtn" onclick="toggleReadMore()" style="background: none; border: none; color: #007BFF; cursor: pointer; padding: 0;">
+    <button id="toggleBtn" onclick="toggleReadMore()" style="background: none; border: none; color: #007BFF; cursor: pointer; padding: 0; font-size:11px;">
         Read more
     </button>
     @include('user.layouts.includes.message')
@@ -44,8 +46,8 @@
 
         <div class="top-section">
             <div class="projects-list">
-                <h3>List of Projects</h3>
-                <p>Choose a project that interests you, click GO to view details, then APPLY.</p>
+                <h3>LISTS OF PROJECTS</h3>
+                <p>Choose a project that interests you, click SHOW to view details, then APPLY.</p>
                 <form action="{{route('user.project-collaboration.apply')}}" method="POST">
                     @csrf
 
@@ -56,7 +58,7 @@
                                     <label style="cursor: pointer;">
                                         <strong><input type="radio" name="project_id" value="{{ $project->id }}" required /> {{ $project->title }}</strong>
                                     </label>
-                                    <button type="button" onclick="viewProject({{ json_encode($project->description) }})">GO</button>
+                                    <button type="button" onclick="viewProject({{ json_encode($project->description) }})">SHOW</button>
                                 </div>
                             @endforeach
                         @else
@@ -73,9 +75,9 @@
             </div>
 
             <div class="project-description">
-                <h3>Project Description</h3>
+                <h3>PROJECT DESCRIPTION</h3>
                 <p id="description" class="placeholder">
-                    This is a detailed description of the selected project. When you click GO, this area will show project details in about 200 words.
+                    This is a detailed description of the selected project. When you click SHOW, this area will show project details in about 200 words.
                 </p>
             </div>
         </div>
@@ -83,28 +85,36 @@
         <div class="info-fields">
             <div class="field-box">
                 <label>Selected Project</label>
-                <input type="text" readonly value="{{ $selected_project->project->title  ?? 'N/A'}}" />
+                <input type="text" class="classtext" readonly value="{{ $selected_project->project->title  ?? 'N/A'}}" />
             </div>
             <div class="field-box">
                 <label>Researcher</label>
-                <input type="text" readonly value="{{ $selected_project->project->researcher    ->name ?? 'N/A'}}" />
+                <input type="text"  class="classtext" readonly value="{{ $selected_project->project->researcher    ->name ?? 'N/A'}}" />
             </div>
             <div class="field-box">
                 <label>Application Status</label>
-                <input type="text" readonly value="{{ $selected_project->status ?? 'N/A'}}" />
+                <input type="text" class="classtext" readonly value="{{ $selected_project->status ?? 'N/A'}}" />
             </div>
         </div>
 
         <section class="volunteer-status">
-            <h3>Research Volunteering Status</h3>
+            <h3>RESEARCH VOLUNTEERING STATUS</h3>
             <table>
+                <colgroup>
+                    <col style="width: 18%;"> 
+                    <col style="width: 28%;"> 
+                    <col style="width: 12%;"> 
+                    <col style="width: 15%;"> 
+                    <col style="width: 15%;"> 
+                    <col style="width: 12%;"> 
+                </colgroup>
                 <thead>
                     <tr>
                         <th>Project Name</th>
                         <th>Upload your research</th>
                         <th>Date</th>
                         <th>Progress %</th>
-                        <th>Research Progress %</th>
+                        <th>Evaluation %</th>
 
                         <th>Update</th>
                     </tr>
@@ -120,8 +130,15 @@
                                 <tr>
                                     <td>{{ $project->title }}</td>
                                     <td>
-                                        {{ $project->collaborations[0]->document_url ?? 'N/A'}}
+                                        @if(!empty($project->collaborations[0]->document_url))
+                                            <a href="{{ $project->collaborations[0]->document_url }}" target="_blank">
+                                               worksheet by Researcher
+                                            </a>
+                                        @else
+                                            N/A
+                                        @endif
                                     </td>
+
                                     <td class="date-cell">{{ $project->collaborations[0]->updated_at }}</td>
                                     <td>
                                         <input type="number"  name="progress_percentage" 

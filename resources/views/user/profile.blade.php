@@ -54,7 +54,7 @@
                 <label>Address:</label>
                 <textarea name="address" class="form-control">{{ $user->address }}</textarea>
             </div>
-           <div class="col-md-6 mb-3">
+           <!-- <div class="col-md-6 mb-3">
                 <label>Document Type:</label>
                 <select name="document_type" class="form-select" required>
                     <option disabled {{ is_null($user->document_type) ? 'selected' : '' }}>Select</option>
@@ -62,12 +62,12 @@
                     <option value="voter" {{ $user->document_type == 'voter' ? 'selected' : '' }}>Voter ID</option>
                     <option value="dl" {{ $user->document_type == 'dl' ? 'selected' : '' }}>Driving License</option>
                 </select>
-            </div>
+            </div> -->
 
-            <div class="col-md-6 mb-3">
+            <!-- <div class="col-md-6 mb-3">
                 <label>Document Number:</label>
                 <input type="text" name="document_number" class="form-control" value="{{ $user->document_number }}">
-            </div>
+            </div> -->
             <div class="col-md-6 mb-3">
                 <label>RHM Number:</label>
                 <input type="text" name="rhm_number" class="form-control" value="{{ $user->rhm_number }}">
@@ -76,13 +76,13 @@
                 <label>Project:</label>
                 <input type="text" name="project" class="form-control" value="{{ $user->project }}">
             </div>
-            <div class="col-md-6 mb-3">
+            <!-- <div class="col-md-6 mb-3">
                 <label>Profile Image:</label>
                 <input type="file" name="image" class="form-control">
                 @if($user->image)
                     <img src="{{ asset('storage/' . $user->image) }}" class="img-thumbnail mt-2" width="100">
                 @endif
-            </div>
+            </div> -->
         </div>
 
         <hr>
