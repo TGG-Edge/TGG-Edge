@@ -88,7 +88,7 @@
                     <col style="width: 35%;">
                 </colgroup>
                 <tr>
-                    <th>Name</th>
+                    <th>Volunteer Name</th>
                     <th>Whatsapp</th>
                     <th>Status</th>
                 </tr>

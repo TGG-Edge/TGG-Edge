@@ -6,20 +6,22 @@
 <div class="container-fluid">
 
     <div class="row mt-4">
-        <div class="col-md-12 mt-5">
-            <h4 class="text-uppercase font-weight-bold">Volunteer Projects</h4>
+        <div class="col-md-12 mt-5" admin-newapplication>
+            <h2 class="admin-newappheading">VOLUNTEER PROJRCTS</h4>
             @include('user.layouts.includes.message')
 
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Name</th>
-                        <th>Researcher Name</th>
-                        <th>Project</th>
-                        <th>Progress%</th>
-                        <th>Evaluation%</th>
-                        <th>View the progress</th>
-                        <th>Archive</th>
+
+                        <th class="admin-application-table">NAME</th>
+                        <th class="admin-application-table">RESEACHER NAME</th>
+                        <th class="admin-application-table">PROJRCT</th>
+                        <th class="admin-application-table">PROGRESS%</th>
+                        <th class="admin-application-table">EVALUATE%</th>
+                        <th class="admin-application-table">VIEW THE PROGRESS</th>
+                        <th class="admin-application-table">ARCHIVE</th>
+
                     </tr>
                 </thead>
                 <tbody>
