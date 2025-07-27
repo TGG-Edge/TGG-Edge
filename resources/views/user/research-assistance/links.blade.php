@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container">
-    <h2>Useful Research Links</h2>
+    <h2 class="litheader">Useful Research Links</h2>
     <ul class="list-group">
         @forelse ($links as $link)
             <li class="list-group-item">
@@ -13,7 +13,7 @@
                 <p>{{ $link['description']?? 'N/A'  }}</p>
             </li>
         @empty
-            <li class="list-group-item">No link data available.</li>
+            <li class="list-group-item litfeildtext">No link data available.</li>
         @endforelse
     </ul>
      <div class="mt-4">

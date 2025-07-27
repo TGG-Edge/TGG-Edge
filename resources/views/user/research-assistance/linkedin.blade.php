@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container">
-    <h2>Relevant LinkedIn Profiles</h2>
+    <h2 class="litheader">Relevant LinkedIn Profiles</h2>
     <ul class="list-group">
         @forelse ($linkedin as $profile)
             <li class="list-group-item">
@@ -15,7 +15,7 @@
                 Relevance: {{ $profile['relevance'] ?? 'N/A' }}
             </li>
         @empty
-            <li class="list-group-item">No LinkedIn data available.</li>
+            <li class="list-group-item litfeildtext">No LinkedIn data available.</li>
         @endforelse
     </ul>
      <div class="mt-4">

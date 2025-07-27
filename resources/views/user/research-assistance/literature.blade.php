@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <h2>Literature Resources</h2>
+    <h2 class="litheader">Literature Resources</h2>
     <ul class="list-group">
         @forelse ($literature as $item)
             <li class="list-group-item">
@@ -15,7 +15,7 @@
                 {{-- <a href="{{ $item['url'] ?? 'N/A' }}" target="_blank">View</a> --}}
             </li>
         @empty
-            <li class="list-group-item">No literature data available.</li>
+            <li class="list-group-item litfeildtext">No literature data available.</li>
         @endforelse
     </ul>
       <div class="mt-4">

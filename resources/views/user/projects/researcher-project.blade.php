@@ -5,22 +5,22 @@
 @section('content')
 <div class="container-fluid">
 
-    <div class="row mt-4">
+    <div class="row mt-4 admin-newapplication">
         <div class="col-md-12">
-            <h4 class="text-uppercase font-weight-bold">Research Projects</h4>
+            <h2 class="admin-newappheading">RESEARCH PROJECTS</h4>
             @include('user.layouts.includes.message')
 
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Name</th>
-                        <th>Project</th>
-                        <th>Progress%</th>
-                        <th>View the progress</th>
-                        <th>Freezed</th>
+                        <th class="admin-application-table">NAME</th>
+                        <th class="admin-application-table">PROJECT</th>
+                        <th class="admin-application-table">PROGRESS%</th>
+                        <th class="admin-application-table">VIEW THE PROGRESS</th>
+                        <th class="admin-application-table">FREEZED</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="admin-projects-table">
                     @foreach($researchProjects as $project)
                     <tr>
                         <td>{{ $project->researcher->name  }}</td>
@@ -35,7 +35,7 @@
                         </td>
                         <td>
                            <a href="{{ route('user.researcher-project.freezed', $project->id) }}"
-                            class="btn btn-sm {{ $project->status == 'freezed' ? 'btn-dark' : 'btn-danger' }}">
+                            class="btn btn-sm {{ $project->status == 'freezed' ? 'btn-dark' : 'btn-danger' }} btn-tight">
                             {{ $project->status == 'freezed' ? 'Freezed' : 'Freeze' }}
                             </a>
 

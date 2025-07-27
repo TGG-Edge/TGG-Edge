@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container">
-    <h2>Video Recommendations</h2>
+    <h2 class="litheader">Video Recommendations</h2>
     <div class="row">
         @forelse ($videos as $video)
             <div class="col-md-6 mb-3">
@@ -18,7 +18,7 @@
                 </div>
             </div>
         @empty
-            <p>No video data available.</p>
+            <p class="litfeildtext">No video data available.</p>
         @endforelse
     </div>
      <div class="mt-4">
