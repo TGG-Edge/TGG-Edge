@@ -17,7 +17,7 @@
                         <th>Researcher Name</th>
                         <th>Project</th>
                         <th>Progress%</th>
-                        <th>Evaluate Progress%</th>
+                        <th>Evaluation%</th>
                         <th>View the progress</th>
                         <th>Archive</th>
                     </tr>
