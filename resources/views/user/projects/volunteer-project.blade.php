@@ -14,13 +14,13 @@
                 <thead class="thead-dark">
                     <tr>
 
-                        <th class="admin-application-table">NAME</th>
-                        <th class="admin-application-table">RESEACHER NAME</th>
-                        <th class="admin-application-table">PROJRCT</th>
-                        <th class="admin-application-table">PROGRESS%</th>
-                        <th class="admin-application-table">EVALUATE%</th>
-                        <th class="admin-application-table">VIEW THE PROGRESS</th>
-                        <th class="admin-application-table">ARCHIVE</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">NAME</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">RESEACHER NAME</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">PROJRCT</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">PROGRESS%</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">EVALUATE%</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">VIEW THE PROGRESS</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">ARCHIVE</th>
 
                     </tr>
                 </thead>
@@ -34,7 +34,7 @@
                         <td>{{ $volunteerProject->researcher_progress_percentage	?? '0' }}%</td>
                        <td>
                             @if($volunteerProject->document_url)
-                                <a href="{{ $volunteerProject->document_url }}" target="_blank">Worksheet by researcher</a>
+                                <a href="{{ $volunteerProject->document_url }}" target="_blank">Worksheet by volunteer</a>
                             @else
                                 N/A
                             @endif

@@ -60,11 +60,11 @@ class ProjectCollaborationController extends Controller
         $volunteerId = auth()->id();
 
         $hasPendingRequest = ProjectCollaboration::where('volunteer_id', $volunteerId)
-            ->where('status', 'pending')
+            ->whereIn('status', ['pending','running'])
             ->exists();
 
         if ($hasPendingRequest) {
-            return back()->with('error', 'You already have a pending project request. Wait for approval of accept or reject before applying to another project.');
+            return back()->with('error', 'You already have a pending / processing project request. Wait for approval of accept or reject before applying to another project.');
         }
 
         $alreadyAppliedToThis = ProjectCollaboration::where('project_id', $projectId)

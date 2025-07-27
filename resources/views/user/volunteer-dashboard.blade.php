@@ -7,9 +7,9 @@
     <div class="para-text">
         <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('user.logout') }}">Log out</a>)</p>
 
-        <p><strong>Welcome to TGG India!</strong></p>
+        <p><strong>WELCOME TO TGG-EDGE</strong></p>
 
-        <p>We are delighted to have you join us on this transformative journey. TGG India has been initiated with the vision of providing a holistic learning experience, remote working opportunities, and impactful community development initiatives. Our collective goal is to foster happiness and mindful living, which is at the core of Project Shambala.
+        <p>Welcome to the central workspace of TGG-Edge, a dynamic hub where ethical research meets grassroots action. This is where your inquiries, insights, and efforts converge to shape meaningful change through collaborative, well-coordinated projects.
             <!-- Read more button (visible initially) -->
         <button id="readMoreBtn" style="background: none; border: none; color: #007BFF; cursor: pointer; padding-left: 5px; font-size: 11px; padding-top: 0;">
             Read more
@@ -18,24 +18,13 @@
 
         <div id="moreText" style="display: none;">
             <p>
-                As the world evolves with rapid technological advancements,
-                the challenges of navigating this complex landscape are becoming increasingly evident.
-                Unfortunately, technology’s misuse has led to disconnection, stress, and uncertainty for many.
-                Project Shambala stands as a beacon of hope, guiding individuals toward a more meaningful and balanced life.
+             As a volunteer or researcher, you are part of a unified ecosystem committed to experiential learning, rigorous documentation, and outcome-oriented exploration. Here, you’ll find streamlined tools to manage assignments, exchange knowledge, and align your work with the broader values of sustainability, compassion, and community empowerment.
             </p>
 
             <p>
-                Through our programs, we aspire to build a community that nurtures knowledge,
-                collaboration, and conscious living. Together, we can create a safe space for those seeking
-                an alternative to the fast-paced, often overwhelming modern lifestyle.
-                Our collective efforts will pave the way for many who wish to break free from the vicious cycle that entraps them.
+              Let’s co-create solutions that bridge theory and practice, deepen local impact, and contribute to a global narrative of self-reliance and human unity. Welcome aboard and onward with purpose.
             </p>
 
-            <p>
-                Let us work hand in hand to build a future where learning, working, and living harmoniously
-                with nature and society become the foundation of true well-being.
-                Welcome to a community that believes in the power of mindful transformation!
-            </p>
 
             <p>With gratitude,<br><strong>TGG Family</strong>
               <!-- Read less button -->
@@ -127,17 +116,16 @@
                         <th>Date</th>
                         <th>Progress %</th>
                         <th>Evaluation %</th>
-
                         <th>Update</th>
                     </tr>
                 </thead>
-                <form action="{{ route('user.project-collaboration.progress.update') }}" method="POST">
-                    @csrf
+               
                     <tbody>
                         @if($collaborated_projects->count() > 0)
                             
                             @foreach($collaborated_projects as $index => $project)
-                            
+                             <form action="{{ route('user.project-collaboration.progress.update') }}" method="POST">
+                    @csrf
                                 <input type="hidden" name="collaborated_project_id" value="{{$project->collaborations[0]->id}}">
                                 <tr>
                                     <td>{{ $project->title }}</td>
@@ -163,16 +151,12 @@
                                     </td>
     
                                      <td>
-                                        <input type="number"  name="researcher_progress_percentage" 
-                                            class="progress-input" 
-                                            min="0" 
-                                            max="100"
-                                            value="{{  $project->collaborations[0]->researcher_progress_percentage ?? 'N/A' }}" 
-                                            placeholder="Enter %" 
-                                            required readonly>
+                                       {{  $project->collaborations[0]->researcher_progress_percentage ?? 'N/A' }}
                                     </td>
                                     <td><button type="submit" name="project_id" value="{{ $project->id }}">UPDATE</button></td>
                                 </tr>
+                </form>
+
                             @endforeach
                         
                         @else
@@ -181,7 +165,6 @@
                         </tr>
                         @endif
                     </tbody>
-                </form>
             </table>
         </section>
 </div>

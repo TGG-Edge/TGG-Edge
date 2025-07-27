@@ -13,11 +13,11 @@
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th class="admin-application-table">NAME</th>
-                        <th class="admin-application-table">RHM REGISTRATION</th>
-                        <th class="admin-application-table">ENGAGEMENT TYPE</th>
-                        <th class="admin-application-table">PROFILE</th>
-                        <th class="admin-application-table">APPROVAL</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">NAME</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">RHM REGISTRATION</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">ENGAGEMENT TYPE</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">PROFILE</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">APPROVAL</th>
                     </tr>
                 </thead>
                 <tbody>

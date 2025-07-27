@@ -74,7 +74,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label>Project:</label>
-                <input type="text" name="project" class="form-control" value="{{ $user->project }}">
+                <input type="text" name="project" class="form-control" value="{{ $user->project ?? 'N/A' }}">
             </div>
             <!-- <div class="col-md-6 mb-3">
                 <label>Profile Image:</label>

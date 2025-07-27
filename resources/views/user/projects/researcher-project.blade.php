@@ -13,11 +13,11 @@
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th class="admin-application-table">NAME</th>
-                        <th class="admin-application-table">PROJECT</th>
-                        <th class="admin-application-table">PROGRESS%</th>
-                        <th class="admin-application-table">VIEW THE PROGRESS</th>
-                        <th class="admin-application-table">FREEZED</th>
+                        <th class="admin-application-table" style="font-weight: 500;  background: lightgray;">NAME</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">PROJECT</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">PROGRESS%</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">VIEW THE PROGRESS</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">FREEZED</th>
                     </tr>
                 </thead>
                 <tbody class="admin-projects-table">
