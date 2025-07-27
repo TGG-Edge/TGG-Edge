@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h3 class="mb-3">📖 Knowledge & Research</h3>
+    <h3 class="mb-3 knowledge">📖 KNOWLEDGE & RESEARCH</h3>
     <!-- <p>This section will host blog posts, insights, field research data, and articles from the TGG team and global collaborators.</p>
     <ul>
         <li><strong>Blog:</strong> Rethinking Rural Sustainability in India</li>
@@ -14,8 +14,8 @@
     <div class="input-group search-container">
         <form id="search_form" method="POST" class="col-md-10">
             @csrf
-            <input type="text" id="searchData" class="col-md-11" style="padding: 1%;font-size: 13px;" placeholder="Example: Rural Development and Sustainable Living..." name="searchData">
-			<button type="submit" class="btn btn-outline-secondary" style="margin-bottom: 11px;" id="searchAI" type="button"><i class="fa fa-search"></i></button>
+            <input type="text" id="searchData" class="col-md-11 knowledge-innertext" style="padding: 1%;font-size: 13px;" placeholder="Example: Rural Development and Sustainable Living..." name="searchData">
+			<button type="submit" class="btn btn-outline-secondary knowledge-search" style="margin-bottom: 11px;" id="searchAI" type="button"><i class="fa fa-search"></i></button>
         </form>
     </div>
 	<button class="btn btn-primary" type="button" id="loaderIcon" style="display:none" disabled>

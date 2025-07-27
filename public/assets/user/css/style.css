@@ -662,3 +662,40 @@ button:hover {
     margin: 0px !important;
     font-size: 10px;
 }
+
+.page-heading {
+    font-size: 17px;
+    color: #265475;
+}
+
+.pagesub-heading {
+    font-size: 15px;
+}
+
+.page-button {
+    font-size: 10px !important;
+}
+
+.page-text {
+    font-size: 13px;
+}
+
+.page-inputtext {
+    font-size: 11px !important;
+}
+
+.knowledge {
+    font-size: 17px !important;
+    color: #265475 !important;
+}
+
+.knowledge-innertext {
+    font-size: 11px !important;
+    width: 570px !important;
+}
+
+.knowledge-search {
+    width: 30px;
+    height: 30px;
+    padding: 0px !important;
+}

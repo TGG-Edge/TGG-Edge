@@ -5,15 +5,15 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>User Profile</h2>
+    <h2 class="page-heading">USER PROFILE</h2>
     {{-- @if(Auth::check() && Auth::user()->user_role != 1) --}}
 
     <div>
-        <span class="fw-bold">Account Status: </span>
+        <span class="pagesub-heading">Account Status: </span>
             <span class="badge 
                 @if($user->approval === 'accepted') bg-success 
                 @elseif($user->approval === 'rejected') bg-danger 
-                @else bg-warning text-dark @endif p-2">
+                @else bg-warning text-dark @endif p-2 page-button">
                 {{ ucfirst($user->approval) }}
         </span>
     </div>
@@ -38,21 +38,21 @@
         @csrf
 
         <div class="row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 page-text">
                 <label>Name:</label>
-                <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+                <input type="text" name="name" class="form-control page-inputtext" value="{{ $user->name }}">
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 page-text">
                 <label>Email:</label>
-                <input type="email" name="email" class="form-control" value="{{ $user->email }}" readonly>
+                <input type="email" name="email" class="form-control page-inputtext" value="{{ $user->email }}" readonly>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 page-text">
                 <label>Phone:</label>
-                <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
+                <input type="text" name="phone" class="form-control page-inputtext" value="{{ $user->phone }}">
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 page-text">
                 <label>Address:</label>
-                <textarea name="address" class="form-control">{{ $user->address }}</textarea>
+                <textarea name="address" class="form-control page-inputtext">{{ $user->address }}</textarea>
             </div>
            <!-- <div class="col-md-6 mb-3">
                 <label>Document Type:</label>
@@ -68,13 +68,13 @@
                 <label>Document Number:</label>
                 <input type="text" name="document_number" class="form-control" value="{{ $user->document_number }}">
             </div> -->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 page-text">
                 <label>RHM Number:</label>
-                <input type="text" name="rhm_number" class="form-control" value="{{ $user->rhm_number }}">
+                <input type="text" name="rhm_number" class="form-control page-inputtext" value="{{ $user->rhm_number }}">
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 page-text">
                 <label>Project:</label>
-                <input type="text" name="project" class="form-control" value="{{ $user->project }}">
+                <input type="text" name="project" class="form-control page-inputtext" value="{{ $user->project }}">
             </div>
             <!-- <div class="col-md-6 mb-3">
                 <label>Profile Image:</label>
@@ -86,23 +86,23 @@
         </div>
 
         <hr>
-        <h5>Change Password</h5>
+        <h5 class="page-heading">CHANGE PASSWORD</h5>
         <div class="row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 page-text">
                 <label>Current Password:</label>
-                <input type="password" name="current_password" class="form-control">
+                <input type="password" name="current_password" class="form-control page-inputtext">
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 page-text">
                 <label>New Password:</label>
-                <input type="password" name="new_password" class="form-control">
+                <input type="password" name="new_password" class="form-control page-inputtext">
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 page-text">
                 <label>Confirm New Password:</label>
-                <input type="password" name="new_password_confirmation" class="form-control">
+                <input type="password" name="new_password_confirmation" class="form-control page-inputtext">
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3">Update Profile</button>
+        <button type="submit" class="btn btn-primary mt-3 page-button">Update Profile</button>
     </form>
 </div>
 @endsection
