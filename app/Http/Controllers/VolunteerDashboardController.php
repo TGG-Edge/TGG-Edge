@@ -26,7 +26,7 @@ class VolunteerDashboardController extends Controller
 
         // 2. Latest pending collaboration (if any)
         $selected_project = ProjectCollaboration::where('volunteer_id', $volunteerId)
-            ->where('status', 'running')->where('status', '!=', 'freezed')
+            ->whereIn('status', ['running','pending'])->where('status', '!=', 'freezed')
             ->latest()
             ->first();
 

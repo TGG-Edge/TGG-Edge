@@ -99,13 +99,13 @@ class ProjectController extends Controller
 
     public function researcherProject()
     {
-        $researchProjects = Project::latest()->paginate(10);
+        $researchProjects = Project::where('document_url','!=',null)->latest()->paginate(10);
         return view('user.projects.researcher-project',compact('researchProjects'));
     }
 
     public function volunteerProject()
     {
-        $volunteerProjects = ProjectCollaboration::latest()->paginate(10);
+        $volunteerProjects = ProjectCollaboration::where('document_url','!=',null)->latest()->paginate(10);
         return view('user.projects.volunteer-project' , compact('volunteerProjects'));
     }
 

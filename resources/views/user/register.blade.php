@@ -92,7 +92,7 @@
                 <div class="mb-3 col-12">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="research_assistance" id="research_assistance">
-                        <label class="form-check-label" for="research_assistance">
+                        <label class="form-check-label" for="research_assistance" style="font-size: 13px;">
                             I would like to apply for Research Assistance
                         </label>
                     </div>
@@ -101,10 +101,10 @@
             </div>
 
             {{-- Submit --}}
-            <button type="submit" class="btn w-100 mt-2 text-white" style="background-color: #033576; border-color: #033576;">Register</button>
+            <button type="submit" class="btn w-100 mt-2 text-white" style="background-color: #033576; border-color: #033576; " >Register</button>
 
             {{-- Login Link --}}
-            <p class="text-center mt-3 mb-0">Already registered? <a href="{{ route('user.login') }}">Login</a></p>
+            <p class="text-center mt-3 mb-0" style="font-size: 13px;">Already registered? <a href="{{ route('user.login') }}">Login</a></p>
         </form>
     </div>
 </div>

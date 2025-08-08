@@ -1,5 +1,5 @@
 
-@php
+{{-- @php
     if(auth()->user()->user_role == 1){
         $dashboardRoute = route('user.admin-dashboard'); 
 
@@ -12,11 +12,11 @@
     }else{
         $dashboardRoute = route('user.dashboard'); 
     } 
-@endphp
-<a href="{{ $dashboardRoute }}" class="{{ request()->is('user/dashboard') ? 'active' : '' }}">
+@endphp --}}
+<a href="#" class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
     <i class="fas fa-tachometer-alt"></i> Dashboard
 </a>
-
+{{-- 
 <a href="{{ route('user.profile') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
 
 @if(Auth::check() && Auth::user()->user_role != 1 && Auth::user()->research_assistance == 1)
@@ -116,4 +116,4 @@
 @endif
 
 
-<a href="{{ route('user.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>
+<a href="{{ route('user.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a> --}}

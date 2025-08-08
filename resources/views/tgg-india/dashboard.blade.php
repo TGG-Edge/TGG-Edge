@@ -1,11 +1,11 @@
-@extends('user.layouts.app')
+@extends('tgg-india.layouts.app')
 
-@section('title', 'Admin Dashboard - TGG Edge')
+@section('title', 'Dashboard - TGG Edge - India')
 
 
 @section('content')
 <div class="admin-container">
-            <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('user.logout') }}">Log out</a>)</p>
+            <p>Hello <strong>{{  'Tgg India' }}</strong> (not <strong>{{  'Tgg India' }}</strong>? <a href="#">Log out</a>)</p>
 
             <p><strong>WELCOME TO TGG-EDGE</strong></p>
 

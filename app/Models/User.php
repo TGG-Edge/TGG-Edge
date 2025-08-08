@@ -47,6 +47,10 @@ class User extends Authenticatable
         return $this->hasOne(Project::class, 'researcher_id', 'id');
     }
 
+     public function projectNew() {
+        return $this->hasOne(Project::class, 'researcher_id', 'id');
+    }
+
     // 2. A Volunteer has MANY collaborations (applications)
     public function collaborations() {
         return $this->hasMany(ProjectCollaboration::class, 'volunteer_id', 'id');
