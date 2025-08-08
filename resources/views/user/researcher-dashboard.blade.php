@@ -9,7 +9,7 @@
 
        <p><strong>WELCOME TO TGG-EDGE</strong></p>
 
-        <p>Welcome to the central workspace of TGG-Edge, a dynamic hub where ethical research meets grassroots action. This is where your inquiries, insights, and efforts converge to shape meaningful change through collaborative, well-coordinated projects.
+        <p>It is a dynamic hub where ethical research meets grassroots action. This is where your inquiries, insights, and efforts converge to shape meaningful change through collaborative, well-coordinated projects.
         <!-- Read more button (visible initially) -->
         <button id="readMoreBtn" style="background: none; border: none; color: #007BFF; cursor: pointer; padding-left: 5px; font-size: 11px; padding-top: 0;">
             Read more

@@ -77,6 +77,7 @@ Route::middleware(['web', 'auth'])->prefix('user')->name('user.')->group(functio
     Route::get('/processed-applications', [UserApprovalController::class, 'processedApplication'])->name('processed-applications');
 
     Route::get('/user-profile/{id}', [UserApprovalController::class, 'userProfile'])->name('user-profile');
+    Route::post('/users/{id}/userProfileUpdate', [UserApprovalController::class, 'userProfileUpdate'])->name('users.profile.update');
     Route::get('/users/{id}/approval', [UserApprovalController::class, 'updateApproval'])->name('users.update.approval');
     Route::post('/users/{id}/project', [UserApprovalController::class, 'updateProject'])->name('users.update.project');
     // end

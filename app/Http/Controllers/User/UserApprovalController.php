@@ -42,6 +42,27 @@ class UserApprovalController extends Controller
         return view('user.user-profile', compact('user'));
     }
 
+   public function userProfileUpdate(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string',
+            'rhm_number' => 'nullable|string|max:50',
+        ]);
+
+        // Add checkbox value manually
+        $validated['research_assistance'] = $request->has('research_assistance') ? 1 : 0;
+
+        $user->update($validated);
+
+        return redirect()->back()->with('success', 'User updated successfully!');
+    }
+
+
     public function updateApproval(Request $request, $id, AIService $aiService, YouTubeService $yt)
     {
         

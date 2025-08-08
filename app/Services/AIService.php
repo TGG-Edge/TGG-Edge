@@ -34,8 +34,7 @@ class AIService
             Requirements:
             - 10-15 literature, 10-15 links, 10-15 LinkedIn profiles, 5-10 video queries
             - All URLs must be real and valid.
-            - linkedin_profiles url should be public and real profile url (
-            Do Webscrape for url)
+            - linkedin profiles data & url should be public and real.
 
             Return ONLY a valid **raw JSON object** (no markdown, no explanation, no formatting). The output must contain the following **exact keys and structure**:
             {

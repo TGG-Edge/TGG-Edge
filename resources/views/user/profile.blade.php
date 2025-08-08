@@ -72,12 +72,13 @@
                 <label>RHM Number:</label>
                 <input type="text" name="rhm_number" class="form-control page-inputtext" value="{{ $user->rhm_number }}">
             </div>
+            @if($user->user_role == 2)
             <div class="col-md-6 mb-3 page-text">
                 <label>Project:</label>
-
-                <input type="text" name="project" class="form-control page-inputtext" value="{{ $user->project  ?? 'N/A' }}">
+                <input type="text" name="project" class="form-control page-inputtext" value="{{ $user->project  ?? 'N/A' }}" readonly>
 
             </div>
+            @endif
             <!-- <div class="col-md-6 mb-3">
                 <label>Profile Image:</label>
                 <input type="file" name="image" class="form-control">

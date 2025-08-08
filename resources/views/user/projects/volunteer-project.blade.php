@@ -5,8 +5,8 @@
 @section('content')
 <div class="container-fluid">
 
-    <div class="row mt-4">
-        <div class="col-md-12 mt-5" admin-newapplication>
+    <div class="row mt-4 admin-newapplication">
+        <div class="col-md-12 ">
             <h2 class="admin-newappheading">VOLUNTEER PROJRCTS</h4>
             @include('user.layouts.includes.message')
 
