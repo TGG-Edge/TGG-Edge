@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
        using: function (Router $router) {
             require base_path('routes/user.php');
             require base_path('routes/web.php');
+            require base_path('routes/tgg-india.php');
         },
         commands: base_path('routes/console.php'),
         health: '/up',
