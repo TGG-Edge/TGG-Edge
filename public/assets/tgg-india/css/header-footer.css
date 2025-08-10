@@ -378,152 +378,118 @@
 }
 
 /* new CSS TGG India */
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* Header */
 
-body {
-    font-family: "Segoe UI", sans-serif;
-}
-
-/* HEADER MAIN */
-.elementor-section {
+header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 10px 40px;
-    background-color: white;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    align-items: center;
+    padding: 0 40px;
+    background: #fff;
+    height: 100px;
 }
 
-/* LOGO */
-.elementor-widget-image img {
-    max-width: 160px;
-    height: auto;
-}
-
-/* NAV MENU */
-.hfe-nav-menu {
+.header-container {
     display: flex;
     align-items: center;
+    justify-content: flex-start; /* Everything starts from left */
+    /* gap: 80px; */
 }
 
-.hfe-nav-menu__layout-horizontal ul {
+/* .menu {
+    flex-grow: 0.6;
+} */
+
+/* Logo */
+.logo img {
+    height: 80px;
+    width: 300px;
+    padding-left: 20px;
+    padding-bottom: 2px;
+}
+
+/* Menu */
+.menu ul {
     display: flex;
     list-style: none;
-    gap: 30px;
+    /* margin-right: 160px; */
+    padding: 0;
+    gap: 28px;
+    font-family: "Belleza", Sans-serif;
+    font-weight: 600;
 }
 
-.hfe-nav-menu__layout-horizontal ul li a {
+.menu ul li a {
     text-decoration: none;
-    color: black;
+    color: #000;
     font-weight: 600;
-    font-size: 16px;
-    padding-bottom: 5px;
+    padding: 10px 0;
     position: relative;
 }
 
-.hfe-nav-menu__layout-horizontal ul li.current-menu-item a::after {
+.menu ul li a.active::after,
+.menu ul li a:hover::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: 0;
-    height: 2px;
+    bottom: -3px;
     width: 100%;
-    background-color: #007bff;
+    height: 3px;
+    background: #2d9cff;
 }
 
-/* HIDE BURGER ICON (only for desktop) */
-.hfe-nav-menu__toggle {
-    display: none;
-}
-
-/* RIGHT SIDE WRAPPER for Cart + Social */
-.header-right {
+/* Right Section */
+.right {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 150px;
 }
 
-/* CART - Reduced Size */
-.elementor-menu-cart__toggle_wrapper {
-    width: 100px;
-    background-color: black;
-    padding: 6px 10px;
+/* Cart */
+.cart a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #000;
+    color: #fff;
+    padding: 8px 14px;
     border-radius: 6px;
-    color: white;
-    display: flex;
-    align-items: center;
-    margin-left: 980px;
-    margin-top: -45px;
-}
-
-.elementor-menu-cart__toggle_button {
-    display: flex;
-    align-items: center;
-    color: white;
-    text-decoration: none;
     font-weight: 500;
-    font-size: 14px;
-}
-
-.elementor-button-text {
-    margin-right: 6px;
-}
-
-.elementor-button-icon {
+    text-decoration: none;
     position: relative;
-    display: flex;
-    align-items: center;
+    width: 100px;
 }
 
-.elementor-button-icon-qty {
+.cart .cart-count {
+    background: red;
+    color: #fff;
+    font-size: 10px;
+    border-radius: 50%;
+    padding: 2px 5px;
     position: absolute;
     top: -6px;
-    right: -8px;
-    background: red;
-    color: white;
-    font-size: 10px;
-    padding: 2px 5px;
-    border-radius: 50%;
+    right: -6px;
 }
 
-/* SOCIAL ICONS */
-.elementor-social-icons-wrapper {
+/* Social Icons */
+.social-icons {
     display: flex;
-    gap: 12px;
     align-items: center;
-    margin-left: 1100px;
-    margin-top: -37px;
-    margin-bottom: 30px;
+    gap: 6px;
+    padding-right: 50px;
 }
 
-.elementor-social-icon {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 8px;
-    border-radius: 50%;
+.social-icons a {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease;
-    width: 34px;
-    height: 34px;
+    width: 25px !important;
+    height: 25px !important;
+    background: #222;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 15px !important;
     text-decoration: none;
-}
-
-.elementor-social-icon i {
-    font-size: 15px;
-}
-
-.elementor-social-icon:hover {
-    transform: scale(1.1);
 }
 
 /* Hide label text */
@@ -531,111 +497,180 @@ body {
     display: none;
 }
 
+/* Footer */
+
 .footer-container {
+    position: relative; /* Needed for ::before and ::after */
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
-    background: #0b3a73;
-    padding: 40px;
-    color: white;
-    font-family: "Georgia", serif;
+    padding: 40px 60px;
+    color: #ffffff;
+    font-family: "Bellefair", Sans-serif;
+    justify-content: flex-start;
+    height: 390px;
+    z-index: 0;
+    overflow: hidden; /* Ensures overlay doesn't spill out */
+}
+
+/* Background image layer */
+.footer-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("https://tggindia.com/wp-content/uploads/2020/10/robin-spielmann-591331-unsplash.jpg")
+        center/cover no-repeat;
+    opacity: 0.4; /* Control ONLY image opacity */
+    z-index: 0;
+}
+
+/* Blue overlay layer */
+.footer-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(1, 44, 97, 0.8); /* blue with opacity */
+    z-index: 1;
+}
+
+/* Text above both layers */
+.footer-container > * {
+    position: relative;
+    z-index: 2;
 }
 
 .footer-column {
-    flex: 1 1 22%;
-    margin: 0 10px;
-    min-width: 200px;
-}
-
-.footer-column h3 {
-    margin-bottom: 15px;
-    font-size: 20px;
-    color: #fff;
-}
-
-.footer-column ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-column ul li {
-    margin-bottom: 8px;
-}
-
-.footer-column ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-.footer-column form input[type="text"],
-.footer-column form input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-}
-
-.footer-column form button {
-    background: #137dc5;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
+    flex: 1;
+    margin: 0 20px;
 }
 
 .footer-column img {
-    max-width: 100%;
+    width: 110px;
     height: auto;
+    border-radius: 8px;
+    background: white;
+    padding: 10px;
+    margin-top: 140px;
+    margin-left: 40px;
+}
+
+/* .footer-column h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: normal;
+} */
+
+.footer-column-contactus h3 {
+    margin-top: 100px !important;
+    font-size: 19px;
+    margin-right: 90px;
+}
+
+.footer-column-contactus p {
+    font-size: 14px;
+    margin-right: 90px;
+    margin-top: 20px;
+}
+
+.footer-column-pages h3 {
+    margin-top: 70px;
+    font-size: 19px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+}
+
+/* .footer-column p {
+    font-size: 15px;
+    line-height: 1.6;
+} */
+
+.footer-column-pages ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    margin-right: 45px;
+}
+
+.footer-column-pages ul li {
+    margin-bottom: 2px;
+    font-size: 14px;
+    margin-right: 45px;
+}
+
+.footer-column-pages ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 45px;
+}
+
+.footer-column-pages ul li a:hover {
+    text-decoration: underline;
+    margin-right: 45px;
+}
+
+.footer-column h3 {
+    margin-top: 40px;
+    font-size: 19px;
+    margin-right: 20px;
+}
+
+.footer-column form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 17px;
+}
+
+.footer-column form div {
+    margin-bottom: 10px;
+}
+
+.footer-column label {
+    font-size: 14px;
+    margin-bottom: 4px;
     display: block;
 }
 
+.footer-column input[type="text"],
+.footer-column input[type="password"] {
+    width: 270px;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+}
 
+.footer-column input[type="checkbox"] {
+    margin-right: 5px;
+}
 
+.footer-column button {
+    background-color: #1f78b4;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 270px;
+}
 
+.footer-column button:hover {
+    background-color: #80b6d9;
+}
 
+.footer-column a {
+    color: #ffffff;
+}
 
+.footer-bottom {
+    background-color: #0b3a73; /* Same as footer background */
+    text-align: center;
+    padding: 10px 0;
+    font-size: 15px;
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Optional thin line */
+}
 
-
-
-
-
-  .header-logo img {
-        max-height: 60px;
-    }
-    .nav-link.active {
-        border-bottom: 2px solid #2196F3; /* Blue underline */
-    }
-    .cart-btn {
-        background: black;
-        color: white;
-        display: flex;
-        align-items: center;
-        padding: 5px 12px;
-        border-radius: 5px;
-        font-size: 14px;
-        position: relative;
-    }
-    .cart-btn .badge {
-        position: absolute;
-        top: -8px;
-        left: -8px;
-        background: red;
-        font-size: 12px;
-    }
-    .social-icons a {
-        color: white;
-        background: #333;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        margin-left: 5px;
-        font-size: 16px;
-        text-decoration: none;
-    }
-    .social-icons a:hover {
-        background: #555;
-    }
-
+.footer-bottom p {
+    margin: 0;
+    font-family: "Bellefair", sans-serif;
+}
