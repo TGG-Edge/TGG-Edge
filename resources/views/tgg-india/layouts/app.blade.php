@@ -28,29 +28,24 @@
   @include('tgg-india.layouts.includes.header')
 
   <div class="container-fluid">
-   
     <div class="row">
-    @if(isset($is_sidebar) && $is_sidebar === false)
- <div class="col-md-12 tgg-content">
-        @yield('content')
-      </div>
-    @else
-    
-    <div class="col-md-3 tgg-sidebar">
-      @if(auth()->user()->user_role == 1){
-          @include('tgg-india.layouts.includes.admin-sidebar')
-          }elseif(auth()->user()->user_role == 2){
+        @if(isset($is_sidebar) && $is_sidebar === false)
+          <div class="col-md-12 tgg-content">
+              @yield('content')
+          </div>
+        @else
+        <div class="col-md-3 tgg-sidebar">
+          @if( isset(auth()->user()->user_role) &&  auth()->user()->user_role == 1)
+              @include('tgg-india.layouts.includes.admin-sidebar')
+          @elseif( isset(auth()->user()->user_role) &&  auth()->user()->user_role == 2)
               @include('tgg-india.layouts.includes.trainer-sidebar')
-          }else{
-                @include('tgg-india.layouts.includes.trainer-sidebar')
-          } 
-      @endphp 
-    </div>
-
-    <div class="col-md-9 tgg-content">
-     
-      @yield('content')
-    </div>
+          @else
+              @include('tgg-india.layouts.includes.trainer-sidebar')
+          @endif
+        </div>
+        <div class="col-md-9 tgg-content">
+          @yield('content')
+        </div>
     @endif
     </div>
   </div>

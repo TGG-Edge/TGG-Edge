@@ -30,7 +30,7 @@
    
     <div class="row">
     @if(isset($is_sidebar) && $is_sidebar === false)
- <div class="col-md-12 tgg-content">
+    <div class="col-md-12 tgg-content">
         @yield('content')
       </div>
     @else
