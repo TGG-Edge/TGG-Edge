@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>@yield('title', 'TGG Edge | tgg-india Dashboard')</title>
+  <title>@yield('title', 'TGG Edge | TGG India Dashboard')</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="{{ asset('assets/tgg-india/images/tgg-fnd-logo-new.png') }}" type="image/x-icon">
@@ -37,7 +37,14 @@
     @else
     
     <div class="col-md-3 tgg-sidebar">
-      @include('tgg-india.layouts.includes.sidebar')
+      @if(auth()->user()->user_role == 1){
+          @include('tgg-india.layouts.includes.admin-sidebar')
+          }elseif(auth()->user()->user_role == 2){
+              @include('tgg-india.layouts.includes.trainer-sidebar')
+          }else{
+                @include('tgg-india.layouts.includes.trainer-sidebar')
+          } 
+      @endphp 
     </div>
 
     <div class="col-md-9 tgg-content">
