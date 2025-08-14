@@ -16,26 +16,65 @@
 <a href="#" class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
     <i class="fas fa-tachometer-alt"></i> Dashboard
 </a>
+
+<a href="#" class="{{ request()->is('tgg-india/literature') ? 'active' : '' }}">
+    <i class="fas fa-book"></i> Literatures
+</a>
+
+<a href="#" class="{{ request()->is('tgg-india/links') ? 'active' : '' }}">
+    <i class="fas fa-link"></i> Links
+</a>
+
+<a href="#" class="{{ request()->is('tgg-india/videos') ? 'active' : '' }}">
+    <i class="fas fa-video"></i> Videos
+</a>
+
+<div class="dropdown">
+    <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/*') ? 'active ' : '' }}"
+       data-bs-toggle="collapse" data-bs-target="#researchDropdown" aria-expanded="false">
+        <span><i class="fas fa-flask"></i> Investment </span>
+        <i class="fas fa-caret-down"></i>
+    </a>
+
+    <div class="collapse ps-3 {{ request()->is('user/research-assistance/*') ? 'show ' : '' }}" id="researchDropdown">
+
+        {{-- Literature Dropdown --}}
+        <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/literature*') ? 'active ' : '' }}"
+           data-bs-toggle="collapse" data-bs-target="#literatureDropdown" aria-expanded="false">
+            <span><i class="fas fa-chart-bar"></i> Literature</span>
+            <i class="fas fa-caret-down"></i>
+        </a>
+
+        <div class="collapse ps-3 {{ request()->is('user/research-assistance/literature*') ? 'show ' : '' }}" id="literatureDropdown">
+            
+            {{-- Sections Dropdown --}}
+            <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/literature/sections*') ? 'active ' : '' }}"
+               data-bs-toggle="collapse" data-bs-target="#sectionDropdown" aria-expanded="false">
+                <span><i class="fas fa-list"></i> Sections</span>
+                <i class="fas fa-caret-down"></i>
+            </a>
+
+            <div class="collapse ps-3 {{ request()->is('user/research-assistance/literature/sections*') ? 'show ' : '' }}" id="sectionDropdown">
+                <a href="#"><i class="fas fa-book"></i> Chapters</a>
+            </div>
+        </div>
+
+        {{-- Videos --}}
+        <a href="{{ route('user.research-assistance.videos') }}"><i class="fas fa-video"></i> Videos</a>
+
+        {{-- Links --}}
+        <a href="{{ route('user.research-assistance.links') }}"><i class="fas fa-link"></i> Links</a>
+
+    </div>
+</div>
+
+
+
 {{-- 
 <a href="{{ route('user.profile') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
 
 @if(Auth::check() && Auth::user()->user_role != 1 && Auth::user()->research_assistance == 1)
-<div class="dropdown">
-    <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/*') ? 'active ' : '' }}"
-       data-bs-toggle="collapse" data-bs-target="#researchDropdown" aria-expanded="false">
-        <span><i class="fas fa-flask"></i> Research Assistance</span>
-        <i class="fas fa-caret-down"></i>
-    </a>
-    <div class="collapse ps-3 {{ request()->is('user/research-assistance/*') ? 'show ' : '' }}" id="researchDropdown">
-        <a href="{{ route('user.research-assistance.literature') }}"><i class="fas fa-chart-bar"></i> Literature</a>
-        <a href="{{ route('user.research-assistance.videos') }}"><i class="fas fa-video"></i> Videos</a>
-        <a href="{{ route('user.research-assistance.links') }}"><i class="fas fa-link"></i> Links</a>
-        <a href="{{ route('user.research-assistance.linkedin') }}"><i class="fab fa-linkedin"></i> LinkedIn</a>
-    </div>
-</div>
 @endif
-
-
 <a href="{{ route('user.knowledge-research.index') }}" class="{{ request()->is('user/knowledge-research') ? 'active' : '' }}">
     <i class="fas fa-book"></i> Knowledge and Research
 </a>
