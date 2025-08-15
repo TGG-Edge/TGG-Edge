@@ -17,7 +17,7 @@
     <i class="fas fa-tachometer-alt"></i> Dashboard
 </a>
 
-<a href="#" class="{{ request()->is('tgg-india/literature') ? 'active' : '' }}">
+<a href="{{ route('tgg-india.trainer.sections.index')}}" class="{{ request()->is('tgg-india/literature') ? 'active' : '' }}">
     <i class="fas fa-book"></i> Literatures
 </a>
 
