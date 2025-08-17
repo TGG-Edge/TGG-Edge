@@ -13,22 +13,22 @@
                 <input type="text" name="name" class="form-control">
 
                 <label>Assign Users:</label>
-                <select name="users[]" class="form-control" multiple>
+                <select name="users[]" id="users" class="form-control" multiple>
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach
                 </select>
 
                 <!-- Features Multi-Select -->
-    <div>
-        <label for="features">Select Features:</label>
-        <select name="features[]" id="features" multiple required>
-            @foreach($features as $key => $name)
-                <option value="{{ $key }}">{{ $name }}</option>
-            @endforeach
-        </select>
-    </div>
-    
+                <div>
+                    <label for="features">Select Features:</label>
+                    <select name="features[]" id="features" multiple required>
+                        @foreach($features as $key => $name)
+                            <option value="{{ $key }}">{{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-primary mt-2">Save</button>
             </form>
 

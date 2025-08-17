@@ -35,9 +35,9 @@
           </div>
         @else
         <div class="col-md-3 tgg-sidebar">
-          @if( isset(auth()->user()->user_role) &&  auth()->user()->user_role == 1 || request()->is('tgg-edge/tgg-india/admin/*'))
+          @if( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 1 || request()->is('tgg-edge/tgg-india/admin/*'))
               @include('tgg-india.layouts.includes.admin-sidebar')
-          @elseif( isset(auth()->user()->user_role) &&  auth()->user()->user_role == 2)
+          @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 2)
               @include('tgg-india.layouts.includes.trainer-sidebar')
           @else
               @include('tgg-india.layouts.includes.trainer-sidebar')

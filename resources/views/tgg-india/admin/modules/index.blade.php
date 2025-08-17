@@ -23,6 +23,7 @@
                 <th>Name</th>
                 <th>Slug</th>
                 <th>Assigned Users</th>
+                 <th>Assigned Features</th>
                 <th>Created At</th>
                 <th width="180">Actions</th>
             </tr>
@@ -34,16 +35,28 @@
                     <td>{{ $module->name }}</td>
                     <td>{{ $module->slug }}</td>
                     <td>
-                        {{-- @if($module->users->count())
+                        @if($module->users->count())
                             <ul class="mb-0 ps-3">
                                 @foreach($module->users as $user)
                                     <li>{{ $user->name }}</li>
                                 @endforeach
                             </ul>
-                        @else --}}
+                        @else
                             <span class="text-muted">No users assigned</span>
-                        {{-- @endif --}}
+                        @endif
                     </td>
+                    <td>
+                        @if($module->features->count())
+                            <ul class="mb-0 ps-3">
+                                @foreach($module->features as $feature)
+                                    <li>{{ $feature->feature_name  }}</li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <span class="text-muted">No features assigned</span>
+                        @endif
+                    </td>
+
                     <td>{{ $module->created_at->format('d M Y') }}</td>
                     <td>
                         <a href="{{ route('tgg-india.admin.modules.edit', $module) }}" class="btn btn-sm btn-warning">Edit</a>

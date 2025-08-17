@@ -16,11 +16,14 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // return response()->json(['message' => auth()->user()], 403);
+        $isWebAdmin = Auth::guard('web')->check() && auth('web')->user()->user_role === '1';
+        $isWeb2Admin = Auth::guard('web2')->check() && auth('web2')->user()->user_role === '1';
 
-        if (auth()->user()->role !== 'admin') {
-        return response()->json(['message' => 'Unauthorized'], 403);
-       }
-        return $next($request);
+        if ($isWebAdmin || $isWeb2Admin) {
+            return $next($request);
+        }
+        
+        return abort(403, 'Unauthorized access.');
+
     }
 }

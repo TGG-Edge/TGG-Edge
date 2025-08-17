@@ -1,62 +1,32 @@
-
-<link rel="stylesheet" href="{{ asset('assets/bootstrap-icons/bootstrap-icons.css') }}">
-
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Trainer Dashboard - TGG India')
+@section('title', 'Chapter - ' . $chapter->title)
 
 @section('content')
 <div class="admin-container">
-    <h4 class="mb-3 trainer-heading">Trainer Dashboard</h4>
+    <h4 class="mb-3 trainer-heading">Chapter: {{ $chapter->title }}</h4>
 
-    <!-- Create Button -->
-    <div class="d-flex justify-content-end mb-3" style="margin-right: 20px;">
-        <a href="{{ route('tgg-india.trainer.chapters.create',['section_id' => request()->section_id]) }}" class="btn btn-primary">
-            <i class="bi bi-plus-lg"></i> Create
-        </a>
+    <div class="card mb-3 p-3">
+        <h5 class="mb-2">{{ $chapter->title }}</h5>
+        <p>{{ $chapter->content ?? 'No content available for this chapter.' }}</p>
     </div>
 
-    <table class="table table-striped table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Created At</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($chapters as $chapter)
-                <tr>
-                    <td>{{ $chapter->id }}</td>
-                    <td>{{ $chapter->title }}</td>
-                    <td>{!! $chapter->content !!}</td>
-                    <td>{{ $chapter->created_at->format('Y-m-d') }}</td>
-                    <td class="d-flex align-items-center justify-content-center">
-                        <a href="{{ route('tgg-india.trainer.chapters.edit', $chapter->id) }}" 
-                           class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
-                           style="width: 28px; height: 28px;">
-                            <i class="bi bi-pencil-square"></i>
-                        </a>
+    <div class="card mb-3 p-3">
+        <p><strong>Section:</strong> {{ $chapter->section->title ?? '-' }}</p>
+        <p><strong>Literature:</strong> {{ $chapter->section->literature->title ?? '-' }}</p>
+    </div>
 
-                        <form action="{{ route('tgg-india.trainer.chapters.destroy', $chapter->id) }}" method="POST" 
-                              onsubmit="return confirm('Are you sure you want to delete this chapter?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center justify-content-center p-0" 
-                                    style="width: 28px; height: 28px;">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="5" class="text-center">No chapters found.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+    <!-- Navigation Buttons -->
+    <div class="d-flex justify-content-between">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back
+        </a>
+
+        @if($chapter->next())
+            <a href="{{ route('chapters.show', $chapter->next()->id) }}" class="btn btn-primary">
+                Next <i class="bi bi-arrow-right"></i>
+            </a>
+        @endif
+    </div>
 </div>
 @endsection

@@ -1,18 +1,22 @@
     
-{{-- @php
-    if(auth()->user()->user_role == 1){
-        $dashboardRoute = route('user.admin-dashboard'); 
+@php
+    // if(auth()->user()->user_role == 1){
+    //     $dashboardRoute = route('user.admin-dashboard'); 
 
-    }elseif(auth()->user()->user_role == 2){
-        $dashboardRoute = route('user.researcher-dashboard'); 
+    // }elseif(auth()->user()->user_role == 2){
+    //     $dashboardRoute = route('user.researcher-dashboard'); 
 
-    }elseif(auth()->user()->user_role == 3){
-        $dashboardRoute = route('user.volunteer-dashboard'); 
+    // }elseif(auth()->user()->user_role == 3){
+    //     $dashboardRoute = route('user.volunteer-dashboard'); 
 
-    }else{
-        $dashboardRoute = route('user.dashboard'); 
-    } 
-@endphp --}}
+    // }else{
+    //     $dashboardRoute = route('user.dashboard'); 
+    // } 
+    // $sections = /App/Model/Section::
+
+    $user = auth('web2')->user();
+    // $module = $user->modules[0];
+@endphp
 <a href="#" class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
     <i class="fas fa-tachometer-alt"></i> Dashboard
 </a>
@@ -39,25 +43,38 @@
     <div class="collapse ps-3 {{ request()->is('user/research-assistance/*') ? 'show ' : '' }}" id="researchDropdown">
 
         {{-- Literature Dropdown --}}
-        <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/literature*') ? 'active ' : '' }}"
-           data-bs-toggle="collapse" data-bs-target="#literatureDropdown" aria-expanded="false">
-            <span><i class="fas fa-chart-bar"></i> Literature</span>
+        @foreach($user->literatures as $literature)
+        <a href="#" 
+           class="dropdown-toggle d-flex justify-content-between align-items-center"
+           data-bs-toggle="collapse" 
+           data-bs-target="#literature-{{ $literature->id }}" 
+           aria-expanded="false" title="{{ $literature->title }}">
+            <span><i class="fas fa-book"></i> Literature </span>
             <i class="fas fa-caret-down"></i>
         </a>
 
-        <div class="collapse ps-3 {{ request()->is('user/research-assistance/literature*') ? 'show ' : '' }}" id="literatureDropdown">
+        <div class="collapse ps-3" id="literature-{{ $literature->id }}">
             
-            {{-- Sections Dropdown --}}
-            <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/literature/sections*') ? 'active ' : '' }}"
-               data-bs-toggle="collapse" data-bs-target="#sectionDropdown" aria-expanded="false">
-                <span><i class="fas fa-list"></i> Sections</span>
-                <i class="fas fa-caret-down"></i>
-            </a>
+            {{-- Loop through sections --}}
+            @foreach($literature->sections as $section)
+                <a href="#" 
+                   class="dropdown-toggle d-flex justify-content-between align-items-center"
+                   data-bs-toggle="collapse" 
+                   data-bs-target="#section-{{ $section->id }}" 
+                   aria-expanded="false" title="{{ $section->title }}">
+                    <span><i class="fas fa-list"></i> Section</span>
+                    <i class="fas fa-caret-down"></i>
+                </a>
 
-            <div class="collapse ps-3 {{ request()->is('user/research-assistance/literature/sections*') ? 'show ' : '' }}" id="sectionDropdown">
-                <a href="#"><i class="fas fa-book"></i> Chapters</a>
-            </div>
+                <div class="collapse ps-3" id="section-{{ $section->id }}">
+                    {{-- Loop chapters --}}
+                    @foreach($section->chapters as $chapter)
+                        <a href="{{ route('tgg-india.trainer.chapters.show',$chapter->id) }}" title="{{ $chapter->title }}"><i class="fas fa-book"></i>Chapter</a>
+                    @endforeach
+                </div>
+            @endforeach
         </div>
+    @endforeach
 
         {{-- Videos --}}
         <a href="{{ route('user.research-assistance.videos') }}"><i class="fas fa-video"></i> Videos</a>

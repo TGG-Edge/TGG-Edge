@@ -41,7 +41,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('user.register.store', $user_type) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('tgg-india.register.store', $user_type) }}" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 {{-- Name --}}
@@ -79,7 +79,7 @@
                     <input type="text" class="form-control" name="rhm_number" placeholder="If applicable" required>
                 </div>
 
-                 @if($user_type == 'researcher')
+                @if($user_type == 'researcher')
                 {{-- Project Description --}}
                 <div class="mb-3 col-12">
                     <label class="form-label">Project (Research Topic Description) *</label>

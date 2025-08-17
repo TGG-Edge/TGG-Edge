@@ -10,4 +10,9 @@ class ModuleFeature extends Model
     protected $connection = 'mysql2';
     protected $table = 'module_features';
     protected $guarded = ['id'];
+
+    public function module()
+    {
+        return $this->belongsTo(Module::class, 'module_id');
+    }
 }

@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'web2' => [
+            'driver' => 'session',
+            'provider' => 'users_secondary',
+        ],
     ],
 
     /*
@@ -65,6 +70,10 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
+        'users_secondary' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserSecondary::class, // secondary connection
+         ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

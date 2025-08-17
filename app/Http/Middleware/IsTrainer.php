@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class CheckTrainer
+class IsTrainer
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class CheckTrainer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth()->check() && Auth()->user()->user_role != 2) {
+        if(Auth('web2')->check() && Auth('web2')->user()->user_role == 2) {
             return $next($request);
         }
 

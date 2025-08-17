@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Module;
 use App\Models\ModuleFeature;
 use App\Models\ModuleInstance;
+use App\Models\UserSecondary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -21,18 +22,13 @@ class ModuleController extends Controller
 
     public function create()
     {
-        // $users = User::select('id', 'name')->get();
-        $users = collect([
-            (object)[
-                'id' => 1,
-                'name' => 'Demo User'
-            ]
-        ]);
+        $users = UserSecondary::select('id', 'name')->get();
+      
 
         $features = [
             'literatures' => 'Literatures',
-            'literature_chapters' => 'Literature Chapters',
-            'literature_sections' => 'Literature Sections',
+            // 'literature_chapters' => 'Literature Chapters',
+            // 'literature_sections' => 'Literature Sections',
             'links' => 'Links',
             'linkedins' => 'LinkedIns',
             'videos' => 'Videos'

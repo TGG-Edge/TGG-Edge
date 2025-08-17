@@ -47,7 +47,7 @@
                 @endif
 
                 {{-- Login Form --}}
-                <form method="POST" action="{{ route('user.login') }}">
+                <form method="POST" action="{{ route('tgg-india.login') }}">
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>

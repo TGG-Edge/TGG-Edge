@@ -61,4 +61,12 @@ class ChapterController extends Controller
         return redirect()->route('tgg-india.trainer.chapters.index')
                          ->with('success', 'Chapter deleted successfully.');
     }
+
+    public function show(Chapter $chapter)
+    {
+        // Eager load section and literature
+        $chapter->load('section.literature');
+
+        return view('tgg-india.trainer.chapters.show', compact('chapter'));
+    }
 }
