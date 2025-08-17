@@ -1,23 +1,19 @@
-
-<link rel="stylesheet" href="{{ asset('assets/bootstrap-icons/bootstrap-icons.css') }}">
-
-
 @extends('tgg-india.layouts.app')
 
 @section('title', 'Trainer Dashboard - TGG India')
 
-
 @section('content')
 <div class="admin-container">
-    <h4 class="mb-3 trainer-heading">Modules</h4>
     <!-- Create Button -->
-     <div class="d-flex justify-content-end mb-3" style="margin-right: 20px;">
-        <a href="{{ route('tgg-india.admin.modules.create') }}" class="btn btn-primary">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-3 trainer-heading">Modules</h4>
+        <a href="{{ route('tgg-india.admin.modules.create') }}" class="btn btn-primary create-button">
             <i class="bi bi-plus-lg"></i> Create
         </a>
     </div>
-    <table class="table table-bordered table-striped">
-        <thead>
+
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
             <tr>
                 <th>#</th>
                 <th>Name</th>
@@ -25,7 +21,7 @@
                 <th>Assigned Users</th>
                  <th>Assigned Features</th>
                 <th>Created At</th>
-                <th width="180">Actions</th>
+                <th class="text-center" width="120">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -58,13 +54,25 @@
                     </td>
 
                     <td>{{ $module->created_at->format('d M Y') }}</td>
-                    <td>
-                        <a href="{{ route('tgg-india.admin.modules.edit', $module) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <td class="text-center d-flex justify-content-center">
+                        <!-- Edit button -->
+                        <a href="{{ route('tgg-india.admin.modules.edit', $module) }}" 
+                           class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
+                           style="width: 28px; height: 28px;position: relative; top: 2px;">
+                            <i class="fas fa-edit"></i>
+                        </a>
 
-                        <form action="{{ route('tgg-india.admin.modules.destroy', $module) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this module?');">
+                        <!-- Delete button -->
+                        <form action="{{ route('tgg-india.admin.modules.destroy', $module) }}" 
+                              method="POST" 
+                              onsubmit="return confirm('Are you sure you want to delete this module?');">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                            <button type="submit" 
+                                    class="btn btn-danger btn-sm d-flex align-items-center justify-content-center p-0" 
+                                    style="width: 28px; height: 28px;">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </form>
                     </td>
                 </tr>
