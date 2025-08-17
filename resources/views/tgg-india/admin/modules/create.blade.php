@@ -1,6 +1,6 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Create Trainer Project - TGG India')
+@section('title', 'Create Module - TGG India')
 
 @section('content')
     <div class="admin-container">
@@ -13,35 +13,44 @@
                 <input type="text" name="name" class="form-control">
 
                 <label>Assign Users:</label>
-                <select name="users[]" class="form-control" multiple>
+                <select name="users[]" multiple placeholder="Select Users">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach
                 </select>
 
-                <!-- Features Multi-Select -->
-    <div>
-        <label for="features">Select Features:</label>
-        <select name="features[]" id="features" multiple required>
-            @foreach($features as $key => $name)
-                <option value="{{ $key }}">{{ $name }}</option>
-            @endforeach
-        </select>
+                <label for="features">Select Features:</label>
+                <select name="features[]" id="features" multiple placeholder="Select Features">
+                    @foreach($features as $key => $name)
+                        <option value="{{ $key }}">{{ $name }}</option>
+                    @endforeach
+                </select>
     </div>
     
-                <button type="submit" class="btn btn-primary mt-2">Save</button>
+                <button type="submit" class="btn btn-primary mt-2 save-button">Save</button>
             </form>
 
         </div>
     </div>
 
-    <!-- CKEditor 5 Script -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#description'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Apply Choices.js to "Assign Users"
+    new Choices('select[name="users[]"]', {
+        removeItemButton: true,
+        placeholderValue: 'Select Users',
+        searchEnabled: true,
+    });
+
+    // Apply Choices.js to "Features"
+    new Choices('#features', {
+        removeItemButton: true,
+        placeholderValue: 'Select Features',
+        searchEnabled: true,
+    });
+});
+</script>
+@endpush

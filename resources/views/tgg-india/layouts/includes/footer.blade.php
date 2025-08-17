@@ -1,4 +1,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Bellefair&display=swap" rel="stylesheet">
+<div class="footer-top">
+    <p>
+        Powered by 
+        <img src="{{ asset('assets/user/images/TGG_Meta.png') }}" alt="TGG-META Logo" class="tgg-meta-logo">
+    </p>
+</div>
+
 <div class="footer-container">
 
     <!-- Logo -->

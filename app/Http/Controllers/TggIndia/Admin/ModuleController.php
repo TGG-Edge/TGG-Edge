@@ -26,6 +26,22 @@ class ModuleController extends Controller
             (object)[
                 'id' => 1,
                 'name' => 'Demo User'
+            ],
+            (object)[
+                'id' => 2,
+                'name' => 'Second User'
+            ],
+            (object)[
+                'id' => 3,
+                'name' => 'Thrid User'
+            ],
+            (object)[
+                'id' => 4,
+                'name' => 'Fourth User'
+            ],
+            (object)[
+                'id' => 5,
+                'name' => 'Fifth User'
             ]
         ]);
 

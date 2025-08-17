@@ -674,3 +674,21 @@ header {
     margin: 0;
     font-family: "Bellefair", sans-serif;
 }
+
+.footer-top {
+    background: #fff; /* white background like in screenshot */
+    padding: 20px;
+    text-align: left; /* logo aligned left */
+    font-family: " Poppins", Bellefair, serif;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    /* gap: 8px; */
+    height: 2px;
+    margin-left: 20px;
+}
+
+.footer-top img.tgg-meta-logo {
+    height: 30px; /* adjust size */
+    vertical-align: middle;
+}
