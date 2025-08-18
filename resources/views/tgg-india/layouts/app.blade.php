@@ -54,6 +54,8 @@
               @include('tgg-india.layouts.includes.admin-sidebar')
           @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 2)
               @include('tgg-india.layouts.includes.trainer-sidebar')
+          @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 3)
+              @include('tgg-india.layouts.includes.member-sidebar')
           @else
               @include('tgg-india.layouts.includes.trainer-sidebar')
           @endif

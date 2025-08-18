@@ -20,19 +20,6 @@
 <a href="#" class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
     <i class="fas fa-tachometer-alt"></i> Dashboard
 </a>
-
-<a href="{{ route('tgg-india.trainer.sections.index')}}" class="{{ request()->is('tgg-india/literature') ? 'active' : '' }}">
-    <i class="fas fa-book"></i> Literatures
-</a>
-
-<a href="{{ route('tgg-india.trainer.links.index')}}" class="{{ request()->is('tgg-india/links') ? 'active' : '' }}">
-    <i class="fas fa-link"></i> Links
-</a>
-
-<a href="{{ route('tgg-india.trainer.videos.index')}}" class="{{ request()->is('tgg-india/videos') ? 'active' : '' }}">
-    <i class="fas fa-video"></i> Videos
-</a>
-
 <div class="dropdown">
     <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/*') ? 'active ' : '' }}"
        data-bs-toggle="collapse" data-bs-target="#researchDropdown" aria-expanded="false">

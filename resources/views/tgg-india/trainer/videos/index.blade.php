@@ -1,12 +1,16 @@
+<link rel="stylesheet" href="{{ asset('assets/bootstrap-icons/bootstrap-icons.css') }}">
+
 @extends('tgg-india.layouts.app')
 
 @section('title', 'Trainer Dashboard - TGG India')
 
 @section('content')
 <div class="admin-container">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="mb-3 trainer-heading">Modules</h4>
-        <a href="{{ route('tgg-india.trainer.chapters.create',['section_id' => request()->section_id]) }}" class="btn btn-primary create-button">
+    <h4 class="mb-3 trainer-heading">Trainer Dashboard</h4>
+
+    <!-- Create Button -->
+    <div class="d-flex justify-content-end mb-3" style="margin-right: 20px;">
+        <a href="{{ route('tgg-india.trainer.videos.create') }}" class="btn btn-primary">
             <i class="bi bi-plus-lg"></i> Create
         </a>
     </div>
@@ -16,40 +20,39 @@
             <tr>
                 <th>ID</th>
                 <th>Title</th>
-                 <th>Description</th> 
+                <th>Description</th>
                 <th>Created At</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($chapters as $chapter)
+            @forelse ($videos as $video)
                 <tr>
-                    <td>{{ $chapter->id }}</td>
-                    <td>{{ $chapter->title }}</td>
-                    <td>{!! $chapter->description !!}</td>
-                    
-                    <td>{{ $chapter->created_at->format('Y-m-d') }}</td>
+                    <td>{{ $video->id }}</td>
+                    <td>{{ $video->title }}</td>
+                    <td>{!! $video->description !!}</td>
+                    <td>{{ $video->created_at->format('Y-m-d') }}</td>
                     <td class="d-flex align-items-center justify-content-center">
-                        <a href="{{ route('tgg-india.trainer.chapters.edit', $chapter->id) }}" 
+                        <a href="{{ route('tgg-india.trainer.videos.edit', $video->id) }}" 
                            class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
                            style="width: 28px; height: 28px;">
-                            <i class="fas fa-edit"></i>
+                            <i class="bi bi-pencil-square"></i>
                         </a>
 
-                        <form action="{{ route('tgg-india.trainer.chapters.destroy', $chapter->id) }}" method="POST" 
-                              onsubmit="return confirm('Are you sure you want to delete this chapter?');">
+                        <form action="{{ route('tgg-india.trainer.videos.destroy', $video->id) }}" method="POST" 
+                              onsubmit="return confirm('Are you sure you want to delete this video?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center justify-content-center p-0" 
                                     style="width: 28px; height: 28px;">
-                                <i class="fas fa-trash"></i>
+                                <i class="bi bi-trash"></i>
                             </button>
                         </form>
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" class="text-center">No chapters found.</td>
+                    <td colspan="5" class="text-center">No videos found.</td>
                 </tr>
             @endforelse
         </tbody>
