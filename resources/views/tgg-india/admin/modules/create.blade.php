@@ -21,36 +21,36 @@
 
                 <label for="features">Select Features:</label>
                 <select name="features[]" id="features" multiple placeholder="Select Features">
-                    @foreach($features as $key => $name)
+                    @foreach ($features as $key => $name)
                         <option value="{{ $key }}">{{ $name }}</option>
                     @endforeach
                 </select>
-    </div>
-    
-                <button type="submit" class="btn btn-primary mt-2 save-button">Save</button>
-            </form>
-
         </div>
+
+        <button type="submit" class="btn btn-primary mt-2 save-button">Save</button>
+        </form>
+
+    </div>
     </div>
 
 @endsection
 
 @push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Apply Choices.js to "Assign Users"
-    new Choices('select[name="users[]"]', {
-        removeItemButton: true,
-        placeholderValue: 'Select Users',
-        searchEnabled: true,
-    });
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Apply Choices.js to "Assign Users"
+            new Choices('select[name="users[]"]', {
+                removeItemButton: true,
+                placeholderValue: 'Select Users',
+                searchEnabled: true,
+            });
 
-    // Apply Choices.js to "Features"
-    new Choices('#features', {
-        removeItemButton: true,
-        placeholderValue: 'Select Features',
-        searchEnabled: true,
-    });
-});
-</script>
+            // Apply Choices.js to "Features"
+            new Choices('#features', {
+                removeItemButton: true,
+                placeholderValue: 'Select Features',
+                searchEnabled: true,
+            });
+        });
+    </script>
 @endpush

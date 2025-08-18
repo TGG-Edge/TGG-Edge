@@ -63,7 +63,7 @@
                         </a>
 
                         <!-- Delete button -->
-                        <form action="{{ route('tgg-india.admin.modules.destroy', $module) }}" 
+                        <form action="{{ route('tgg-india.admin.modules.destroy', $module->id) }}" 
                               method="POST" 
                               onsubmit="return confirm('Are you sure you want to delete this module?');">
                             @csrf

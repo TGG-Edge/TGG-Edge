@@ -5,9 +5,9 @@
 @section('content')
     <div class="admin-container">
         <h4 class="mb-3 trainer-heading">Create New Literature</h4>
-
+         @include('tgg-india.layouts.includes.message')
         <div class="card p-3 mb-4">
-            <form action="{{ route('tgg-india.trainer.videos.store') }}" method="POST">
+            <form action="{{ route('tgg-india.trainer.videos.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
@@ -30,13 +30,5 @@
         </div>
     </div>
 
-    <!-- CKEditor 5 Script -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#description'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
+    
 @endsection

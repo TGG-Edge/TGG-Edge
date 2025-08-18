@@ -16,13 +16,16 @@
 <a href="#" class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
     <i class="fas fa-tachometer-alt"></i> Dashboard
 </a>
+
+
+<a href="{{ route('tgg-india.admin.profile.index') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
+
 <a href="{{ route('tgg-india.admin.modules.index') }}" class="{{ request()->is('tgg-india/admin/modules*') ? 'active' : '' }}">
     <i class="fas fa-cubes"></i> Modules
 </a>
 
-{{-- 
-<a href="{{ route('user.profile') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
 
+{{-- 
 @if(Auth::check() && Auth::user()->user_role != 1 && Auth::user()->research_assistance == 1)
 <div class="dropdown">
     <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/*') ? 'active ' : '' }}"

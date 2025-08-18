@@ -5,7 +5,7 @@
 @section('content')
 <div class="admin-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="mb-3 trainer-heading">Modules</h4>
+        <h4 class="mb-3 trainer-heading">Sections</h4>
         <a href="{{ route('tgg-india.trainer.sections.create') }}" class="btn btn-primary create-button">
             <i class="bi bi-plus-lg"></i> Create
         </a>
@@ -16,19 +16,18 @@
             <tr>
                 <th>ID</th>
                 <th>Title</th>
-                <!-- <th>Description</th> -->
                 <th>Chapters</th>
                 <th>Created At</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($sections as $section)
+            @forelse ($sections as $index => $section)
                 <tr>
-                    <td>{{ $section->id }}</td>
+                    <td>{{ ++$index}}</td>
                     <td>{{ $section->title }}</td>
                     <!-- <td>{!! $section->description !!}</td> -->
-                    <td> <a href="{{ route('tgg-india.trainer.chapters.index',['section_id' => $section->id]) }}">1</a></td>
+                    <td> <a href="{{ route('tgg-india.trainer.chapters.index',['section_id' => $section->id]) }}">  {{ $section->chapters ? $section->chapters->count() : 0 }}</a></td>
                     <td>{{ $section->created_at->format('Y-m-d') }}</td>
                     <td class="d-flex align-items-center justify-content-center">
                         <a href="{{ route('tgg-india.trainer.sections.edit', $section->id) }}" 

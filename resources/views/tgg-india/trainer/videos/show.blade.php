@@ -9,7 +9,7 @@
         @forelse ($videos as $video)
             <div class="col-md-6 mb-3">
                 <div class="card">
-                    <img src="{{ $video['thumbnail'] ?? '#' }}" class="card-img-top" alt="Thumbnail">
+                    <img src="{{ asset('storage/'.$video->image)  ?? '#' }}" class="card-img-top" alt="Thumbnail">
                     <div class="card-body">
                         <h5 class="card-title">{{ $video['title']?? 'N/A'  }}</h5>
                         <p class="card-text">{!! $video['description']?? 'N/A'  !!}</p>

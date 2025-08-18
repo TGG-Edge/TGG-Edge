@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TggIndia\LoginController;
 use App\Http\Controllers\TggIndia\Admin\ModuleController;
+use App\Http\Controllers\TggIndia\Admin\ProfileController;
 use App\Http\Controllers\TggIndia\RegisterController;
 use App\Http\Controllers\TggIndia\Trainer\ChapterController;
 use App\Http\Controllers\TggIndia\Trainer\LinkController;
@@ -34,6 +35,12 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
        Route::get('/dashboard', function () {
           return view('tgg-india.admin.dashboard');
         })->name('dashboard');
+
+        Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'show'])->name('index');
+        Route::post('/profile', [ProfileController::class, 'update'])->name('update');
+        });
+
         Route::prefix('modules')->name('modules.')->group(function () {
         Route::get('/', [ModuleController::class, 'index'])->name('index');
         Route::get('/create', [ModuleController::class, 'create'])->name('create');

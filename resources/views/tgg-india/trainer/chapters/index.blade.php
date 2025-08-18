@@ -22,11 +22,11 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($chapters as $chapter)
+            @forelse ($chapters as $index =>$chapter)
                 <tr>
-                    <td>{{ $chapter->id }}</td>
+                    <td>{{ ++$index }}</td>
                     <td>{{ $chapter->title }}</td>
-                    <td>{!! $chapter->description !!}</td>
+                    <td>{!! $chapter->content ?? 'N/A' !!}</td>
                     
                     <td>{{ $chapter->created_at->format('Y-m-d') }}</td>
                     <td class="d-flex align-items-center justify-content-center">

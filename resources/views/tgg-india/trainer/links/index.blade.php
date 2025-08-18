@@ -20,16 +20,19 @@
                 <th>ID</th>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Url</th>
                 <th>Created At</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($links as $link)
+            @forelse ($links as $index => $link)
                 <tr>
-                    <td>{{ $link->id }}</td>
+                    <td>{{ ++$index }}</td>
                     <td>{{ $link->title }}</td>
                     <td>{!! $link->description !!}</td>
+                    <td>{{ $link->url }}</td>
+
                     <td>{{ $link->created_at->format('Y-m-d') }}</td>
                     <td class="d-flex align-items-center justify-content-center">
                         <a href="{{ route('tgg-india.trainer.links.edit', $link->id) }}" 

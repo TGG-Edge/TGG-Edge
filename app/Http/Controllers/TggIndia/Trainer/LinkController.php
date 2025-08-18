@@ -22,7 +22,7 @@ class LinkController extends Controller
      */
     public function create()
     {
-       
+
         return view('tgg-india.trainer.links.create');
     }
 
@@ -32,19 +32,30 @@ class LinkController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'title'       => 'required|string|max:255',
-        'description' => 'nullable|string',
+            'title'       => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
+
+        $user = auth('web2')->user();
+
+        // Get the first assigned module_instance of this user
+        $moduleInstance = $user->modules()
+            ->withPivot('id') // ensure pivot id is loaded
+            ->first();
+        if (!$moduleInstance) {
+            return back()->withErrors(['error' => 'No module instance found for this user.']);
+        }
+        
         Link::create([
             'title'              => $request->title,
             'description'        => $request->description,
-            'module_instance_id' => 2, // Or set dynamically based on logged-in trainer
-            'url' => '#',
+            'module_instance_id' => $moduleInstance->pivot->id, // Or set dynamically based on logged-in trainer
+            'url' => $request->url,
         ]);
 
         return redirect()->route('tgg-india.trainer.links.index')
-                         ->with('success', 'Link created successfully.');
+            ->with('success', 'Link created successfully.');
     }
 
     /**
@@ -79,7 +90,7 @@ class LinkController extends Controller
         $link->update($request->all());
 
         return redirect()->route('tgg-india.trainer.links.index')
-                         ->with('success', 'Link updated successfully.');
+            ->with('success', 'Link updated successfully.');
     }
 
     /**
@@ -89,6 +100,6 @@ class LinkController extends Controller
     {
         Link::findOrFail($id)->delete();
         return redirect()->route('tgg-india.trainer.links.index')
-                         ->with('success', 'Link deleted successfully.');
+            ->with('success', 'Link deleted successfully.');
     }
 }

@@ -70,7 +70,7 @@ class SectionController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
         ]);
 
         $section = Section::findOrFail($id);

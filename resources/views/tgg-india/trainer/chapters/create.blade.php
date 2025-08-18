@@ -17,7 +17,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">content</label>
-                    <textarea id="description" name="content" class="form-control" rows="5"></textarea>
+                    <textarea id="description" name="content" class="form-control js-ckeditor" rows="5"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary save-button">Save</button>
             </form>

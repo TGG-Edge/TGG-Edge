@@ -98,7 +98,7 @@ window.initCKEditors = function(selector = '.js-ckeditor', options = {}) {
 
         ClassicEditor.create(el, {
             extraPlugins: [ MyCustomUploadAdapterPlugin ],
-            toolbar: [
+            toolbar: [p
                 'heading', '|',
                 'bold', 'italic', 'underline', 'link', '|',
                 'bulletedList', 'numberedList', '|',

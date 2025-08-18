@@ -20,16 +20,32 @@
                 <th>ID</th>
                 <th>Title</th>
                 <th>Description</th>
+                <th>URL</th>
+                <th>Image</th>
                 <th>Created At</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($videos as $video)
+            @forelse ($videos as $index => $video)
                 <tr>
-                    <td>{{ $video->id }}</td>
+                    <td>{{ ++$index }}</td>
                     <td>{{ $video->title }}</td>
                     <td>{!! $video->description !!}</td>
+                     <td>
+                        @if($video->url && $video->url !== '#')
+                           {{ $video->url }}
+                        @else
+                            <span class="text-muted">N/A</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if($video->image)
+                            <img src="{{ asset('storage/'.$video->image) }}" alt="Video Image" width="60" height="40" style="object-fit: cover; border-radius: 4px;">
+                        @else
+                            <span class="text-muted">No Image</span>
+                        @endif
+                    </td>
                     <td>{{ $video->created_at->format('Y-m-d') }}</td>
                     <td class="d-flex align-items-center justify-content-center">
                         <a href="{{ route('tgg-india.trainer.videos.edit', $video->id) }}" 
