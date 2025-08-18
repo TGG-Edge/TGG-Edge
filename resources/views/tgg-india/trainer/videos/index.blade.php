@@ -2,15 +2,14 @@
 
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Trainer Dashboard - TGG India')
+@section('title', 'Videos | TGG Meta | TGG India')
 
 @section('content')
 <div class="admin-container">
-    <h4 class="mb-3 trainer-heading">Trainer Dashboard</h4>
-
     <!-- Create Button -->
-    <div class="d-flex justify-content-end mb-3" style="margin-right: 20px;">
-        <a href="{{ route('tgg-india.trainer.videos.create') }}" class="btn btn-primary">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-3 trainer-heading">Videos</h4>
+        <a href="{{ route('tgg-india.trainer.videos.create') }}" class="btn btn-primary create-button">
             <i class="bi bi-plus-lg"></i> Create
         </a>
     </div>
@@ -36,7 +35,7 @@
                         <a href="{{ route('tgg-india.trainer.videos.edit', $video->id) }}" 
                            class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
                            style="width: 28px; height: 28px;">
-                            <i class="bi bi-pencil-square"></i>
+                            <i class="fas fa-edit"></i>
                         </a>
 
                         <form action="{{ route('tgg-india.trainer.videos.destroy', $video->id) }}" method="POST" 
@@ -45,7 +44,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center justify-content-center p-0" 
                                     style="width: 28px; height: 28px;">
-                                <i class="bi bi-trash"></i>
+                                <i class="fas fa-trash"></i>
                             </button>
                         </form>
                     </td>

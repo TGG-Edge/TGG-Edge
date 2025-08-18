@@ -739,7 +739,15 @@ button:hover {
     box-sizing: border-box;
 }
 
+.choices__input {
+    font-size: 12px !important;
+}
+
 .create-button {
     background-color: #6f7300 !important;
     border-color: #6f7300 !important;
+}
+
+.form-control {
+    height: 40px !important;
 }

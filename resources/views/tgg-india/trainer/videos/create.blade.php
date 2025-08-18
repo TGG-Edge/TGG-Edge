@@ -1,6 +1,6 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Create Trainer Project - TGG India')
+@section('title', 'Create videos | TGG Meta | TGG India')
 
 @section('content')
     <div class="admin-container">
@@ -15,7 +15,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea id="description" name="description" class="form-control" rows="5"></textarea>
+                    <textarea id="description" name="description" class="form-control js-ckeditor" rows="5"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="url" class="form-label">URL</label>
+                    <input type="url" name="url" class="form-control" id="url" placeholder="https://example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload Image</label>
+                    <input type="file" name="image" class="form-control" id="image" accept="image/*"> {{-- NEW FIELD --}}
                 </div>
                 <button type="submit" class="btn btn-primary save-button">Save</button>
             </form>

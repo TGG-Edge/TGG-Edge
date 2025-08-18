@@ -1,6 +1,6 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Dashboard - TGG Edge - India')
+@section('title', 'Trainer Dashboard | TGG Meta | TGG India')
 
 
 @section('content')

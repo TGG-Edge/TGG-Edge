@@ -1,6 +1,6 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Create Trainer Project - TGG India')
+@section('title', 'Create Links | TGG Meta | TGG India')
 
 @section('content')
     <div class="admin-container">
@@ -15,14 +15,20 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea id="description" name="description" class="form-control" rows="5"></textarea>
+                    <textarea id="description" name="description" class="form-control js-ckeditor" rows="5"></textarea>
                 </div>
+
+                <div class="mb-3">
+                    <label for="url" class="form-label">URL</label>
+                    <input type="url" name="url" class="form-control" id="url" placeholder="https://example.com">
+                </div>
+                
                 <button type="submit" class="btn btn-primary save-button">Save</button>
             </form>
         </div>
     </div>
 
-    <!-- CKEditor 5 Script -->
+    <!-- CKEditor 5 Script
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
@@ -30,5 +36,5 @@
             .catch(error => {
                 console.error(error);
             });
-    </script>
+    </script> -->
 @endsection
