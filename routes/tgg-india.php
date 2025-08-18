@@ -14,6 +14,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
     Route::get('/login', [LoginController::class, 'show'])->name('show');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
+    
 
     // Public registration routes
     Route::prefix('register')->name('register.')->group(function () {
