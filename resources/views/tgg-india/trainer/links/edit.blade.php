@@ -18,7 +18,9 @@
         </div>
         <button type="button" class="btn btn-primary save-button">Save</button>
     </div>
+    
 </div>
+
 
 <!-- CKEditor 5 Script -->
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
