@@ -71,6 +71,10 @@ class UserSecondary extends Authenticatable
         ];
     }
 
+    public function getRoleNameAttribute()
+{
+    return self::$user_types[$this->user_role]['name'] ?? 'Unknown';
+}
     public function project()
     {
         return $this->hasOne(Project::class, 'researcher_id', 'id');

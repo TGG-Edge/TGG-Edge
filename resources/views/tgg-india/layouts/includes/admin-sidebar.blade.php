@@ -25,6 +25,27 @@
 </a>
 
 
+<div class="dropdown">
+    <a href="#"
+       class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'active' : '' }}"
+       data-bs-toggle="collapse"
+       data-bs-target="#applicationDropdown"
+       aria-expanded="{{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'true' : 'false' }}">
+        <span><i class="fas fa-file-alt me-2"></i> Applications</span>
+        <i class="fas fa-caret-down"></i>
+    </a>
+    <div class="collapse ps-3 {{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'show' : '' }}"
+         id="applicationDropdown">
+        <a href="{{ route('tgg-india.admin.new-applications') }}" class="d-block py-1">
+            <i class="fas fa-user-plus me-2"></i> New Applications
+        </a>
+        <a href="{{ route('tgg-india.admin.processed-applications') }}" class="d-block py-1">
+            <i class="fas fa-check-circle me-2"></i> Processed Applications
+        </a>
+    </div>
+</div>
+
+
 {{-- 
 @if(Auth::check() && Auth::user()->user_role != 1 && Auth::user()->research_assistance == 1)
 <div class="dropdown">
@@ -77,25 +98,7 @@
 
 
 
-<div class="dropdown">
-    <a href="#"
-       class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'active' : '' }}"
-       data-bs-toggle="collapse"
-       data-bs-target="#applicationDropdown"
-       aria-expanded="{{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'true' : 'false' }}">
-        <span><i class="fas fa-file-alt me-2"></i> Applications</span>
-        <i class="fas fa-caret-down"></i>
-    </a>
-    <div class="collapse ps-3 {{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'show' : '' }}"
-         id="applicationDropdown">
-        <a href="{{ route('user.new-applications') }}" class="d-block py-1">
-            <i class="fas fa-user-plus me-2"></i> New Applications
-        </a>
-        <a href="{{ route('user.processed-applications') }}" class="d-block py-1">
-            <i class="fas fa-check-circle me-2"></i> Processed Applications
-        </a>
-    </div>
-</div>
+
 
 <div class="dropdown">
     <a href="#"

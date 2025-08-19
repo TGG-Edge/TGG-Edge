@@ -14,6 +14,8 @@
         class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
         <i class="fas fa-tachometer-alt"></i> Dashboard
     </a>
+    <a href="{{ route('tgg-india.trainer.profile.index') }}"
+        class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
 
 
     @if ($hasLiteratures)

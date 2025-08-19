@@ -74,7 +74,7 @@ class ModuleController extends Controller
 
     public function edit(Module $module,$id)
     {
-        $users = UserSecondary::select('id', 'name')->get();
+        $users = UserSecondary::get();
         $module = Module::with(['users', 'features'])->findOrFail($id);
         $features = [
             'literatures' => 'Literatures',

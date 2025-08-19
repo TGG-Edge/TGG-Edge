@@ -21,7 +21,7 @@
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
                             {{ in_array($user->id, $module->users->pluck('id')->toArray()) ? 'selected' : '' }}>
-                            {{ $user->name }}
+                            {{ $user->name. ' - '. $user->role_name }}
                         </option>
                     @endforeach
                 </select>

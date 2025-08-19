@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class IsTrainer
+class IsMember
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class IsTrainer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth('web2')->check() && Auth('web2')->user()->user_role == 2) {
+        if(Auth('web2')->check() && Auth('web2')->user()->user_role == 3) {
             $user = Auth('web2')->user();
             if ($user->approval != 'accepted') {
                 return abort(403, 'Your approval is not accepted yet. Please contact admin.');
