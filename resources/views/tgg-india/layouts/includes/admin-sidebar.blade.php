@@ -24,6 +24,10 @@
     <i class="fas fa-cubes"></i> Modules
 </a>
 
+<a href="{{ route('tgg-india.admin.feature-limits.index') }}" class="{{ request()->is('tgg-india/admin/feature-limits*') ? 'active' : '' }}">
+    <i class="fas fa-sliders-h"></i> Feature Limits
+</a>
+
 
 <div class="dropdown">
     <a href="#"

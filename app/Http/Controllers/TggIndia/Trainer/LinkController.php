@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\TggIndia\Trainer;
 
 use App\Http\Controllers\Controller;
+use App\Models\FeatureLimit;
+use App\Models\FeatureUsage;
 use App\Models\Link;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,19 @@ class LinkController extends Controller
     public function index()
     {
         $links = Link::latest()->get();
-        return view('tgg-india.trainer.links.index', compact('links'));
+         $features = featureList();
+        $feature_key = $features[1]['key'];
+        $user = auth('web2')->user();
+        $feature_usage = FeatureUsage::where('user_id',$user->id)->where('feature_key',$feature_key)->first();
+        $feature_limit = FeatureLimit::where('feature_key', $feature_key)->first();
+
+        $is_exceeded = false; // default
+
+        if ($feature_limit) {
+            $used_count = $feature_usage ? $feature_usage->count : 0;
+            $is_exceeded = $used_count >= $feature_limit->free_limit ? true : false;
+        }
+        return view('tgg-india.trainer.links.index', compact('links','feature_usage','is_exceeded'));
     }
 
     /**
@@ -53,6 +67,19 @@ class LinkController extends Controller
             'module_instance_id' => $moduleInstance->pivot->id, // Or set dynamically based on logged-in trainer
             'url' => $request->url,
         ]);
+
+        $features = featureList();
+        $feature_key = $features[1]['key'];
+        $user = auth('web2')->user();
+        FeatureUsage::updateOrCreate(
+        [
+            'user_id'     => $user->id,
+            'feature_key' => $feature_key,
+        ],
+        [
+            'count' => \DB::raw('count + 1')
+        ]
+        );
 
         return redirect()->route('tgg-india.trainer.links.index')
             ->with('success', 'Link created successfully.');

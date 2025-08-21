@@ -8,14 +8,15 @@
     <!-- Create Button -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-3 trainer-heading">Videos</h4>
-        <div class="d-flex align-items-center gap-2">
+         @if ($is_exceeded)
+                <button class="btn btn-danger" disabled>
+                    <i class="bi bi-lock"></i> Upgrade to Create More
+                </button>
+            @else
             <a href="{{ route('tgg-india.trainer.videos.create') }}" class="btn btn-primary create-button">
                 <i class="bi bi-plus-lg"></i> Create
             </a>
-            <button type="button" class="btn btn-primary create-button">
-                <i class="bi bi-plus-lg"></i> AI Generation
-            </button>
-        </div>
+            @endif
     </div>
 
     <table class="table table-striped table-bordered">

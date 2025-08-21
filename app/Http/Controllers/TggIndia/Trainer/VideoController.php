@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\TggIndia\Trainer;
 
 use App\Http\Controllers\Controller;
+use App\Models\FeatureLimit;
+use App\Models\FeatureUsage;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +17,19 @@ class videoController extends Controller
     public function index()
     {
         $videos = Video::latest()->get();
-        return view('tgg-india.trainer.videos.index', compact('videos'));
+        $features = featureList();
+        $feature_key = $features[2]['key'];
+        $user = auth('web2')->user();
+        $feature_usage = FeatureUsage::where('user_id', $user->id)->where('feature_key', $feature_key)->first();
+        $feature_limit = FeatureLimit::where('feature_key', $feature_key)->first();
+
+        $is_exceeded = false; // default
+
+        if ($feature_limit) {
+            $used_count = $feature_usage ? $feature_usage->count : 0;
+            $is_exceeded = $used_count >= $feature_limit->free_limit ? true : false;
+        }
+        return view('tgg-india.trainer.videos.index', compact('videos', 'feature_usage','is_exceeded'));
     }
 
     /**
@@ -62,6 +76,18 @@ class videoController extends Controller
             'image'              => $imagePath,
         ]);
 
+        $features = featureList();
+        $feature_key = $features[2]['key'];
+        $user = auth('web2')->user();
+        FeatureUsage::updateOrCreate(
+            [
+                'user_id'     => $user->id,
+                'feature_key' => $feature_key,
+            ],
+            [
+                'count' => \DB::raw('count + 1')
+            ]
+        );
         return redirect()->route('tgg-india.trainer.videos.index')
             ->with('success', 'Video created successfully.');
     }
