@@ -10,6 +10,7 @@
 
     <!-- Create Button -->
     <div class="d-flex justify-content-end mb-3" style="margin-right: 20px;">
+        
         <a href="{{ route('tgg-india.trainer.literatures.create') }}" class="btn btn-primary">
             <i class="bi bi-plus-lg"></i> Create
         </a>

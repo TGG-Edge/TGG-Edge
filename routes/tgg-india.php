@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TggIndia\Admin\ApplicationController;
+use App\Http\Controllers\TggIndia\Admin\FeatureLimitController;
 use App\Http\Controllers\TggIndia\LoginController;
 use App\Http\Controllers\TggIndia\Admin\ModuleController;
 use App\Http\Controllers\TggIndia\Admin\ProfileController;
@@ -56,7 +57,27 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     Route::get('/user-profile/{id}', [ApplicationController::class, 'userProfile'])->name('user-profile');
     Route::post('/users/{id}/userProfileUpdate', [ApplicationController::class, 'userProfileUpdate'])->name('users.profile.update');
     Route::get('/users/{id}/approval', [ApplicationController::class, 'updateApproval'])->name('users.update.approval');
+    Route::resource('feature-limits', FeatureLimitController::class);
+
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // trainer routes 
   Route::middleware('trainer')->prefix('trainer')->name('trainer.')->group(function () {
