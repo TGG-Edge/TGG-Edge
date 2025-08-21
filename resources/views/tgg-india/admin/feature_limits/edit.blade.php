@@ -5,6 +5,7 @@
 @section('content')
 <div class="admin-container">
     <h4 class="mb-3 trainer-heading">Edit Feature Limit</h4>
+    @include('tgg-india.layouts.includes.message')
 
     <div class="card p-3">
         <form action="{{ route('tgg-india.admin.feature-limits.update', $featureLimit->id) }}" method="POST">

@@ -22,8 +22,8 @@
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
  <link rel="stylesheet" href="{{ asset('assets/tgg-india/css/header-footer.css') }}">
 
- {{-- Bootstrap (local) --}}
-  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+ <!-- {{-- Bootstrap (local) --}}
+  <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}"> -->
 
   {{-- Font Awesome (local, downloaded) --}}
   <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
@@ -69,15 +69,14 @@
 
   @include('tgg-india.layouts.includes.footer')
 
-  {{-- Needed for multiselect --}}
-  <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+  <!-- {{-- Needed for multiselect --}}
+  <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script> -->
 
   <!-- Choices.js JS -->
   <script src="{{ asset('assets/choices/choices.min.js') }}"></script>
 
   <script>
   document.addEventListener('DOMContentLoaded', function () {
-      // Automatically apply Choices.js to all <select multiple>
       document.querySelectorAll('select[multiple]').forEach(function (el) {
           new Choices(el, {
               removeItemButton: true,
@@ -98,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
         el.dataset.ckeditorInited = '1';
 
         CKEDITOR.ClassicEditor.create(el, {
-            // ✅ only keep your custom upload adapter
             extraPlugins: [ MyCustomUploadAdapterPlugin ],
 
             // remove plugins you don’t need
@@ -135,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     'imageStyle:block',
                     'imageStyle:side',
                     '|',
-                    'resizeImage',   // 👈 enables resizing
+                    'resizeImage',  
                     'imageTextAlternative'
                 ]
             }
@@ -144,7 +142,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// ✅ Custom upload adapter (sends to Laravel route)
 class UploadAdapter {
     constructor(loader) { this.loader = loader; }
     upload() {

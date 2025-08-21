@@ -1,5 +1,4 @@
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Index Chapters | TGG Meta | TGG India')
 
@@ -7,6 +6,7 @@
     <div class="admin-container">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="mb-3 trainer-heading">Modules</h4>
+            <div class="d-flex align-items-center gap-2">
             @if ($is_exceeded)
             <div>
                 <button class="btn btn-primary create-button" disabled>
@@ -21,9 +21,14 @@
                 class="btn btn-primary create-button">
                 <i class="bi bi-plus-lg"></i> Create
             </a>
+            <button type="button" class="btn btn-primary aigen-button">
+                <i class="bi bi-plus-lg"></i> AIGen
+            </button>
+            </div>
             @endif
         </div>
-
+                    
+        @include('tgg-india.layouts.includes.message')
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
                 <tr>

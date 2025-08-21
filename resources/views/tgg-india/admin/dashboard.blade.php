@@ -1,11 +1,11 @@
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Admin Dashbaord | TGG Meta | TGG India')
 
 
 @section('content')
 <div class="admin-container">
+            @include('tgg-india.layouts.includes.message')
             <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('user.logout') }}">Log out</a>)</p>
 
             <p><strong>WELCOME TO TGG-EDGE</strong></p>

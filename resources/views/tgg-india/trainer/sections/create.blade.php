@@ -1,12 +1,12 @@
 
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Create Literature | TGG Meta | TGG India')
 
 @section('content')
     <div class="admin-container">
         <h4 class="mb-3 trainer-heading">Create New section</h4>
+        @include('tgg-india.layouts.includes.message')
 
         <div class="card p-3 mb-4">
             <form action="{{ route('tgg-india.trainer.sections.store') }}" method="POST">
@@ -25,3 +25,4 @@
     </div>
 
 @endsection
+

@@ -1,6 +1,4 @@
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
-
 @section('title', 'Literature | TGG Meta | TGG India')
 
 @section('content')
@@ -11,11 +9,13 @@
             <a href="{{ route('tgg-india.trainer.sections.create') }}" class="btn btn-primary create-button">
                 <i class="bi bi-plus-lg"></i> Create
             </a>
-            <button type="button" class="btn btn-primary create-button">
-                <i class="bi bi-plus-lg"></i> AI Generation
+            <button type="button" class="btn btn-primary aigen-button">
+                <i class="bi bi-plus-lg"></i> AIGen
             </button>
         </div>
     </div>
+
+    @include('tgg-india.layouts.includes.message')
 
 
     <table class="table table-striped table-bordered">

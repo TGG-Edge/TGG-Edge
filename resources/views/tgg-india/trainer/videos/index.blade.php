@@ -1,5 +1,4 @@
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Videos | TGG Meta | TGG India')
 
@@ -8,16 +7,22 @@
     <!-- Create Button -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-3 trainer-heading">Videos</h4>
+        <div class="d-flex align-items-center gap-2">
          @if ($is_exceeded)
                 <button class="btn btn-danger" disabled>
                     <i class="bi bi-lock"></i> Upgrade to Create More
                 </button>
             @else
-            <a href="{{ route('tgg-india.trainer.videos.create') }}" class="btn btn-primary create-button">
-                <i class="bi bi-plus-lg"></i> Create
-            </a>
+                <a href="{{ route('tgg-india.trainer.videos.create') }}" class="btn btn-primary create-button">
+                    <i class="bi bi-plus-lg"></i> Create
+                </a>
+                <button type="button" class="btn btn-primary aigen-button">
+                    <i class="bi bi-plus-lg"></i> AIGen
+                </button>
             @endif
+        </div>
     </div>
+    @include('tgg-india.layouts.includes.message')
 
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
@@ -51,8 +56,8 @@
                             <span class="text-muted">No Image</span>
                         @endif
                     </td>
-                    <td>{{ $video->created_at->format('Y-m-d') }}</td>
-                    <td>
+                    <td class="align-middle">{{ $video->created_at->format('Y-m-d') }}</td>
+                    <td class="align-middle">
                          <div class="d-flex align-items-center justify-content-center">
                             <a href="{{ route('tgg-india.trainer.videos.edit', $video->id) }}" 
                                 class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 

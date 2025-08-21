@@ -4,15 +4,17 @@
 
 @section('content')
 <div class="admin-container">
-    <h4 class="mb-3 trainer-heading">Feature Limits</h4>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-3 trainer-heading">Feature Limits</h4>
+            <div class="d-flex align-items-center gap-2">
 
-    <div class="d-flex justify-content-end mb-3">
-        <a href="{{ route('tgg-india.admin.feature-limits.create') }}" class="btn btn-primary">Create New</a>
+            <a href="{{ route('tgg-india.admin.feature-limits.create') }}" class="btn btn-primary create-button">Create New</a>
+            </div>
     </div>
 
-    <div class="card p-3">
-        <table class="table table-bordered">
-            <thead>
+    @include('tgg-india.layouts.includes.message')
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
                 <tr>
                     <th>Feature</th>
                     <th>Free Limit</th>
@@ -27,12 +29,23 @@
                         <td>{{ $feature->free_limit }}</td>
                         <td>{{ $feature->created_at?->format('d M Y') }}</td>
                         <td>
-                            <a href="{{ route('tgg-india.admin.feature-limits.edit', $feature->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                            <form action="{{ route('tgg-india.admin.feature-limits.destroy', $feature->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this feature?')">Delete</button>
-                            </form>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <a href="{{ route('tgg-india.admin.feature-limits.edit', $feature->id) }}" 
+                                class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
+                                style="width: 28px; height: 28px;">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+
+                                <form action="{{ route('tgg-india.admin.feature-limits.destroy', $feature->id) }}" method="POST" 
+                                    onsubmit="return confirm('Are you sure you want to delete this feature?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center justify-content-center p-0" 
+                                            style="width: 28px; height: 28px;">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty
@@ -40,6 +53,5 @@
                 @endforelse
             </tbody>
         </table>
-    </div>
 </div>
 @endsection

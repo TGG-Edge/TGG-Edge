@@ -1,12 +1,12 @@
 
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Create Chapters | TGG Meta | TGG India')
 
 @section('content')
     <div class="admin-container">
         <h4 class="mb-3 trainer-heading">Create New chapter</h4>
+        @include('tgg-india.layouts.includes.message')
 
         <div class="card p-3 mb-4">
             <form action="{{ route('tgg-india.trainer.chapters.store') }}" method="POST">

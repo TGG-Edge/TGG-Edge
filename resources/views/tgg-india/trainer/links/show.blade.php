@@ -1,11 +1,11 @@
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Show Links | TGG Meta | TGG India')
 @section('content')
 
 <div class="container">
     <h2 class="litheader">Useful Research Links</h2>
+    @include('tgg-india.layouts.includes.message')
     <ul class="list-group">
         @forelse ($links as $link)
             <li class="list-group-item">

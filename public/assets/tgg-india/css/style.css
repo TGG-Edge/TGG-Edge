@@ -752,3 +752,9 @@ button:hover {
 .form-control {
     height: 40px !important;
 }
+
+.aigen-button {
+    background-color: #265475;
+    border-color: #265475;
+    height: 40px;
+}

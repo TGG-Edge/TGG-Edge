@@ -1,5 +1,4 @@
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Modules | TGG Meta | TGG India')
 
@@ -8,6 +7,7 @@
     <!-- Create Button -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-3 trainer-heading">Modules</h4>
+        @include('tgg-india.layouts.includes.message')
         <a href="{{ route('tgg-india.admin.modules.create') }}" class="btn btn-primary create-button">
             <i class="bi bi-plus-lg"></i> Create
         </a>

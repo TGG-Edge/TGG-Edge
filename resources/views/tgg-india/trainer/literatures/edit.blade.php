@@ -1,12 +1,12 @@
 
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Edit Literature | TGG Meta | TGG India')
 
 @section('content')
 <div class="admin-container">
     <h4 class="mb-3 trainer-heading">Edit New Project</h4>
+    @include('tgg-india.layouts.includes.message')
 
     <div class="card p-3 mb-4">
         <div class="mb-3">

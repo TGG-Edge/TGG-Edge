@@ -1,5 +1,4 @@
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Index Literature | TGG Meta | TGG India')
 
@@ -8,11 +7,16 @@
 
     <!-- Create Button -->
     <div class="d-flex justify-content-end mb-3" style="margin-right: 20px;">
-        
+        <div class="d-flex align-items-center gap-2">
         <a href="{{ route('tgg-india.trainer.literatures.create') }}" class="btn btn-primary">
             <i class="bi bi-plus-lg"></i> Create
         </a>
+        <button type="button" class="btn btn-primary aigen-button">
+                <i class="bi bi-plus-lg"></i> AIGen
+        </button>
+        </div>
     </div>
+    @include('tgg-india.layouts.includes.message')
 
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
