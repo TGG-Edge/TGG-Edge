@@ -1,4 +1,5 @@
 @extends('tgg-india.layouts.app')
+@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Show videos | TGG Meta | TGG India')
 @section('content')

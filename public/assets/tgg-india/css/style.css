@@ -746,6 +746,7 @@ button:hover {
 .create-button {
     background-color: #6f7300 !important;
     border-color: #6f7300 !important;
+    height: 40px;
 }
 
 .form-control {

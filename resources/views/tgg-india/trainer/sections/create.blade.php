@@ -1,5 +1,6 @@
 
 @extends('tgg-india.layouts.app')
+@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Create Literature | TGG Meta | TGG India')
 
@@ -23,13 +24,4 @@
         </div>
     </div>
 
-    <!-- CKEditor 5 Script -->
-    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#description'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script> -->
 @endsection

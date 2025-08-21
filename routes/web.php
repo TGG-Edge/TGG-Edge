@@ -13,5 +13,6 @@ Route::get('/login', fn () => redirect()->route('user.login'))->name('login');
 
 Route::get('/cron/generate-ai-research-assistance', [ResearchAssistanceController::class, 'CronGenerateRA']);
 
-Route::post('/ckeditor/upload', [CkeditorUploadController::class, 'store'])
-    ->name('ckeditor.upload');
+// routes/web.php
+Route::post('/ckeditor/upload', [\App\Http\Controllers\UploadController::class, 'upload'])->name('ckeditor.upload');
+

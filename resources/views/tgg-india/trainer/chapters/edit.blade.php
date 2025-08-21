@@ -1,6 +1,7 @@
 @extends('tgg-india.layouts.app')
+@include('tgg-india.layouts.includes.message')
 
-@section('title', 'Edit Chapter - TGG India')
+@section('title', 'Edit Chapters | TGG Meta | TGG India')
 
 @section('content')
 <div class="admin-container">

@@ -88,52 +88,93 @@
   });
   </script>
 
-  {{-- CKEditor global initializer --}}
-<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+{{-- CKEditor 5 super-build --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/super-build/ckeditor.js"></script>
+
 <script>
-window.initCKEditors = function(selector = '.js-ckeditor', options = {}) {
-    document.querySelectorAll(selector).forEach(function (el) {
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.js-ckeditor').forEach(function (el) {
         if (el.dataset.ckeditorInited) return;
         el.dataset.ckeditorInited = '1';
 
-        ClassicEditor.create(el, {
+        CKEDITOR.ClassicEditor.create(el, {
+            // ✅ only keep your custom upload adapter
             extraPlugins: [ MyCustomUploadAdapterPlugin ],
-            toolbar: [p
+
+            // remove plugins you don’t need
+            removePlugins: [
+                'CKBox','CKFinder','CKFinderUploadAdapter','EasyImage',
+                'RealTimeCollaborativeComments','RealTimeCollaborativeTrackChanges',
+                'RealTimeCollaborativeRevisionHistory','PresenceList','Comments',
+                'TrackChanges','TrackChangesData','RevisionHistory','Pagination',
+                'WProofreader','MathType','DocumentOutline','ExportPdf','ExportWord',
+                'TableOfContents',
+                'FormatPainter',
+                'Template',
+                'SlashCommand',
+                'PasteFromOfficeEnhanced'
+            ],
+
+            toolbar: [
                 'heading', '|',
                 'bold', 'italic', 'underline', 'link', '|',
                 'bulletedList', 'numberedList', '|',
                 'insertTable', 'blockQuote', 'imageUpload', 'undo', 'redo'
-            ]
-        }).catch(console.error);
-    });
-};
+            ],
 
-// Base64 Upload Adapter
-class Base64UploadAdapter {
-    constructor(loader) {
-        this.loader = loader;
-    }
+            image: {
+                resizeUnit: '%',
+                resizeOptions: [
+                    { name: 'resizeImage:original', label: 'Original', value: null },
+                    { name: 'resizeImage:25', label: '25%', value: '25' },
+                    { name: 'resizeImage:50', label: '50%', value: '50' },
+                    { name: 'resizeImage:75', label: '75%', value: '75' }
+                ],
+                toolbar: [
+                    'imageStyle:inline',
+                    'imageStyle:block',
+                    'imageStyle:side',
+                    '|',
+                    'resizeImage',   // 👈 enables resizing
+                    'imageTextAlternative'
+                ]
+            }
+        }).catch(console.error);
+
+    });
+});
+
+// ✅ Custom upload adapter (sends to Laravel route)
+class UploadAdapter {
+    constructor(loader) { this.loader = loader; }
     upload() {
         return this.loader.file.then(file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve({ default: reader.result });
-            reader.onerror = err => reject(err);
-            reader.readAsDataURL(file);
+            const data = new FormData();
+            data.append('upload', file);
+            data.append('_token', '{{ csrf_token() }}');
+
+            fetch('{{ route('ckeditor.upload') }}', {
+                method: 'POST',
+                body: data
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.url) {
+                    resolve({ default: data.url });
+                } else {
+                    reject(data.error || 'Upload failed');
+                }
+            })
+            .catch(reject);
         }));
     }
     abort() {}
 }
-
 function MyCustomUploadAdapterPlugin(editor) {
-    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-        return new Base64UploadAdapter(loader);
-    };
+    editor.plugins.get('FileRepository').createUploadAdapter = loader => new UploadAdapter(loader);
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    initCKEditors();
-});
 </script>
+
 
   
   {{-- Dashboard Volunteer Javascipt support --}}

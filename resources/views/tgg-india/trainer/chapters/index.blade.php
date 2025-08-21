@@ -1,14 +1,20 @@
 @extends('tgg-india.layouts.app')
+@include('tgg-india.layouts.includes.message')
 
-@section('title', 'Trainer Dashboard - TGG India')
+@section('title', 'Index Chapters | TGG Meta | TGG India')
 
 @section('content')
 <div class="admin-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="mb-3 trainer-heading">Modules</h4>
-        <a href="{{ route('tgg-india.trainer.chapters.create',['section_id' => request()->section_id]) }}" class="btn btn-primary create-button">
-            <i class="bi bi-plus-lg"></i> Create
-        </a>
+        <h4 class="mb-3 trainer-heading">Chapters</h4>
+        <div class="d-flex align-items-center gap-2">
+            <a href="{{ route('tgg-india.trainer.chapters.create',['section_id' => request()->section_id]) }}" class="btn btn-primary create-button">
+                <i class="bi bi-plus-lg"></i> Create
+            </a>
+            <button type="button" class="btn btn-primary create-button">
+                    <i class="bi bi-plus-lg"></i> AI Generation
+                </button>
+        </div>
     </div>
 
     <table class="table table-striped table-bordered">
@@ -29,23 +35,26 @@
                     <td>{!! $chapter->content ?? 'N/A' !!}</td>
                     
                     <td>{{ $chapter->created_at->format('Y-m-d') }}</td>
-                    <td class="d-flex align-items-center justify-content-center">
-                        <a href="{{ route('tgg-india.trainer.chapters.edit', $chapter->id) }}" 
-                           class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
-                           style="width: 28px; height: 28px;">
-                            <i class="fas fa-edit"></i>
-                        </a>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a href="{{ route('tgg-india.trainer.chapters.edit', $chapter->id) }}" 
+                                class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
+                                style="width: 28px; height: 28px;">
+                                <i class="fas fa-edit"></i>
+                            </a>
 
-                        <form action="{{ route('tgg-india.trainer.chapters.destroy', $chapter->id) }}" method="POST" 
-                              onsubmit="return confirm('Are you sure you want to delete this chapter?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center justify-content-center p-0" 
-                                    style="width: 28px; height: 28px;">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
+                            <form action="{{ route('tgg-india.trainer.chapters.destroy', $chapter->id) }}" method="POST" 
+                                onsubmit="return confirm('Are you sure you want to delete this chapter?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center justify-content-center p-0" 
+                                        style="width: 28px; height: 28px;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </td>
+
                 </tr>
             @empty
                 <tr>

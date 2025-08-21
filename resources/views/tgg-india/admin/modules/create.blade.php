@@ -1,4 +1,5 @@
 @extends('tgg-india.layouts.app')
+@include('tgg-india.layouts.includes.message')
 
 @section('title', 'Create Modules | TGG Meta | TGG India')
 
