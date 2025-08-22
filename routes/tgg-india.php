@@ -128,6 +128,10 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
   });
 
 
+
+
+
+
   //members
   Route::middleware('member')->prefix('member')->name('member.')->group(function () {
     Route::get('/dashboard', function () {
@@ -136,7 +140,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     Route::prefix('modules')->name('modules.')->group(function () {
       Route::get('/', [\App\Http\Controllers\TggIndia\Member\ModuleController::class, 'index'])->name('index');
       Route::get('/links', [\App\Http\Controllers\TggIndia\Member\ModuleController::class, 'links'])->name('links');
-      Route::post('/videos', [\App\Http\Controllers\TggIndia\Member\ModuleController::class, 'videos'])->name('videos');
+      Route::get('/videos', [\App\Http\Controllers\TggIndia\Member\ModuleController::class, 'videos'])->name('videos');
       Route::get('/chapters/{id}', [\App\Http\Controllers\TggIndia\Member\ModuleController::class, 'chapters'])->name('chapters');
     });
 

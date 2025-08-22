@@ -68,17 +68,18 @@
                     <input type="text" class="form-control" name="number" placeholder="Mobile number" required>
                 </div>
 
-                {{-- Address --}}
-                <div class="mb-3 col-md-6">
-                    <label class="form-label">Address *</label>
-                    <textarea class="form-control" name="address" placeholder="Full address" rows="2" required></textarea>
-                </div>
 
                 {{-- RHM Registration Number --}}
                 <div class="mb-3 col-md-6">
                     <label class="form-label">RHM Registration Number *</label>
                     <input type="text" class="form-control" name="rhm_number" placeholder="If applicable" required>
                 </div>
+
+                {{-- Address --}}
+                <div class="mb-3 col-md-6">
+                    <label class="form-label">Address *</label>
+                    <textarea class="form-control" name="address" placeholder="Full address" rows="2" required></textarea>
+                </div> 
 
                 @if($user_type == 'researcher')
                 {{-- Project Description --}}
@@ -88,17 +89,18 @@
                 </div>
                 @endif
 
-                @if($user_type == 'researcher')
-                {{-- Research Assistance Checkbox --}}
-                <div class="mb-3 col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="research_assistance" id="research_assistance">
-                        <label class="form-check-label" for="research_assistance" style="font-size: 13px;">
-                            I would like to apply for Research Assistance
-                        </label>
+                @if($user_type != 'admin' && $user_type != 'trainer')
+                    <div class="mb-3 col-12">
+                        <label for="modules" class="form-label">Select Modules</label>
+                        <select name="modules[]" id="modules" class="form-select" multiple>
+                            @foreach(\App\Models\Module::all() as $module)
+                                <option value="{{ $module->id }}">{{ $module->name }}</option>
+                            @endforeach
+                        </select>
+                        <small class="text-muted">Hold Ctrl (Windows) or Command (Mac) to select multiple modules.</small>
                     </div>
-                </div>
                 @endif
+
             </div>
 
             {{-- Submit --}}
