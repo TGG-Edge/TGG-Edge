@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FeatureLimit;
 use App\Models\FeatureUsage;
 use App\Models\Link;
+use App\Services\AIService;
 use Illuminate\Http\Request;
 
 class LinkController extends Controller
@@ -16,10 +17,10 @@ class LinkController extends Controller
     public function index()
     {
         $links = Link::latest()->get();
-         $features = featureList();
+        $features = featureList();
         $feature_key = $features[1]['key'];
         $user = auth('web2')->user();
-        $feature_usage = FeatureUsage::where('user_id',$user->id)->where('feature_key',$feature_key)->first();
+        $feature_usage = FeatureUsage::where('user_id', $user->id)->where('feature_key', $feature_key)->first();
         $feature_limit = FeatureLimit::where('feature_key', $feature_key)->first();
 
         $is_exceeded = false; // default
@@ -28,7 +29,7 @@ class LinkController extends Controller
             $used_count = $feature_usage ? $feature_usage->count : 0;
             $is_exceeded = $used_count >= $feature_limit->free_limit ? true : false;
         }
-        return view('tgg-india.trainer.links.index', compact('links','feature_usage','is_exceeded'));
+        return view('tgg-india.trainer.links.index', compact('links', 'feature_usage', 'is_exceeded'));
     }
 
     /**
@@ -60,7 +61,7 @@ class LinkController extends Controller
         if (!$moduleInstance) {
             return back()->withErrors(['error' => 'No module instance found for this user.']);
         }
-        
+
         Link::create([
             'title'              => $request->title,
             'description'        => $request->description,
@@ -72,13 +73,13 @@ class LinkController extends Controller
         $feature_key = $features[1]['key'];
         $user = auth('web2')->user();
         FeatureUsage::updateOrCreate(
-        [
-            'user_id'     => $user->id,
-            'feature_key' => $feature_key,
-        ],
-        [
-            'count' => \DB::raw('count + 1')
-        ]
+            [
+                'user_id'     => $user->id,
+                'feature_key' => $feature_key,
+            ],
+            [
+                'count' => \DB::raw('count + 1')
+            ]
         );
 
         return redirect()->route('tgg-india.trainer.links.index')
@@ -119,6 +120,64 @@ class LinkController extends Controller
         return redirect()->route('tgg-india.trainer.links.index')
             ->with('success', 'Link updated successfully.');
     }
+
+    public function aigen(AIService $aiService)
+    {
+        $user = auth('web2')->user();
+
+        // Prompt for AI
+        $prompt = "Generate a useful resource link for {$user->modules[0]->name}. 
+               Respond in JSON format with keys: 
+               - title: short and clear title of the resource
+               - url: a realistic learning resource URL
+               - description: detailed HTML content compatible with CKEditor, 
+                              including <p>, <ul>, <ol>, <strong>, <em>, etc. 
+                              Optionally include one relevant <img> tag with a free-to-use image.";
+
+        // Get AI response
+        $response = $aiService->getAiResponseWithFallback($prompt);
+
+        if (!$response) {
+            return back()->with('error', 'AI failed to generate link.');
+        }
+
+        $parsed = $aiService->parseJsonResponse($response['content']);
+
+        if (!$parsed || !isset($parsed['title'], $parsed['url'], $parsed['description'])) {
+            return back()->with('error', 'Invalid AI response.');
+        }
+
+        // Get the first assigned module_instance of this user
+        $moduleInstance = $user->modules()->withPivot('id')->first();
+        if (!$moduleInstance) {
+            return back()->withErrors(['error' => 'No module instance found for this user.']);
+        }
+
+        // Save new Link with CKEditor-compatible content
+        $link = Link::create([
+            'title'              => $parsed['title'],
+            'url'                => $parsed['url'],
+            'description'        => $parsed['description'], // rich HTML for CKEditor
+            'module_instance_id' => $moduleInstance->pivot->id,
+        ]);
+
+        // Track usage
+        $features = featureList();
+        $feature_key = $features[1]['key'] ?? 'links'; // safe fallback
+
+        $usage = FeatureUsage::firstOrNew([
+            'user_id'     => $user->id,
+            'feature_key' => $feature_key,
+        ]);
+
+        $usage->count = ($usage->count ?? 0) + 1;
+        $usage->save();
+
+        return redirect()
+            ->route('tgg-india.trainer.links.index')
+            ->with('success', 'AI Generated Link added successfully!');
+    }
+
 
     /**
      * Remove the specified resource from storage.

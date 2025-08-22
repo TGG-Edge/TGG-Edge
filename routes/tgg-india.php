@@ -102,6 +102,8 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
     Route::resource('sections', SectionController::class);
     Route::resource('chapters', ChapterController::class);
+    Route::get('/chapters/aigen/{section_id}', [ChapterController::class, 'aigen'])
+    ->name('chapters.aigen');
 
     Route::prefix('links')->name('links.')->group(function () {
 
@@ -113,6 +115,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       Route::get('/edit/{id}', [LinkController::class, 'edit'])->name('edit');
       Route::put('/update/{id}', [LinkController::class, 'update'])->name('update');
       Route::delete('/delete/{id}', [LinkController::class, 'destroy'])->name('destroy');
+      Route::get('/aigen', [LinkController::class, 'aigen'])->name('aigen'); 
     });
 
     Route::prefix('videos')->name('videos.')->group(function () {
@@ -124,6 +127,8 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       Route::get('/show', [VideoController::class, 'show'])->name('show');
       Route::put('/update/{id}', [VideoController::class, 'update'])->name('update');
       Route::delete('/delete/{id}', [VideoController::class, 'destroy'])->name('destroy');
+      Route::get('/aigen', [VideoController::class, 'aigen'])->name('aigen');
+
     });
   });
 

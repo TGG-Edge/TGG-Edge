@@ -9,9 +9,9 @@
             <a href="{{ route('tgg-india.trainer.sections.create') }}" class="btn btn-primary create-button">
                 <i class="bi bi-plus-lg"></i> Create
             </a>
-            <button type="button" class="btn btn-primary aigen-button">
+            {{-- <button type="button" class="btn btn-primary aigen-button">
                 <i class="bi bi-plus-lg"></i> AIGen
-            </button>
+            </button> --}}
         </div>
     </div>
 

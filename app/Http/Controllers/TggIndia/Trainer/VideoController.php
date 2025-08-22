@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\FeatureLimit;
 use App\Models\FeatureUsage;
 use App\Models\Video;
+use App\Services\AIService;
+use App\Services\YouTubeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,7 +31,7 @@ class videoController extends Controller
             $used_count = $feature_usage ? $feature_usage->count : 0;
             $is_exceeded = $used_count >= $feature_limit->free_limit ? true : false;
         }
-        return view('tgg-india.trainer.videos.index', compact('videos', 'feature_usage','is_exceeded'));
+        return view('tgg-india.trainer.videos.index', compact('videos', 'feature_usage', 'is_exceeded'));
     }
 
     /**
@@ -90,6 +92,70 @@ class videoController extends Controller
         );
         return redirect()->route('tgg-india.trainer.videos.index')
             ->with('success', 'Video created successfully.');
+    }
+
+    public function aigen(AIService $aiService, YouTubeService $yt)
+    {
+        $user = auth('web2')->user();
+
+        // --- 1. AI Prompt to generate video search query ---
+        $prompt = "Suggest an effective YouTube search query to find high-quality educational videos 
+               for the module: {$user->modules[0]->name}.
+               Respond in JSON with key: query.";
+
+        $response = $aiService->getAiResponseWithFallback($prompt);
+
+        if (!$response) {
+            return back()->with('error', 'AI failed to generate query.');
+        }
+
+        $parsed = $aiService->parseJsonResponse($response['content']);
+
+        if (!$parsed || !isset($parsed['query'])) {
+            return back()->with('error', 'Invalid AI query response.');
+        }
+
+        $query = $parsed['query'];
+
+        // --- 2. Fetch videos from YouTube API ---
+        $videos = $yt->fetchVideos($query, 5);
+
+        if (empty($videos)) {
+            return back()->with('error', 'No YouTube videos found.');
+        }
+
+        // Pick first video
+        $videoData = $videos[0];
+
+        // --- 3. Get user module_instance ---
+        $moduleInstance = $user->modules()->withPivot('id')->first();
+        if (!$moduleInstance) {
+            return back()->withErrors(['error' => 'No module instance found for this user.']);
+        }
+
+        // --- 4. Save video ---
+        $video = Video::create([
+            'title'              => $videoData['title'],
+            'url'                => $videoData['url'],
+            'description'        => $videoData['description'], // CKEditor-ready plain text
+            'image'              => $videoData['thumbnail'],   // thumbnail into image column
+            'module_instance_id' => $moduleInstance->pivot->id,
+        ]);
+
+        // --- 5. Track usage ---
+        $features = featureList();
+        $feature_key = $features[2]['key'] ?? 'videos_aigen';
+
+        $usage = FeatureUsage::firstOrNew([
+            'user_id'     => $user->id,
+            'feature_key' => $feature_key,
+        ]);
+        $usage->count = ($usage->count ?? 0) + 1;
+        $usage->save();
+
+        return redirect()
+            ->route('tgg-india.trainer.videos.index')
+            ->with('success', 'AI Generated Video added successfully!');
     }
 
     /**

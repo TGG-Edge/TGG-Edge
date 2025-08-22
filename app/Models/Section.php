@@ -16,6 +16,8 @@ class Section extends Model
         return $this->belongsTo(Literature::class, 'literature_id');
     }
 
+    
+
     public function chapters()
     {
         return $this->hasMany(Chapter::class, 'section_id');

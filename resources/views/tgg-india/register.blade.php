@@ -97,7 +97,6 @@
                                 <option value="{{ $module->id }}">{{ $module->name }}</option>
                             @endforeach
                         </select>
-                        <small class="text-muted">Hold Ctrl (Windows) or Command (Mac) to select multiple modules.</small>
                     </div>
                 @endif
 
