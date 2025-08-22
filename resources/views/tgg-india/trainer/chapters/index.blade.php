@@ -5,7 +5,7 @@
 @section('content')
     <div class="admin-container">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="mb-3 trainer-heading">Modules</h4>
+            <h4 class="mb-3 trainer-heading">Chapters</h4>
             <div class="d-flex align-items-center gap-2">
                 @if ($is_exceeded)
                   

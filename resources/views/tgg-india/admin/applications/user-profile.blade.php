@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h2 class="page-heading">User Registration Requests</h2>
-    @include('tgg-india.layouts.includes.message')
+    <!-- @include('tgg-india.layouts.includes.message') -->
 
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
