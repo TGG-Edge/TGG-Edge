@@ -1,6 +1,6 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Admin Dashboard - TGG Edge')
+@section('title', 'Dashboard | TGG Meta | TGG India')
 
 @section('content')
 <div class="admin-container">
@@ -26,16 +26,16 @@
                 <div class="slider-outer card-inner">
                     <div class="slider" aria-label="Woodperker image slider">
                         <div class="slide">
-                            <img src="https://picsum.photos/800/420?random=1" alt="Demo image 1"/>
+                            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Ffree-images&psig=AOvVaw0KDcBQMAq42BRcGqphELO_&ust=1756044678803000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi3wbSOoY8DFQAAAAAdAAAAABAE" alt="Demo image 1"/>
                         </div>
                         <div class="slide">
-                            <img src="https://picsum.photos/800/420?random=2" alt="Demo image 2"/>
+                            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fnewsroom.gettyimages.com%2Fen%2Fgetty-images%2Fgetty-images-statement&psig=AOvVaw0KDcBQMAq42BRcGqphELO_&ust=1756044678803000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi3wbSOoY8DFQAAAAAdAAAAABAT" alt="Demo image 2"/>
                         </div>
                         <div class="slide">
-                            <img src="https://picsum.photos/800/420?random=3" alt="Demo image 3"/>
+                            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fphotos%2Fbird-blue-clouds-weather-pen-8788491%2F&psig=AOvVaw0KDcBQMAq42BRcGqphELO_&ust=1756044678803000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi3wbSOoY8DFQAAAAAdAAAAABAc" alt="Demo image 3"/>
                         </div>
                         <div class="slide">
-                            <img src="https://picsum.photos/800/420?random=4" alt="Demo image 4"/>
+                            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Ffree-images&psig=AOvVaw0KDcBQMAq42BRcGqphELO_&ust=1756044678803000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMi3wbSOoY8DFQAAAAAdAAAAABAl" alt="Demo image 4"/>
                         </div>
                     </div>
                 </div>

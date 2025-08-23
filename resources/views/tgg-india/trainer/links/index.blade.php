@@ -47,7 +47,34 @@
                     <tr>
                         <td>{{ ++$index }}</td>
                         <td>{{ $link->title }}</td>
-                        <td>{!! $link->description !!}</td>
+                        <td class="text-justify">
+                            @php
+                                $plainText = strip_tags($link->description);
+                                $preview = strlen($plainText) > 120 ? substr($plainText, 0, 120) . '...' : $plainText;
+                            @endphp
+
+                            <!-- Clickable truncated text (looks like normal text) -->
+                            <span style="cursor: pointer; display: block; text-align: justify;"
+                                data-bs-toggle="modal" data-bs-target="#descModal-{{ $link->id }}">
+                                {{ $preview }}
+                            </span>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="descModal-{{ $link->id }}" tabindex="-1" aria-labelledby="descModalLabel-{{ $link->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="descModalLabel-{{ $link->id }}">{{ $link->title }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-justify">
+                                            {!! $link->description !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+
                         <td>{{ $link->url }}</td>
 
                         <td>{{ $link->created_at->format('Y-m-d') }}</td>

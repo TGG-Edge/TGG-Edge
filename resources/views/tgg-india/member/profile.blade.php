@@ -1,6 +1,6 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Profile - TGG Edge')
+@section('title', 'Profile | TGG Meta | TGG India')
 
 @section('content')
 <div class="container">
