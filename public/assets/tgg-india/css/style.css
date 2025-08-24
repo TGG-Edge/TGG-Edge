@@ -799,11 +799,27 @@ button:hover {
     padding: 1rem;
     background-color: #265475 !important;
     opacity: 1 !important;
+    color: #fff !important;
+    background-image: none; /* remove default icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-dismissible .btn-close::before {
+    content: "×"; /* fallback close symbol */
+    font-size: 2rem;
+    line-height: 1;
+    color: #fff; /* white "X" */
 }
 
 .alert-dismissible .btn-close:hover,
 .alert-dismissible .btn-close:focus {
     background-color: #265475 !important;
+}
+
+.alert-dismissible .btn-close {
+    color: white !important;
 }
 
 /* Member Dashbaord */
