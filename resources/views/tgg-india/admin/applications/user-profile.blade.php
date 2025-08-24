@@ -54,6 +54,17 @@
                             <input type="text" name="rhm_number" class="form-control" value="{{ old('rhm_number', $user->rhm_number) }}">
                         </div>
 
+                        @if($user->user_role != 2 && $user->modules->count() > 0) {{-- 2 = trainer --}}
+                            <div class="page-text">
+                                <label>Modules:</label>
+                                <ul class="list-group">
+                                    @foreach($user->modules as $index => $module)
+                                        <li class="list-group-item">{{$index+1  .'. '. $module->name }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         {{-- <div class="page-text">
                             <label>Password:</label>
                             <input type="text" name="password" class="form-control" value="{{ old('password', $user->password ) }}">

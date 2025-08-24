@@ -11,5 +11,8 @@ class Link extends Model
     protected $table = 'links';
     protected $guarded = ['id'];
 
-   
+    public function moduleInstance()
+    {
+        return $this->belongsTo(ModuleInstance::class, 'module_instance_id');
+    }
 }

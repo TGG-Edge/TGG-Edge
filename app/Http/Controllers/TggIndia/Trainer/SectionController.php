@@ -12,9 +12,13 @@ class SectionController extends Controller
     /**
      * Display a listing of the resource.
      */
-   public function index()
+    public function index()
     {
-        $sections = Section::latest()->get();
+        $user_id = auth('web2')->id();
+
+        $sections = Section::whereHas('literature.moduleInstance', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->latest()->paginate(5);
         return view('tgg-india.trainer.sections.index', compact('sections'));
     }
 

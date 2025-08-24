@@ -30,8 +30,7 @@
                         placeholder="https://example.com" required>
                 </div>
 
-                <div class="mb-3">
-                    {{ $video->image }}
+                <div class="mb-3"> {{ $video->image }}
                     <label for="image" class="form-label">Upload Image</label>
                     <input type="file" name="image" class="form-control" id="image" accept="image/*">
                     @if ($video->image)

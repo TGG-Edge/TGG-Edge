@@ -5,6 +5,7 @@ use App\Http\Controllers\TggIndia\Admin\FeatureLimitController;
 use App\Http\Controllers\TggIndia\LoginController;
 use App\Http\Controllers\TggIndia\Admin\ModuleController;
 use App\Http\Controllers\TggIndia\Admin\ProfileController;
+use App\Http\Controllers\TggIndia\Admin\ShowCaseController;
 use App\Http\Controllers\TggIndia\RegisterController;
 use App\Http\Controllers\TggIndia\Trainer\ChapterController;
 use App\Http\Controllers\TggIndia\Trainer\LinkController;
@@ -34,6 +35,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
   // trainer routes 
   Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+
     Route::get('/dashboard', function () {
       return view('tgg-india.admin.dashboard');
     })->name('dashboard');
@@ -59,6 +61,10 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     Route::get('/users/{id}/approval', [ApplicationController::class, 'updateApproval'])->name('users.update.approval');
     Route::resource('feature-limits', FeatureLimitController::class);
 
+    Route::prefix('/showcases')->group(function () {
+     Route::get('/edit', [ShowcaseController::class, 'edit'])->name('showcases.edit');
+    Route::post('/update', [ShowcaseController::class, 'update'])->name('showcases.update');
+    });
   });
 
 
@@ -139,9 +145,11 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
   //members
   Route::middleware('member')->prefix('member')->name('member.')->group(function () {
-    Route::get('/dashboard', function () {
-      return view('tgg-india.member.dashboard');
-    })->name('dashboard');
+      Route::get('/dashboard', [\App\Http\Controllers\TggIndia\Member\DashboardController::class, 'index'])->name('dashboard');
+
+    // Route::get('/dashboard', function () {
+    //   return view('tgg-india.member.dashboard');
+    // })->name('dashboard');
     Route::prefix('modules')->name('modules.')->group(function () {
       Route::get('/', [\App\Http\Controllers\TggIndia\Member\ModuleController::class, 'index'])->name('index');
       Route::get('/links', [\App\Http\Controllers\TggIndia\Member\ModuleController::class, 'links'])->name('links');

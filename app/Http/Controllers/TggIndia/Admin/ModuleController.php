@@ -72,7 +72,7 @@ class ModuleController extends Controller
         return redirect()->route('tgg-india.admin.modules.index')->with('success', 'Module created successfully.');
     }
 
-    public function edit(Module $module,$id)
+    public function edit(Module $module, $id)
     {
         $users = UserSecondary::get();
         $module = Module::with(['users', 'features'])->findOrFail($id);
@@ -88,48 +88,48 @@ class ModuleController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'name'   => 'required|string|max:255',
-        'users'  => 'required|array',
-        'features' => 'required|array',
-    ]);
-
-    $module = Module::findOrFail($id);
-
-    // Update module details
-    $module->update([
-        'name' => $request->name,
-        'slug' => Str::slug($request->name),
-    ]);
-
-    // Sync users (clear old & insert new)
-    ModuleInstance::where('module_id', $module->id)->delete();
-    foreach ($request->users as $userId) {
-        ModuleInstance::create([
-            'module_id' => $module->id,
-            'user_id'   => $userId,
+    {
+        $request->validate([
+            'name'   => 'required|string|max:255',
+            'users'  => 'required|array',
+            'features' => 'required|array',
         ]);
-    }
 
-    // Sync features (clear old & insert new)
-    ModuleFeature::where('module_id', $module->id)->delete();
-    foreach ($request->features as $featureKey) {
-        ModuleFeature::create([
-            'module_id'    => $module->id,
-            'feature_key'  => $featureKey,
-            'feature_name' => ucfirst(str_replace('_', ' ', $featureKey)),
-            'feature_type' => null,
-            'settings'     => null,
-            'created_at'   => now(),
-            'updated_at'   => now(),
+        $module = Module::findOrFail($id);
+
+        // Update module details
+        $module->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
         ]);
-    }
 
-    return redirect()
-        ->route('tgg-india.admin.modules.index')
-        ->with('success', 'Module updated successfully.');
-}
+        // Sync users (clear old & insert new)
+        // ModuleInstance::where('module_id', $module->id)->delete();
+        // foreach ($request->users as $userId) {
+        //     ModuleInstance::create([
+        //         'module_id' => $module->id,
+        //         'user_id'   => $userId,
+        //     ]);
+        // }
+
+        // Sync features (clear old & insert new)
+        ModuleFeature::where('module_id', $module->id)->delete();
+        foreach ($request->features as $featureKey) {
+            ModuleFeature::create([
+                'module_id'    => $module->id,
+                'feature_key'  => $featureKey,
+                'feature_name' => ucfirst(str_replace('_', ' ', $featureKey)),
+                'feature_type' => null,
+                'settings'     => null,
+                'created_at'   => now(),
+                'updated_at'   => now(),
+            ]);
+        }
+
+        return redirect()
+            ->route('tgg-india.admin.modules.index')
+            ->with('success', 'Module updated successfully.');
+    }
 
 
     // public function destroy(Module $module)
@@ -141,20 +141,20 @@ class ModuleController extends Controller
     // }
 
     public function destroy($id)
-{
-    $module = Module::findOrFail($id);
+    {
+        $module = Module::findOrFail($id);
 
-    // Delete related module instances (users)
-    ModuleInstance::where('module_id', $module->id)->delete();
+        // Delete related module instances (users)
+        ModuleInstance::where('module_id', $module->id)->delete();
 
-    // Delete related module features
-    ModuleFeature::where('module_id', $module->id)->delete();
+        // Delete related module features
+        ModuleFeature::where('module_id', $module->id)->delete();
 
-    // Finally delete the module
-    $module->delete();
+        // Finally delete the module
+        $module->delete();
 
-    return redirect()
-        ->route('tgg-india.admin.modules.index')
-        ->with('success', 'Module deleted successfully.');
-}
+        return redirect()
+            ->route('tgg-india.admin.modules.index')
+            ->with('success', 'Module deleted successfully.');
+    }
 }

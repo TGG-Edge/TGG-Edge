@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\TggIndia;
 
 use App\Http\Controllers\Controller;
+use App\Models\ModuleInstance;
 use App\Models\User;
 use App\Models\UserSecondary;
 use Illuminate\Http\Request;
@@ -71,7 +72,7 @@ class RegisterController extends Controller
             $user_type = 6;
         }
         // Store user
-        UserSecondary::create([
+        $user = UserSecondary::create([
             'name' => $request->name,
             'age' => $request->age,
             'project' => $request->project ?? null,
@@ -82,6 +83,15 @@ class RegisterController extends Controller
             'rhm_number' => $request->rhm_number,
             'password' => Hash::make('default-password'), // change as needed
         ]);
+
+        if ($request->has('modules') && is_array($request->modules)) {
+            foreach ($request->modules as $moduleId) {
+                ModuleInstance::create([
+                    'module_id' => $moduleId,
+                    'user_id' => $user->id,
+                ]);
+            }
+        }
 
         return redirect()->route('tgg-india.login')->with('success', 'Registration successful!');
 

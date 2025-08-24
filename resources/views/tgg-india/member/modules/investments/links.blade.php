@@ -9,7 +9,7 @@
     <ul class="list-group">
         @forelse ($links as $link)
             <li class="list-group-item">
-                <strong>{{ $link->title?? 'N/A'  }}</strong> ({{ $link->type  ?? 'N/A' }})<br>
+                <strong>{{ $link->title?? 'N/A'  }}</strong> <br>
                 <a href="{{ $link->url  ?? 'N/A' }}" target="_blank">{{ $link->url  ?? 'N/A' }}</a><br>
                 <p>{!! $link->description ?? 'N/A'  !!}</p>
             </li>

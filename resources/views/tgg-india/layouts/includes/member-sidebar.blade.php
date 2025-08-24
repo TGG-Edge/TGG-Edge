@@ -2,8 +2,13 @@
         $user = auth('web2')->user();
         $modules = $user->modules;
         $investmentModules = $user->modules->filter(function ($module) {
-            return $module->slug === 'investment' || $module->name === 'investment';
+            return $module->slug === 'investment-sip' || $module->name === 'Investment sip';
         });
+        $features = $user->modules->flatMap->features;
+        // Check for specific feature keys
+        $hasLiteratures = $features->contains('feature_key', 'literatures');
+        $hasLinks = $features->contains('feature_key', 'links');
+        $hasVideos = $features->contains('feature_key', 'videos');
     @endphp
     <a href="#" class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
         <i class="fas fa-tachometer-alt"></i> Dashboard
@@ -12,7 +17,7 @@
     <a href="{{ route('tgg-india.member.profile.index') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i
             class="fas fa-user"></i> Profile</a>
 
-    @if ($investmentModules)
+    @if ($investmentModules->isNotEmpty())
         <div class="dropdown">
             <a href="#"
                 class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/*') ? 'active ' : '' }}"
@@ -23,44 +28,53 @@
 
             <div class="collapse ps-3 {{ request()->is('user/research-assistance/*') ? 'show ' : '' }}"
                 id="researchDropdown">
+                @if ($hasLiteratures)
+                    {{-- Literature Dropdown --}}
+                    @foreach (\App\Models\Literature::get() as $literature)
+                        <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center"
+                            data-bs-toggle="collapse" data-bs-target="#literature-{{ $literature->id }}"
+                            aria-expanded="false" title="{{ $literature->title }}">
+                            <span><i class="fas fa-book"></i> Literature </span>
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                        @if ($literature->sections && $literature->sections->count() > 0)
+                            <div class="collapse ps-3" id="literature-{{ $literature->id }}">
 
-                {{-- Literature Dropdown --}}
-                @foreach (\App\Models\Literature::get() as $literature)
+                                {{-- Loop through sections --}}
+                                @foreach ($literature->sections as $section)
+                                    @if ($section->chapters && $section->chapters->count() > 0)
+                                        <a href="#"
+                                            class="dropdown-toggle d-flex justify-content-between align-items-center"
+                                            data-bs-toggle="collapse" data-bs-target="#section-{{ $section->id }}"
+                                            aria-expanded="false" title="{{ $section->title }}">
+                                            <span><i class="fas fa-list"></i> Section</span>
+                                            <i class="fas fa-caret-down"></i>
+                                        </a>
 
-                    <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center"
-                        data-bs-toggle="collapse" data-bs-target="#literature-{{ $literature->id }}"
-                        aria-expanded="false" title="{{ $literature->title }}">
-                        <span><i class="fas fa-book"></i> Literature </span>
-                        <i class="fas fa-caret-down"></i>
-                    </a>
-
-                    <div class="collapse ps-3" id="literature-{{ $literature->id }}">
-
-                        {{-- Loop through sections --}}
-                        @foreach ($literature->sections as $section)
-                            <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center"
-                                data-bs-toggle="collapse" data-bs-target="#section-{{ $section->id }}"
-                                aria-expanded="false" title="{{ $section->title }}">
-                                <span><i class="fas fa-list"></i> Section</span>
-                                <i class="fas fa-caret-down"></i>
-                            </a>
-
-                            <div class="collapse ps-3" id="section-{{ $section->id }}">
-                                {{-- Loop chapters --}}
-                                @foreach ($section->chapters as $chapter)
-                                    <a href="{{ route('tgg-india.member.modules.chapters', $chapter->id) }}"
-                                        title="{{ $chapter->title }}"><i class="fas fa-book"></i>Chapter</a>
+                                        <div class="collapse ps-3" id="section-{{ $section->id }}">
+                                            {{-- Loop chapters --}}
+                                            @foreach ($section->chapters as $chapter)
+                                                <a href="{{ route('tgg-india.member.modules.chapters', $chapter->id) }}"
+                                                    title="{{ $chapter->title }}"><i
+                                                        class="fas fa-book"></i>Chapter</a>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
-                        @endforeach
-                    </div>
-                @endforeach
+                        @endif
+                    @endforeach
+                @endif
 
                 {{-- Links --}}
+                 @if ($hasLinks)
                 <a href="{{ route('tgg-india.member.modules.links') }}"><i class="fas fa-link"></i> Links</a>
+                @endif
 
                 {{-- Videos --}}
+                @if ($hasVideos)
                 <a href="{{ route('tgg-india.member.modules.videos') }}"><i class="fas fa-video"></i> Videos</a>
+                @endif
 
 
 
