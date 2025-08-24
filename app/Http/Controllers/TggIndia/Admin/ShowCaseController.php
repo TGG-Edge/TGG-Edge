@@ -19,48 +19,49 @@ class ShowCaseController extends Controller
      * Display a listing of the resource.
      */
     use HandlesAiResearch;
-   public function edit($section)
+   public function edit()
     {
-        $showcase = Showcase::firstOrCreate(['id' => 1]); // Always use single row
-
-        return view('tgg-india.admin.showcase', compact('showcase', 'section'));
+        $showcase = Showcase::first(); // always first row
+        return view('tgg-india.admin.showcase', compact('showcase'));
     }
 
-    public function update(Request $request, $section)
-    {
-        $showcase = Showcase::firstOrCreate(['id' => 1]);
+   public function update(Request $request)
+{
+    $showcase = Showcase::first();
 
-        switch ($section) {
-            case 'welcome_note':
-                $showcase->update(['welcome_note' => $request->welcome_note]);
-                break;
+    $data = $request->only(['welcome_note']);
 
-            case 'entrepreneurship':
-                $showcase->update(['entrepreneurship_opportunities' => $request->entrepreneurship_opportunities]);
-                break;
+    // Handle multiple text-based fields
+    foreach (['entrepreneurship_opportunities','tgg_news','investment_opportunities'] as $field) {
+        $data[$field] = $request->$field ? explode(',', $request->$field) : [];
+    }
 
-            case 'woodpecker':
-                $showcase->update(['woodpecker_collection' => $request->woodpecker_collection]);
-                break;
+    // Handle file uploads for image fields
+    foreach (['woodpecker_collection','travel_and_events','tgg_homes'] as $field) {
+        $existing = $showcase->$field ?? [];
 
-            case 'travel':
-                $showcase->update(['travel_and_events' => $request->travel_and_events]);
-                break;
-
-            case 'homes':
-                $showcase->update(['tgg_homes' => $request->tgg_homes]);
-                break;
-
-            case 'news':
-                $showcase->update(['tgg_news' => $request->tgg_news]);
-                break;
-
-            case 'investment':
-                $showcase->update(['investment_opportunities' => $request->investment_opportunities]);
-                break;
+        // Remove selected images
+        if ($request->has("remove_$field")) {
+            $removeImages = $request->input("remove_$field");
+            $existing = array_diff($existing, $removeImages);
         }
 
-        return redirect()->back()->with('success', ucfirst($section) . ' updated successfully!');
+        // Upload new files
+        if ($request->hasFile($field)) {
+            foreach ($request->file($field) as $file) {
+                $path = $file->store('showcase', 'public');
+                $existing[] = '/storage/' . $path;
+            }
+        }
+
+        $data[$field] = array_values($existing); // reindex
     }
+
+    $showcase->update($data);
+
+    return redirect()->route('tgg-india.admin.showcases.edit')->with('success', 'Showcase updated successfully.');
+}
+
+
 
 }

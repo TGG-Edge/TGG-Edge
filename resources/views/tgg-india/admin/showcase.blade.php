@@ -4,73 +4,65 @@
 
 @section('content')
 <div class="container">
-    <h3>Edit Showcase: {{ ucfirst(str_replace('_',' ',$section)) }}</h3>
+    <h2>Edit Showcase</h2>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('tgg-india.admin.showcases.update', $section) }}" method="POST" enctype="multipart/form-data">
-        @csrf
+    <form action="{{ route('tgg-india.admin.showcases.update') }}" method="POST" enctype="multipart/form-data">
+    @csrf
 
-        {{-- Welcome Note --}}
-        @if($section == 'welcome_note')
-            <textarea name="welcome_note" class="form-control" rows="5">{{ $showcase->welcome_note }}</textarea>
-        @endif
+    <!-- WELCOME NOTE -->
+    <div class="form-group">
+        <label>Welcome Note</label>
+        <textarea name="welcome_note" class="form-control">{{ old('welcome_note', $showcase->welcome_note) }}</textarea>
+    </div>
 
-        {{-- Entrepreneurship (multiple text) --}}
-        @if($section == 'entrepreneurship')
-            <div id="entrepreneurship-wrapper">
-                @foreach($showcase->entrepreneurship_opportunities ?? [] as $text)
-                    <input type="text" name="entrepreneurship_opportunities[]" value="{{ $text }}" class="form-control mb-2">
+    <!-- ENTREPRENEURSHIP -->
+    <div class="form-group">
+        <label>Entrepreneurship Opportunities (comma separated)</label>
+        <input type="text" name="entrepreneurship_opportunities"
+               class="form-control"
+               value="{{ old('entrepreneurship_opportunities', implode(',', $showcase->entrepreneurship_opportunities ?? [])) }}">
+    </div>
+
+    <!-- IMAGE FIELDS -->
+    @foreach(['woodpecker_collection' => 'Woodpecker Collection', 'travel_and_events' => 'Travel & Events', 'tgg_homes' => 'TGG Homes'] as $field => $label)
+        <div class="form-group">
+            <label>{{ $label }} (Upload Multiple Images)</label>
+            <input type="file" name="{{ $field }}[]" class="form-control" multiple>
+            <div class="mt-2 d-flex flex-wrap">
+                @foreach($showcase->$field ?? [] as $img)
+                    <div class="position-relative m-1">
+                        <img src="{{ $img }}" width="100" class="rounded shadow">
+                        <label class="d-block text-center small mt-1">
+                            <input type="checkbox" name="remove_{{ $field }}[]" value="{{ $img }}"> Remove
+                        </label>
+                    </div>
                 @endforeach
-                <button type="button" class="btn btn-sm btn-primary" onclick="addField('entrepreneurship-wrapper','entrepreneurship_opportunities[]')">+ Add</button>
             </div>
-        @endif
+        </div>
+    @endforeach
 
-        {{-- Woodpecker / Travel / Homes (multiple image URLs) --}}
-        @if(in_array($section, ['woodpecker','travel','homes']))
-            <div id="image-wrapper">
-                @foreach($showcase->{ $section == 'woodpecker' ? 'woodpecker_collection' : ($section == 'travel' ? 'travel_and_events' : 'tgg_homes') } ?? [] as $img)
-                    <input type="text" name="{{ $section }}[]" value="{{ $img }}" class="form-control mb-2" placeholder="Image URL">
-                @endforeach
-                <button type="button" class="btn btn-sm btn-primary" onclick="addField('image-wrapper','{{ $section }}[]')">+ Add</button>
-            </div>
-        @endif
+    <!-- TGG NEWS -->
+    <div class="form-group">
+        <label>TGG News (YouTube URLs, comma separated)</label>
+        <input type="text" name="tgg_news"
+               class="form-control"
+               value="{{ old('tgg_news', implode(',', $showcase->tgg_news ?? [])) }}">
+    </div>
 
-        {{-- TGG News (multiple YouTube URLs) --}}
-        @if($section == 'news')
-            <div id="news-wrapper">
-                @foreach($showcase->tgg_news ?? [] as $url)
-                    <input type="text" name="tgg_news[]" value="{{ $url }}" class="form-control mb-2" placeholder="YouTube URL">
-                @endforeach
-                <button type="button" class="btn btn-sm btn-primary" onclick="addField('news-wrapper','tgg_news[]')">+ Add</button>
-            </div>
-        @endif
+    <!-- INVESTMENT -->
+    <div class="form-group">
+        <label>Investment Opportunities (comma separated)</label>
+        <input type="text" name="investment_opportunities"
+               class="form-control"
+               value="{{ old('investment_opportunities', implode(',', $showcase->investment_opportunities ?? [])) }}">
+    </div>
 
-        {{-- Investment Opportunities (multiple text) --}}
-        @if($section == 'investment')
-            <div id="investment-wrapper">
-                @foreach($showcase->investment_opportunities ?? [] as $item)
-                    <input type="text" name="investment_opportunities[]" value="{{ $item }}" class="form-control mb-2">
-                @endforeach
-                <button type="button" class="btn btn-sm btn-primary" onclick="addField('investment-wrapper','investment_opportunities[]')">+ Add</button>
-            </div>
-        @endif
+    <button type="submit" class="btn btn-primary">Update Showcase</button>
+</form>
 
-        <br>
-        <button type="submit" class="btn btn-success">Save</button>
-    </form>
 </div>
-
-<script>
-function addField(wrapperId, fieldName) {
-    let wrapper = document.getElementById(wrapperId);
-    let input = document.createElement("input");
-    input.type = "text";
-    input.name = fieldName;
-    input.className = "form-control mb-2";
-    wrapper.insertBefore(input, wrapper.lastElementChild);
-}
-</script>
 @endsection

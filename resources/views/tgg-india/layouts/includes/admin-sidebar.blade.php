@@ -20,20 +20,10 @@
 
 <a href="{{ route('tgg-india.admin.profile.index') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
 
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="showcaseDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-star"></i> Showcase
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="showcaseDropdown">
-        <li><a class="dropdown-item" href="{{ route('tgg-india.admin.showcases.edit', ['section' => 'welcome_note']) }}">Welcome Note</a></li>
-        <li><a class="dropdown-item" href="{{ route('tgg-india.admin.showcases.edit', ['section' => 'entrepreneurship']) }}">Entrepreneurship Opportunities</a></li>
-        <li><a class="dropdown-item" href="{{ route('tgg-india.admin.showcases.edit', ['section' => 'woodpecker']) }}">Woodpecker Collection</a></li>
-        <li><a class="dropdown-item" href="{{ route('tgg-india.admin.showcases.edit', ['section' => 'travel']) }}">Travel & Events</a></li>
-        <li><a class="dropdown-item" href="{{ route('tgg-india.admin.showcases.edit', ['section' => 'homes']) }}">TGG Homes</a></li>
-        <li><a class="dropdown-item" href="{{ route('tgg-india.admin.showcases.edit', ['section' => 'news']) }}">TGG News</a></li>
-        <li><a class="dropdown-item" href="{{ route('tgg-india.admin.showcases.edit', ['section' => 'investment']) }}">Investment Opportunities</a></li>
-    </ul>
-</li>
+
+<a href="{{ route('tgg-india.admin.showcases.edit') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-star"></i> Showcase</a>
+
+
 
 <a href="{{ route('tgg-india.admin.modules.index') }}" class="{{ request()->is('tgg-india/admin/modules*') ? 'active' : '' }}">
     <i class="fas fa-cubes"></i> Modules
