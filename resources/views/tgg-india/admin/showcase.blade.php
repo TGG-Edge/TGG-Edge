@@ -5,18 +5,21 @@
 @section('content')
 <div class="container">
     <h2>Edit Showcase</h2>
+    @include('tgg-india.layouts.includes.message')
 
-    @if(session('success'))
+    <!-- @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    @endif -->
 
     <form action="{{ route('tgg-india.admin.showcases.update') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <!-- WELCOME NOTE -->
-    <div class="form-group">
-        <label>Welcome Note</label>
-        <textarea name="welcome_note" class="form-control">{{ old('welcome_note', $showcase->welcome_note) }}</textarea>
+    <div class="mb-3">
+        <label for="welcome_note" class="form-label">Welcome Note</label>
+        <textarea id="welcome_note" name="welcome_note" class="form-control js-ckeditor" rows="5">
+            {!! old('welcome_note', $showcase?->welcome_note ?? '') !!}
+        </textarea>
     </div>
 
     <!-- ENTREPRENEURSHIP -->

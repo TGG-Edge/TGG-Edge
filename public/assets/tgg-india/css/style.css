@@ -875,22 +875,28 @@ button:hover {
     text-align: center;
 }
 
-/* ---------- Woodperker slider ---------- */
+/* ---------- Woodpecker slider ---------- */
 .admin-container .slider-outer {
     padding: 8px;
+    overflow: hidden; /* hides outside slides */
+    position: relative;
 }
+
 .admin-container .slider {
     display: flex;
-    overflow-x: auto;
+    overflow-x: scroll; /* user can drag/scroll */
     scroll-snap-type: x mandatory;
     gap: 0;
     border-radius: 10px;
+    scroll-behavior: smooth; /* smooth manual scroll */
 }
+
 .admin-container .slide {
-    flex: 0 0 100%;
+    flex: 0 0 100%; /* full width slide */
     scroll-snap-align: start;
     padding: 8px;
 }
+
 .admin-container .slide img {
     width: 100%;
     height: 220px;
@@ -899,18 +905,6 @@ button:hover {
     border: 1px solid #d9d9d9;
     border-radius: 10px;
     background: #eee;
-}
-
-/* Thin grey scrollbar */
-.admin-container .slider::-webkit-scrollbar {
-    height: 8px;
-}
-.admin-container .slider::-webkit-scrollbar-thumb {
-    background: #cfcfcf;
-    border-radius: 8px;
-}
-.admin-container .slider::-webkit-scrollbar-track {
-    background: #f2f2f2;
 }
 
 /* ---------- Buttons ---------- */
