@@ -16,7 +16,11 @@ class LinkController extends Controller
      */
     public function index()
     {
-        $links = Link::latest()->get();
+         $user_id = auth('web2')->id();
+
+    $links = Link::whereHas('moduleInstance', function ($q) use ($user_id) {
+        $q->where('user_id', $user_id);
+    })->latest()->paginate(5);
         $features = featureList();
         $feature_key = $features[1]['key'];
         $user = auth('web2')->user();

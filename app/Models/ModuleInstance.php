@@ -26,4 +26,17 @@ class ModuleInstance extends Model
     {
         return $this->hasMany(Literature::class, 'module_instance_id');
     }
+    
+    
+ public function links()
+    {
+        return $this->hasMany(Link::class, 'module_instance_id');
+    }
+
+     public function videos()
+    {
+        return $this->hasMany(Video::class, 'module_instance_id');
+    }
+
+
 }

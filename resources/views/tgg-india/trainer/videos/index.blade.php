@@ -99,5 +99,6 @@
                 @endforelse
             </tbody>
         </table>
+        {{ $videos->links() }}
     </div>
 @endsection

@@ -78,5 +78,8 @@
                     @endforelse
                 </tbody>
             </table>
+            <div class="mt-4">
+              {{ $chapters->links() }}
+            </div>
         </div>
     @endsection

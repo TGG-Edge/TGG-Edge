@@ -18,7 +18,11 @@ class videoController extends Controller
      */
     public function index()
     {
-        $videos = Video::latest()->get();
+        $user_id = auth('web2')->id();
+
+        $videos = Video::whereHas('moduleInstance', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->latest()->paginate(5);
         $features = featureList();
         $feature_key = $features[2]['key'];
         $user = auth('web2')->user();

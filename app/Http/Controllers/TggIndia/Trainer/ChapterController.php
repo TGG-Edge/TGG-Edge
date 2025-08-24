@@ -17,14 +17,18 @@ class ChapterController extends Controller
      */
     public function index(Request $request)
     {
-        $chapters = Chapter::latest();
+        $user_id = auth('web2')->id();
+        $chapters = Chapter::whereHas('section.literature.moduleInstance', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->latest();
 
         if ($request->has('section_id') && !empty($request->section_id)) {
             $chapters->where('section_id', $request->section_id);
         }
 
-        $chapters = $chapters->get();
 
+        $chapters = $chapters->paginate(5);
+$chapters->appends($request->all());
         $features = featureList();
         $feature_key = $features[0]['key'];
         $user = auth('web2')->user();

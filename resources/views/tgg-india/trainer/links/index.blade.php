@@ -81,5 +81,6 @@
                 @endforelse
             </tbody>
         </table>
+        {{ $links->links() }}
     </div>
 @endsection

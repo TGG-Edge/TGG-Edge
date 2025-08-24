@@ -37,7 +37,7 @@
             <i class="fas fa-video"></i> Videos
         </a>
     @endif
-    @if ($investmentModules)
+    @if ($investmentModules->isNotEmpty())
         <div class="dropdown">
             <a href="#"
                 class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/*') ? 'active ' : '' }}"
