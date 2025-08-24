@@ -1,5 +1,4 @@
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
 @section('title', 'User Login - TGG Edge')
 @php $is_sidebar = false; @endphp
 
@@ -62,6 +61,12 @@
                         Login
                     </button>
                 </form>
+                    <div class="login-meta">
+                        <p>
+                            Powered by 
+                            <img src="{{ asset('assets/user/images/TGG_Meta.png') }}" alt="TGG-META Logo" class="tgg-meta-logo">
+                        </p>
+                    </div>            
             </div>
         </div>
     </div>

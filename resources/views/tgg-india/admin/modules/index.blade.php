@@ -7,12 +7,12 @@
     <!-- Create Button -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-3 trainer-heading">Modules</h4>
-        @include('tgg-india.layouts.includes.message')
         <a href="{{ route('tgg-india.admin.modules.create') }}" class="btn btn-primary create-button">
             <i class="bi bi-plus-lg"></i> Create
         </a>
     </div>
 
+    @include('tgg-india.layouts.includes.message')
     <table class="table table-bordered table-striped align-middle">
         <thead class="table-dark">
             <tr>

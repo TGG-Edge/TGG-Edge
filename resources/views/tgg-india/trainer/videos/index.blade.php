@@ -47,7 +47,33 @@
                     <tr>
                         <td>{{ ++$index }}</td>
                         <td>{{ $video->title }}</td>
-                        <td>{!! $video->description !!}</td>
+                        <td class="text-justify">
+                            @php
+                                $plainText = strip_tags($video->description);
+                                $preview = strlen($plainText) > 120 ? substr($plainText, 0, 120) . '...' : $plainText;
+                            @endphp
+
+                            <!-- Preview (normal text, clickable, justified) -->
+                            <span style="cursor: pointer; display: block; text-align: justify;"
+                                data-bs-toggle="modal" data-bs-target="#descModal-{{ $video->id }}">
+                                {{ $preview }}
+                            </span>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="descModal-{{ $video->id }}" tabindex="-1" aria-labelledby="descModalLabel-{{ $video->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="descModalLabel-{{ $video->id }}">{{ $video->title }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-justify">
+                                            {!! $video->description !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                         <td>
                             @if ($video->url && $video->url !== '#')
                                 {{ $video->url }}

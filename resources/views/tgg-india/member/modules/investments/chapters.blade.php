@@ -1,10 +1,11 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Show chapter - TGG India')
+@section('title', 'Chapters | TGG Meta | TGG India')
 @section('content')
 <div class="container">
 
     <h2>{{ $chapter->title }}</h2>
+    @include('tgg-india.layouts.includes.message')
     <p>{!! $chapter->content ?? 'No content available.' !!}</p>
 
     <hr>

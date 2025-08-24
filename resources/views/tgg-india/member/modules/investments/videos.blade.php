@@ -5,6 +5,7 @@
 
 <div class="container">
     <h2 class="litheader">Video Recommendations</h2>
+    @include('tgg-india.layouts.includes.message')
     <div class="row">
         @forelse ($videos as $video)
             <div class="col-md-6 mb-3">
