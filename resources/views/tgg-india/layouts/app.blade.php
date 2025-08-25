@@ -137,6 +137,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     'imageTextAlternative'
                 ]
             }
+        }).then(editor => {
+            // ✅ Default styles for text inside CKEditor
+            editor.editing.view.change(writer => {
+                writer.setStyle('font-size', '13px', editor.editing.view.document.getRoot());
+                writer.setStyle('color', '#000', editor.editing.view.document.getRoot());
+                writer.setStyle('font-family', 'poppins, system-ui, Arial, sans-serif', editor.editing.view.document.getRoot());
+            });
         }).catch(console.error);
 
     });
