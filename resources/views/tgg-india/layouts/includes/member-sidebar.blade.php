@@ -84,21 +84,24 @@
     @endif
 
         {{-- WhatsApp Message Admin Box --}}
-            <div class="mt-4 p-4 border rounded bg-light text-center shadow-sm" style="min-height: 220px;">
-                <h6 class="fw-bold mb-3 text-dark">
-                    <i class="fab fa-whatsapp text-success me-1"></i> Message Admin
-                </h6>
+        <div class="mt-4 p-4 border rounded bg-light text-center shadow-sm" style="min-height: 220px;">
+            <h6 class="fw-bold mb-3 text-dark">
+                <i class="fab fa-whatsapp text-success me-1"></i> Message Admin
+            </h6>
 
-                <p class="small text-muted mb-4">
-                    Need help? Chat directly with the admin on WhatsApp.
-                </p>
+            <p class="small text-muted mb-4">
+                Need help? Chat directly with the admin on WhatsApp.
+            </p>
 
-                {{-- 🔗 Replace 1234567890 with the actual admin WhatsApp number --}}
-                <a href="https://wa.me/1234567890" target="_blank"   
-                class="btn btn-success w-100 d-flex align-items-center justify-content-center py-2">
-                    <i class="fab fa-whatsapp me-2"></i> Start Chat
-                </a>
-            </div>
+            {{-- 🔗 Replace 919995329536 with admin WhatsApp number --}}
+            {{-- And replace the text after ?text= with your own message (use %20 for spaces) --}}
+            <a href="https://wa.me/919995329536/?text=Hello%20Admin,%20I%20need%20some%20help." 
+            target="_blank"   
+            class="btn btn-success w-100 d-flex align-items-center justify-content-center py-2">
+                <i class="fab fa-whatsapp me-2"></i> Start Chat
+            </a>
+        </div>
+
 
     {{-- 
 <a href="{{ route('user.profile') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
