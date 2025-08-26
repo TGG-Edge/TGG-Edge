@@ -21,7 +21,7 @@
 <a href="{{ route('tgg-india.admin.profile.index') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
 
 
-<a href="{{ route('tgg-india.admin.showcases.edit') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-star"></i> Showcase</a>
+<a href="{{ route('tgg-india.admin.showcases.edit') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fa-solid fa-display"></i> Showcase</a>
 
 
 

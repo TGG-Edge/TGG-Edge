@@ -1,5 +1,5 @@
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
+<!-- @include('tgg-india.layouts.includes.message') -->
 
 @section('title', 'Profile - TGG Edge')
 
@@ -8,6 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="page-heading">USER PROFILE</h2>
 
+    @include('tgg-india.layouts.includes.message')
     </div>
     
     @if(session('success'))

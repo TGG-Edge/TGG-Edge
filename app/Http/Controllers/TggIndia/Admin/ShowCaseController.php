@@ -63,7 +63,6 @@ class ShowCaseController extends Controller
         // if no record exists, create one
         $showcase = ShowCase::create($data);
     }
-
     return redirect()->route('tgg-india.admin.showcases.edit')->with('success', 'Showcase updated successfully.');
 }
 

@@ -23,7 +23,7 @@
                 <h3 class="card-title">WOODPERKER COLLECTIONS</h3>
 
                 <div class="slider-outer card-inner">
-                    <div class="slider" aria-label="Woodperker image slider">
+                    <div class="slider" id="woodpecker-slider" aria-label="Woodpecker image slider">
                         @if(!empty($showcase->woodpecker_collection))
                             @foreach($showcase->woodpecker_collection as $img)
                                 <div class="slide">
@@ -63,57 +63,130 @@
         <section class="row">
             <div class="card center-box">
                 <h3 class="card-title">TGG NEWS</h3>
-                @if(!empty($showcase->tgg_news))
-                    @foreach($showcase->tgg_news as $news)
-                        <div class="news-item">
-                            <iframe width="100%" height="200" src="{{ $news }}" frameborder="0"  
-                                frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    allowfullscreen
-    ></iframe>
-                        </div>
-                    @endforeach
-                @else
-                    <p>No news available</p>
-                @endif
+                <div class="slider-outer card-inner">
+                    <div class="slider" id="tgg-news-slider">
+                        @if(!empty($showcase->tgg_news))
+                            @foreach($showcase->tgg_news as $news)
+                                <div class="slide">
+                                    <iframe width="100%" height="220" src="{{ $news }}" 
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="slide"><p>No news available</p></div>
+                        @endif
+                    </div>
+                </div>
             </div>
+
             <div class="card center-box">
                 <h3 class="card-title">TRAVEL UPDATE AND EVENTS</h3>
-                @if(!empty($showcase->travel_and_events))
-                    @foreach($showcase->travel_and_events as $event)
-                        <img src="{{ asset($event) }}" width="100%" alt="Event Image"/>
-                    @endforeach
-                @else
-                    <p>No events available</p>
-                @endif
+                <div class="slider-outer card-inner">
+                    <div class="slider" id="travel-slider">
+                        @if(!empty($showcase->travel_and_events))
+                            @foreach($showcase->travel_and_events as $event)
+                                <div class="slide">
+                                    <img src="{{ asset($event) }}" alt="Event Image"/>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="slide"><p>No events available</p></div>
+                        @endif
+                    </div>
+                </div>
             </div>
+
         </section>
 
         <!-- Bottom Row -->
         <section class="row">
             <div class="card center-box">
                 <h3 class="card-title">TGG HOMES</h3>
-                @if(!empty($showcase->tgg_homes))
-                    @foreach($showcase->tgg_homes as $home)
-                        <img src="{{ asset($home) }}" width="100%" alt="Home Image"/>
-                    @endforeach
-                @else
-                    <p>No homes available</p>
-                @endif
+                <div class="slider-outer card-inner">
+                    <div class="slider" id="homes-slider">
+                        @if(!empty($showcase->tgg_homes))
+                            @foreach($showcase->tgg_homes as $home)
+                                <div class="slide">
+                                    <img src="{{ asset($home) }}" alt="Home Image"/>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="slide"><p>No homes available</p></div>
+                        @endif
+                    </div>
+                </div>
             </div>
-            <div class="card center-box">
+
+            <div class="card opportunities">
                 <h3 class="card-title">INVESTMENT OPPORTUNITIES</h3>
+
                 @if(!empty($showcase->investment_opportunities))
-                    <ul>
-                        @foreach($showcase->investment_opportunities as $investment)
-                            <li>{{ $investment }}</li>
-                        @endforeach
-                    </ul>
+                    @foreach($showcase->investment_opportunities as $key => $investment)
+                        <div class="project-row">
+                            <label class="project-left">
+                                <input type="radio" name="investment"/>
+                                <span>{{ $investment }}</span>
+                            </label>
+                            <button class="btn-outline">INVEST</button>
+                        </div>
+                    @endforeach
                 @else
                     <p>No investment opportunities</p>
                 @endif
             </div>
+
         </section>
     </main>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    function initSlider(sliderId) {
+        const slider = document.getElementById(sliderId);
+        if (!slider) return;
+
+        const slides = slider.querySelectorAll(".slide");
+        let index = 0;
+        let autoSlideInterval;
+
+        function autoSlide() {
+            index = (index + 1) % slides.length;
+            slider.scrollTo({
+                left: slider.clientWidth * index,
+                behavior: "smooth"
+            });
+        }
+
+        function startAutoSlide() {
+            stopAutoSlide();
+            autoSlideInterval = setInterval(autoSlide, 3000); // 3 sec
+        }
+
+        function stopAutoSlide() {
+            if (autoSlideInterval) clearInterval(autoSlideInterval);
+        }
+
+        slider.addEventListener("scroll", () => {
+            const newIndex = Math.round(slider.scrollLeft / slider.clientWidth);
+            index = newIndex;
+            stopAutoSlide();
+            startAutoSlide();
+        });
+
+        startAutoSlide();
+    }
+
+    // Initialize all sliders
+    initSlider("woodpecker-slider");
+    initSlider("tgg-news-slider");
+    initSlider("travel-slider");
+    initSlider("homes-slider");
+
+});
+</script>
+
 @endsection
