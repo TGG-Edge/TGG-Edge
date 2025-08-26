@@ -57,7 +57,12 @@ class ShowCaseController extends Controller
         $data[$field] = array_values($existing); // reindex
     }
 
-    $showcase->update($data);
+    if ($showcase) {
+        $showcase->update($data);
+    } else {
+        // if no record exists, create one
+        $showcase = ShowCase::create($data);
+    }
 
     return redirect()->route('tgg-india.admin.showcases.edit')->with('success', 'Showcase updated successfully.');
 }

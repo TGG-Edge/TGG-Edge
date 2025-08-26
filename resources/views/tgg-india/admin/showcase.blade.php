@@ -16,7 +16,7 @@
     <!-- WELCOME NOTE -->
     <div class="form-group">
         <label>Welcome Note</label>
-        <textarea name="welcome_note" class="form-control">{{ old('welcome_note', $showcase->welcome_note) }}</textarea>
+        <textarea name="welcome_note" class="form-control">{{ old('welcome_note', $showcase->welcome_note ?? 'WELCOME TO TGG-EDGE') }}</textarea>
     </div>
 
     <!-- ENTREPRENEURSHIP -->
