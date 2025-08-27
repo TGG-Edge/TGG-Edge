@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\AuthenticateSession as MiddlewareAuthenticateSession;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsAssignee;
 use App\Http\Middleware\IsMember;
 use App\Http\Middleware\IsTrainer;
 use Illuminate\Foundation\Application;
@@ -30,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
         'web' => StartSession::class,
         'trainer' => IsTrainer::class,
         'member' => IsMember::class,
+        'assignee' => IsAssignee::class,
          ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

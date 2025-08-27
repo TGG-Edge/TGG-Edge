@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
     <h1>Create Assignment</h1>
-    <form action="{{ route('tgg-india.admin.assignments.store') }}" method="POST">
+    <form action="{{ route('tgg-fct.admin.assignments.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label>Title</label>

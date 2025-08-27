@@ -49,7 +49,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Create</button>
-        <a href="{{ route('assignee.assignments.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('tgg-fct.assignee.assignments.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

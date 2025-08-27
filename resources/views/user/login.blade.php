@@ -1,7 +1,6 @@
 @extends('user.layouts.app')
 @section('title', 'User Login - TGG Edge')
 @php $is_sidebar = false; @endphp
-
 @section('content')
 <div class="container py-4">
     {{-- Top Description --}}

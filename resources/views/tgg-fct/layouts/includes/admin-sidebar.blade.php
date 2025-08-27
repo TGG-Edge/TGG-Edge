@@ -1,5 +1,5 @@
 
-<a href="#" class="{{ request()->is('user/dashboard') ? 'active' : '' }}">
+<a href="{{ route('tgg-fct.admin.dashboard') }}" class="{{ request()->is('user/dashboard') ? 'active' : '' }}">
     <i class="fas fa-tachometer-alt"></i> Dashboard
 </a>
 
@@ -7,6 +7,10 @@
 
 <a href="{{ route('tgg-fct.admin.knowledge-research.index') }}" class="{{ request()->is('user/knowledge-research') ? 'active' : '' }}">
     <i class="fas fa-book"></i> Knowledge and Research
+</a>
+
+<a href="{{ route('tgg-fct.admin.assignments.index') }}" class="{{ request()->is('user/knowledge-research') ? 'active' : '' }}">
+    <i class="fas fa-clipboard-list"></i> Assignments
 </a>
 
 <div class="dropdown">
@@ -21,7 +25,7 @@
     </a>
     <div class="collapse ps-3 {{ request()->is('user/login') || request()->is('uses/researcher') ? 'show' : '' }}"
          id="sitemaplink">
-        <a href="{{ route('tgg-fct.admin.login') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
+        <a href="{{ route('tgg-fct.show') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-sign-in-alt me-2"></i> Login
         </a>
         <a href="{{ url('user/register/researcher') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
@@ -76,30 +80,7 @@
 </div>
 
 
-<div class="dropdown">
-    <a href="#manage-content"
-       class="dropdown-toggle d-flex justify-content-between align-items-center text-decoration-none py-2"
-       data-bs-toggle="collapse"
-       role="button"
-       aria-expanded="{{ request()->is('admin/welcome-note*') || request()->is('admin/wood-collection*') || request()->is('admin/entrepreneurship*') ? 'true' : 'false' }}"
-       aria-controls="manage-content">
-        <span><i class="fas fa-sitemap me-2"></i> Manage Content</span>
-        <i class="fas fa-caret-down"></i>
-    </a>
-
-    <div class="collapse ps-3 {{ request()->is('admin/welcome-note*') || request()->is('admin/wood-collection*') || request()->is('admin/entrepreneurship*') ? 'show' : '' }}"
-         id="manage-content">
-        <a href="{{ route('tgg-fct.admin.manage-content.welcome-note.edit') }}" class="d-block py-1 text-decoration-none">
-            <i class="fas fa-handshake me-2"></i> Welcome Note
-        </a>
-        <a href="{{ route('tgg-fct.admin.manage-content.wood-collection.index') }}" class="d-block py-1 text-decoration-none">
-            <i class="fas fa-tree me-2"></i> Wood Collection
-        </a>
-        <a href="{{ route('tgg-fct.admin.manage-content.entrepreneurship.index') }}" class="d-block py-1 text-decoration-none">
-            <i class="fas fa-briefcase me-2"></i> Entrepreneurship
-        </a>
-    </div>
-</div>
 
 
-<a href="{{ route('tgg-fct.admin.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>
+
+<a href="{{ route('tgg-fct.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>

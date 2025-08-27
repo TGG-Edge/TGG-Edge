@@ -1,4 +1,4 @@
-@extends('tgg-india.layouts.app')
+@extends('tgg-fct.layouts.app')
 
 @section('title', 'Show chapter - TGG india')
 @section('content')

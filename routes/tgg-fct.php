@@ -12,13 +12,11 @@ use App\Http\Controllers\User\UserApprovalController;
 use App\Http\Controllers\VolunteerDashboardController;
 use Illuminate\Support\Facades\Route;
 
-
-
 Route::middleware('web')->prefix('tgg-edge/tgg-fct')->name('tgg-fct.')->group(function () {
 
     Route::get('/login', [LoginController::class, 'show'])->name('show');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
-    
+
 
     // Public registration routes
     Route::prefix('register')->name('register.')->group(function () {
@@ -27,13 +25,14 @@ Route::middleware('web')->prefix('tgg-edge/tgg-fct')->name('tgg-fct.')->group(fu
     });
 
     // admin routes 
-    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function(){
-       Route::get('/dashboard', function () {
-          return view('tgg-india.admin.dashboard');
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+
+        Route::get('/dashboard', function () {
+            return view('tgg-fct.admin.dashboard');
         })->name('dashboard');
 
-        Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
-        Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/profile', [\App\Http\Controllers\TggFct\Admin\ProfileController::class, 'show'])->name('profile');
+        Route::post('/profile', [\App\Http\Controllers\TggFct\Admin\ProfileController::class, 'update'])->name('profile.update');
 
 
         // application start
@@ -53,20 +52,22 @@ Route::middleware('web')->prefix('tgg-edge/tgg-fct')->name('tgg-fct.')->group(fu
         Route::get('/volunteer-project/freezed/{id}', [ProjectController::class, 'volunteerFreezeProject'])->name('volunteer-project.freezed');
         // end
 
-       // trainer routes 
+        // trainer routes 
         Route::resource('assignments', \App\Http\Controllers\TggFct\Admin\AssignmentController::class);
 
+        Route::get('/knowledge-research', [\App\Http\Controllers\TggFct\Admin\KnowledgeResearchController::class, 'knowledgeAndResearch'])->name('knowledge-research.index');
     });
 
-     Route::middleware('assignee')->prefix('assignee')->name('assignee.')->group(function(){
-       Route::get('/dashboard', function () {
-          return view('tgg-fct.assignee.dashboard');
+    Route::middleware('assignee')->prefix('assignee')->name('assignee.')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('tgg-fct.assignee.dashboard');
         })->name('dashboard');
         Route::resource('assignments', \App\Http\Controllers\TggFct\Assignee\AssignmentController::class);
-
+        Route::get('/profile', [\App\Http\Controllers\TggFct\Admin\ProfileController::class, 'show'])->name('profile');
+        Route::post('/profile', [\App\Http\Controllers\TggFct\Admin\ProfileController::class, 'update'])->name('profile.update');
     });
 
-    
+
 
 
 
@@ -77,9 +78,9 @@ Route::middleware('web')->prefix('tgg-edge/tgg-fct')->name('tgg-fct.')->group(fu
     Route::post('/project-progress/update', [ProjectController::class, 'progressUpdate'])->name('project-progress.update');
     // end
 
-     //volunteer start
+    //volunteer start
     Route::get('/volunteer-dashboard', [VolunteerDashboardController::class, 'index'])->name('volunteer-dashboard');
-    
+
     Route::post('/project-collaboration/apply', [ProjectCollaborationController::class, 'apply'])->name('project-collaboration.apply');
     Route::post('/project-collaboration/progress/update', [ProjectCollaborationController::class, 'progressUpdate'])->name('project-collaboration.progress.update');
     Route::post('/project-collaboration/progress/application/accept-reject', [ProjectCollaborationController::class, 'applicationAcceptReject'])->name('project-collaboration.application/accept-reject');
@@ -97,10 +98,9 @@ Route::middleware('web')->prefix('tgg-edge/tgg-fct')->name('tgg-fct.')->group(fu
         Route::get('/linkedin', [ResearchAssistanceController::class, 'linkedin'])->name('linkedin');
     });
 
-    Route::get('/knowledge-research', [KnowledgeResearchController::class, 'knowledgeAndResearch'])->name          ('knowledge-research.index');
+    Route::get('/knowledge-research', [KnowledgeResearchController::class, 'knowledgeAndResearch'])->name('knowledge-research.index');
     Route::post('/search-knowledge', [KnowledgeResearchController::class, 'searchKnowledge'])->name('knowledge-research.search-knowledge');
 
 
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-    
 });

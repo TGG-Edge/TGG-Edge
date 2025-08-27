@@ -1,97 +1,128 @@
 <link rel="stylesheet" href="{{ asset('assets/user/css/header-footer.css') }}">
-
-<div class="logo">
-    <div class="elementor-widget-wrap elementor-element-populated">
-						<div class="elementor-element elementor-element-14b8df7 exad-sticky-section-no exad-glass-effect-no elementor-widget elementor-widget-image" data-id="14b8df7" data-element_type="widget" data-widget_type="image.default">
-				<div class="elementor-widget-container">
-																<a href="https://tggindia.com/">
-							<img fetchpriority="high" width="800" height="220" src="https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-1024x281.png" class="attachment-large size-large wp-image-491" alt="Tgg logo" srcset="https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-1024x281.png 1024w, https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-600x165.png 600w, https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-300x82.png 300w, https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-768x211.png 768w, https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-1536x422.png 1536w, https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-2048x563.png 2048w" sizes="(max-width: 800px) 100vw, 800px">								</a>
-															</div>
-				</div>
-					</div>
-</div>
+ <header class="wrapper_outer">
+        <div class="topbar_outer">
 
 
-<div class="menu">
-        <div class="elementor-widget-wrap elementor-element-populated">
-						<div class="elementor-element elementor-element-b68b0ea hfe-nav-menu__align-center elementor-widget-mobile__width-initial hfe-submenu-icon-arrow hfe-submenu-animation-none hfe-link-redirect-child hfe-nav-menu__breakpoint-tablet exad-sticky-section-no exad-glass-effect-no elementor-widget elementor-widget-navigation-menu" data-id="b68b0ea" data-element_type="widget" data-settings="{&quot;padding_horizontal_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:0,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:15,&quot;sizes&quot;:[]},&quot;padding_horizontal_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:15,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_menu_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_space_between_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_row_space&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_row_space_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;menu_row_space_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;dropdown_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;dropdown_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;top&quot;:&quot;&quot;,&quot;right&quot;:&quot;&quot;,&quot;bottom&quot;:&quot;&quot;,&quot;left&quot;:&quot;&quot;,&quot;isLinked&quot;:true},&quot;width_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;220&quot;,&quot;sizes&quot;:[]},&quot;width_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;width_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_horizontal_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:15,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;padding_vertical_dropdown_item_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;distance_from_menu_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_size_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_width_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]},&quot;toggle_border_radius_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:&quot;&quot;,&quot;sizes&quot;:[]}}" data-widget_type="navigation-menu.default">
-				<div class="elementor-widget-container">
-								<div class="hfe-nav-menu hfe-layout-horizontal hfe-nav-menu-layout horizontal hfe-pointer__underline hfe-animation__slide" data-layout="horizontal">
-				<div role="button" class="hfe-nav-menu__toggle elementor-clickable" aria-haspopup="true" aria-expanded="false">
-					<span class="screen-reader-text">Menu</span>
-					<div class="hfe-nav-menu-icon">
-						<i aria-hidden="true" class="fas fa-align-justify"></i>					</div>
-				</div>
-				<nav class="hfe-nav-menu__layout-horizontal hfe-nav-menu__submenu-arrow" data-toggle-icon="&lt;i aria-hidden=&quot;true&quot; tabindex=&quot;0&quot; class=&quot;fas fa-align-justify&quot;&gt;&lt;/i&gt;" data-close-icon="&lt;i aria-hidden=&quot;true&quot; tabindex=&quot;0&quot; class=&quot;far fa-window-close&quot;&gt;&lt;/i&gt;" data-full-width="yes">
-					<ul id="menu-1-b68b0ea" class="hfe-nav-menu"><li id="menu-item-2647" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-2086 current_page_item parent hfe-creative-menu"><a href="https://tggindia.com/" class="hfe-menu-item">Home</a></li>
-<li id="menu-item-2645" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu"><a href="https://tggindia.com/about-us/" class="hfe-menu-item">About Us</a></li>
-<li id="menu-item-5402" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu"><a href="https://tggindia.com/blog-post/" class="hfe-menu-item">Blog</a></li>
-<li id="menu-item-2646" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu"><a href="https://tggindia.com/journey-with-tgg/" class="hfe-menu-item">Journey with TGG</a></li>
-<li id="menu-item-5127" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu"><a href="https://tggindia.com/my-account/" class="hfe-menu-item">My Account</a></li>
-<li id="menu-item-2644" class="menu-item menu-item-type-post_type menu-item-object-page parent hfe-creative-menu"><a href="https://tggindia.com/contact-us/" class="hfe-menu-item">Contact Us</a></li>
-</ul> 
-				</nav>
-			</div>
-							</div>
-				</div>
-					</div>
-</div>
-
-
-<div class="right">
-        <div class="cart">
-            <div class="elementor-widget-wrap elementor-element-populated">
-						<div class="exad-link-anything-wrapper elementor-element elementor-element-60f2c64 toggle-icon--cart-medium elementor-menu-cart--items-indicator-bubble elementor-menu-cart--show-subtotal-yes elementor-menu-cart--cart-type-side-cart elementor-menu-cart--show-remove-button-yes exad-sticky-section-no exad-glass-effect-no elementor-widget elementor-widget-woocommerce-menu-cart" data-exad-element-link="{&quot;url&quot;:&quot;https:\/\/tggindia.com\/cart-2\/&quot;,&quot;is_external&quot;:&quot;&quot;,&quot;nofollow&quot;:&quot;&quot;,&quot;custom_attributes&quot;:&quot;&quot;}" style="cursor: pointer" data-id="60f2c64" data-element_type="widget" data-settings="{&quot;cart_type&quot;:&quot;side-cart&quot;,&quot;open_cart&quot;:&quot;click&quot;,&quot;automatically_open_cart&quot;:&quot;no&quot;}" data-widget_type="woocommerce-menu-cart.default">
-				<div class="elementor-widget-container">
-							<div class="elementor-menu-cart__wrapper">
-							<div class="elementor-menu-cart__toggle_wrapper">
-					<div class="elementor-menu-cart__container elementor-lightbox" aria-hidden="true">
-						<div class="elementor-menu-cart__main" aria-hidden="true">
-									<div class="elementor-menu-cart__close-button">
-					</div>
-									<div class="widget_shopping_cart_content">	<div class="woocommerce-mini-cart__empty-message"></div>
+            <div class="topbar">
+                <div class="container d-flex justify-content-between p-0">
+                    <div class="call_mail">
+                        <div class="mail">
+                            <span><a href="tel:+91-7902677236"> <i class="fas fa-phone"></i>+91-7902677236</a></span>
+                        </div>
+                        <div class="call">
+                            <span><a href="mailto:ebox.tgg@gmail.com"><i
+                                        class="fa fa-envelope"></i>ebox.tgg@gmail.com</a></span>
+                        </div>
                     </div>
-						</div>
-					</div>
-							<div class="elementor-menu-cart__toggle elementor-button-wrapper">
-			<a id="elementor-menu-cart__toggle_button" href="#" class="elementor-menu-cart__toggle_button elementor-button elementor-size-sm" aria-expanded="false">
-				<span class="elementor-button-text"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">₹</span>0.00</bdi></span></span>
-				<span class="elementor-button-icon">
-					<span class="elementor-button-icon-qty" data-counter="0">0</span>
-					<i class="eicon-cart-medium"></i>					<span class="elementor-screen-only">Cart</span>
-				</span>
-			</a>
-		</div>
-						</div>
-					</div> <!-- close elementor-menu-cart__wrapper -->
-						</div>
-				</div>
-					</div>
+
+
+                    <div class="social_media">
+                        <ul>
+                             {{-- fab fa-facebook --}}
+                            <li><a href="https://www.facebook.com/tggfct"><i class=" fab fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/tggfamily/"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="https://twitter.com/tggfct"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="https://www.linkedin.com/company/tggfct/"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+                            <li><a href="#"><i class="fab fa-telegram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="social-icons">
-          <div class="elementor-widget-wrap elementor-element-populated">
-						<div class="elementor-element elementor-element-43f49f7 elementor-hidden-tablet elementor-hidden-phone elementor-shape-square elementor-grid-0 e-grid-align-center exad-sticky-section-no exad-glass-effect-no elementor-widget elementor-widget-social-icons" data-id="43f49f7" data-element_type="widget" data-widget_type="social-icons.default">
-				<div class="elementor-widget-container">
-							<div class="elementor-social-icons-wrapper elementor-grid">
-							<span class="elementor-grid-item">
-					<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-animation-shrink elementor-repeater-item-87d6eb6" href="https://www.instagram.com/tggfamily/" target="_blank">
-						<span class="elementor-screen-only">Instagram</span>
-						<i class="fab fa-instagram"></i>					</a>
-				</span>
-							<span class="elementor-grid-item">
-					<a class="elementor-icon elementor-social-icon elementor-social-icon-facebook-f elementor-animation-shrink elementor-repeater-item-c29d3e9" href="https://www.facebook.com/TGGIndia" target="_blank">
-						<span class="elementor-screen-only">Facebook-f</span>
-						<i class="fab fa-facebook-f"></i>					</a>
-				</span>
-							<span class="elementor-grid-item">
-					<a class="elementor-icon elementor-social-icon elementor-social-icon-youtube elementor-animation-shrink elementor-repeater-item-8214b36" href="https://www.youtube.com/@tggindia" target="_blank">
-						<span class="elementor-screen-only">Youtube</span>
-						<i class="fab fa-youtube"></i>					</a>
-				</span>
-					</div>
-						</div>
-				</div>
-					</div>
+        <div class="container p-0">
+            <a class="navbar-brand" href="index.html"><img src="{{ asset('assets/user/images/tgg-fnd.jpg')}}"></a>
         </div>
-</div>
+
+        <nav class="navbar navbar-expand-xl navbar-dark my_navbar_outer">
+            <div class="container p-0">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"><i class='icon-menu'></i></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarCollapse">
+                    <ul class="navbar-nav nav ">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="https://tggfct.org/">HOME</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://tggfct.org/tgg-family/">TGG FAMILY</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://tggfct.org/ethos-of-tgg/">ETHOS</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://tggfct.org/tsrdg/">OUR GOALS</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://tggfct.org/oneworld/">ONEWORLD</a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="contact.html">INTERVENTIONS</a>
+                        </li> -->
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" id="interventionsDropdown" role="button">
+                              INTERVENTIONS
+                            </a>
+                            <div  class="dropdown-menu show-on-hover " style="padding-top: 10px; background: transparent; border: none;">
+
+                                <ul class="dropdown-menu show-on-hover" aria-labelledby="interventionsDropdown" style="margin-top: 0px;">
+                                  <li><a class="dropdown-item" href="https://tggfct.org/agriculture-food-production/">Production</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/eco-cultural-village/">Eco-Cultural Village</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/ayurgyanam/">Ayurgyanam</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/handicraft/">Handicraft</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/aaranyam/">AARANYAM</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/alternate-education-employability/">Alternate Education & Employability</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/responsible-consumption/">Responsible Consumption</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/civil-right-and-responsibilities/">Civil Rights And Responsibilities</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/rhm-center/">Rural Infrastructure</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/funding-and-monitoring/">Funding And Monitoring</a></li>
+                                </ul>
+                            </div>
+                          </li>
+
+                          
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://tggfct.org/impact/">IMPACT</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('user/login') ? 'active' : '' }}" href="https://thegoldengreens.com/user/login">USER LOGIN</a>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#"  id="interventionsDropdown" role="button">JOIN US</a>
+
+
+                            <div  class="dropdown-menu show-on-hover" style="padding-top: 10px; background: transparent; border: none;">
+
+                                <ul class="dropdown-menu show-on-hover" aria-labelledby="interventionsDropdown" style="margin-top: 0px;">
+                                  <li><a class="dropdown-item" href="https://tggfct.org/global-citizen/">Global Citizen</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/bridging-the-gap/">Bridging-the-gap</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/exploration-with-tgg//">Exploring with TGG</a></li>
+                                  <li><a class="dropdown-item" href="https://tggfct.org/tggs-research-innovation/">Sustainability Research</a></li>
+                                 
+                                </ul>
+                            </div>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+
+
+    </header>

@@ -38,7 +38,7 @@
     <div class="col-md-3 tgg-sidebar">
       @if( isset(auth()->user()->user_role) &&  auth()->user()->user_role == 1 )
               @include('tgg-fct.layouts.includes.admin-sidebar')
-      @elseif( isset(auth()->user()->user_role) &&  auth()->user()->user_role == 4)
+      @elseif( isset(auth()->user()->user_role) &&  auth()->user()->user_role == 5)
           @include('tgg-fct.layouts.includes.assignee-sidebar')
       @else
           @include('tgg-fct.layouts.includes.sidebar')
