@@ -60,7 +60,10 @@ class RegisterController extends Controller
             $user_type = 3;
         }elseif($user_type == 'admin'){
             $user_type = 1;
-        }else{
+        }elseif($user_type == 'assignee'){
+            $user_type = 5;
+        }
+        else{
             $user_type = 4;
         }
         // Store user
@@ -97,7 +100,8 @@ class RegisterController extends Controller
         $userTypes = [
             'researcher' => 'RHM Club',
             'volunteer' => 'NCRH',
-            'freelance' => 'Freelance'
+            'freelance' => 'Freelance',
+            'assignee' => 'Assignee'
         ];
 
 

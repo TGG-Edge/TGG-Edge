@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsAdmin
+class IsAssignee
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,10 @@ class IsAdmin
     public function handle(Request $request, Closure $next): Response
     {
         
-        $isWebAdmin = Auth::guard('web')->check() && (auth('web')->user()->user_role === '1' || auth('web')->user()->user_role === 1 );
-        $isWeb2Admin = Auth::guard('web2')->check() && auth('web2')->user()->user_role === '1';
+        $isWebAssignee = Auth::guard('web')->check() && (auth('web')->user()->user_role === '5' || auth('web')->user()->user_role === 5 );
+       
 
-        if ($isWebAdmin || $isWeb2Admin) {
+        if ($isWebAssignee) {
             return $next($request);
         }
         

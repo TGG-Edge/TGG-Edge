@@ -51,13 +51,17 @@ class LoginController extends Controller
 
         if (Auth::guard('web')->attempt($request->only('email', 'password'))) {
             if(auth()->user()->user_role == 1){
-            return redirect()->route('user.admin-dashboard'); 
+            return redirect()->route('tgg-fct.admin.dashboard'); 
 
             }elseif(auth()->user()->user_role == 2){
             return redirect()->route('user.researcher-dashboard'); 
 
             }elseif(auth()->user()->user_role == 3){
             return redirect()->route('user.volunteer-dashboard'); 
+
+            }
+            elseif(auth()->user()->user_role == 5){
+            return redirect()->route('tgg-fct.assignee.dashboard'); 
 
             }else{
                  return redirect()->route('user.dashboard'); 
