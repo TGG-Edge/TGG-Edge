@@ -1,15 +1,18 @@
 @extends('tgg-fct.layouts.app')
 
-@section('title', 'Trainer Dashboard - TGG India')
+@section('title', 'Trainer Dashboard | TGG Edge | TGG fct')
 
 
 @section('content')
-<div class="container">
-    <h2>Assignments</h2>
-    <a href="{{ route('tgg-fct.admin.assignments.create') }}" class="btn btn-primary mb-3">+ New Assignment</a>
-
-    <table class="table table-bordered">
-        <thead>
+<div class="admin-container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-3 trainer-heading">Assignmnets</h4>
+        <div class="d-flex align-items-center justify-content-end gap-2">
+            <a href="{{ route('tgg-fct.admin.assignments.create') }}" class="btn btn-primary assignment-button"><i class="bi bi-plus-lg"></i>+ New Assignment</a>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
             <tr>
                 <th>Title</th>
                 <th>Task Type</th>
@@ -30,12 +33,20 @@
                 <td>{{ $assignment->due_date ?? 'N/A' }}</td>
                 <td>{{ $assignment->creator?->name }}</td>
                 <td>
-                    <a href="{{ route('tgg-fct.admin.assignments.edit', $assignment->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="{{ route('tgg-fct.admin.assignments.destroy', $assignment->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <a href="{{ route('tgg-fct.admin.assignments.edit', $assignment->id) }}" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
+                                style="width: 28px; height: 28px;">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                        <form action="{{ route('tgg-fct.admin.assignments.destroy', $assignment->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center justify-content-center p-0" 
+                                        style="width: 28px; height: 28px;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @endforeach

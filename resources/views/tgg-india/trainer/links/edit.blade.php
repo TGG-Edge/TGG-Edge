@@ -48,19 +48,9 @@
                 >
             </div>
             
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary save-button">Update</button>
             <a href="{{ route('tgg-india.trainer.links.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>
 
-<!-- CKEditor 5 Script -->
-<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-        .create(document.querySelector('#description'))
-        .catch(error => {
-            console.error(error);
-        });
-</script>
-@endsection

@@ -1,12 +1,11 @@
 @extends('tgg-fct.layouts.app')
 
-@section('title', 'Show chapter - TGG india')
+@section('title', 'Show chapter | TGG Edge | TGG fct')
 @section('content')
 <div class="container">
 
-    <h2>{{ $chapter->title }}</h2>
+    <h2 class="litheader">{{ $chapter->title }}</h2>
     <p>{{ $chapter->content ?? 'No content available.' }}</p>
-
     <hr>
 
     <h5>Section: {{ $chapter->section->title ?? '-' }}</h5>

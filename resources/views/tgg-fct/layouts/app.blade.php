@@ -54,6 +54,101 @@
   </div>
 
   @include('tgg-fct.layouts.includes.footer')
+
+  {{-- CKEditor 5 super-build --}}
+  <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/super-build/ckeditor.js"></script>
+
+  <script>
+     document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.js-ckeditor').forEach(function (el) {
+          if (el.dataset.ckeditorInited) return;
+          el.dataset.ckeditorInited = '1';
+
+          // ✅ Support both CKEDITOR.ClassicEditor (old) and ClassicEditor (new super-build)
+          const Editor = (window.CKEDITOR && window.CKEDITOR.ClassicEditor) || window.ClassicEditor;
+
+          Editor.create(el, {
+              extraPlugins: [ MyCustomUploadAdapterPlugin ],
+
+                // remove plugins you don’t need
+                removePlugins: [
+                    'CKBox','CKFinder','CKFinderUploadAdapter','EasyImage',
+                    'RealTimeCollaborativeComments','RealTimeCollaborativeTrackChanges',
+                    'RealTimeCollaborativeRevisionHistory','PresenceList','Comments',
+                    'TrackChanges','TrackChangesData','RevisionHistory','Pagination',
+                    'WProofreader','MathType','DocumentOutline','ExportPdf','ExportWord',
+                    'TableOfContents',
+                    'FormatPainter',
+                    'Template',
+                    'SlashCommand',
+                    'PasteFromOfficeEnhanced'
+                ],
+
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'underline', 'link', '|',
+                    'bulletedList', 'numberedList', '|',
+                    'insertTable', 'blockQuote', 'imageUpload', 'undo', 'redo'
+                ],
+
+                image: {
+                    resizeUnit: '%',
+                    resizeOptions: [
+                        { name: 'resizeImage:original', label: 'Original', value: null },
+                        { name: 'resizeImage:25', label: '25%', value: '25' },
+                        { name: 'resizeImage:50', label: '50%', value: '50' },
+                        { name: 'resizeImage:75', label: '75%', value: '75' }
+                    ],
+                    toolbar: [
+                        'imageStyle:inline',
+                        'imageStyle:block',
+                        'imageStyle:side',
+                        '|',
+                        'resizeImage',  
+                        'imageTextAlternative'
+                    ]
+                }
+            }).then(editor => {
+                // ✅ Default styles for text inside CKEditor
+                editor.editing.view.change(writer => {
+                    writer.setStyle('font-size', '13px', editor.editing.view.document.getRoot());
+                    writer.setStyle('color', '#000', editor.editing.view.document.getRoot());
+                    writer.setStyle('font-family', 'poppins, system-ui, Arial, sans-serif', editor.editing.view.document.getRoot());
+                });
+            }).catch(console.error);
+
+        });
+    });
+
+    class UploadAdapter {
+        constructor(loader) { this.loader = loader; }
+        upload() {
+            return this.loader.file.then(file => new Promise((resolve, reject) => {
+                const data = new FormData();
+                data.append('upload', file);
+                data.append('_token', '{{ csrf_token() }}');
+
+                fetch('{{ route('ckeditor.upload') }}', {
+                    method: 'POST',
+                    body: data
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.url) {
+                        resolve({ default: data.url });
+                    } else {
+                        reject(data.error || 'Upload failed');
+                    }
+                })
+                .catch(reject);
+            }));
+        }
+        abort() {}
+    }
+    function MyCustomUploadAdapterPlugin(editor) {
+        editor.plugins.get('FileRepository').createUploadAdapter = loader => new UploadAdapter(loader);
+    }
+  </script>
   
   {{-- Dashboard Volunteer Javascipt support --}}
   @stack('scripts')

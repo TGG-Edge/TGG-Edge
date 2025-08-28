@@ -704,8 +704,8 @@ button:hover {
 }
 
 .trainer-heading {
-    font-size: 18px;
-    color: #265475;
+    font-size: 18px !important;
+    color: #265475 !important;
 }
 
 .custom-table-head {

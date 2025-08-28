@@ -30,8 +30,8 @@
     padding: 20px 30px;
 }
 
-.admin-application-table{
-        background: lightgray;
+.admin-application-table {
+    background: lightgray;
 }
 .dropdown .collapse a {
     margin-left: 20px;
@@ -701,4 +701,41 @@ button:hover {
     width: 30px;
     height: 30px;
     padding: 0px !important;
+}
+
+.trainer-heading {
+    font-size: 18px !important;
+    color: #265475 !important;
+}
+
+.admin-container {
+    font-size: 13px;
+}
+
+.admin-container .card {
+    background: #f5f9f5;
+    border: 1px solid #d9d9d9;
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 20px;
+}
+
+.form-label {
+    font-size: 14px;
+}
+
+.save-button {
+    background-color: #6f7300 !important;
+    border-color: #6f7300 !important;
+}
+
+.assignment-button {
+    background-color: #6f7300 !important;
+    border-color: #6f7300 !important;
+    height: 40px;
+}
+
+.litheader {
+    font-size: 17px;
+    color: #265475;
 }

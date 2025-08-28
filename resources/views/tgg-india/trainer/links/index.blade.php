@@ -6,7 +6,7 @@
     <div class="admin-container">
         <!-- Create Button -->
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="mb-3 trainer-heading">links</h4>
+            <h4 class="mb-3 trainer-heading">Links</h4>
             <div class="d-flex align-items-center gap-2">
                 @if ($is_exceeded)
                     <button class="btn btn-primary create-button" disabled>
