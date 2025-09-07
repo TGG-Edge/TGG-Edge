@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\TggIndia;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserSecondary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +31,31 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function switchAccount($id)
+    {
+        $currentUser = Auth::guard('web2')->user();
+
+        $otherAccount = UserSecondary::where('id', $id)
+            ->where('email', $currentUser->email)
+            ->first();
+
+        if ($otherAccount) {
+            Auth::guard('web2')->login($otherAccount);
+
+            // Redirect based on role
+            switch ($otherAccount->user_role) {
+                case 2:
+                    return redirect()->route('tgg-india.trainer.dashboard');
+                case 3:
+                    return redirect()->route('tgg-india.member.dashboard');
+                default:
+                    return redirect()->route('tgg-india.login');
+            }
+        }
+
+        return redirect()->back()->with('error', 'No linked account found.');
     }
 
     /**
@@ -82,8 +108,8 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         //
-        Auth::guard('web')->logout();
-        return redirect()->route('user.login');
+        Auth::guard('web2')->logout();
+        return redirect()->route('tgg-india.login');
     }
 
     /**

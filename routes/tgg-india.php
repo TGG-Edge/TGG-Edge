@@ -20,6 +20,8 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
   Route::get('/login', [LoginController::class, 'show'])->name('show');
   Route::post('/login', [LoginController::class, 'login'])->name('login');
+  Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+  Route::get('/switch/account/{id}', [LoginController::class, 'switchAccount'])->name('switch.account');
 
 
   // Public registration routes
@@ -39,6 +41,8 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     Route::get('/dashboard', function () {
       return view('tgg-india.admin.dashboard');
     })->name('dashboard');
+
+    Route::resource('assignments', \App\Http\Controllers\TggIndia\Admin\AssignmentController::class);
 
     Route::prefix('profile')->name('profile.')->group(function () {
       Route::get('/', [ProfileController::class, 'show'])->name('index');
@@ -87,9 +91,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
   // trainer routes 
   Route::middleware('trainer')->prefix('trainer')->name('trainer.')->group(function () {
-    Route::get('/dashboard', function () {
-      return view('tgg-india.trainer.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [\App\Http\Controllers\TggIndia\Trainer\DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('profile')->name('profile.')->group(function () {
       Route::get('/', [\App\Http\Controllers\TggIndia\Trainer\ProfileController::class, 'show'])->name('index');
@@ -161,5 +163,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       Route::get('/', [\App\Http\Controllers\TggIndia\Member\ProfileController::class, 'show'])->name('index');
       Route::post('/profile', [\App\Http\Controllers\TggIndia\Member\ProfileController::class, 'update'])->name('update');
     });
+
+     Route::resource('assignments', \App\Http\Controllers\TggIndia\Member\AssignmentController::class);
   });
 });

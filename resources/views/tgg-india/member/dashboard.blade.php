@@ -10,12 +10,62 @@
         <!-- Welcome Note -->
         <section class="welcome-note card">
             <p>
-                {{ $showcase->welcome_note ?? 'Welcome to the Volunteer Dashboard! Explore the Woodperker
+                {!! $showcase->welcome_note_member ?? 'Welcome to the Volunteer Dashboard! Explore the Woodperker
                 collections, review entrepreneurship opportunities, and keep an eye on
-                the latest updates below.' }}
+                the latest updates below.' !!}
             </p>
         </section>
 
+          <!-- Top Row -->
+        <section class="row top-row">
+            <!-- Woodperker -->
+            <div class="card woodperker">
+                <h3 class="card-title">MODICARE</h3>
+
+                <div class="slider-outer card-inner">
+                    <div class="slider" id="#" aria-label="Woodpecker image slider">
+                                <div class="slide">
+                                    <img src="{{ asset('assets/tgg-india/images/modicare.jpeg') }}" alt="modicare image"/>
+                                </div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 5px; align-items: center;">
+                    <a href="https://www.modicare.com/sign-in" 
+                        style=" color: #ffffff;" class="btn-outline small">
+                        Login
+                    </a>
+                    <a href="#" title=" If you don’t have an account, register first"
+                        style=" color: #ffffff;" class="btn-outline small">
+                        Register
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Opportunities -->
+            <div class="card opportunities">
+                <h3 class="card-title">INVESTMENT MOTILALOSAWAL</h3>
+                         <div class="slider-outer card-inner">
+                    <div class="slider" id="#" aria-label="Woodpecker image slider">
+                                <div class="slide">
+                                    <img src="{{ asset('assets/tgg-india/images/motilal.jpeg') }}" alt="motilal image"/>
+                                </div>
+                    </div>
+                </div>
+                  <div style="display: flex; gap: 5px; align-items: center;">
+                    <a href="https://invest.motilaloswal.com/" 
+                        style=" color: #ffffff;" class="btn-outline small">
+                        Login
+                    </a>
+                    <a href="#" title=" If you don’t have an account, register first"
+                        style=" color: #ffffff;" class="btn-outline small">
+                        Register
+                    </a>
+                </div>
+
+            </div>
+        </section>
+        
         <!-- Top Row -->
         <section class="row top-row">
             <!-- Woodperker -->

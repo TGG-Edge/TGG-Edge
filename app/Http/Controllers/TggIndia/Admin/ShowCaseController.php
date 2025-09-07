@@ -29,7 +29,14 @@ class ShowCaseController extends Controller
 {
     $showcase = Showcase::first();
 
-    $data = $request->only(['welcome_note']);
+    $data = $request->only([
+        'welcome_note',
+        'welcome_note_trainer',
+        'welcome_note_member',
+        'welcome_note_rhm_club',
+        'welcome_note_nomad_community',
+        'welcome_note_freelancer',
+    ]);
 
     // Handle multiple text-based fields
     foreach (['entrepreneurship_opportunities','tgg_news','investment_opportunities'] as $field) {

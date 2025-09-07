@@ -5,8 +5,7 @@
 
 @section('content')
 <div class="admin-container">
-            @include('tgg-india.layouts.includes.message')
-            <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('user.logout') }}">Log out</a>)</p>
+    {!! $showcase->welcome_note_trainer ?? `<p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('user.logout') }}">Log out</a>)</p>
 
             <p><strong>WELCOME TO TGG-EDGE</strong></p>
 
@@ -20,6 +19,8 @@
 
             {{-- <p>Let us work hand in hand to build a future where learning, working, and living harmoniously with nature and society become the foundation of true well-being. Welcome to a community that believes in the power of mindful transformation!</p> --}}
 
-            <p>With gratitude,<br><strong>TGG Family</strong></p>
+            <p>With gratitude,<br><strong>TGG Family</strong></p>` !!}
+
+            
 </div>
 @endsection

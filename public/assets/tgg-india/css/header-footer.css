@@ -386,7 +386,7 @@ header {
     align-items: center;
     padding: 0 40px;
     background: #fff;
-    height: 100px;
+    height: 95px;
 }
 
 .header-container {
@@ -499,15 +499,26 @@ header {
 
 /* Footer */
 
+.footer-b{
+        font-family: "Bellefair", Sans-serif;
+    font-size: 15px;
+    letter-spacing: 2.3px;
+    color: #FFFFFF;
+    position: absolute !important;
+    bottom: 0px;
+    margin-left: 32%;
+}
+
+
 .footer-container {
     position: relative; /* Needed for ::before and ::after */
     display: flex;
     justify-content: space-between;
-    padding: 40px 60px;
+    padding: 20px 70px;
     color: #ffffff;
     font-family: "Bellefair", Sans-serif;
     justify-content: flex-start;
-    height: 390px;
+    height: 430px;
     z-index: 0;
     overflow: hidden; /* Ensures overlay doesn't spill out */
 }
@@ -519,7 +530,7 @@ header {
     inset: 0;
     background: url("https://tggindia.com/wp-content/uploads/2020/10/robin-spielmann-591331-unsplash.jpg")
         center/cover no-repeat;
-    opacity: 0.4; /* Control ONLY image opacity */
+    opacity: 1; 
     z-index: 0;
 }
 
@@ -528,7 +539,7 @@ header {
     content: "";
     position: absolute;
     inset: 0;
-    background-color: rgba(1, 44, 97, 0.8); /* blue with opacity */
+    background-color: rgba(0, 51, 120, 0.86); /* blue with opacity */
     z-index: 1;
 }
 
@@ -540,7 +551,7 @@ header {
 
 .footer-column {
     flex: 1;
-    margin: 0 20px;
+    /* margin: 0 20px; */
 }
 
 .footer-column img {
@@ -548,9 +559,8 @@ header {
     height: auto;
     border-radius: 8px;
     background: white;
-    padding: 10px;
-    margin-top: 140px;
-    margin-left: 40px;
+    margin-top: 125px;
+    margin-left: 30px;
 }
 
 /* .footer-column h3 {
@@ -689,7 +699,7 @@ header {
 }
 
 .footer-top-meta img.tgg-meta-logo {
-    height: 30px; /* adjust size */
+    height: 32px; /* adjust size */
     vertical-align: middle;
 }
 

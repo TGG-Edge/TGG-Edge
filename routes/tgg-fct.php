@@ -36,13 +36,13 @@ Route::middleware('web')->prefix('tgg-edge/tgg-fct')->name('tgg-fct.')->group(fu
 
 
         // application start
-        Route::get('/new-applications', [UserApprovalController::class, 'newApplication'])->name('new-applications');
-        Route::get('/processed-applications', [UserApprovalController::class, 'processedApplication'])->name('processed-applications');
+        Route::get('/new-applications', [\App\Http\Controllers\TggFct\Admin\ApplicationController::class, 'newApplication'])->name('new-applications');
+        Route::get('/processed-applications', [\App\Http\Controllers\TggFct\Admin\ApplicationController::class, 'processedApplication'])->name('processed-applications');
 
-        Route::get('/user-profile/{id}', [UserApprovalController::class, 'userProfile'])->name('user-profile');
-        Route::post('/users/{id}/userProfileUpdate', [UserApprovalController::class, 'userProfileUpdate'])->name('users.profile.update');
-        Route::get('/users/{id}/approval', [UserApprovalController::class, 'updateApproval'])->name('users.update.approval');
-        Route::post('/users/{id}/project', [UserApprovalController::class, 'updateProject'])->name('users.update.project');
+        Route::get('/user-profile/{id}', [\App\Http\Controllers\TggFct\Admin\ApplicationController::class, 'userProfile'])->name('user-profile');
+        Route::post('/users/{id}/userProfileUpdate', [\App\Http\Controllers\TggFct\Admin\ApplicationController::class, 'userProfileUpdate'])->name('users.profile.update');
+        Route::get('/users/{id}/approval', [\App\Http\Controllers\TggFct\Admin\ApplicationController::class, 'updateApproval'])->name('users.update.approval');
+        Route::post('/users/{id}/project', [\App\Http\Controllers\TggFct\Admin\ApplicationController::class, 'updateProject'])->name('users.update.project');
         // end
 
         // application start

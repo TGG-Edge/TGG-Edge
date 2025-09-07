@@ -6,15 +6,15 @@
 <div class="container py-4">
     {{-- Top Description --}}
     <div class="text-center mb-4">
-        <h2 class="fw-bold">WELCOME TO TGG EDGE</h2>
-        <p class="text-muted">TGG Foundation fosters inquiry-driven education where learners explore real-world challenges through research, reflection, and community engagement. Participants are encouraged to formulate questions, investigate ethical solutions, and apply their findings to transformative projects that promote sustainability and self-reliance. This immersive model cultivates critical thinking, creativity, and a deeper understanding of societal impact, empowering learners to become agents of meaningful change.</p>
+        <h2 class="fw-bold">WELCOME TO TGG META</h2>
+        <p class="text-muted">Your gateway to purposeful collective action and transformative growth within the TGG Family. Anchored in the vision of TGG, this platform empowers members to explore eco entrepreneurship, cultivate investment habits, engage in regenerative travel, and build meaningful networks across borders. With a strong focus on revenue generation for passive income, alongside health and responsible investments, TGG-Meta offers structured learning, mentorship, and real-world application. It’s a living ecosystem where values meet action—enabling every member to evolve into a self-reliant changemaker contributing to a sustainable, inclusive future.</p>
     </div>
 
     {{-- Split Layout --}}
     <div class="row justify-content-center align-items-center">
         {{-- Left Image --}}
         <div class="col-md-7 d-none d-md-block text-center">
-            <img src="{{ asset('assets/user/images/login-right.jpg') }}" alt="TGG Edge Login" class="img-fluid rounded-4 shadow" style="height: 500px">
+            <img src="{{ asset('assets/tgg-india/images/login-right.jpg') }}" alt="TGG Edge Login" class="img-fluid rounded-4 shadow" style="height: 500px">
         </div>
 
         {{-- Right Login Form --}}
@@ -60,13 +60,7 @@
                     <button type="submit" class="btn w-100 mt-2 text-white login-btn" style="background-color: #033576; border-color: #033576;">
                         Login
                     </button>
-                </form>
-                    <div class="login-meta">
-                        <p>
-                            Powered by 
-                            <img src="{{ asset('assets/user/images/TGG_Meta.png') }}" alt="TGG-META Logo" class="tgg-meta-logo">
-                        </p>
-                    </div>            
+                </form>      
             </div>
         </div>
     </div>

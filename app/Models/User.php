@@ -35,6 +35,32 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    public static $user_types = [
+        1 => [
+            'name' => 'Admin',
+            'key'  => 'admin'
+        ],
+        2 => [
+            'name' => 'Researcher',
+            'key'  => 'researcher'
+        ],
+        3 => [
+            'name' => 'Volunteer',
+            'key'  => 'volunteer'
+        ],
+        4 => [
+            'name' => 'N/A',
+            'key'  => 'N/A'
+        ],
+        5 => [
+            'name' => 'Assignee',
+            'key'  => 'assignee'
+        ],
+        6 => [
+            'name' => 'Freelancers',
+            'key'  => 'freelancers'
+        ],
+    ];
     protected function casts(): array
     {
         return [
@@ -43,6 +69,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function getRoleNameAttribute()
+    {
+        return self::$user_types[$this->user_role]['name'] ?? 'Unknown';
+    }
     public function project() {
         return $this->hasOne(Project::class, 'researcher_id', 'id');
     }

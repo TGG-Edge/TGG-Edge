@@ -9,6 +9,10 @@
         $hasLiteratures = $features->contains('feature_key', 'literatures');
         $hasLinks = $features->contains('feature_key', 'links');
         $hasVideos = $features->contains('feature_key', 'videos');
+
+        $otherAccounts = \App\Models\UserSecondary::where('email', $user->email)
+        ->where('id', '!=', $user->id)
+        ->get();
     @endphp
     <a href="{{ route('tgg-india.trainer.dashboard') }}"
         class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
@@ -17,6 +21,27 @@
     <a href="{{ route('tgg-india.trainer.profile.index') }}"
         class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
 
+    @if ($otherAccounts->count() > 0)
+       <div class="dropdown mt-2">
+    <a href="#"
+       class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-india/switch*') ? 'active' : '' }}"
+       data-bs-toggle="collapse"
+       data-bs-target="#switchAccountDropdown"
+       aria-expanded="{{ request()->is('tgg-edge/tgg-india/switch*') ? 'true' : 'false' }}">
+        <span><i class="fas fa-exchange-alt me-2"></i> Switch Account</span>
+        <i class="fas fa-caret-down"></i>
+    </a>
+    <div class="collapse ps-3 {{ request()->is('tgg-india/switch*') ? 'show' : '' }}" id="switchAccountDropdown">
+        @foreach ($otherAccounts as $account)
+            <a href="{{ route('tgg-india.switch.account', $account->id) }}" class="d-block py-1" target="_blank">
+                <i class="fas fa-user me-2"></i> 
+                Switch to {{ ucfirst($account->role_name ?? 'N/A') }} Dashboard
+            </a>
+        @endforeach
+    </div>
+</div>
+
+    @endif
 
     @if ($hasLiteratures)
         <a href="{{ route('tgg-india.trainer.sections.index') }}"
@@ -37,7 +62,7 @@
             <i class="fas fa-video"></i> Videos
         </a>
     @endif
-    @if ($investmentModules->isNotEmpty())
+    {{-- @if ($investmentModules->isNotEmpty()) --}}
         <div class="dropdown">
             <a href="#"
                 class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/*') ? 'active ' : '' }}"
@@ -99,4 +124,6 @@
 
             </div>
         </div>
-    @endif
+
+    {{-- @endif --}}
+<a href="{{ route('tgg-india.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>

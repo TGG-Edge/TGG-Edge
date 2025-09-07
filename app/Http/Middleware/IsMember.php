@@ -16,17 +16,23 @@ class IsMember
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth('web2')->check() && Auth('web2')->user()->user_role == 3) {
-            $user = Auth('web2')->user();
-            if ($user->approval != 'accepted') {
-                return abort(403, 'Your approval is not accepted yet. Please contact admin.');
-            }
-            return $next($request);
+        // If not logged in through web2
+        if (!Auth::guard('web2')->check()) {
+            return redirect()->route('tgg-india.login');
         }
 
-        
+        $user = Auth::guard('web2')->user();
 
+        // Check if user role is Member (3)
+        if ((string) $user->user_role !== '3') {
+            return abort(403, 'Unauthorized access.');
+        }
 
-        return abort(403, 'Unauthorized access.');
+        // Check approval status
+        if ($user->approval !== 'accepted') {
+            return abort(403, 'Your approval is not accepted yet. Please contact admin.');
+        }
+
+        return $next($request);
     }
 }

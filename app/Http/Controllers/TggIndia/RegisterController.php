@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UserSecondary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -33,29 +34,6 @@ class RegisterController extends Controller
     public function store(Request $request, $user_type)
     {
         //
-        if($user_type == 'researcher'){
-            $request->validate([
-               'name' => 'required|string',
-               'age' => 'required|integer',
-               'project' => 'required|string',
-               'number' => 'required|string',
-               'email' => 'required|email|unique:users,email',
-               'address' => 'required|string',
-               'rhm_number' => 'required'
-           ]);
-        }else{
-           $request->validate([
-               'name' => 'required|string',
-               'age' => 'required|integer',
-               'number' => 'required|string',
-               'email' => 'required|email|unique:mysql2.users,email',
-               'address' => 'required|string',
-               'rhm_number' => 'required'
-           ]);
-        }
-
-
-
         if($user_type == 'trainer'){
             $user_type = 2;
         }elseif($user_type == 'members'){
@@ -71,6 +49,22 @@ class RegisterController extends Controller
         }else{
             $user_type = 6;
         }
+        
+        $request->validate([
+            'name' => 'required|string',
+            'age' => 'required|integer',
+            'number' => 'required|string',
+            'email' => [
+            'required',
+            'email',
+                Rule::unique('mysql2.users', 'email')->where(function ($query) use ($user_type) {
+                    return $query->where('user_role',$user_type);
+                }),
+            ],
+            'address' => 'required|string',
+            'rhm_number' => 'required'
+        ]);
+        
         // Store user
         $user = UserSecondary::create([
             'name' => $request->name,
@@ -81,7 +75,7 @@ class RegisterController extends Controller
             'address' => $request->address,
             'user_role' => $user_type,
             'rhm_number' => $request->rhm_number,
-            'password' => Hash::make('default-password'), // change as needed
+            'password' => Hash::make('default-password'),
         ]);
 
         if ($request->has('modules') && is_array($request->modules)) {
