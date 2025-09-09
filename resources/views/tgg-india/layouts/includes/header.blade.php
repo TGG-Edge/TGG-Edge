@@ -28,9 +28,9 @@
         <ul class="nav hfe-nav-menu">
             <li><a href="https://tggindia.com/">Home</a></li>
             <li><a href="https://tggindia.com/about-us/">About Us</a></li>
-            <li><a href="https://tggindia.com/blog-post/">Blog</a></li>
             <li><a href="https://tggindia.com/journey-with-tgg/">Journey with TGG</a></li>
-            <li><a href="https://tggindia.com/my-account/">My Account</a></li>
+            <li><a href="https://tggindia.com/blog-post/">Blog</a></li>
+            <li><a href="http://thegoldengreens.com/tgg-meta/tgg-india/login">Login</a></li>
             <li><a href="https://tggindia.com/contact-us/">Contact Us</a></li>
         </ul>
     </nav>

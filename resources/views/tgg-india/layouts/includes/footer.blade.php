@@ -41,7 +41,7 @@
 
     <!-- Member Login -->
     <div class="footer-column">
-        <h3>Member Login</h3>
+        <h3>Admin Login</h3>
         <form method="post" action="https://tggindia.com/wp-login.php">
             <input type="hidden" name="redirect_to" value="https://tggindia.com/my-account/">
 
