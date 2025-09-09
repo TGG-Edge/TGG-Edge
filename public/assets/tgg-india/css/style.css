@@ -824,113 +824,107 @@ button:hover {
 
 /* Member Dashbaord */
 
-/* ---------- Layout ---------- */
+/* Container */
+/* Dashboard main container */
 .admin-container .dashboard-main {
     max-width: 1100px;
     margin: 0 auto;
 }
-.admin-container .row {
-    display: flex;
+
+/* 2-column grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 18px;
-    margin-bottom: 18px;
-}
-.admin-container .top-row .woodperker {
-    flex: 0.95;
-}
-.admin-container .top-row .opportunities {
-    flex: 1.35;
-}
-.admin-container .row .card {
-    flex: 1;
 }
 
-/* ---------- Card/Box styling ---------- */
-.admin-container .card {
-    background: #f5f9f5;
+/* Welcome Note spans both columns */
+/* Welcome Note spans both columns - updated */
+.dashboard-grid .welcome-note {
+    grid-column: span 2;
+    height: auto; /* let height adjust based on content */
+    display: flex;
+    text-align: center;
+    font-size: 14px;      /* smaller/custom font size */
+    font-family: 'Arial', sans-serif; /* custom font */
+    font-weight: 500;
+    line-height: 1.4;     /* adjust spacing between lines */
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 8px;          /* reduced padding for smaller height */
+    box-sizing: border-box;
+}
+
+.card-inner-welcome{
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 16px;
+    width: 100%;
+    height: 80px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 8px 0;
+}
+
+/* Generic card styling for all cards */
+.dashboard-grid .card {
+    background: #f5f9f5;       /* outer card background */
     border: 1px solid #d9d9d9;
     border-radius: 14px;
-    padding: 16px;
-    margin-top: 20px;
+    padding: 5px;                /* remove outer padding */
+    display: flex;
+    width: 100%;
+    height: 300px;
 }
-.admin-container .card-title {
-    margin: 0 0 10px 0;
+
+.dashboard-grid-welcome .card {
+    background: #f5f9f5;       /* outer card background */
+    border: 1px solid #d9d9d9;
+    border-radius: 14px;
+    padding: 5px;                /* remove outer padding */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100px;
+}
+
+/* Inner white box inside all cards */
+.dashboard-grid .card-inner,
+.dashboard-grid .card:not(.card-inner) > .card-inner { /* fallback for nested inner box */
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 16px;
+    width: 100%;
+    max-width: 420px; 
+    height: 200px;
+    box-sizing: border-box;
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center;
+    justify-content: center; */
+    overflow: hidden; 
+    margin: 8px 0;
+}
+
+/* Card titles */
+.card-title {
+    margin: 5px 0 7px 0;
     font-size: 16px;
     font-weight: 600;
     color: #265475;
     text-align: center;
-    letter-spacing: 0.2px;
-}
-.admin-container .card-inner {
-    border: 1px solid #d9d9d9;
-    border-radius: 12px;
-    background: #fff;
 }
 
-/* Welcome box */
-.admin-container .welcome-note {
-    min-height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-/* ---------- Woodpecker slider ---------- */
-.admin-container .slider-outer {
-    padding: 8px;
-    overflow: hidden; /* hides outside slides */
-    position: relative;
-}
-
-.admin-container .slider {
-    display: flex;
-    overflow-x: scroll; /* user can drag/scroll */
-    scroll-snap-type: x mandatory;
-    gap: 0;
-    border-radius: 10px;
-    scroll-behavior: smooth; /* smooth manual scroll */
-}
-
-.admin-container .slide {
-    flex: 0 0 100%; /* full width slide */
-    scroll-snap-align: start;
-    padding: 8px;
-}
-
-.admin-container .slide img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-    border: 1px solid #d9d9d9;
-    border-radius: 10px;
-    background: #eee;
-}
-
-/* ---------- Buttons ---------- */
-.admin-container .btn-outline {
-    background: #6f7300;
-    border: 1px solid #bdbdbd;
-    border-radius: 999px;
-    padding: 6px 16px;
-    cursor: pointer;
-    font-size: 14px;
-}
-.admin-container .btn-outline.small {
-    padding: 4px 12px;
-    margin-top: 10px;
-}
-.admin-container .btn-outline:active {
-    transform: translateY(1px);
-}
-
-/* ---------- Opportunities rows ---------- */
-.admin-container .opportunities {
-    display: flex;
-    flex-direction: column;
+/* Opportunities cards */
+.opportunities {
     gap: 10px;
 }
-.admin-container .project-row {
+.project-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -939,35 +933,111 @@ button:hover {
     border-radius: 10px;
     background: #fff;
 }
-.admin-container .project-left {
+
+/* Slider outer */
+.card-inner {
+    width: 100%;
+    height: 200px; /* adjust as needed */
+    overflow: hidden;
     display: flex;
-    align-items: center;
-    gap: 8px;
+    /* align-items: center;
+    justify-content: center; */
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    width: 100%;
+    max-width: 385px;
+    height: 170px;
+    scroll-snap-type: x mandatory;
+    overflow-x: hidden; /* hide scrollbar */
+    
+}
+
+.slide {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center; /* centers the image horizontally */
+    align-items: center;     /* centers the image vertically */
+    scroll-snap-align: start;
+}
+
+.slide img {
+    width: 100%;
+    max-width: 385px;
+    height: 170px;
+    border-radius: 6px;
+}
+
+
+/* Buttons */
+
+.button-group {
+    display: flex;
+    justify-content: center; /* center the buttons horizontally */
+    gap: 10px;               /* space between buttons */
+    flex-wrap: wrap;          /* optional: wrap on smaller screens */
+}
+
+.button-group .btn-outline.small {
+    margin-top: 0;            /* remove top margin for alignment */
+}
+
+.btn-outline {
+    background: #6f7300;
+    border: 1px solid #bdbdbd;
+    border-radius: 999px;
+    padding: 6px 16px;
+    cursor: pointer;
     font-size: 14px;
 }
-.admin-container .project-left input[type="radio"] {
-    width: 14px;
-    height: 14px;
-    accent-color: #666;
+.btn-outline.small {
+    padding: 4px 12px;
+    margin-top: 10px;
 }
 
-/* ---------- Simple container boxes ---------- */
-.admin-container .center-box {
-    min-height: 140px;
-    display: flex;
-    align-items: center;
+/* Modal overlay */
+.modal {
+    display: none;               /* hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* semi-transparent background */
     justify-content: center;
+    align-items: center;
+}
+
+/* Modal content box */
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 80%;
     text-align: center;
-    font-weight: 600;
-    margin-top: 5px;
+    position: relative;
 }
 
-.welcome-text {
-    font-size: 12px;
-    color: #000;
-}
-
-.showcase-heading {
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
     font-size: 18px;
-    color: #265475;
+    cursor: pointer;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .dashboard-grid .welcome-note {
+        grid-column: span 1;
+    }
 }

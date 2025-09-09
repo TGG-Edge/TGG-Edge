@@ -7,103 +7,170 @@
     @include('tgg-india.layouts.includes.message')
 
     <main class="dashboard-main">
-        <!-- Welcome Note -->
-        <section class="welcome-note card">
-            <p>
-                {{ $showcase->welcome_note ?? 'Welcome to the Volunteer Dashboard! Explore the Woodperker
-                collections, review entrepreneurship opportunities, and keep an eye on
-                the latest updates below.' }}
-            </p>
-        </section>
+        <div class="dashboard-grid-welcome">
 
-        <!-- Top Row -->
-        <section class="row top-row">
+            <!-- Welcome Note (spans 2 columns) -->
+            <section class="welcome-note card">
+                <div class="card-inner-welcome">
+                    <p>
+                        {{ $showcase->welcome_note ?? 'Welcome to the Volunteer Dashboard! Explore the Woodperker
+                        collections, review entrepreneurship opportunities, and keep an eye on
+                        the latest updates below.' }}
+                    </p>
+                </div>
+            </section>
+        </div>
+        <br>
+
+        <div class="dashboard-grid">
+
+            <!-- Example: Modicare -->
+            <!-- Modicare -->
+            <div class="card">
+                <h3 class="card-title">MODICARE</h3>
+                <div class="card-inner">
+                    <img src="{{ asset('assets/tgg-india/images/Modicare.png') }}" alt="Modicare Logo" class="card-img" width="300" height="150">
+                </div>
+                <div class="button-group">
+                    <button class="btn-outline small">Login</button>
+                    <button class="btn-outline small info-btn">Information</button>
+                </div>
+                <div class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn">&times;</span>
+                        <p>This is information for Modicare</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Motilal -->
+            <div class="card">
+                <h3 class="card-title">MOTILAL OSWAL</h3>
+                <div class="card-inner">
+                    <img src="{{ asset('assets/tgg-india/images/Motilal.png') }}" alt="Modicare Logo" class="card-img" width="300" height="150" >
+                </div>
+                <div class="button-group">
+                    <button class="btn-outline small">Login</button>
+                    <button class="btn-outline small info-btn">Information</button>
+                </div>
+                <div class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn">&times;</span>
+                        <p>This is information for Motilal</p>
+                    </div>
+                </div>
+            </div>
+
+
             <!-- Woodperker -->
             <div class="card woodperker">
                 <h3 class="card-title">WOODPERKER COLLECTIONS</h3>
-
-                <div class="slider-outer card-inner">
-                    <div class="slider" id="woodpecker-slider" aria-label="Woodpecker image slider">
-                        @if(!empty($showcase->woodpecker_collection))
-                            @foreach($showcase->woodpecker_collection as $img)
-                                <div class="slide">
-                                    <img src="{{ asset($img) }}" alt="Woodpecker image"/>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="slide"><p>No images available</p></div>
-                        @endif
-                    </div>
+                <div class="card-inner">
+                    @if(!empty($showcase->woodpecker_collection))
+                        @foreach($showcase->woodpecker_collection as $img)
+                            <img src="{{ asset($img) }}" alt="Woodpecker image" class="card-img"/>
+                        @endforeach
+                    @else
+                        <img src="{{ asset('assets/tgg-india/images/resized.jpg') }}" alt="Dummy Image" class="card-img" />
+                    @endif
                 </div>
 
-                <button class="btn-outline small">checkout</button>
+                <div class="button-group">
+                    <button class="btn-outline small checkout-btn">Checkout</button>
+                </div>
+
+                <!-- Checkout Modal -->
+                <div class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn">&times;</span>
+                        <p>This is the checkout popup for Woodperker Collections</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- Opportunities -->
-            <div class="card opportunities">
-                <h3 class="card-title">ENTREPRENEURSHIP OPPORTUNITIES</h3>
 
-                @if(!empty($showcase->entrepreneurship_opportunities))
-                    @foreach($showcase->entrepreneurship_opportunities as $key => $opportunity)
-                        <div class="project-row">
-                            <label class="project-left">
-                                <input type="radio" name="project"/>
-                                <span>{{ $opportunity }}</span>
-                            </label>
-                            <button class="btn-outline">GO</button>
-                        </div>
+            <!-- Entrepreneurship Opportunities -->
+            <!-- <div class="card opportunities">
+                <h3 class="card-title">ENTREPRENEURSHIP OPPORTUNITIES</h3>
+                <div class="card-inner">
+                    @if(!empty($showcase->entrepreneurship_opportunities))
+                        @foreach($showcase->entrepreneurship_opportunities as $opportunity)
+                            <div class="project-row">
+                                <label class="project-left">
+                                    <input type="radio" name="project"/>
+                                    <span>{{ $opportunity }}</span>
+                                </label>
+                                <button class="btn-outline">GO</button>
+                            </div>
+                        @endforeach
+                    @else
+                        <p>No opportunities available</p>
+                    @endif
+                </div>
+            </div> -->
+
+            <!-- TGG News -->
+            <div class="card">
+            <h3 class="card-title">TGG NEWS</h3>
+            <div class="card-inner">
+                @if(!empty($showcase->tgg_news))
+                    @foreach($showcase->tgg_news as $news)
+                        <iframe width="100%" height="200" src="{{ $news }}" 
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
                     @endforeach
                 @else
-                    <p>No opportunities available</p>
+                    <p>No news available</p>
                 @endif
             </div>
-        </section>
+        </div>
 
-        <!-- Middle Row -->
-        <section class="row">
-            <div class="card center-box">
-                <h3 class="card-title">TGG NEWS</h3>
-                <div class="slider-outer card-inner">
-                    <div class="slider" id="tgg-news-slider">
-                        @if(!empty($showcase->tgg_news))
-                            @foreach($showcase->tgg_news as $news)
-                                <div class="slide">
-                                    <iframe width="100%" height="220" src="{{ $news }}" 
-                                        frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        allowfullscreen>
-                                    </iframe>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="slide"><p>No news available</p></div>
-                        @endif
-                    </div>
-                </div>
-            </div>
 
-            <div class="card center-box">
+            <!-- Travel -->
+            <div class="card">
                 <h3 class="card-title">TRAVEL UPDATE AND EVENTS</h3>
-                <div class="slider-outer card-inner">
-                    <div class="slider" id="travel-slider">
-                        @if(!empty($showcase->travel_and_events))
+                <div class="card-inner">
+                    <div class="slider">
+                        @if(!empty($showcase->travel_and_events) && count($showcase->travel_and_events) > 0)
                             @foreach($showcase->travel_and_events as $event)
                                 <div class="slide">
-                                    <img src="{{ asset($event) }}" alt="Event Image"/>
+                                    <img src="{{ asset($event) }}" alt="Event Image" class="card-img" />
                                 </div>
                             @endforeach
                         @else
-                            <div class="slide"><p>No events available</p></div>
+                            {{-- Dummy multiple images --}}
+                            <div class="slide">
+                                <img src="{{ asset('assets/tgg-india/images/WOODPERKER.jpg') }}" alt="Dummy 3" class="card-img" />
+                            </div>
+                            <div class="slide">
+                                <img src="{{ asset('assets/tgg-india/images/Modicare.png') }}" alt="Dummy 1" class="card-img" />
+                            </div>
+                            <div class="slide">
+                                <img src="{{ asset('assets/tgg-india/images/Motilal.png') }}" alt="Dummy 2" class="card-img"/>
+                            </div>
                         @endif
+                    </div>
+                </div>
+
+
+                <div class="button-group">
+                    <button class="btn-outline small checkout-btn">Checkout</button>
+                </div>
+
+                <!-- Checkout Modal -->
+                <div class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn">&times;</span>
+                        <p>This is the checkout popup for Travel Update and Events</p>
                     </div>
                 </div>
             </div>
 
-        </section>
 
-        <!-- Bottom Row -->
-        <section class="row">
-            <div class="card center-box">
+            <!-- TGG Homes -->
+            <!-- <div class="card">
                 <h3 class="card-title">TGG HOMES</h3>
                 <div class="slider-outer card-inner">
                     <div class="slider" id="homes-slider">
@@ -118,75 +185,121 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="card opportunities">
+            <!-- Investment Opportunities -->
+            <!-- <div class="card opportunities">
                 <h3 class="card-title">INVESTMENT OPPORTUNITIES</h3>
+                <div class="card-inner">
+                    @if(!empty($showcase->investment_opportunities))
+                        @foreach($showcase->investment_opportunities as $investment)
+                            <div class="project-row">
+                                <label class="project-left">
+                                    <input type="radio" name="investment"/>
+                                    <span>{{ $investment }}</span>
+                                </label>
+                                <button class="btn-outline">INVEST</button>
+                            </div>
+                        @endforeach
+                    @else
+                        <p>No investment opportunities</p>
+                    @endif
+                </div>
+            </div> -->
 
-                @if(!empty($showcase->investment_opportunities))
-                    @foreach($showcase->investment_opportunities as $key => $investment)
-                        <div class="project-row">
-                            <label class="project-left">
-                                <input type="radio" name="investment"/>
-                                <span>{{ $investment }}</span>
-                            </label>
-                            <button class="btn-outline">INVEST</button>
-                        </div>
-                    @endforeach
-                @else
-                    <p>No investment opportunities</p>
-                @endif
+            <!-- TGG Foundation -->
+            <div class="card">
+                <h3 class="card-title">TGG FOUNDATION</h3>
+                <div class="card-inner">
+                    <div class="slider">
+                        @if(!empty($showcase->tgg_foundation) && count($showcase->tgg_foundation) > 0)
+                            @foreach($showcase->tgg_foundation as $item)
+                                <div class="slide">
+                                    <img src="{{ asset($item) }}" alt="TGG Foundation Image" class="card-img"/>
+                                </div>
+                            @endforeach
+                        @else
+                            {{-- Dummy multiple images --}}
+                            <div class="slide">
+                                <img src="{{ asset('assets/tgg-india/images/WOODPERKER.jpg') }}" alt="Dummy Foundation 3" class="card-img" />
+                            </div>
+                            <div class="slide">
+                                <img src="{{ asset('assets/tgg-india/images/Modicare.png') }}" alt="Dummy Foundation 1" class="card-img"/>
+                            </div>
+                            <div class="slide">
+                                <img src="{{ asset('assets/tgg-india/images/Motilal.png') }}" alt="Dummy Foundation 2" class="card-img"/>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-outline small checkout-btn">Checkout</button>
+                </div>
+
+                <!-- Checkout Modal -->
+                <div class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn">&times;</span>
+                        <p>This is the checkout popup for TGG Foundation</p>
+                    </div>
+                </div>
             </div>
-
-        </section>
+        </div>
     </main>
 </div>
+@endsection
 
+@push('scripts')
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    function initSlider(sliderId) {
-        const slider = document.getElementById(sliderId);
-        if (!slider) return;
-
-        const slides = slider.querySelectorAll(".slide");
-        let index = 0;
-        let autoSlideInterval;
-
-        function autoSlide() {
-            index = (index + 1) % slides.length;
-            slider.scrollTo({
-                left: slider.clientWidth * index,
-                behavior: "smooth"
-            });
-        }
-
-        function startAutoSlide() {
-            stopAutoSlide();
-            autoSlideInterval = setInterval(autoSlide, 3000); // 3 sec
-        }
-
-        function stopAutoSlide() {
-            if (autoSlideInterval) clearInterval(autoSlideInterval);
-        }
-
-        slider.addEventListener("scroll", () => {
-            const newIndex = Math.round(slider.scrollLeft / slider.clientWidth);
-            index = newIndex;
-            stopAutoSlide();
-            startAutoSlide();
+    // ==========================
+    // Modal handling
+    // ==========================
+    // Open the correct modal when any trigger button is clicked
+    document.querySelectorAll('.info-btn, .checkout-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const card = button.closest('.card');       // find parent card
+            const modal = card.querySelector('.modal'); // modal inside this card
+            if (modal) modal.style.display = 'flex';
         });
+    });
 
-        startAutoSlide();
-    }
+    // Close modal when X is clicked
+    document.querySelectorAll('.modal .close-btn').forEach(close => {
+        close.addEventListener('click', () => {
+            close.closest('.modal').style.display = 'none';
+        });
+    });
 
-    // Initialize all sliders
-    initSlider("woodpecker-slider");
-    initSlider("tgg-news-slider");
-    initSlider("travel-slider");
-    initSlider("homes-slider");
+    // Close modal when clicking outside modal-content
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+            e.target.style.display = 'none';
+        }
+    });
 
+    // ==========================
+    // Auto slider handling
+    // ==========================
+    document.addEventListener('DOMContentLoaded', () => {
+    const INTERVAL = 2000; // 2 seconds
+
+    document.querySelectorAll('.slider').forEach(slider => {
+        const slides = slider.querySelectorAll('.slide');
+        if (slides.length <= 1) return;
+
+        let index = 0;
+
+        const goTo = i => {
+            slider.scrollTo({ left: slider.clientWidth * i, behavior: 'smooth' });
+        };
+
+        setInterval(() => {
+            index = (index + 1) % slides.length;
+            goTo(index);
+        }, INTERVAL);
+    });
 });
 </script>
+@endpush
 
-@endsection
