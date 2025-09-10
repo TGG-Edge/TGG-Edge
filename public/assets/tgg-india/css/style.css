@@ -901,7 +901,7 @@ button:hover {
     padding: 16px;
     width: 100%;
     max-width: 420px; 
-    height: 200px;
+    height: 235px;
     box-sizing: border-box;
     display: flex;
     /* flex-direction: column; */
@@ -949,9 +949,10 @@ button:hover {
     display: flex;
     width: 100%;
     max-width: 385px;
-    height: 170px;
+    height: 215px;
     scroll-snap-type: x mandatory;
     overflow-x: hidden; /* hide scrollbar */
+   
     
 }
 
@@ -961,6 +962,15 @@ button:hover {
     justify-content: center; /* centers the image horizontally */
     align-items: center;     /* centers the image vertically */
     scroll-snap-align: start;
+
+
+    flex-direction: column;
+}
+
+
+.slide-inner {
+    width: 100%;
+    text-align: center;
 }
 
 .slide img {
