@@ -109,8 +109,28 @@
                 </div>
             </div> -->
 
+            <!-- Freelancing Opportunities -->
+            <div class="card opportunities">
+                <h3 class="card-title">FREELANCING OPPORTUNITIES</h3>
+                <div class="card-inner">
+                    @if(!empty($showcase->freelancing_opportunities))
+                        @foreach($showcase->freelancing_opportunities as $opportunity)
+                            <div class="project-row">
+                                <label class="project-left">
+                                    <input type="radio" name="project"/>
+                                    <span>{{ $opportunity }}</span>
+                                </label>
+                                <button class="btn-outline">GO</button>
+                            </div>
+                        @endforeach
+                    @else
+                        <p>No opportunities available</p>
+                    @endif
+                </div>
+            </div>
+
             <!-- TGG News -->
-            <div class="card">
+            <!-- <div class="card tgg_news">
             <h3 class="card-title">TGG NEWS</h3>
             <div class="card-inner">
                 @if(!empty($showcase->tgg_news))
@@ -125,11 +145,11 @@
                     <p>No news available</p>
                 @endif
             </div>
-        </div>
+        </div> -->
 
 
             <!-- Travel -->
-            <div class="card">
+            <div class="card travel">
                 <h3 class="card-title">TRAVEL UPDATE AND EVENTS</h3>
                 <div class="card-inner">
                     <div class="slider">
@@ -141,6 +161,9 @@
                             @endforeach
                         @else
                             {{-- Dummy multiple images --}}
+                            <div class="slide">
+                                <img src="{{ asset('assets/tgg-india/images/Resize400.jpg') }}" alt="Dummy 3" class="card-img" />
+                            </div>
                             <div class="slide">
                                 <img src="{{ asset('assets/tgg-india/images/WOODPERKER.jpg') }}" alt="Dummy 3" class="card-img" />
                             </div>
@@ -208,7 +231,7 @@
             </div> -->
 
             <!-- TGG Foundation -->
-            <div class="card">
+            <div class="card tgg-foundation ">
                 <h3 class="card-title">TGG FOUNDATION</h3>
                 <div class="card-inner">
                     <div class="slider">
@@ -221,10 +244,10 @@
                         @else
                             {{-- Dummy multiple images --}}
                             <div class="slide">
-                                <img src="{{ asset('assets/tgg-india/images/WOODPERKER.jpg') }}" alt="Dummy Foundation 3" class="card-img" />
+                                <img src="{{ asset('assets/tgg-india/images/Modicare.png') }}" alt="Dummy Foundation 1" class="card-img"/>
                             </div>
                             <div class="slide">
-                                <img src="{{ asset('assets/tgg-india/images/Modicare.png') }}" alt="Dummy Foundation 1" class="card-img"/>
+                                <img src="{{ asset('assets/tgg-india/images/WOODPERKER.jpg') }}" alt="Dummy Foundation 3" class="card-img" />
                             </div>
                             <div class="slide">
                                 <img src="{{ asset('assets/tgg-india/images/Motilal.png') }}" alt="Dummy Foundation 2" class="card-img"/>

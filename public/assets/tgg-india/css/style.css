@@ -839,24 +839,23 @@ button:hover {
 }
 
 /* Welcome Note spans both columns */
-/* Welcome Note spans both columns - updated */
 .dashboard-grid .welcome-note {
     grid-column: span 2;
-    height: auto; /* let height adjust based on content */
+    height: auto;
     display: flex;
     text-align: center;
-    font-size: 14px;      /* smaller/custom font size */
-    font-family: 'Arial', sans-serif; /* custom font */
+    font-size: 14px;
+    font-family: 'Arial', sans-serif;
     font-weight: 500;
-    line-height: 1.4;     /* adjust spacing between lines */
+    line-height: 1.4;
     background: #fff;
     border: 1px solid #d9d9d9;
     border-radius: 12px;
-    padding: 8px;          /* reduced padding for smaller height */
+    padding: 8px;
     box-sizing: border-box;
 }
 
-.card-inner-welcome{
+.card-inner-welcome {
     background: #fff;
     border: 1px solid #d9d9d9;
     border-radius: 12px;
@@ -872,20 +871,20 @@ button:hover {
 
 /* Generic card styling for all cards */
 .dashboard-grid .card {
-    background: #f5f9f5;       /* outer card background */
+    background: #f5f9f5;
     border: 1px solid #d9d9d9;
     border-radius: 14px;
-    padding: 5px;                /* remove outer padding */
+    padding: 5px;
     display: flex;
     width: 100%;
-    height: 300px;
+    height: auto; /* flexible height */
 }
 
 .dashboard-grid-welcome .card {
-    background: #f5f9f5;       /* outer card background */
+    background: #f5f9f5;
     border: 1px solid #d9d9d9;
     border-radius: 14px;
-    padding: 5px;                /* remove outer padding */
+    padding: 5px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -894,21 +893,19 @@ button:hover {
 
 /* Inner white box inside all cards */
 .dashboard-grid .card-inner,
-.dashboard-grid .card:not(.card-inner) > .card-inner { /* fallback for nested inner box */
+.dashboard-grid .card:not(.card-inner) > .card-inner {
     background: #fff;
     border: 1px solid #d9d9d9;
     border-radius: 12px;
     padding: 16px;
     width: 100%;
-    max-width: 420px; 
-    height: 200px;
+    max-width: 420px;
     box-sizing: border-box;
     display: flex;
-    /* flex-direction: column; */
-    /* align-items: center;
-    justify-content: center; */
-    overflow: hidden; 
-    margin: 8px 0;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 8px auto;
 }
 
 /* Card titles */
@@ -920,10 +917,7 @@ button:hover {
     text-align: center;
 }
 
-/* Opportunities cards */
-.opportunities {
-    gap: 10px;
-}
+
 .project-row {
     display: flex;
     align-items: center;
@@ -934,54 +928,102 @@ button:hover {
     background: #fff;
 }
 
-/* Slider outer */
-.card-inner {
-    width: 100%;
-    height: 200px; /* adjust as needed */
-    overflow: hidden;
-    display: flex;
-    /* align-items: center;
-    justify-content: center; */
-    position: relative;
+/* =============================
+   Special card image handling
+   ============================= */
+
+/* Motilal & Modicare (first 2 cards) */
+.dashboard-grid .card:first-child .card-inner,
+.dashboard-grid .card:nth-child(2) .card-inner {
+    width: 420px !important;
+    height: 200px !important;
 }
 
+.dashboard-grid .card:first-child .card-inner img,
+.dashboard-grid .card:nth-child(2) .card-inner img {
+    width: 300px !important;
+    height: 150px !important;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+/* Inner for Woodperker, Travel, TGG News, Foundation */
+.dashboard-grid .card.woodperker .card-inner,
+.dashboard-grid .card.travel .card-inner,
+.dashboard-grid .card.tgg_news .card-inner,
+.dashboard-grid .card.tgg-foundation .card-inner {
+    width: 400px !important;
+    height: 400px !important;
+    display: flex;               /* ✅ flexbox for centering */
+    justify-content: center;     /* horizontal center */
+    align-items: center;         /* vertical center */
+    overflow: hidden;            /* keep it clean */
+    margin: 0 auto;
+}
+
+/* Images inside the big cards */
+.dashboard-grid .card.woodperker .card-inner img,
+.dashboard-grid .card.travel .card-inner img,
+.dashboard-grid .card.tgg_news .card-inner img,
+.dashboard-grid .card.tgg-foundation .card-inner img {
+    width: 400px !important; 
+    height: 400px !important;
+    object-fit: contain; /* ✅ no stretch, keep aspect ratio */
+    border-radius: 8px;
+    display: block;
+}
+
+/* =============================
+   Slider (only if used)
+   ============================= */
 .slider {
     display: flex;
     width: 100%;
-    max-width: 385px;
-    height: 170px;
+    max-width: 400px;
+    height: 400px;
     scroll-snap-type: x mandatory;
-    overflow-x: hidden; /* hide scrollbar */
-    
+    overflow-x: hidden;
 }
 
 .slide {
     flex: 0 0 100%;
     display: flex;
-    justify-content: center; /* centers the image horizontally */
-    align-items: center;     /* centers the image vertically */
+    justify-content: center;
+    align-items: center;
     scroll-snap-align: start;
 }
 
 .slide img {
     width: 100%;
-    max-width: 385px;
-    height: 170px;
+    max-width: 400px;
+    height: 400px;
     border-radius: 6px;
+    object-fit: cover;
+}
+
+.card.woodperker .slider,
+.card.travel .slider,
+.card.tgg_news .slider,
+.card.tgg-foundation .slider {
+    width: 400px !important;
+    height: 400px !important;
+    flex: 0 0 400px !important; /* ensures exact size in flex slider */
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
 }
 
 
 /* Buttons */
-
 .button-group {
     display: flex;
-    justify-content: center; /* center the buttons horizontally */
-    gap: 10px;               /* space between buttons */
-    flex-wrap: wrap;          /* optional: wrap on smaller screens */
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .button-group .btn-outline.small {
-    margin-top: 0;            /* remove top margin for alignment */
+    margin-top: 0;
 }
 
 .btn-outline {
@@ -992,6 +1034,7 @@ button:hover {
     cursor: pointer;
     font-size: 14px;
 }
+
 .btn-outline.small {
     padding: 4px 12px;
     margin-top: 10px;
@@ -999,14 +1042,14 @@ button:hover {
 
 /* Modal overlay */
 .modal {
-    display: none;               /* hidden by default */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5); /* semi-transparent background */
+    background-color: rgba(0,0,0,0.5);
     justify-content: center;
     align-items: center;
 }
@@ -1031,7 +1074,6 @@ button:hover {
     cursor: pointer;
 }
 
-
 /* Responsive */
 @media (max-width: 768px) {
     .dashboard-grid {
@@ -1040,4 +1082,69 @@ button:hover {
     .dashboard-grid .welcome-note {
         grid-column: span 1;
     }
+}
+
+/* freelancing */
+
+/* Freelancing Opportunities card */
+.dashboard-grid .card.opportunities .card-inner {
+    width: 400px !important;
+    height: 400px !important;
+    max-width: 400px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;   /* enables vertical scroll if content exceeds height */
+    overflow-x: hidden; /* hides horizontal scroll */
+}
+
+/* Each project row */
+.project-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fafafa;
+    transition: background 0.2s ease;
+}
+
+.project-row:hover {
+    background: #f0f8f0; /* subtle hover effect */
+}
+
+/* Radio + project text */
+.project-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #333;
+}
+
+.project-left input[type="radio"] {
+    accent-color: #6f7300; /* custom radio button color */
+    cursor: pointer;
+}
+
+/* GO button */
+.project-row .btn-outline {
+    background: #6f7300;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.project-row .btn-outline:hover {
+    background: #565900; /* darker hover */
 }
