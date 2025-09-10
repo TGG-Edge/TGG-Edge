@@ -908,7 +908,7 @@ button:hover {
     /* align-items: center;
     justify-content: center; */
     overflow: hidden; 
-    margin: 8px 0;
+    margin: 8px auto;
 }
 
 /* Card titles */

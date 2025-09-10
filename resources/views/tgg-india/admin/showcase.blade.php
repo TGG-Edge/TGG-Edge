@@ -69,23 +69,23 @@
         </div>
 
         <!-- IMAGE FIELDS -->
-    @foreach(['woodpecker_collection' => 'Woodpecker Collection', 'travel_and_events' => 'Travel & Events', 'tgg_homes' => 'TGG Homes'] as $field => $label)
-        <div class="mb-3">
-            <label for="{{ $field }}" class="form-label">{{ $label }} (Upload Multiple Images)</label>
-            <input type="file" id="{{ $field }}" name="{{ $field }}[]" class="form-control" multiple>
+        @foreach(['woodpecker_collection' => 'Woodpecker Collection', 'travel_and_events' => 'Travel & Events', 'tgg_homes' => 'TGG Homes'] as $field => $label)
+            <div class="mb-3">
+                <label for="{{ $field }}" class="form-label">{{ $label }} (Upload Multiple Images)</label>
+                <input type="file" id="{{ $field }}" name="{{ $field }}[]" class="form-control" multiple>
 
-            <div class="mt-2 d-flex flex-wrap">
-                @foreach($showcase->$field ?? [] as $img)
-                    <div class="position-relative m-1">
-                        <img src="{{ $img }}" width="100" class="rounded shadow">
-                        <label class="d-block text-center small mt-1">
-                            <input type="checkbox" name="remove_{{ $field }}[]" value="{{ $img }}"> Remove
-                        </label>
-                    </div>
-                @endforeach
+                <div class="mt-2 d-flex flex-wrap">
+                    @foreach($showcase->$field ?? [] as $img)
+                        <div class="position-relative m-1">
+                            <img src="{{ $img }}" width="100" class="rounded shadow">
+                            <label class="d-block text-center small mt-1">
+                                <input type="checkbox" name="remove_{{ $field }}[]" value="{{ $img }}"> Remove
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
 
         <!-- TGG NEWS -->
         <div class="form-group">
