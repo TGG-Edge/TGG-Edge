@@ -899,7 +899,8 @@ button:hover {
     border-radius: 12px;
     padding: 16px;
     width: 100%;
-    max-width: 420px;
+    max-width: 420px; 
+    height: 235px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -991,6 +992,15 @@ button:hover {
     justify-content: center;
     align-items: center;
     scroll-snap-align: start;
+
+
+    flex-direction: column;
+}
+
+
+.slide-inner {
+    width: 100%;
+    text-align: center;
 }
 
 .slide img {

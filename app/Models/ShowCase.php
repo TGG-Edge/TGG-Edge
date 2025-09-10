@@ -17,5 +17,6 @@ class Showcase  extends Model
         'tgg_homes' => 'array',
         'tgg_news' => 'array',
         'investment_opportunities' => 'array',
+        'tgg_foundation' => 'array'
     ];
 }
