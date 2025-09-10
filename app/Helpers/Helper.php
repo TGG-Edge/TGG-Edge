@@ -27,3 +27,18 @@ if (!function_exists('featureList')) {
         ];
     }
 }
+
+
+function getEmbedUrl($url) {
+    // For youtu.be links
+    if (preg_match('/youtu\.be\/([^\?]+)/', $url, $matches)) {
+        return "https://www.youtube.com/embed/" . $matches[1];
+    }
+
+    // For youtube.com/watch?v= links
+    if (preg_match('/v=([^\&]+)/', $url, $matches)) {
+        return "https://www.youtube.com/embed/" . $matches[1];
+    }
+
+    return $url; // fallback
+}

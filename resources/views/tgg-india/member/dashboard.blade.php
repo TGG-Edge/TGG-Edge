@@ -34,9 +34,9 @@
                         style=" color: #ffffff;" class="btn-outline small">
                         Login
                     </a>
-                    <a href="#" title=" If you don’t have an account, register first"
+                    <a href="#"
                         style=" color: #ffffff;" class="btn-outline small">
-                        Register
+                        Information
                     </a>
                 </div>
 
@@ -59,7 +59,7 @@
                     </a>
                     <a href="#" title=" If you don’t have an account, register first"
                         style=" color: #ffffff;" class="btn-outline small">
-                        Register
+                        Information
                     </a>
                 </div>
 
@@ -67,7 +67,7 @@
         </section>
         
         <!-- Top Row -->
-        <section class="row top-row">
+        {{-- <section class="row top-row">
             <!-- Woodperker -->
             <div class="card woodperker">
                 <h3 class="card-title">WOODPERKER COLLECTIONS</h3>
@@ -107,7 +107,7 @@
                     <p>No opportunities available</p>
                 @endif
             </div>
-        </section>
+        </section> --}}
 
         <!-- Middle Row -->
         <section class="row">
@@ -118,7 +118,7 @@
                         @if(!empty($showcase->tgg_news))
                             @foreach($showcase->tgg_news as $news)
                                 <div class="slide">
-                                    <iframe width="100%" height="220" src="{{ $news }}" 
+                                    <iframe width="100%" height="220" src="{{ getEmbedUrl($news) }}" 
                                         frameborder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                         allowfullscreen>
@@ -132,7 +132,7 @@
                 </div>
             </div>
 
-            <div class="card center-box">
+            {{-- <div class="card center-box">
                 <h3 class="card-title">TRAVEL UPDATE AND EVENTS</h3>
                 <div class="slider-outer card-inner">
                     <div class="slider" id="travel-slider">
@@ -147,12 +147,12 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </section>
 
         <!-- Bottom Row -->
-        <section class="row">
+        {{-- <section class="row">
             <div class="card center-box">
                 <h3 class="card-title">TGG HOMES</h3>
                 <div class="slider-outer card-inner">
@@ -188,7 +188,7 @@
                 @endif
             </div>
 
-        </section>
+        </section> --}}
     </main>
 </div>
 

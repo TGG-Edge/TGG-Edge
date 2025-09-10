@@ -10,8 +10,9 @@ use App\Http\Controllers\TggIndia\RegisterController;
 use App\Http\Controllers\TggIndia\Trainer\ChapterController;
 use App\Http\Controllers\TggIndia\Trainer\LinkController;
 use App\Http\Controllers\TggIndia\Trainer\LiteratureController;
+use App\Http\Controllers\TggIndia\Trainer\PricingController;
 use App\Http\Controllers\TggIndia\Trainer\SectionController;
-use App\Http\Controllers\TggIndia\Trainer\videoController;
+use App\Http\Controllers\TggIndia\Trainer\VideoController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -128,7 +129,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
     Route::prefix('videos')->name('videos.')->group(function () {
 
-      Route::get('/index', [videoController::class, 'index'])->name('index');
+      Route::get('/index', [VideoController::class, 'index'])->name('index');
       Route::get('/create', [VideoController::class, 'create'])->name('create');
       Route::post('/store', [VideoController::class, 'store'])->name('store');
       Route::get('/edit/{id}', [VideoController::class, 'edit'])->name('edit');
@@ -138,6 +139,9 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       Route::get('/aigen', [VideoController::class, 'aigen'])->name('aigen');
 
     });
+
+    Route::resource('feature-limits', \App\Http\Controllers\TggIndia\Trainer\FeatureLimitController::class);
+
   });
 
 
