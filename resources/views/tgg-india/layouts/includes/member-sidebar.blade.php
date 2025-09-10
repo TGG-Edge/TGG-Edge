@@ -9,54 +9,120 @@
         $hasLiteratures = $features->contains('feature_key', 'literatures');
         $hasLinks = $features->contains('feature_key', 'links');
         $hasVideos = $features->contains('feature_key', 'videos');
+        $otherAccounts = \App\Models\UserSecondary::where('email', $user->email)->where('id', '!=', $user->id)->get();
+        $literatures = \App\Models\Literature::get();
+        $assignments = \App\Models\AssignmentSecondary::where('assigned_to', auth('web2')->id())->get();
     @endphp
-    <a href="#" class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
+    <a href="{{ route('tgg-india.member.dashboard') }}"
+        class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
         <i class="fas fa-tachometer-alt"></i> Dashboard
     </a>
 
     <a href="{{ route('tgg-india.member.profile.index') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i
             class="fas fa-user"></i> Profile</a>
 
+
+    @if ($otherAccounts->count() > 0)
+        <div class="dropdown mt-2">
+            <a href="#"
+                class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-india/switch*') ? 'active' : '' }}"
+                data-bs-toggle="collapse" data-bs-target="#switchAccountDropdown"
+                aria-expanded="{{ request()->is('tgg-edge/tgg-india/switch*') ? 'true' : 'false' }}">
+                <span><i class="fas fa-exchange-alt me-2"></i> Switch Account</span>
+                <i class="fas fa-caret-down"></i>
+            </a>
+            <div class="collapse ps-3 {{ request()->is('tgg-india/switch*') ? 'show' : '' }}"
+                id="switchAccountDropdown">
+                @foreach ($otherAccounts as $account)
+                    <a href="{{ route('tgg-india.switch.account', $account->id) }}" class="d-block py-1"
+                        target="_blank">
+                        <i class="fas fa-user me-2"></i>
+                        Switch to {{ ucfirst($account->role_name ?? 'N/A') }} Dashboard
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
+    @endif
+
+    @if ($assignments->count() > 0)
+        <a href="{{ route('tgg-india.member.assignments.index') }}"
+            class="{{ request()->is('tgg-edge/tgg-fct/assignee/assignments') ? 'active' : '' }}">
+            <i class="fas fa-book"></i> Assignments
+        </a>
+    @endif
+
     @if ($investmentModules->isNotEmpty())
         <div class="dropdown">
+            {{-- Main Investment Dropdown --}}
             <a href="#"
-                class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/research-assistance/*') ? 'active ' : '' }}"
-                data-bs-toggle="collapse" data-bs-target="#researchDropdown" aria-expanded="false">
+                class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-meta/tgg-india/member/modules*') ? 'active' : '' }}"
+                data-bs-toggle="collapse" data-bs-target="#researchDropdown"
+                aria-expanded="{{ request()->is('tgg-meta/tgg-india/member/modules*') ? 'true' : 'false' }}">
                 <span><i class="fas fa-flask"></i> Investment </span>
                 <i class="fas fa-caret-down"></i>
             </a>
 
-            <div class="collapse ps-3 {{ request()->is('user/research-assistance/*') ? 'show ' : '' }}"
+            <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/member/modules*') ? 'show' : '' }}"
                 id="researchDropdown">
+
+                {{-- ================= Literatures ================= --}}
                 @if ($hasLiteratures)
-                    {{-- Literature Dropdown --}}
-                    @foreach (\App\Models\Literature::get() as $literature)
-                        <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center"
+
+                    @foreach ($literatures as $literature)
+                        @php
+                            $literatureActive = request()->is('tgg-meta/tgg-india/member/modules/chapters/*');
+                        @endphp
+
+                        <a href="#"
+                            class="dropdown-toggle d-flex justify-content-between align-items-center {{ $literatureActive ? 'active' : '' }}"
                             data-bs-toggle="collapse" data-bs-target="#literature-{{ $literature->id }}"
-                            aria-expanded="false" title="{{ $literature->title }}">
-                            <span><i class="fas fa-book"></i> Literature </span>
+                            aria-expanded="{{ $literatureActive ? 'true' : 'false' }}"
+                            title="{{ $literature->title }}">
+                            <span><i class="fas fa-book"></i>Literature</span>
                             <i class="fas fa-caret-down"></i>
                         </a>
                         @if ($literature->sections && $literature->sections->count() > 0)
-                            <div class="collapse ps-3" id="literature-{{ $literature->id }}">
-
-                                {{-- Loop through sections --}}
+                            <div class="collapse ps-3 {{ $literatureActive ? 'show' : '' }}"
+                                id="literature-{{ $literature->id }}">
+                                {{-- Loop Sections --}}
                                 @foreach ($literature->sections as $section)
-                                    @if ($section->chapters && $section->chapters->count() > 0)
-                                        <a href="#"
-                                            class="dropdown-toggle d-flex justify-content-between align-items-center"
-                                            data-bs-toggle="collapse" data-bs-target="#section-{{ $section->id }}"
-                                            aria-expanded="false" title="{{ $section->title }}">
-                                            <span><i class="fas fa-list"></i> Section</span>
-                                            <i class="fas fa-caret-down"></i>
-                                        </a>
+                                    @php
+                                        // Check if any chapter inside this section is active
+                                        $sectionActive = false;
+                                        if ($section->chapters && $section->chapters->count() > 0) {
+                                            foreach ($section->chapters as $chapter) {
+                                                if (
+                                                    request()->is(
+                                                        'tgg-meta/tgg-india/member/modules/chapters/' . $chapter->id,
+                                                    )
+                                                ) {
+                                                    $sectionActive = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    @endphp
 
-                                        <div class="collapse ps-3" id="section-{{ $section->id }}">
-                                            {{-- Loop chapters --}}
+                                    <a href="#"
+                                        class="dropdown-toggle d-flex justify-content-between align-items-center {{ $sectionActive ? 'active' : '' }}"
+                                        data-bs-toggle="collapse" data-bs-target="#section-{{ $section->id }}"
+                                        aria-expanded="{{ $sectionActive ? 'true' : 'false' }}"
+                                        title="{{ $section->title }}">
+                                        <span><i class="fas fa-list"></i> {{ $section->title }}</span>
+                                        <i class="fas fa-caret-down"></i>
+                                    </a>
+
+                                    {{-- Loop Chapters --}}
+                                    @if ($section->chapters && $section->chapters->count() > 0)
+                                        <div class="collapse ps-3 {{ $sectionActive ? 'show' : '' }}"
+                                            id="section-{{ $section->id }}">
                                             @foreach ($section->chapters as $chapter)
                                                 <a href="{{ route('tgg-india.member.modules.chapters', $chapter->id) }}"
-                                                    title="{{ $chapter->title }}"><i
-                                                        class="fas fa-book"></i>Chapter</a>
+                                                    title="{{ $chapter->title }}"
+                                                    class="{{ request()->is('tgg-meta/tgg-india/member/modules/chapters/' . $chapter->id) ? 'active' : '' }}">
+                                                    <i class="fas fa-book"></i> {{ $chapter->title }}
+                                                </a>
                                             @endforeach
                                         </div>
                                     @endif
@@ -66,41 +132,44 @@
                     @endforeach
                 @endif
 
-                {{-- Links --}}
-                 @if ($hasLinks)
-                <a href="{{ route('tgg-india.member.modules.links') }}"><i class="fas fa-link"></i> Links</a>
+                {{-- ================= Links ================= --}}
+                @if ($hasLinks)
+                    <a href="{{ route('tgg-india.member.modules.links') }}"
+                        class="{{ request()->is('tgg-meta/tgg-india/member/modules/links') ? 'active' : '' }}">
+                        <i class="fas fa-link"></i> Links
+                    </a>
                 @endif
 
-                {{-- Videos --}}
+                {{-- ================= Videos ================= --}}
                 @if ($hasVideos)
-                <a href="{{ route('tgg-india.member.modules.videos') }}"><i class="fas fa-video"></i> Videos</a>
+                    <a href="{{ route('tgg-india.member.modules.videos') }}"
+                        class="{{ request()->is('tgg-meta/tgg-india/member/modules/videos') ? 'active' : '' }}">
+                        <i class="fas fa-video"></i> Videos
+                    </a>
                 @endif
-
-
-
             </div>
         </div>
-
     @endif
 
-        {{-- WhatsApp Message Admin Box --}}
-        <div class="mt-4 p-4 border rounded bg-light text-center shadow-sm" style="min-height: 220px;">
-            <h6 class="fw-bold mb-3 text-dark">
-                <i class="fab fa-whatsapp text-success me-1"></i> Message Admin
-            </h6>
 
-            <p class="small text-muted mb-4">
-                Need help? Chat directly with the admin on WhatsApp.
-            </p>
+    <a href="{{ route('tgg-india.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>
+    {{-- WhatsApp Message Admin Box --}}
+    <div class="mt-4 p-4 border rounded bg-light text-center shadow-sm" style="min-height: 220px;">
+        <h6 class="fw-bold mb-3 text-dark">
+            <i class="fab fa-whatsapp text-success me-1"></i> Message Admin
+        </h6>
 
-            {{-- 🔗 Replace 919995329536 with admin WhatsApp number --}}
-            {{-- And replace the text after ?text= with your own message (use %20 for spaces) --}}
-            <a href="https://wa.me/919995329536/?text=Hello%20Admin,%20I%20need%20some%20help." 
-            target="_blank"   
+        <p class="small text-muted mb-4">
+            Need help? Chat directly with the admin on WhatsApp.
+        </p>
+
+        {{-- 🔗 Replace 919995329536 with admin WhatsApp number --}}
+        {{-- And replace the text after ?text= with your own message (use %20 for spaces) --}}
+        <a href="https://wa.me/919995329536/?text=Hello%20Admin,%20I%20need%20some%20help." target="_blank"
             class="btn btn-success w-100 d-flex align-items-center justify-content-center py-2">
-                <i class="fab fa-whatsapp me-2"></i> Start Chat
-            </a>
-        </div>
+            <i class="fab fa-whatsapp me-2"></i> Start Chat
+        </a>
+    </div>
 
 
     {{-- 

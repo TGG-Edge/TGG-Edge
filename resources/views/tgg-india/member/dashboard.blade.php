@@ -7,6 +7,9 @@
     @include('tgg-india.layouts.includes.message')
 
     <main class="dashboard-main">
+          <!-- Top Row -->
+    <section class="row top-row">
+
         <div class="dashboard-grid-welcome">
 
             <!-- Welcome Note (spans 2 columns) -->
@@ -61,7 +64,56 @@
                 </div>
             </div>
 
+            <!-- Woodperker -->
+            <div class="card woodperker">
+                <h3 class="card-title">MODICARE</h3>
 
+                <div class="slider-outer card-inner">
+                    <div class="slider" id="#" aria-label="Woodpecker image slider">
+                                <div class="slide">
+                                    <img src="{{ asset('assets/tgg-india/images/modicare.jpeg') }}" alt="modicare image"/>
+                                </div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 5px; align-items: center;">
+                    <a href="https://www.modicare.com/sign-in" 
+                        style=" color: #ffffff;" class="btn-outline small">
+                        Login
+                    </a>
+                    <a href="#"
+                        style=" color: #ffffff;" class="btn-outline small">
+                        Information
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Opportunities -->
+            <div class="card opportunities">
+                <h3 class="card-title">INVESTMENT MOTILALOSAWAL</h3>
+                         <div class="slider-outer card-inner">
+                    <div class="slider" id="#" aria-label="Woodpecker image slider">
+                                <div class="slide">
+                                    <img src="{{ asset('assets/tgg-india/images/motilal.jpeg') }}" alt="motilal image"/>
+                                </div>
+                    </div>
+                </div>
+                  <div style="display: flex; gap: 5px; align-items: center;">
+                    <a href="https://invest.motilaloswal.com/" 
+                        style=" color: #ffffff;" class="btn-outline small">
+                        Login
+                    </a>
+                    <a href="#" title=" If you don’t have an account, register first"
+                        style=" color: #ffffff;" class="btn-outline small">
+                        Information
+                    </a>
+                </div>
+
+            </div>
+    </section>
+        
+        <!-- Top Row -->
+        {{-- <section class="row top-row">
             <!-- Woodperker -->
             <div class="card woodperker">
                 <h3 class="card-title">WOODPERKER COLLECTIONS</h3>
@@ -145,7 +197,33 @@
                     <p>No news available</p>
                 @endif
             </div>
-        </div> -->
+        </section> --}}
+
+        <!-- Middle Row -->
+        <section class="row">
+            <div class="card center-box">
+                <h3 class="card-title">TGG NEWS</h3>
+                <div class="slider-outer card-inner">
+                    <div class="slider" id="tgg-news-slider">
+                        @if(!empty($showcase->tgg_news))
+                            @foreach($showcase->tgg_news as $news)
+                                <div class="slide">
+                                    <iframe width="100%" height="220" src="{{ getEmbedUrl($news) }}" 
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="slide"><p>No news available</p></div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+        <div class="card center-box">
+        </div>
 
 
             <!-- Travel -->
@@ -177,6 +255,8 @@
                     </div>
                 </div>
 
+            </div>
+
 
                 <div class="button-group">
                     <button class="btn-outline small checkout-btn">Checkout</button>
@@ -191,6 +271,11 @@
                 </div>
             </div>
 
+
+
+        <!-- Bottom Row -->
+        {{-- <section class="row">
+            <div class="card center-box">
 
             <!-- TGG Homes -->
             <!-- <div class="card">
@@ -228,7 +313,7 @@
                         <p>No investment opportunities</p>
                     @endif
                 </div>
-            </div> -->
+            </div> --}}
 
             <!-- TGG Foundation -->
             <div class="card tgg-foundation ">
@@ -268,6 +353,10 @@
                     </div>
                 </div>
             </div>
+
+
+      {{--  </section> --}}
+
         </div>
     </main>
 </div>

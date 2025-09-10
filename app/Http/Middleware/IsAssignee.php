@@ -17,14 +17,24 @@ class IsAssignee
     public function handle(Request $request, Closure $next): Response
     {
         
-        $isWebAssignee = Auth::guard('web')->check() && (auth('web')->user()->user_role === '5' || auth('web')->user()->user_role === 5 );
-       
-
-        if ($isWebAssignee) {
-            return $next($request);
+        // If not logged in
+        if (!Auth::guard('web')->check()) {
+            return redirect()->route('tgg-india.login');
         }
-        
-        return abort(403, 'Unauthorized access.');
+
+        $user = auth('web')->user();
+
+        // Must be role = 5
+        if ((string) $user->user_role !== '5') {
+            return abort(403, 'Unauthorized access.');
+        }
+
+        // Must be approved
+        if ($user->approval !== 'accepted') {
+            return abort(403, 'Your approval is not accepted yet. Please contact admin.');
+        }
+
+        return $next($request);
 
     }
 }

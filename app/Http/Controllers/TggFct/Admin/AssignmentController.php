@@ -21,7 +21,7 @@ class AssignmentController extends Controller
 
     public function create()
     {
-        $users = User::all(); // All users who can be assignees
+        $users = User::where('user_role',5)->get(); // All users who can be assignees
         return view('tgg-fct.admin.assignments.create', compact('users'));
     }
 
@@ -50,7 +50,7 @@ class AssignmentController extends Controller
 
      public function edit(Assignment $assignment)
     {
-        $users = User::all();
+        $users = User::where('user_role',5)->get();
         return view('tgg-fct.admin.assignments.edit', compact('assignment', 'users'));
     }
 

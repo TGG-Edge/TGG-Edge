@@ -386,7 +386,7 @@ header {
     align-items: center;
     padding: 0 30px;
     background: #fff;
-    height: 100px;
+    height: 95px;
 }
 
 .header-container {
@@ -504,11 +504,22 @@ header {
 
 /* Footer */
 
+.footer-b{
+        font-family: "Bellefair", Sans-serif;
+    font-size: 15px;
+    letter-spacing: 2.3px;
+    color: #FFFFFF;
+    position: absolute !important;
+    bottom: 0px;
+    margin-left: 32%;
+}
+
+
 .footer-container {
     position: relative;
     display: flex;
     justify-content: space-between;
-    padding: 40px 60px;
+    padding: 20px 70px;
     color: #ffffff;
     font-family: "Bellefair", Sans-serif;
     height: 390px;
@@ -701,7 +712,7 @@ header {
 }
 
 .footer-top-meta img.tgg-meta-logo {
-    height: 30px; /* adjust size */
+    height: 40px; /* adjust size */
     vertical-align: middle;
 }
 

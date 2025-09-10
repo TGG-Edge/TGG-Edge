@@ -17,13 +17,10 @@
                     <input type="text" name="title" class="form-control" id="title" placeholder="Enter title">
                 </div>
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" 
-                           name="title" 
-                           class="form-control" 
-                           id="title" 
-                           value="{{ old('title', $chapter->title ?? '') }}"
-                           placeholder="Enter title">
+                    <label for="content" class="form-label">content</label>
+                    <textarea id="content" name="content" class="form-control js-ckeditor" rows="5">
+                        {!! old('content') !!}
+                    </textarea>
                 </div>
                 <button type="submit" class="btn btn-primary save-button">Save</button>
             </form>

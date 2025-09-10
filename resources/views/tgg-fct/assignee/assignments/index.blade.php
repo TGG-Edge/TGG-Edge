@@ -18,6 +18,7 @@
                 <th>Task Type</th>
                 <th>Status</th>
                 <th>Due Date</th>
+                 <th>Created By</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <td>{{ $assignment->task_type }}</td>
                 <td>{{ ucfirst($assignment->status) }}</td>
                 <td>{{ $assignment->due_date ?? '-' }}</td>
+                  <td>{{ $assignment->creator?->name }}</td>
                 <td>
                     <div class="d-flex align-items-center justify-content-center">
                     <a href="{{ route('tgg-fct.assignee.assignments.edit', $assignment) }}" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 

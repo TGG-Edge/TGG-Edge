@@ -4,7 +4,7 @@
   <title>@yield('title', 'TGG Edge | TGG India Dashboard')</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="{{ asset('assets/tgg-india/images/tgg-fnd-logo-new.png') }}" type="image/x-icon">
+  <link rel="icon" href="{{ asset('assets/tgg-india/images/tgg-india-fav.jpg') }}" type="image/x-icon">
 
   <!-- Fonts and Styles -->
    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
@@ -50,7 +50,7 @@
           </div>
         @else
         <div class="col-md-3 tgg-sidebar">
-          @if( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 1 || request()->is('tgg-edge/tgg-india/admin/*'))
+          @if( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 1 )
               @include('tgg-india.layouts.includes.admin-sidebar')
           @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 2)
               @include('tgg-india.layouts.includes.trainer-sidebar')

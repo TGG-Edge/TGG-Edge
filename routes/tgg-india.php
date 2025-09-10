@@ -10,8 +10,9 @@ use App\Http\Controllers\TggIndia\RegisterController;
 use App\Http\Controllers\TggIndia\Trainer\ChapterController;
 use App\Http\Controllers\TggIndia\Trainer\LinkController;
 use App\Http\Controllers\TggIndia\Trainer\LiteratureController;
+use App\Http\Controllers\TggIndia\Trainer\PricingController;
 use App\Http\Controllers\TggIndia\Trainer\SectionController;
-use App\Http\Controllers\TggIndia\Trainer\videoController;
+use App\Http\Controllers\TggIndia\Trainer\VideoController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,6 +21,8 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
   Route::get('/login', [LoginController::class, 'show'])->name('show');
   Route::post('/login', [LoginController::class, 'login'])->name('login');
+  Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+  Route::get('/switch/account/{id}', [LoginController::class, 'switchAccount'])->name('switch.account');
 
 
   // Public registration routes
@@ -39,6 +42,8 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     Route::get('/dashboard', function () {
       return view('tgg-india.admin.dashboard');
     })->name('dashboard');
+
+    Route::resource('assignments', \App\Http\Controllers\TggIndia\Admin\AssignmentController::class);
 
     Route::prefix('profile')->name('profile.')->group(function () {
       Route::get('/', [ProfileController::class, 'show'])->name('index');
@@ -87,9 +92,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
   // trainer routes 
   Route::middleware('trainer')->prefix('trainer')->name('trainer.')->group(function () {
-    Route::get('/dashboard', function () {
-      return view('tgg-india.trainer.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [\App\Http\Controllers\TggIndia\Trainer\DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('profile')->name('profile.')->group(function () {
       Route::get('/', [\App\Http\Controllers\TggIndia\Trainer\ProfileController::class, 'show'])->name('index');
@@ -126,7 +129,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
     Route::prefix('videos')->name('videos.')->group(function () {
 
-      Route::get('/index', [videoController::class, 'index'])->name('index');
+      Route::get('/index', [VideoController::class, 'index'])->name('index');
       Route::get('/create', [VideoController::class, 'create'])->name('create');
       Route::post('/store', [VideoController::class, 'store'])->name('store');
       Route::get('/edit/{id}', [VideoController::class, 'edit'])->name('edit');
@@ -136,6 +139,9 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       Route::get('/aigen', [VideoController::class, 'aigen'])->name('aigen');
 
     });
+
+    Route::resource('feature-limits', \App\Http\Controllers\TggIndia\Trainer\FeatureLimitController::class);
+
   });
 
 
@@ -161,5 +167,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       Route::get('/', [\App\Http\Controllers\TggIndia\Member\ProfileController::class, 'show'])->name('index');
       Route::post('/profile', [\App\Http\Controllers\TggIndia\Member\ProfileController::class, 'update'])->name('update');
     });
+
+     Route::resource('assignments', \App\Http\Controllers\TggIndia\Member\AssignmentController::class);
   });
 });

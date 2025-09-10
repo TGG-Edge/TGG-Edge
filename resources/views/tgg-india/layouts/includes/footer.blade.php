@@ -1,8 +1,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bellefair&display=swap" rel="stylesheet">
 <div class="footer-top-meta">
-    <p>
-        Powered by 
-        <img src="{{ asset('assets/user/images/TGG_Meta.png') }}" alt="TGG-META Logo" class="tgg-meta-logo">
+    <p style="margin: 0 auto;">
+        <img src="{{ asset('assets/tgg-india/images/TGG_Meta.png') }}" alt="TGG-META Logo" class="tgg-meta-logo">
     </p>
 </div>
 
@@ -70,8 +69,9 @@
             </div>
         </form>
     </div>
-</div>
 
-<div class="footer-bottom">
+    <div class="footer-b">
         <p>© TGG INDIA 2025 I All rights reserved</p>
     </div>
+</div>
+

@@ -16,15 +16,25 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
-        $isWebAdmin = Auth::guard('web')->check() && (auth('web')->user()->user_role === '1' || auth('web')->user()->user_role === 1 );
-        $isWeb2Admin = Auth::guard('web2')->check() && auth('web2')->user()->user_role === '1';
+       $isWebLoggedIn  = Auth::guard('web')->check();
+        $isWeb2LoggedIn = Auth::guard('web2')->check();
 
-        if ($isWebAdmin || $isWeb2Admin) {
+        // If user is not logged in at all
+        if (!$isWebLoggedIn && !$isWeb2LoggedIn) {
+            return redirect()->route('tgg-india.login');
+        }
+
+        // If logged in through web guard
+        if ($isWebLoggedIn && (auth('web')->user()->user_role === '1' || auth('web')->user()->user_role === 1)) {
             return $next($request);
         }
-        
-        return abort(403, 'Unauthorized access.');
 
+        // If logged in through web2 guard
+        if ($isWeb2LoggedIn && (auth('web2')->user()->user_role === '1' || auth('web2')->user()->user_role === 1)) {
+            return $next($request);
+        }
+
+        // Logged in but not admin
+        return abort(403, 'Unauthorized access.');
     }
 }

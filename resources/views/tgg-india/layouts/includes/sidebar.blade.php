@@ -116,4 +116,4 @@
 @endif
 
 
-<a href="{{ route('user.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a> --}}
+<a href="{{ route('tgg-india.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a> --}}

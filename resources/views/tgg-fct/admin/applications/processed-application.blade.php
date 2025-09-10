@@ -1,6 +1,6 @@
 @extends('tgg-fct.layouts.app')
 
-@section('title', 'User Dashboard - TGG Edge')
+@section('title', 'PROCESSED APPLICATIONS - TGG Edge')
 
 @section('content')
 <div class="container-fluid">
@@ -25,7 +25,7 @@
                     <tr>
                         <td>{{ $app->name }}</td>
                         <td>{{ $app->rhm_number }}</td>
-                        <td>{{  $app->user_role == 2 ? 'Researcher' : 'Volunteer'; }}</td>
+                        <td>{{  $app->role_name }}</td>
                         <td>
                              <a href="{{ route('tgg-fct.admin.user-profile',$app->id) }}">View/Edit</a>
                         </td>
