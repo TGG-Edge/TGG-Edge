@@ -899,8 +899,7 @@ button:hover {
     border-radius: 12px;
     padding: 16px;
     width: 100%;
-    max-width: 420px; 
-    height: 235px;
+    max-width: 420px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -948,6 +947,7 @@ button:hover {
     border-radius: 6px;
 }
 
+/* Woodperker, Travel, TGG News, Foundation */
 /* Inner for Woodperker, Travel, TGG News, Foundation */
 .dashboard-grid .card.woodperker .card-inner,
 .dashboard-grid .card.travel .card-inner,
@@ -960,6 +960,8 @@ button:hover {
     align-items: center;         /* vertical center */
     overflow: hidden;            /* keep it clean */
     margin: 0 auto;
+    padding: 0; /* ✅ ensure no padding */
+
 }
 
 /* Images inside the big cards */
@@ -967,9 +969,9 @@ button:hover {
 .dashboard-grid .card.travel .card-inner img,
 .dashboard-grid .card.tgg_news .card-inner img,
 .dashboard-grid .card.tgg-foundation .card-inner img {
-    width: 400px !important; 
-    height: 400px !important;
-    object-fit: contain; /* ✅ no stretch, keep aspect ratio */
+    max-width: 100%;    /* scale down if larger */
+    max-height: 100%;   /* scale down if taller */
+    object-fit: cover; /* ✅ no stretch, keep aspect ratio */
     border-radius: 8px;
     display: block;
 }
@@ -992,15 +994,8 @@ button:hover {
     justify-content: center;
     align-items: center;
     scroll-snap-align: start;
-
-
-    flex-direction: column;
-}
-
-
-.slide-inner {
-    width: 100%;
-    text-align: center;
+    width: 400px;
+    height: 400px;
 }
 
 .slide img {
@@ -1020,9 +1015,19 @@ button:hover {
     flex: 0 0 400px !important; /* ensures exact size in flex slider */
     margin: 0 auto;
     overflow: hidden;
+    display: flex;
     padding: 0;
 }
 
+.card.woodperker .slide img,
+.card.travel .slide img,
+.card.tgg_news .slide img,
+.card.tgg-foundation .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ✅ ensures 400x400 images fill fully */
+    border-radius: 8px;
+}
 
 /* Buttons */
 .button-group {
@@ -1030,10 +1035,6 @@ button:hover {
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-}
-
-.button-group .btn-outline.small {
-    margin-top: 0;
 }
 
 .btn-outline {
@@ -1047,7 +1048,7 @@ button:hover {
 
 .btn-outline.small {
     padding: 4px 12px;
-    margin-top: 10px;
+    margin-top: 10px !important;
 }
 
 /* Modal overlay */
