@@ -897,7 +897,6 @@ button:hover {
     background: #fff;
     border: 1px solid #d9d9d9;
     border-radius: 12px;
-    padding: 16px;
     width: 100%;
     max-width: 420px;
     box-sizing: border-box;
@@ -949,29 +948,68 @@ button:hover {
 
 /* Woodperker, Travel, TGG News, Foundation */
 /* Inner for Woodperker, Travel, TGG News, Foundation */
-.dashboard-grid .card.woodperker .card-inner,
-.dashboard-grid .card.travel .card-inner,
-.dashboard-grid .card.tgg_news .card-inner,
-.dashboard-grid .card.tgg-foundation .card-inner {
+/* === Sliders: Woodperker, Travel, TGG Foundation === */
+.card.woodperker .card-inner,
+.card.travel .card-inner,
+.card.tgg-foundation .card-inner {
+    width: 400px !important;
+    height: auto !important;   /* auto height so button can sit below */
+    display: flex;
+    flex-direction: column;    /* ✅ stack slider + button vertically */
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+}
+
+/* Slider box fixed 400x400 */
+.card.woodperker .slider,
+.card.travel .slider,
+.card.tgg-foundation .slider {
     width: 400px !important;
     height: 400px !important;
-    display: flex;               /* ✅ flexbox for centering */
-    justify-content: center;     /* horizontal center */
-    align-items: center;         /* vertical center */
-    overflow: hidden;            /* keep it clean */
-    margin: 0 auto;
-    padding: 0; /* ✅ ensure no padding */
-
+    overflow: hidden;
+    display: flex;
+    scroll-snap-type: x mandatory;
+    border-radius: 8px;
+    margin-bottom: 10px; /* ✅ gap before button */
 }
+
+/* Each slide */
+.card.woodperker .slide,
+.card.travel .slide,
+.card.tgg-foundation .slide {
+    flex: 0 0 100%;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+}
+
+/* Images inside slider */
+.card.woodperker .slide img,
+.card.travel .slide img,
+.card.tgg-foundation .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* ✅ keep aspect ratio, no stretch */
+    border-radius: 8px;
+    background: #fff;    /* ✅ ensures no weird gaps if transparent */
+}
+
 
 /* Images inside the big cards */
 .dashboard-grid .card.woodperker .card-inner img,
 .dashboard-grid .card.travel .card-inner img,
-.dashboard-grid .card.tgg_news .card-inner img,
 .dashboard-grid .card.tgg-foundation .card-inner img {
     max-width: 100%;    /* scale down if larger */
     max-height: 100%;   /* scale down if taller */
-    object-fit: cover; /* ✅ no stretch, keep aspect ratio */
+    /* object-fit: cover;  */
     border-radius: 8px;
     display: block;
 }
@@ -1025,7 +1063,8 @@ button:hover {
 .card.tgg-foundation .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* ✅ ensures 400x400 images fill fully */
+    object-fit: contain;
+    background: #fff;  /* optional: adds white background for smaller images */
     border-radius: 8px;
 }
 

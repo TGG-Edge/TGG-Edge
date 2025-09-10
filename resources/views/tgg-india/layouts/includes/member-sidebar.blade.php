@@ -153,6 +153,7 @@
 
 
     <a href="{{ route('tgg-india.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>
+
     {{-- WhatsApp Message Admin Box --}}
     <div class="mt-4 p-4 border rounded bg-light text-center shadow-sm" style="min-height: 220px;">
         <h6 class="fw-bold mb-3 text-dark">
@@ -170,6 +171,24 @@
             <i class="fab fa-whatsapp me-2"></i> Start Chat
         </a>
     </div>
+
+    <br>
+        <div class="card tgg_news">
+            <h3 class="card-title">TGG NEWS</h3>
+                <div class="card-inner">
+                    @if (!empty($showcase->tgg_news))
+                        @foreach ($showcase->tgg_news as $news)
+                            <iframe width="100%" height="200" src="{{ getEmbedUrl($news) }}" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                            </iframe>
+                        @endforeach
+                        @else
+                            <p>No news available</p>
+                        @endif
+                </div>
+        </div>
+
 
 
     {{-- 

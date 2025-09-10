@@ -84,17 +84,19 @@
                             @endif
                         </div>
                     </div>
-                    <div class="button-group">
+                    <button type="button" class="btn-outline small checkout-btn"
+                        data-note="{{ e($note) }}" data-html="0">Checkout
+                    </button>
+                    <!-- <div class="button-group">
                         <button class="btn-outline small checkout-btn">Checkout</button>
                     </div>
 
-                    <!-- Checkout Modal -->
                     <div class="modal">
                         <div class="modal-content">
                             <span class="close-btn">&times;</span>
                             <p>This is the checkout popup for Woodperker Collections</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
 
@@ -171,27 +173,26 @@
                                         @endphp
                                         <div class="slide">
                                             <img src="{{ asset($img) }}" alt="Event Image" class="card-img" />
-                                            <div class="button-group mt-2">
-                                                <button type="button" class="btn-outline small checkout-btn"
-                                                    data-note="{{ e($note) }}" data-html="0">Checkout</button>
-                                            </div>
                                         </div>
                                     @endforeach
 
                                 @endif
                         </div>
                     </div>
-                    <div class="button-group">
+                    <button type="button" class="btn-outline small checkout-btn"
+                        data-note="{{ e($note) }}" data-html="0">Checkout
+                    </button>
+                    <!-- <div class="button-group">
                         <button class="btn-outline small checkout-btn">Checkout</button>
                     </div>
-                    <!-- Checkout Modal -->
                     <div class="modal">
                         <div class="modal-content">
                             <span class="close-btn">&times;</span>
                             <p>This is the checkout popup for Travel Update and Events</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
+
                 <!-- TGG Homes -->
                 <!--
                 <div class="card">
@@ -232,6 +233,7 @@
                     </div>
                 </div>
                 -->
+
                 <!-- TGG Foundation -->
                 <div class="card tgg-foundation ">
                     <h3 class="card-title">TGG FOUNDATION</h3>
@@ -245,10 +247,6 @@
                                         @endphp
                                         <div class="slide">
                                             <img src="{{ asset($img) }}" alt="TGG Foundation Image" class="card-img" />
-                                            <div class="button-group mt-2">
-                                                <button type="button" class="btn-outline small checkout-btn"
-                                                    data-note="{{ e($note) }}" data-html="0">Checkout</button>
-                                            </div>
                                         </div>
                                     @endforeach
                                 @else
@@ -267,19 +265,29 @@
                                 @endif
                         </div>
                     </div>
-                    <div class="button-group">
+                    <button type="button" class="btn-outline small checkout-btn"
+                        data-note="{{ e($note) }}" data-html="0">Checkout
+                    </button>
+                    <!-- <div class="button-group">
                         <button class="btn-outline small checkout-btn">Checkout</button>
                     </div>
-                    <!-- Checkout Modal -->
                     <div class="modal">
                         <div class="modal-content">
                             <span class="close-btn">&times;</span>
                             <p>This is the checkout popup for TGG Foundation</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </main>
+    </div>
+
+    <!-- Reusable checkout modal (single) -->
+    <div class="modal" id="checkoutModal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="checkoutModalBody"></div>
+        </div>
     </div>
 @endsection
 @push('scripts')
