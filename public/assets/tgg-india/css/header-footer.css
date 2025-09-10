@@ -384,7 +384,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 40px;
+    padding: 0 30px;
     background: #fff;
     height: 95px;
 }
@@ -402,8 +402,8 @@ header {
 
 /* Logo */
 .logo img {
-    height: 80px;
-    width: 300px;
+    height: 73px;
+    width: 270px;
     padding-left: 20px;
     padding-bottom: 2px;
 }
@@ -412,11 +412,14 @@ header {
 .menu ul {
     display: flex;
     list-style: none;
-    /* margin-right: 160px; */
-    padding: 0;
+    padding: 0 !important;
+    margin: 0;
     gap: 28px;
     font-family: "Belleza", Sans-serif;
     font-weight: 600;
+    margin-right: 20px;
+    padding-bottom: 5px;
+    margin: -7px !important;
 }
 
 .menu ul li a {
@@ -442,7 +445,8 @@ header {
 .right {
     display: flex;
     align-items: center;
-    gap: 150px;
+    gap: 95px;
+    padding-right: 18px;
 }
 
 /* Cart */
@@ -458,6 +462,7 @@ header {
     text-decoration: none;
     position: relative;
     width: 100px;
+    margin-right: 15px;
 }
 
 .cart .cart-count {
@@ -511,56 +516,47 @@ header {
 
 
 .footer-container {
-    position: relative; /* Needed for ::before and ::after */
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: 20px 70px;
     color: #ffffff;
     font-family: "Bellefair", Sans-serif;
-    justify-content: flex-start;
-    height: 430px;
+    height: 390px;
     z-index: 0;
-    overflow: hidden; /* Ensures overlay doesn't spill out */
+    overflow: hidden;
 }
 
-/* Background image layer */
+/* Background image + overlay combined */
 .footer-container::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: url("https://tggindia.com/wp-content/uploads/2020/10/robin-spielmann-591331-unsplash.jpg")
-        center/cover no-repeat;
-    opacity: 1; 
+    background: 
+        linear-gradient(rgba(1, 44, 97, 0.9), rgba(1, 44, 97, 0.9)), /* overlay */
+        url("https://tggindia.com/wp-content/uploads/2020/10/robin-spielmann-591331-unsplash.jpg") center/cover no-repeat;
+    background-blend-mode: normal; /* keeps image sharp, just tinted */
     z-index: 0;
 }
 
-/* Blue overlay layer */
-.footer-container::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 51, 120, 0.86); /* blue with opacity */
+/* Make footer content stay above overlay */
+.footer-container > * {
+    position: relative;
     z-index: 1;
 }
 
-/* Text above both layers */
-.footer-container > * {
-    position: relative;
-    z-index: 2;
-}
-
-.footer-column {
+/* .footer-column {
     flex: 1;
-    /* margin: 0 20px; */
-}
+} */
 
 .footer-column img {
     width: 110px;
     height: auto;
     border-radius: 8px;
     background: white;
-    margin-top: 125px;
-    margin-left: 30px;
+    padding: 10px;
+    margin-top: 140px;
+    margin-right: 50px;
 }
 
 /* .footer-column h3 {
@@ -570,35 +566,30 @@ header {
 } */
 
 .footer-column-contactus h3 {
-    margin-top: 100px !important;
+    margin-top: 120px !important;
     font-size: 19px;
-    margin-right: 90px;
+    margin-left: 130px;
 }
 
 .footer-column-contactus p {
     font-size: 14px;
-    margin-right: 90px;
+    margin-left: 130px;
     margin-top: 20px;
 }
 
 .footer-column-pages h3 {
-    margin-top: 70px;
+    margin-top: 80px;
     font-size: 19px;
-    margin-right: 50px;
+    margin-left: 85px;
     margin-bottom: 20px;
 }
-
-/* .footer-column p {
-    font-size: 15px;
-    line-height: 1.6;
-} */
 
 .footer-column-pages ul {
     list-style: none;
     padding: 0;
     margin: 0;
     font-size: 14px;
-    margin-right: 45px;
+    margin-left: 85px;
 }
 
 .footer-column-pages ul li {
@@ -622,7 +613,7 @@ header {
 .footer-column h3 {
     margin-top: 40px;
     font-size: 19px;
-    margin-right: 20px;
+    margin-left: 63px;
 }
 
 .footer-column form {
@@ -639,14 +630,16 @@ header {
     font-size: 14px;
     margin-bottom: 4px;
     display: block;
+    margin-left: 63px;
 }
 
 .footer-column input[type="text"],
 .footer-column input[type="password"] {
-    width: 270px;
+    width: 290px;
     padding: 8px;
     border: none;
     border-radius: 4px;
+    margin-left: 63px;
 }
 
 .footer-column input[type="checkbox"] {
@@ -660,7 +653,9 @@ header {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 270px;
+    width: 290px;
+    margin-left: 63px;
+    height: 40px;
 }
 
 .footer-column button:hover {
@@ -669,20 +664,38 @@ header {
 
 .footer-column a {
     color: #ffffff;
+    margin-left: 63px;
 }
 
 .footer-bottom {
-    background-color: #0b3a73; /* Same as footer background */
+    position: relative;
     text-align: center;
     padding: 10px 0;
     font-size: 15px;
     color: #fff;
-    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Optional thin line */
+    font-family: "Bellefair", sans-serif;
+    overflow: hidden;
+    z-index: 0;
 }
 
-.footer-bottom p {
+/* Background image + overlay */
+.footer-bottom::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(rgba(1, 44, 97, 0.9), rgba(1, 44, 97, 0.9)), /* overlay */
+        url("https://tggindia.com/wp-content/uploads/2020/10/robin-spielmann-591331-unsplash.jpg") center/cover no-repeat;
+    background-blend-mode: normal;
+    z-index: 0;
+}
+
+/* Keep text above background */
+.footer-bottom p,
+.footer-bottom > * {
+    position: relative;
+    z-index: 1;
     margin: 0;
-    font-family: "Bellefair", sans-serif;
 }
 
 .footer-top-meta {
