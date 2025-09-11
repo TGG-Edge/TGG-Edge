@@ -173,21 +173,29 @@
     </div>
 
     <br>
-        <div class="card tgg_news">
-            <h3 class="card-title">TGG NEWS</h3>
-                <div class="card-inner">
-                    @if (!empty($showcase->tgg_news))
-                        @foreach ($showcase->tgg_news as $news)
+    <div class="card tgg_news">
+        <h3 class="card-title">TGG NEWS</h3>
+        <div class="card-inner">
+            <div class="slider" style="
+                height: 220px !important;
+                width: auto !important">
+                @if (!empty($showcase->tgg_news))
+                    @foreach ($showcase->tgg_news as $news)
+                        <div class="slide " style="
+                                height: 220px !important;
+                                width: auto !important margin: 10px !important;">
                             <iframe width="100%" height="200" src="{{ getEmbedUrl($news) }}" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen>
                             </iframe>
-                        @endforeach
-                        @else
-                            <p>No news available</p>
-                        @endif
-                </div>
+                        </div>
+                    @endforeach
+                @else
+                    <p>No news available</p>
+                @endif
+            </div>
         </div>
+    </div>
 
 
 

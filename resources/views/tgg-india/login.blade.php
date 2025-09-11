@@ -14,7 +14,7 @@
     <div class="row justify-content-center align-items-center">
         {{-- Left Image --}}
         <div class="col-md-7 d-none d-md-block text-center">
-            <img src="{{ asset('assets/tgg-india/images/login-right.jpg') }}" alt="TGG Edge Login" class="img-fluid rounded-4 shadow" style="height: 500px">
+            <img src="{{ asset('assets/tgg-india/images/login-2.png') }}" alt="TGG Edge Login" class="img-fluid rounded-4 shadow" style="height: 500px">
         </div>
 
         {{-- Right Login Form --}}

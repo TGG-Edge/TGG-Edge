@@ -62,12 +62,12 @@
                 </div>
 
                 <!-- ENTREPRENEURSHIP -->
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="entrepreneurship_opportunities" class="form-label">Entrepreneurship Opportunities (comma
                         separated)</label>
                     <input type="text" name="entrepreneurship_opportunities" class="form-control"
                         value="{{ old('entrepreneurship_opportunities', implode(',', $showcase->entrepreneurship_opportunities ?? [])) }}">
-                </div>
+                </div> --}}
 
                 <!-- IMAGE FIELDS -->
                 @foreach ([
@@ -87,16 +87,24 @@
                                     // item may be string (old data) or array ['img'=>..., 'note'=>...]
                                     $imgPath = is_array($item) ? $item['img'] ?? '' : $item;
                                     $note = is_array($item) ? $item['note'] ?? '' : '';
+
+                                    $isLive = (request()->getHost() === 'thegoldengreens.com');
+                                    $filename = basename($imgPath);
+
+                                    // Re-assign $imgPath based on environment
+                                    $imgPath = $isLive
+                                        ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
+                                        : $imgPath;
                                 @endphp
 
-                                <div class="position-relative m-1 p-2 border rounded" style="width:150px;">
-                                    <img src="{{ $imgPath }}" width="100" class="rounded shadow mb-1">
+                                <div class="position-relative m-1 p-2 border rounded" style="width: 49%;">
+                                    <img src="{{ $imgPath }}" width="200" style="    margin-left: 6.5rem !important;" class="rounded shadow mb-1">
                                     <label class="d-block text-center small mb-1">
                                         <input type="checkbox" name="remove_{{ $field }}[]"
                                             value="{{ $imgPath }}"> Remove
                                     </label>
 
-                                    <textarea name="{{ $field }}_notes[]" class="form-control form-control-sm" rows="2"
+                                    <textarea name="{{ $field }}_notes[]" class="form-control form-control-sm " rows="2"
                                         placeholder="Checkout note (for this image)">{{ $note }}</textarea>
                                     <input type="hidden" name="{{ $field }}_existing[]"
                                         value="{{ $imgPath }}">
@@ -111,18 +119,6 @@
                     </div>
                 @endforeach
 
-                <!-- Single checkout textareas for Modicare & Motilal -->
-                <div class="mb-3">
-                    <label for="modicare_checkout" class="form-label">Modicare Information Note</label>
-                    <textarea id="modicare_checkout" name="modicare_checkout" class="form-control" rows="3">{{ old('modicare_checkout', $showcase->modicare_checkout ?? '') }}</textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label for="motilal_checkout" class="form-label">Motilal Oswal Information Note</label>
-                    <textarea id="motilal_checkout" name="motilal_checkout" class="form-control" rows="3">{{ old('motilal_checkout', $showcase->motilal_checkout ?? '') }}</textarea>
-                </div>
-
-
                 <!-- TGG NEWS -->
                 <div class="form-group">
                     <label for="tgg_news" class="form-label">TGG News (YouTube URLs, comma separated)</label>
@@ -132,10 +128,21 @@
 
                 <!-- INVESTMENT -->
                 <div class="form-group">
-                    <label for="investment_opportunities" class="form-label">Investment Opportunities (comma
+                    <label for="investment_opportunities" class="form-label">Freelancing Opportunities (comma
                         separated)</label>
                     <input type="text" name="investment_opportunities" class="form-control"
                         value="{{ old('investment_opportunities', implode(',', $showcase->investment_opportunities ?? [])) }}">
+                </div>
+
+                <!-- Single checkout textareas for Modicare & Motilal -->
+                <div class="mb-3">
+                    <label for="modicare_checkout" class="form-label">Modicare Information Note</label>
+                    <textarea id="modicare_checkout" name="modicare_checkout" class="form-control" rows="3">{{ old('modicare_checkout', $showcase->modicare_checkout ?? '') }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="motilal_checkout" class="form-label">Motilal Oswal Information Note</label>
+                    <textarea id="motilal_checkout" name="motilal_checkout" class="form-control" rows="3">{{ old('motilal_checkout', $showcase->motilal_checkout ?? '') }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update Showcase</button>
