@@ -228,7 +228,7 @@ body {
 /* APPLY Button */
 #applyBtn {
     margin-top: 15px;
-    background-color: #8f9400; /* Olive Green */
+    background-color: #265475;
     color: white;
     border: none;
     width: 100%;
@@ -334,7 +334,7 @@ table tr:nth-child(even) {
 table button {
     padding: 3px;
     width: 80px;
-    background-color: #8f9400;
+    background-color: #265475;
     border: none;
     color: white;
     font-weight: bold;
@@ -474,7 +474,7 @@ body {
 }
 
 .update-box button {
-    background-color: #8f9400;
+    background-color: #265475;
     color: white;
     font-weight: bold;
     font-size: 14px;
@@ -715,8 +715,8 @@ button:hover {
 }
 
 .save-button {
-    background-color: #6f7300 !important;
-    border-color: #6f7300 !important;
+    background-color: #265475 !important;
+    border-color: #265475 !important;
 }
 
 .choices {
@@ -732,8 +732,8 @@ button:hover {
     font-weight: 500;
     margin-right: 3.75px;
     margin-bottom: 3.75px;
-    background-color: #6f7300 !important;
-    border: 1px solid #6f7300 !important;
+    background-color: #265475 !important;
+    border: 1px solid #265475 !important;
     color: #fff;
     word-break: break-all;
     box-sizing: border-box;
@@ -744,8 +744,8 @@ button:hover {
 }
 
 .create-button {
-    background-color: #6f7300 !important;
-    border-color: #6f7300 !important;
+    background-color: #265475 !important;
+    border-color: #265475 !important;
     height: 40px;
 }
 
@@ -1077,7 +1077,7 @@ button:hover {
 }
 
 .btn-outline {
-    background: #6f7300;
+    background: #265475;
     border: 1px solid #bdbdbd;
     border-radius: 999px;
     padding: 6px 16px;
@@ -1137,19 +1137,31 @@ button:hover {
 /* freelancing */
 
 /* Freelancing Opportunities card */
+.dashboard-grid .card.opportunities {
+    width: 100% ;
+    height: auto ;
+    background: #f5f9f5;
+    border: 1px solid #d9d9d9;
+    border-radius: 14px;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
 .dashboard-grid .card.opportunities .card-inner {
-    width: 400px !important;
-    height: 400px !important;
-    max-width: 400px;
+    width: 400px;
+    height: 400px;
     background: #fff;
     border: 1px solid #d9d9d9;
     border-radius: 12px;
     padding: 12px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;   /* enables vertical scroll if content exceeds height */
-    overflow-x: hidden; /* hides horizontal scroll */
+    display: block;
+    /* flex-direction: column; */
+    overflow-y: auto;     /* vertical scrollbar appears when items overflow */
+    overflow-x: hidden;   
 }
 
 /* Each project row */
@@ -1163,6 +1175,7 @@ button:hover {
     border-radius: 8px;
     background: #fafafa;
     transition: background 0.2s ease;
+    width: 100%;
 }
 
 .project-row:hover {
@@ -1179,13 +1192,13 @@ button:hover {
 }
 
 .project-left input[type="radio"] {
-    accent-color: #6f7300; /* custom radio button color */
+    accent-color: #265475; /* custom radio button color */
     cursor: pointer;
 }
 
 /* GO button */
 .project-row .btn-outline {
-    background: #6f7300;
+    background: #265475;
     color: #fff;
     border: none;
     border-radius: 999px;
