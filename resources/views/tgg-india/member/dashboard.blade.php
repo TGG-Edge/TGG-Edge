@@ -1,6 +1,12 @@
 @extends('tgg-india.layouts.app')
 @section('title', 'Dashboard | TGG Meta | TGG India')
+
 @section('content')
+     <style>
+        .checkout-btn:hover{
+    background-color: #0056b3 !important;
+        }
+     </style>
     <div class="admin-container">
         @include('tgg-india.layouts.includes.message')
         <main class="dashboard-main">
@@ -10,7 +16,7 @@
                 <section class="welcome-note card">
                     <div class="card-inner-welcome">
                         <p>
-                            {!! $showcase->welcome_note ??
+                            {!! $showcase->welcome_note_member  ??
                                 'Welcome to the Volunteer Dashboard! Explore the Woodperker collections, review entrepreneurship opportunities, and keep an eye on the latest updates below.' !!}
                         </p>
                     </div>
@@ -30,7 +36,7 @@
                         <a href="https://www.modicare.com/sign-in" style="
                             color: white;
                             text-decoration: none;
-                        " class="btn-outline small">Login</a>
+                        " class="btn-outline small checkout-btn">Login</a>
                         <button type="button" class="btn-outline small checkout-btn"
                             data-note="{{ isset($showcase->modicare_checkout) ? e($showcase->modicare_checkout) : '' }}"
                             data-html="1">Information
@@ -49,7 +55,7 @@
                         <a href="https://invest.motilaloswal.com/" style="
                             color: white;
                             text-decoration: none;
-                        " class="btn-outline small">Login</a>
+                        " class="btn-outline small checkout-btn">Login</a>
                         <button type="button" class="btn-outline small checkout-btn"
                             data-note="{{ isset($showcase->motilal_checkout) ? e($showcase->motilal_checkout) : '' }}"
                             data-html="1">Information
@@ -93,8 +99,7 @@
                                 @php
                                     $img = is_array($item) ? $item['img'] ?? '' : $item;
                                     $note = is_array($item) ? $item['note'] ?? '' : '';
-
-                                                                    
+                                    
                                     $isLive = (request()->getHost() === 'thegoldengreens.com');
                                     $filename = basename($img);
 
@@ -104,11 +109,8 @@
                                         : $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
-                                    <button style="
-                                        width: 100%;
-                                        " type="button" class="btn-outline small checkout-btn"
-                                        data-note="{{ e($note) }}" data-html="0">Checkout</button>
-
+                                    <button style="width: 100%;" type="button" class="btn-outline small checkout-btn"  data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" 
+                                    data-html="1">Checkout</button>
                                 </div>
                             @endforeach
                         @else
@@ -130,7 +132,7 @@
                                         <input type="radio" name="project" />
                                         <span>{{ $opportunity }}</span>
                                     </label>
-                                    <button class="btn-outline">GO</button>
+                                    <button class="btn-outline checkout-btn">GO</button>
                                 </div>
                             @endforeach
                         @else
@@ -190,7 +192,8 @@
                                     <button style="
                                         width: 100%;
                                         " type="button" class="btn-outline small checkout-btn"
-                                        data-note="{{ e($note) }}" data-html="0">Checkout</button>
+                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" 
+                                    data-html="1">Checkout</button>
 
                                 </div>
                             @endforeach
@@ -253,7 +256,8 @@
                                     <button style="
                                         width: 100%;
                                         " type="button" class="btn-outline small checkout-btn"
-                                        data-note="{{ e($note) }}" data-html="0">Checkout</button>
+                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" 
+                                    data-html="1">Checkout</button>
 
                                 </div>
                             @endforeach
@@ -269,7 +273,7 @@
     </div>
 
     <!-- Reusable checkout modal (single) -->
-    <div class="modal" id="checkoutModal" style="display:none;">
+    <div class="modal " id="checkoutModal" style="display:none;">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <div id="checkoutModalBody"></div>

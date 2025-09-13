@@ -80,6 +80,9 @@
                             Images)</label>
                         <input type="file" id="{{ $field }}" name="{{ $field }}[]"
                             class="form-control file-input-with-notes" multiple data-field="{{ $field }}">
+                        <small class="text-muted d-block mt-1">
+                            Please upload multiple images in <strong>300 x 300 px</strong> size for best results.
+                        </small>
 
                         <div class="mt-2 d-flex flex-wrap">
                             @foreach ($showcase->{$field} ?? [] as $index => $item)
@@ -104,7 +107,7 @@
                                             value="{{ $imgPath }}"> Remove
                                     </label>
 
-                                    <textarea name="{{ $field }}_notes[]" class="form-control form-control-sm " rows="2"
+                                    <textarea name="{{ $field }}_notes[]" class="js-ckeditor form-control form-control-sm " rows="2"
                                         placeholder="Checkout note (for this image)">{{ $note }}</textarea>
                                     <input type="hidden" name="{{ $field }}_existing[]"
                                         value="{{ $imgPath }}">

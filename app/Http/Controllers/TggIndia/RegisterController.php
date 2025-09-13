@@ -78,13 +78,30 @@ class RegisterController extends Controller
             'password' => Hash::make('default-password'),
         ]);
 
+        // if ($request->has('modules') && is_array($request->modules)) {
+        //     foreach ($request->modules as $moduleId) {
+        //         ModuleInstance::create([
+        //             'module_id' => $moduleId,
+        //             'user_id' => $user->id,
+        //         ]);
+        //     }
+        // }
+
         if ($request->has('modules') && is_array($request->modules)) {
-            foreach ($request->modules as $moduleId) {
-                ModuleInstance::create([
-                    'module_id' => $moduleId,
-                    'user_id' => $user->id,
-                ]);
-            }
+            $modules = $request->modules;
+        } else {
+            $modules = [];
+        }
+
+        if (!in_array(1, $modules)) {
+            $modules[] = 1;
+        }
+
+        foreach ($modules as $moduleId) {
+            ModuleInstance::create([
+                'module_id' => $moduleId,
+                'user_id'   => $user->id,
+            ]);
         }
 
         return redirect()->route('tgg-india.login')->with('success', 'Registration successful!');

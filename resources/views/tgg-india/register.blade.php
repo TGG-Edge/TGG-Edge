@@ -95,7 +95,7 @@
                         <label for="modules" class="form-label">Select Modules</label>
                         <select name="modules[]" id="modules" class="form-select" multiple>
                             @foreach(\App\Models\Module::all() as $module)
-                                <option value="{{ $module->id }}">{{ $module->name }}</option>
+                                <option value="{{ $module->id }}" @if($module->name == 'INVESTMENT FOR BEGINNERS') selected @endif>{{ $module->name }}</option>
                             @endforeach
                         </select>
                     </div>
