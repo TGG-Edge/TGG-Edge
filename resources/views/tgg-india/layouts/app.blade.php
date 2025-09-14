@@ -8,7 +8,7 @@
 
   <!-- Fonts and Styles --> 
    <link rel="stylesheet" href="{{ asset('assets/fonts/fonts.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/tgg-india/fonts/fontawesome.css') }}">
+  <!-- <link rel="stylesheet" href="{{ asset('assets/tgg-india/fonts/fontawesome.css') }}"> -->
   <link rel="stylesheet" href="{{ asset('assets/tgg-india/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
   <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
