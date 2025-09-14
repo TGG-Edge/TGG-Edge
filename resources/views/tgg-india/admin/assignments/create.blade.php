@@ -50,6 +50,11 @@
                 <input type="date" name="due_date" class="form-control">
             </div>
 
+             <div class="mb-3">
+                <label for="description" class="form-label">Price</label>
+                <input type="number" name="price" class="form-control">
+            </div>
+
             <button type="submit" class="btn btn-primary save-button">Save</button>
         </form>
     </div>

@@ -20,8 +20,12 @@ class IsAdmin
         $isWeb2LoggedIn = Auth::guard('web2')->check();
 
         // If user is not logged in at all
-        if (!$isWebLoggedIn && !$isWeb2LoggedIn) {
+        if ( !$isWeb2LoggedIn) {
             return redirect()->route('tgg-india.login');
+        }
+
+        if (!$isWebLoggedIn ) {
+            return redirect()->route('tgg-fct.login');
         }
 
         // If logged in through web guard

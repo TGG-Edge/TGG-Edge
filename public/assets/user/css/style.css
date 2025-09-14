@@ -34,6 +34,9 @@
     background: lightgray;
 }
 .dropdown .collapse a {
+     word-wrap: break-word;  /* allow breaking long words */
+  white-space: normal;    /* allow multi-line text */
+  line-height: 1.4;
     margin-left: 20px;
     font-size: 13px;
 }

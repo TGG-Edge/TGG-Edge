@@ -19,6 +19,7 @@
                 <th>Status</th>
                 <th>Due Date</th>
                  <th>Created By</th>
+                <th>Price</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -30,6 +31,7 @@
                 <td>{{ ucfirst($assignment->status) }}</td>
                 <td>{{ $assignment->due_date ?? '-' }}</td>
                   <td>{{ $assignment->creator?->name }}</td>
+                   <td>{{ $assignment->price }}</td>
                 <td>
                     <div class="d-flex align-items-center justify-content-center">
                     <a href="{{ route('tgg-india.member.assignments.edit', $assignment) }}" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 

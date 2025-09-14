@@ -141,6 +141,8 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     });
 
     Route::resource('feature-limits', \App\Http\Controllers\TggIndia\Trainer\FeatureLimitController::class);
+    Route::post('feature-limits/set-price', [\App\Http\Controllers\TggIndia\Trainer\FeatureLimitController::class, 'setPrice'])
+    ->name('feature-limits.setPrice');
 
   });
 

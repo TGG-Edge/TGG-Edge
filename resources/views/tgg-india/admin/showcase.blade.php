@@ -81,7 +81,7 @@
                         <input type="file" id="{{ $field }}" name="{{ $field }}[]"
                             class="form-control file-input-with-notes" multiple data-field="{{ $field }}">
                         <small class="text-muted d-block mt-1">
-                            Please upload multiple images in <strong>300 x 300 px</strong> size for best results.
+                            Please upload multiple images in <strong>400 x 400 px</strong> size for best results.
                         </small>
 
                         <div class="mt-2 d-flex flex-wrap">

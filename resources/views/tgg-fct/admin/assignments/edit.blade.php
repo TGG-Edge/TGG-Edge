@@ -52,6 +52,10 @@
                 <label for="title" class="form-label">Due Date</label>
                 <input type="date" name="due_date" value="{{ $assignment->due_date }}" class="form-control">
             </div>
+             <div class="mb-3">
+                <label for="description" class="form-label">Price</label>
+                <input type="number" name="price" value="{{ $assignment->price }}" class="form-control">
+            </div>
 
             <button type="submit" class="btn btn-primary save-button">Update</button>
         </form>

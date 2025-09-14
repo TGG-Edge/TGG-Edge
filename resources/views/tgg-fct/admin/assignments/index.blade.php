@@ -19,7 +19,7 @@
                 <th>Status</th>
                 <th>Assignee</th>
                 <th>Due Date</th>
-               
+                <th>Price</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -31,6 +31,8 @@
                 <td>{{ ucfirst($assignment->status) }}</td>
                 <td>{{ $assignment->assignee?->name }}</td>
                 <td>{{ $assignment->due_date ?? 'N/A' }}</td>
+                <td>{{ $assignment->price ?? '0' }}</td>
+
               
                 <td>
                     <div class="d-flex align-items-center justify-content-center">

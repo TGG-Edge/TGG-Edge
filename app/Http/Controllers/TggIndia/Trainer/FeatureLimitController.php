@@ -52,6 +52,23 @@ class FeatureLimitController extends Controller
             ->with('success', 'Feature limit created successfully.');
     }
 
+   public function setPrice(Request $request)
+    {
+        $request->validate([
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        $userId = auth('web2')->id();
+
+        // Update all feature limits of the current user
+        FeatureLimit::where('created_by', $userId)
+            ->update(['price' => $request->price]);
+
+        return redirect()->back()->with('success', 'Price updated successfully for all your features.');
+    }
+
+
+
     public function edit($id)
     {
         $featureLimit = FeatureLimit::findOrFail($id);

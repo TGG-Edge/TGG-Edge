@@ -45,6 +45,7 @@ class AssignmentController extends Controller
             'assigned_to' => $request->assigned_to,
             'created_by'  => Auth('web2')->id(),
             'due_date'    => $request->due_date,
+            'price'    => $request->price,
         ]);
 
         return redirect()->route('tgg-india.admin.assignments.index')->with('success', 'Assignment created successfully.');
@@ -52,7 +53,7 @@ class AssignmentController extends Controller
 
      public function edit(AssignmentSecondary $assignment)
     {
-        $users = UserSecondary::where('user_role',5)->get();
+        $users = UserSecondary::where('user_role',3)->get();
         return view('tgg-india.admin.assignments.edit', compact('assignment', 'users'));
     }
 
@@ -77,6 +78,7 @@ class AssignmentController extends Controller
             'status'      => $request->status,
             'assigned_to' => $request->assigned_to,
             'due_date'    => $request->due_date,
+            'price'    => $request->price,
         ]);
 
         return redirect()->route('tgg-india.admin.assignments.index')->with('success', 'Assignment updated successfully.');

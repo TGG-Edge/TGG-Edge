@@ -272,13 +272,22 @@
         </main>
     </div>
 
-    <!-- Reusable checkout modal (single) -->
-    <div class="modal " id="checkoutModal" style="display:none;">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div id="checkoutModalBody"></div>
+    <!-- Checkout Modal -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content a4-modal">
+        <div class="modal-header">
+            <h5 class="modal-title">Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="checkoutModalBody">
+            <!-- Dynamic content goes here -->
+        </div>
         </div>
     </div>
+    </div>
+
+
 @endsection
 
 @push('scripts')
@@ -286,19 +295,20 @@
         // ==========================
         // Modal handling
         // ==========================
-        const checkoutModal = document.getElementById('checkoutModal');
-        const checkoutModalBody = document.getElementById('checkoutModalBody');
+        const checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+        // const checkoutModalBody = document.getElementById('checkoutModalBody');
 
         document.querySelectorAll('.checkout-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const note = this.dataset.note || '';
                 const isHtml = this.dataset.html === '1';
+                const checkoutModalBody = document.getElementById('checkoutModalBody');
                 if (isHtml) {
                     checkoutModalBody.innerHTML = note;
                 } else {
                     checkoutModalBody.textContent = note || 'No details available.';
                 }
-                checkoutModal.style.display = 'flex';
+                checkoutModal.show();
             });
         });
 
@@ -318,7 +328,7 @@
         // Auto slider handling
         // ==========================
         document.addEventListener('DOMContentLoaded', () => {
-            const INTERVAL = 2000;
+            const INTERVAL = 5000;
             document.querySelectorAll('.slider').forEach(slider => {
                 const slides = slider.querySelectorAll('.slide');
                 if (slides.length <= 1) return;
@@ -338,7 +348,7 @@
 
 
         document.addEventListener('DOMContentLoaded', () => {
-            const INTERVAL = 2000;
+            const INTERVAL = 5000;
             document.querySelectorAll('.slider1').forEach(slider => {
                 const slides = slider.querySelectorAll('.slide');
                 if (slides.length <= 1) return;

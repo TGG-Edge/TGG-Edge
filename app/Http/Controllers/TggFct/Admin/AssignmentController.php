@@ -43,6 +43,7 @@ class AssignmentController extends Controller
             'assigned_to' => $request->assigned_to,
             'created_by'  => Auth::id(),
             'due_date'    => $request->due_date,
+            'price'    => $request->price,
         ]);
 
         return redirect()->route('tgg-fct.admin.assignments.index')->with('success', 'Assignment created successfully.');
@@ -75,6 +76,7 @@ class AssignmentController extends Controller
             'status'      => $request->status,
             'assigned_to' => $request->assigned_to,
             'due_date'    => $request->due_date,
+            'price'    => $request->price,
         ]);
 
         return redirect()->route('tgg-fct.admin.assignments.index')->with('success', 'Assignment updated successfully.');
