@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsAssignee
+class IsVolunteer
 {
     /**
      * Handle an incoming request.
@@ -25,7 +25,7 @@ class IsAssignee
         $user = auth('web')->user();
 
         // Must be role = 5
-        if ((string) $user->user_role !== '5') {
+        if ((string) $user->user_role !== '3') {
             return abort(403, 'Unauthorized access.');
         }
 

@@ -1,9 +1,19 @@
     @php
         $user = auth('web2')->user();
         $modules = $user->modules;
-        $investmentModules = $user->modules->filter(function ($module) {
-            return $module->slug === 'investment-sip' || $module->name === 'Investment sip';
-        });
+        $host = request()->getHost();
+        if ($host === 'localhost' || $host === '127.0.0.1') {
+            // Local environment
+            $investmentModules = $user->modules->filter(function ($module) {
+                return $module->slug === 'investment-sip' || $module->name === 'Investment sip';
+            });
+        } else {
+            // Server (production/staging)
+            $investmentModules = $user->modules->filter(function ($module) {
+                return $module->slug === 'investment-for-beginners' || $module->name === 'INVESTMENT FOR BEGINNERS';
+            });
+        }
+
         $features = $user->modules->flatMap->features;
         // Check for specific feature keys
         $hasLiteratures = $features->contains('feature_key', 'literatures');
@@ -53,22 +63,19 @@
     @endif
 
     <div class="dropdown">
-    <a href="#sitemaplink"
-       class="dropdown-toggle d-flex justify-content-between align-items-center"
-       data-bs-toggle="collapse"
-       role="button"
-       aria-expanded="false"
-       aria-controls="sitemaplink">
-        <span><i class="fas fa-sitemap me-2"></i>Links (Sitemap)</span>
-        <i class="fas fa-caret-down"></i>
-    </a>
-    <div class="collapse ps-3 {{ request()->is('user/login') || request()->is('uses/researcher') ? 'show' : '' }}"
-         id="sitemaplink">
-        <a href="{{ url(' https://tggindia.com/my-account/') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-sign-in-alt me-2"></i> Journey with TGG Login
+        <a href="#sitemaplink" class="dropdown-toggle d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sitemaplink">
+            <span><i class="fas fa-sitemap me-2"></i>Links (Sitemap)</span>
+            <i class="fas fa-caret-down"></i>
         </a>
+        <div class="collapse ps-3 {{ request()->is('user/login') || request()->is('uses/researcher') ? 'show' : '' }}"
+            id="sitemaplink">
+            <a href="{{ url(' https://tggindia.com/my-account/') }}" class="d-block py-1" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fas fa-sign-in-alt me-2"></i> Journey with TGG Login
+            </a>
+        </div>
     </div>
-</div>
 
     @if ($investmentModules->isNotEmpty())
         <div class="dropdown">
@@ -173,29 +180,31 @@
     <a href="{{ route('tgg-india.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>
 
     @if (url()->current() === url('tgg-meta/tgg-india/member/dashboard'))
-    <div class="card tgg_news">
-        <h3 class="card-title">TGG NEWS</h3>
-        <div class="card-inner">
-            <div class="slider" style="
+        <div class="card tgg_news">
+            <h3 class="card-title">TGG NEWS</h3>
+            <div class="card-inner">
+                <div class="slider"
+                    style="
                 height: 220px !important;
                 width: auto !important">
-                @if (!empty($showcase->tgg_news))
-                    @foreach ($showcase->tgg_news as $news)
-                        <div class="slide " style="
+                    @if (!empty($showcase->tgg_news))
+                        @foreach ($showcase->tgg_news as $news)
+                            <div class="slide "
+                                style="
                                 height: 220px !important;
                                 width: auto !important margin: 10px !important;">
-                            <iframe width="100%" height="200" src="{{ getEmbedUrl($news) }}" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    @endforeach
-                @else
-                    <p>No news available</p>
-                @endif
+                                <iframe width="100%" height="200" src="{{ getEmbedUrl($news) }}" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        @endforeach
+                    @else
+                        <p>No news available</p>
+                    @endif
+                </div>
             </div>
         </div>
-    </div>
     @endif
 
 
@@ -216,7 +225,3 @@
             <i class="fab fa-whatsapp me-2"></i> Start Chat
         </a>
     </div>
-
-   
-    
-

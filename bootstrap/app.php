@@ -4,6 +4,8 @@ use App\Http\Middleware\AuthenticateSession as MiddlewareAuthenticateSession;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsAssignee;
 use App\Http\Middleware\IsMember;
+use App\Http\Middleware\IsResearcher;
+use App\Http\Middleware\IsVolunteer;
 use App\Http\Middleware\IsTrainer;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -32,6 +34,8 @@ return Application::configure(basePath: dirname(__DIR__))
         'trainer' => IsTrainer::class,
         'member' => IsMember::class,
         'assignee' => IsAssignee::class,
+        'researcher' => IsResearcher::class,
+        'volunteer' => IsVolunteer::class,
          ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

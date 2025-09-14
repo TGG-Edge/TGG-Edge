@@ -68,6 +68,57 @@ Route::middleware('web')->prefix('tgg-edge/tgg-fct')->name('tgg-fct.')->group(fu
     });
 
 
+    Route::middleware('researcher')->prefix('researcher')->name('researcher.')->group(function () {
+
+        // Route::get('/dashboard', function () {
+        //     return view('tgg-fct.researcher.dashboard');
+        // })->name('dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\TggFct\Researcher\DashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/profile', [\App\Http\Controllers\TggFct\Researcher\ProfileController::class, 'show'])->name('profile');
+        Route::post('/profile', [\App\Http\Controllers\TggFct\Researcher\ProfileController::class, 'update'])->name('profile.update');
+
+        Route::post('/project', [\App\Http\Controllers\TggFct\Researcher\ProjectController::class, 'store'])->name('project.store');
+        Route::post('/project-progress/update', [\App\Http\Controllers\TggFct\Researcher\ProjectController::class, 'progressUpdate'])->name('project-progress.update');
+        Route::post('/project-collaboration/apply', [\App\Http\Controllers\TggFct\Researcher\ProjectCollaborationController::class, 'apply'])->name('project-collaboration.apply');
+        Route::post('/project-collaboration/progress/update', [\App\Http\Controllers\TggFct\Researcher\ProjectCollaborationController::class, 'progressUpdate'])->name('project-collaboration.progress.update');
+        Route::post('/project-collaboration/progress/application/accept-reject', [\App\Http\Controllers\TggFct\Researcher\ProjectCollaborationController::class, 'applicationAcceptReject'])->name('project-collaboration.application/accept-reject');
+        Route::post('/project-collaboration-progress/update', [\App\Http\Controllers\TggFct\Researcher\ProjectCollaborationController::class, 'researcherProgressUpdate'])->name('project-collaboration-progress.update');
+
+       
+         Route::prefix('research-assistance')->name('research-assistance.')->group(function () {
+        Route::get('/literature', [\App\Http\Controllers\TggFct\Researcher\ResearchAssistanceController::class, 'literature'])->name('literature');
+        Route::get('/videos', [\App\Http\Controllers\TggFct\Researcher\ResearchAssistanceController::class, 'videos'])->name('videos');
+        Route::get('/links', [\App\Http\Controllers\TggFct\Researcher\ResearchAssistanceController::class, 'links'])->name('links');
+        Route::get('/linkedin', [\App\Http\Controllers\TggFct\Researcher\ResearchAssistanceController::class, 'linkedin'])->name('linkedin');
+    });
+
+    Route::get('/knowledge-research', [\App\Http\Controllers\TggFct\Researcher\KnowledgeResearchController::class, 'knowledgeAndResearch'])->name('knowledge-research.index');
+        // end
+    });
+
+
+    Route::middleware('volunteer')->prefix('volunteer')->name('volunteer.')->group(function () {
+
+        // Route::get('/dashboard', function () {
+        //     return view('tgg-fct.researcher.dashboard');
+        // })->name('dashboard');
+        Route::get('/dashboard', [\App\Http\Controllers\TggFct\Volunteer\DashboardController::class, 'index'])->name('dashboard');
+
+        Route::get('/profile', [\App\Http\Controllers\TggFct\Volunteer\ProfileController::class, 'show'])->name('profile');
+        Route::post('/profile', [\App\Http\Controllers\TggFct\Volunteer\ProfileController::class, 'update'])->name('profile.update');
+
+        Route::post('/project', [\App\Http\Controllers\TggFct\Volunteer\ProjectController::class, 'store'])->name('project.store');
+        Route::post('/project-progress/update', [\App\Http\Controllers\TggFct\Volunteer\ProjectController::class, 'progressUpdate'])->name('project-progress.update');
+        Route::post('/project-collaboration/apply', [\App\Http\Controllers\TggFct\Volunteer\ProjectCollaborationController::class, 'apply'])->name('project-collaboration.apply');
+        Route::post('/project-collaboration/progress/update', [\App\Http\Controllers\TggFct\Volunteer\ProjectCollaborationController::class, 'progressUpdate'])->name('project-collaboration.progress.update');
+        Route::post('/project-collaboration/progress/application/accept-reject', [\App\Http\Controllers\TggFct\Volunteer\ProjectCollaborationController::class, 'applicationAcceptReject'])->name('project-collaboration.application/accept-reject');
+        Route::post('/project-collaboration-progress/update', [\App\Http\Controllers\TggFct\Volunteer\ProjectCollaborationController::class, 'researcherProgressUpdate'])->name('project-collaboration-progress.update');
+
+        Route::get('/knowledge-research', [\App\Http\Controllers\TggFct\Volunteer\KnowledgeResearchController::class, 'knowledgeAndResearch'])->name('knowledge-research.index');
+        // end
+    });
+
 
 
 
