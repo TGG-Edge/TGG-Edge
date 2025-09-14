@@ -24,9 +24,9 @@ class IsAdmin
             return redirect()->route('tgg-india.login');
         }
 
-        if (!$isWebLoggedIn ) {
-            return redirect()->route('tgg-fct.login');
-        }
+        // if (!$isWebLoggedIn ) {
+        //     return redirect()->route('tgg-fct.login');
+        // }
 
         // If logged in through web guard
         if ($isWebLoggedIn && (auth('web')->user()->user_role === '1' || auth('web')->user()->user_role === 1)) {
