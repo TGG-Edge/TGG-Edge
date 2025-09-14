@@ -21,7 +21,33 @@
 <a href="{{ route('tgg-india.admin.profile.index') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fas fa-user"></i> Profile</a>
 
 
-<a href="{{ route('tgg-india.admin.showcases.edit') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fa-solid fa-display"></i> Showcase</a>
+{{-- <a href="{{ route('tgg-india.admin.showcases.edit') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i class="fa-solid fa-display"></i> Showcase</a> --}}
+<div class="dropdown">
+    <a href="#"
+       class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-meta/tgg-india/admin/showcases*') ? 'active' : '' }}"
+       data-bs-toggle="collapse"
+       data-bs-target="#showcaseDropdown"
+       aria-expanded="{{ request()->is('tgg-meta/tgg-india/admin/showcases*') ? 'true' : 'false' }}">
+        <span><i class="fa-solid fa-display me-2"></i> Showcase</span>
+        <i class="fas fa-caret-down"></i>
+    </a>
+    <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/admin/showcases*') ? 'show' : '' }}"
+         id="showcaseDropdown">
+        <a href="{{ route('tgg-india.admin.showcases.welcome-notes.edit') }}#welcome-notes" class="d-block py-1">
+            <i class="fas fa-sticky-note me-2"></i> Welcome Notes
+        </a>
+        <a href="{{ route('tgg-india.admin.showcases.collaborative-projects.edit') }}#collaborative-projects" class="d-block py-1">
+            <i class="fas fa-handshake me-2"></i> Collaborative Projects
+        </a>
+        <a href="{{ route('tgg-india.admin.showcases.main-projects.edit') }}#main-projects" class="d-block py-1">
+            <i class="fas fa-project-diagram me-2"></i> Main Projects
+        </a>
+        <a href="{{ route('tgg-india.admin.showcases.freelance-opportunities.edit') }}#freelance-opportunities" class="d-block py-1">
+            <i class="fas fa-briefcase me-2"></i> Freelance Opportunities
+        </a>
+    </div>
+</div>
+
 
 <a href="{{ route('tgg-india.admin.assignments.index') }}" class="{{ request()->is('user/knowledge-research') ? 'active' : '' }}">
     <i class="fas fa-clipboard-list"></i> Assignments

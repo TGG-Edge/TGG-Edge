@@ -34,4 +34,4 @@
     </div>
 </div>
 
-<a href="{{ route('user.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>
+<a href="{{ route('tgg-fct.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>

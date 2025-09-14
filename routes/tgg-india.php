@@ -66,9 +66,17 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     Route::get('/users/{id}/approval', [ApplicationController::class, 'updateApproval'])->name('users.update.approval');
     Route::resource('feature-limits', FeatureLimitController::class);
 
-    Route::prefix('/showcases')->group(function () {
-     Route::get('/edit', [ShowcaseController::class, 'edit'])->name('showcases.edit');
-    Route::post('/update', [ShowcaseController::class, 'update'])->name('showcases.update');
+    Route::prefix('/showcases')->name('showcases.')->group(function () {
+     Route::get('/edit', [ShowcaseController::class, 'edit'])->name('edit');
+     Route::get('/welcome-notes/edit', [ShowCaseController::class, 'editWelcomeNotes'])
+        ->name('welcome-notes.edit');
+    Route::get('/collaborative-projects/edit', [ShowCaseController::class, 'editCollaborativeProjects'])
+        ->name('collaborative-projects.edit');
+    Route::get('/main-projects/edit', [ShowCaseController::class, 'editMainProjects'])
+        ->name('main-projects.edit');
+    Route::get('/freelance-opportunities/edit', [ShowCaseController::class, 'editFreelanceOpportunities'])
+        ->name('freelance-opportunities.edit');
+     Route::post('/update', [ShowcaseController::class, 'update'])->name('update');
     });
   });
 

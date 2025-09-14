@@ -77,21 +77,21 @@ class LoginController extends Controller
 
         if (Auth::guard('web2')->attempt($request->only('email', 'password'))) {
             auth()->shouldUse('web2');
-            if(auth()->user()->user_role == 1){
+            if(auth('web2')->user()->user_role == 1){
             return redirect()->route('tgg-india.admin.dashboard'); 
 
-            }elseif(auth()->user()->user_role == 2){
+            }elseif(auth('web2')->user()->user_role == 2){
             return redirect()->route('tgg-india.trainer.dashboard'); 
 
-            }elseif(auth()->user()->user_role == 3){
+            }elseif(auth('web2')->user()->user_role == 3){
             return redirect()->route('tgg-india.member.dashboard'); 
 
             }
-            elseif(auth()->user()->user_role == 4){
+            elseif(auth('web2')->user()->user_role == 4){
             return redirect()->route('tgg-india.rhm-club.dashboard'); 
 
             }
-            elseif(auth()->user()->user_role == 5){
+            elseif(auth('web2')->user()->user_role == 5){
             return redirect()->route('tgg-india.nomad-community.dashboard'); 
 
             }else{

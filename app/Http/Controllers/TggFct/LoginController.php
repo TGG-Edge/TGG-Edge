@@ -64,7 +64,7 @@ class LoginController extends Controller
             return redirect()->route('tgg-fct.assignee.dashboard'); 
 
             }else{
-               return back()->with('error', 'Role not found, you are not registered. Please register.');
+                return back()->with('error', 'Role not found, you are not registered. Please register.');
 
             }
 

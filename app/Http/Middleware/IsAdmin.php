@@ -20,12 +20,30 @@ class IsAdmin
         $isWeb2LoggedIn = Auth::guard('web2')->check();
 
         // If user is not logged in at all
-        if ( !$isWeb2LoggedIn) {
-            return redirect()->route('tgg-india.login');
+        // if ( !$isWeb2LoggedIn) {
+        //     return redirect()->route('tgg-india.login');
+        // }
+
+        // if (!$isWebLoggedIn ) {
+        //     return redirect()->route('tgg-fct.login');
+        // }
+
+        $path = $request->path(); // e.g. "tgg-edge/tgg-fct/dashboard"
+
+        // If URL belongs to FCT section
+        if (str_starts_with($path, 'tgg-edge/tgg-fct')) {
+            if (!$isWebLoggedIn) {
+                return redirect()->route('tgg-fct.login')
+                    ->with('error', 'Please login to access FCT section.');
+            }
         }
 
-        if (!$isWebLoggedIn ) {
-            return redirect()->route('tgg-fct.login');
+        // If URL belongs to India section
+        if (str_starts_with($path, 'tgg-meta/tgg-india')) {
+            if (!$isWeb2LoggedIn) {
+                return redirect()->route('tgg-india.login')
+                    ->with('error', 'Please login to access India section.');
+            }
         }
 
         // If logged in through web guard
