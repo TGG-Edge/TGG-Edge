@@ -33,7 +33,7 @@ class AssignmentController extends Controller
             'title'       => 'required|string|max:255',
             'description' => 'nullable|string',
             'task_type'   => 'required|string|max:100',
-            'assigned_to' => 'required|exists:users,id',
+            'assigned_to' => 'required',
             'due_date'    => 'nullable|date',
         ]);
 
@@ -67,7 +67,7 @@ class AssignmentController extends Controller
             'description' => 'nullable|string',
             'task_type'   => 'required|string|max:100',
             'status'      => 'required|in:pending,in_progress,completed',
-            'assigned_to' => 'required|exists:users,id',
+            'assigned_to' => 'required',
             'due_date'    => 'nullable|date',
         ]);
 

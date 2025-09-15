@@ -39,7 +39,7 @@ class ApplicationController extends Controller
     public function userProfile(Request $request, $id)
     {
         $user = User::where('id',$id)->first();
-        return view('tgg-fct.admin.applications.user-profile', compact('user'));
+        return view('tgg-fct.admin.users.user-profile', compact('user'));
     }
 
    public function userProfileUpdate(Request $request, $id)
