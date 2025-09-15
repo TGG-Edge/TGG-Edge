@@ -6,6 +6,7 @@
 @section('content')
 <div class="admin-container">
     <h4 class="mb-3 trainer-heading">Edit Assignment</h4>
+     @include('tgg-india.layouts.includes.message')
     <div class="card p-3 mb-4">
         <form action="{{ route('tgg-india.admin.assignments.update', $assignment) }}" method="POST">
             @csrf @method('PUT')
