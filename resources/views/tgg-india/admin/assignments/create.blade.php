@@ -1,7 +1,7 @@
 
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Create Assignment | TGG Edge | TGG Fct')
+@section('title', 'Create Assignment | TGG Meta | TGG India')
 
 @section('content')
 <div class="admin-container">

@@ -1,6 +1,6 @@
 @extends('user.layouts.app')
 
-@section('title', 'Reseacher Projects - TGG Edge')
+@section('title', 'Reseacher Projects | Tgg Edge | Tgg Fct')
 
 @section('content')
 <div class="container-fluid">

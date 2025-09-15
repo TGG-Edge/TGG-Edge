@@ -1,6 +1,6 @@
 @extends('user.layouts.app')
 
-@section('title', 'User Registration - TGG Edge') 
+@section('title', 'User Registration | Tgg Edge | Tgg Fct') 
 @php
     $is_sidebar = false;
 @endphp

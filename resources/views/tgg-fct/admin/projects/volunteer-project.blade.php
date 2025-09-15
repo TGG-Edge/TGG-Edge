@@ -1,6 +1,6 @@
 @extends('tgg-fct.layouts.app')
 
-@section('title', 'Volunteer Projects - TGG Edge')
+@section('title', 'Volunteer Projects | Tgg Edge | Tgg Fct')
 
 @section('content')
 <div class="container-fluid">

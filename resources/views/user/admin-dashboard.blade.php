@@ -1,6 +1,6 @@
 @extends('user.layouts.app')
 
-@section('title', 'Admin Dashboard - TGG Edge')
+@section('title', 'Admin Dashboard | Tgg Edge | Tgg Fct')
 
 
 @section('content')

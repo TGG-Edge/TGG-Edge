@@ -1,6 +1,6 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Assignments member | TGG Edge | TGG fct')
+@section('title', 'Assignments member | TGG Meta | TGG India')
 
 
 @section('content')

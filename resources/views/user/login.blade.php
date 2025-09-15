@@ -1,5 +1,5 @@
 @extends('user.layouts.app')
-@section('title', 'User Login - TGG Edge')
+@section('title', 'User Login | Tgg Edge | Tgg Fct')
 @php $is_sidebar = false; @endphp
 @section('content')
 <div class="container py-4">

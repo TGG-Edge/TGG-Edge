@@ -1,6 +1,6 @@
 @extends('tgg-fct.layouts.app')
 
-@section('title', 'Trainer Dashboard | TGG Edge | TGG fct')
+@section('title', 'Assignment | TGG Edge | TGG fct')
 
 
 @section('content')

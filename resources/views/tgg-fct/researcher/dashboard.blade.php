@@ -1,6 +1,6 @@
 @extends('tgg-fct.layouts.app')
 
-@section('title', 'Researcher Dashboard - TGG Edge')
+@section('title', 'Researcher Dashboard | Tgg Edge | Tgg Fct')
 
 @section('content')
 <div class="main-container">

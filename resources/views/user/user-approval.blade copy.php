@@ -1,6 +1,6 @@
 @extends('user.layouts.app')
 
-@section('title', 'User Requests')
+@section('title', 'User Requests | Tgg Edge | Tgg Fct')
 
 @section('content')
 <div class="container mt-4">

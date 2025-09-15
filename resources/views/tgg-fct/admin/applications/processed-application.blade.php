@@ -1,6 +1,6 @@
 @extends('tgg-fct.layouts.app')
 
-@section('title', 'PROCESSED APPLICATIONS - TGG Edge')
+@section('title', 'PROCESSED APPLICATIONS | Tgg Edge | Tgg Fct')
 
 @section('content')
 <div class="container-fluid">

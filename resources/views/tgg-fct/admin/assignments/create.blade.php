@@ -1,7 +1,7 @@
 
 @extends('tgg-fct.layouts.app')
 
-@section('title', 'Create Trainer Project | TGG Edge | TGG Fct')
+@section('title', 'Create Assignment | TGG Edge | TGG Fct')
 
 @section('content')
 <div class="admin-container">

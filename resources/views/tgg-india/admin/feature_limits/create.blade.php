@@ -1,6 +1,6 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Create Feature Limit | TGG India')
+@section('title', 'Create Feature Limit | TGG Meta | TGG India')
 
 @section('content')
 <div class="admin-container">

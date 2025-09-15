@@ -1,7 +1,7 @@
 @extends('tgg-india.layouts.app')
 @include('tgg-india.layouts.includes.message')
 
-@section('title', 'User Registration - TGG Edge') 
+@section('title', 'User Registration | TGG Meta | TGG India') 
 @php
     $is_sidebar = false;
 @endphp

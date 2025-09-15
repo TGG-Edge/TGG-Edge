@@ -1,5 +1,5 @@
 @extends('tgg-india.layouts.app')
-@section('title', 'User Login - TGG Edge')
+@section('title', 'User Login | TGG Meta | TGG India')
 @php $is_sidebar = false; @endphp
 
 @section('content')
