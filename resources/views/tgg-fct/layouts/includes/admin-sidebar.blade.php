@@ -28,11 +28,14 @@
         <a href="{{ route('tgg-fct.show') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-sign-in-alt me-2"></i> Login
         </a>
-        <a href="{{ url('user/register/researcher') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
+        <a href="{{ url('tgg-edge/tgg-fct/register/researcher') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-user-edit me-2"></i> Researcher Register
         </a>
-        <a href="{{ url('user/register/volunteer') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
+        <a href="{{ url('tgg-edge/tgg-fct/register/volunteer') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-user-friends me-2"></i> Volunteer Register
+        </a>
+         <a href="{{ url('tgg-edge/tgg-fct/register/assignee') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-user-friends me-2"></i> Assignee Register
         </a>
     </div>
 </div>

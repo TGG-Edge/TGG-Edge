@@ -1092,8 +1092,25 @@ button:hover {
     margin-top: 10px !important;
 }
 
+.form-control-textarea{
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    font-size: 13px;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color 0.15s 
+ease-in-out, box-shadow 0.15s 
+ease-in-out;    
+}
 .a4-modal {
-  width: 794px;          /* A4 width */
+  width: 1400px;          /* A4 width */
   max-width: 100%;       /* responsive */
   max-height: 90vh;      /* don’t exceed viewport */
   height: auto;          /* adjust to content */
