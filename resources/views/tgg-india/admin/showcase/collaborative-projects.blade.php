@@ -21,12 +21,12 @@
                 <!-- Single checkout textareas for Modicare & Motilal -->
                 <div class="mb-3">
                     <label for="modicare_checkout" class="form-label">Modicare Information Note</label>
-                    <textarea id="modicare_checkout" name="modicare_checkout" class="form-control" rows="3">{{ old('modicare_checkout', $showcase->modicare_checkout ?? '') }}</textarea>
+                    <textarea id="modicare_checkout" name="modicare_checkout" class="form-control-textarea" rows="3">{{ old('modicare_checkout', $showcase->modicare_checkout ?? '') }}</textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="motilal_checkout" class="form-label">Motilal Oswal Information Note</label>
-                    <textarea id="motilal_checkout" name="motilal_checkout" class="form-control" rows="3">{{ old('motilal_checkout', $showcase->motilal_checkout ?? '') }}</textarea>
+                    <textarea id="motilal_checkout" name="motilal_checkout" class="form-control-textarea" rows="3">{{ old('motilal_checkout', $showcase->motilal_checkout ?? '') }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update Showcase</button>

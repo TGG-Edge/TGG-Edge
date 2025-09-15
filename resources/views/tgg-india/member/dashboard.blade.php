@@ -274,7 +274,7 @@
 
     <!-- Checkout Modal -->
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px;">
         <div class="modal-content a4-modal">
         <div class="modal-header">
             <h5 class="modal-title">Details</h5>
