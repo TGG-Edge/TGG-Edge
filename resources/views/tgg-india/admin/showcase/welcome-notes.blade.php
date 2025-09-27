@@ -20,35 +20,35 @@
                 <!-- WELCOME NOTE -->
                 <div class="mb-3">
                     <label for="welcome_note" class="form-label">Welcome Note</label>
-                    <textarea id="welcome_note" name="welcome_note" class="form-control js-ckeditor" rows="5">
+                    <textarea id="welcome_note" name="welcome_note" class="form-control-textarea " rows="5">
                 {!! old('welcome_note', $showcase?->welcome_note ?? '') !!}
             </textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="welcome_note_trainer" class="form-label">Welcome Note For Trainer</label>
-                    <textarea id="welcome_note_trainer" name="welcome_note_trainer" class="form-control js-ckeditor" rows="5">
+                    <textarea id="welcome_note_trainer" name="welcome_note_trainer" class="form-control-textarea " rows="5">
                 {!! old('welcome_note_trainer', $showcase?->welcome_note_trainer ?? '') !!}
             </textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="welcome_note_member" class="form-label">Welcome Note For Member</label>
-                    <textarea id="welcome_note_member" name="welcome_note_member" class="form-control js-ckeditor" rows="5">
+                    <textarea id="welcome_note_member" name="welcome_note_member" class="form-control-textarea " rows="5">
                 {!! old('welcome_note_member', $showcase?->welcome_note_member ?? '') !!}
             </textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="welcome_note_rhm_club" class="form-label">Welcome Note For Rhm Club</label>
-                    <textarea id="welcome_note_rhm_club" name="welcome_note_rhm_club" class="form-control js-ckeditor" rows="5">
+                    <textarea id="welcome_note_rhm_club" name="welcome_note_rhm_club" class="form-control-textarea " rows="5">
                 {!! old('welcome_note_rhm_club', $showcase?->welcome_note_rhm_club ?? '') !!}
             </textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="welcome_note_nomad_community" class="form-label">Welcome Note For Nomad Community</label>
-                    <textarea id="welcome_note_nomad_community" name="welcome_note_nomad_community" class="form-control js-ckeditor"
+                    <textarea id="welcome_note_nomad_community" name="welcome_note_nomad_community" class="form-control-textarea "
                         rows="5">
                 {!! old('welcome_note_nomad_community', $showcase?->welcome_note_nomad_community ?? '') !!}
             </textarea>
@@ -56,7 +56,7 @@
 
                 <div class="mb-3">
                     <label for="welcome_note_freelancer" class="form-label">Welcome Note For Freelancer</label>
-                    <textarea id="welcome_note_freelancer" name="welcome_note_freelancer" class="form-control js-ckeditor" rows="5">
+                    <textarea id="welcome_note_freelancer" name="welcome_note_freelancer" class="form-control-textarea " rows="5">
                 {!! old('welcome_note_freelancer', $showcase?->welcome_note_freelancer ?? '') !!}
             </textarea>
                 </div>

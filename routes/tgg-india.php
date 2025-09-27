@@ -23,8 +23,13 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
   Route::post('/login', [LoginController::class, 'login'])->name('login');
   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
   Route::get('/switch/account/{id}', [LoginController::class, 'switchAccount'])->name('switch.account');
+  Route::get('/referral', function () {
+      return view('tgg-india.referral');
+  })->name('referral');
 
-
+  Route::get('/referral/XASFSDF3223WDSCDW', function () {
+      return redirect()->route('tgg-india.register.show',['user_type' => 'members']);
+  });
   // Public registration routes
   Route::prefix('register')->name('register.')->group(function () {
     Route::get('{user_type}', [RegisterController::class, 'show'])->name('show');

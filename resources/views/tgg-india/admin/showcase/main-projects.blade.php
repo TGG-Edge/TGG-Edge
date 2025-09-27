@@ -15,6 +15,7 @@
 
             <form action="{{ route('tgg-india.admin.showcases.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="form_type" value="main_projects">
 
 
                
@@ -58,6 +59,13 @@
 
                                     <textarea name="{{ $field }}_notes[]" class="js-ckeditor form-control form-control-sm " rows="2"
                                         placeholder="Checkout note (for this image)">{{ $note }}</textarea>
+                                   
+                                   @if ($field === 'tgg_foundation')
+                                        <input type="text" name="{{ $field }}_links[]" 
+                                            class="form-control form-control-sm mt-1"
+                                            placeholder="Enter donate link (optional)" 
+                                            value="{{ is_array($item) ? ($item['link'] ?? '') : '' }}">
+                                    @endif
                                     <input type="hidden" name="{{ $field }}_existing[]"
                                         value="{{ $imgPath }}">
                                 </div>
@@ -113,6 +121,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 ta.rows = 2;
                 ta.className = 'form-control form-control-sm mb-1';
                 wrapper.appendChild(ta);
+
+                if (field === 'tgg_foundation') {
+                    const link = document.createElement('input');
+                    link.type = 'text';
+                    link.name = field + '_new_links[]';
+                    link.placeholder = 'Enter donate link (optional)';
+                    link.className = 'form-control form-control-sm mb-1';
+                    wrapper.appendChild(link);
+                }
+
 
                 container.appendChild(wrapper);
             });

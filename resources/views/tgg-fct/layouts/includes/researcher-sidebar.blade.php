@@ -36,11 +36,37 @@
 @endif
 
 
+<div class="dropdown">
+    <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-edge/tgg-fct/researcher/ai-tools-research/*') ? 'active ' : '' }}"
+       data-bs-toggle="collapse" data-bs-target="#aiToolsDropdown" aria-expanded="false">
+        <span><i class="fas fa-robot"></i> AI Tools & Research Systems</span>
+        <i class="fas fa-caret-down"></i>
+    </a>
+    <div class="collapse ps-3 {{ request()->is('tgg-edge/tgg-fct/researcher/ai-tools-research/*') ? 'show ' : '' }}" id="aiToolsDropdown">
+        <a href="{{ route('tgg-fct.researcher.ai-tools-research.research-material-organizer') }}"  class="{{ request()->is('tgg-edge/tgg-fct/researcher/ai-tools-research/research-material-organizer') ? 'active' : '' }}">
+            <i class="fas fa-folder-open"></i> Research Material Organizer
+        </a>
+    </div>
+
+    <div class="collapse ps-3 {{ request()->is('tgg-edge/tgg-fct/researcher/ai-tools-research/*') ? 'show ' : '' }}" id="aiToolsDropdown">
+        <a href="{{ route('tgg-fct.researcher.ai-tools-research.kanban-note-board') }}"  class="{{ request()->is('tgg-edge/tgg-fct/researcher/ai-tools-research/kanban-note-board') ? 'active' : '' }}">
+            <i class="fas fa-clipboard-list"></i> Kanban Note Board
+        </a>
+    </div>
+
+     <div class="collapse ps-3 {{ request()->is('tgg-edge/tgg-fct/researcher/ai-tools-research/*') ? 'show ' : '' }}" id="aiToolsDropdown">
+        <a href="{{ route('tgg-fct.researcher.ai-tools-research.visualization-analytics.form') }}"  class="{{ request()->is('tgg-edge/tgg-fct/researcher/ai-tools-research/visualization-analytics/*') ? 'active' : '' }}">
+            <i class="fas fa-chart-bar"></i> Visualization & Analytics
+        </a>
+    </div>
+</div>
+
+
 <a href="{{ route('tgg-fct.researcher.knowledge-research.index') }}" class="{{ request()->is('user/knowledge-research') ? 'active' : '' }}">
     <i class="fas fa-book"></i> Knowledge and Research
 </a>
 
-@if(Auth::check() && Auth::user()->user_role == 1)
+@if(Auth::check() && Auth::user()->user_role == 2  && Auth::user()->is_link_enabled == 1)
 <div class="dropdown">
     <a href="#sitemaplink"
        class="dropdown-toggle d-flex justify-content-between align-items-center"

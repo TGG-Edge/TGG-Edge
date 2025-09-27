@@ -7,6 +7,7 @@
 <div class="admin-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-3 trainer-heading">Assignmnets</h4>
+        @include('tgg-fct.layouts.includes.message')
         <div class="d-flex align-items-center justify-content-end gap-2">
             <a href="{{ route('tgg-fct.admin.assignments.create') }}" class="btn btn-primary assignment-button"><i class="bi bi-plus-lg"></i>+ New Assignment</a>
         </div>
@@ -19,7 +20,7 @@
                 <th>Status</th>
                 <th>Assignee</th>
                 <th>Due Date</th>
-                <th>Price</th>
+                <th>Fee</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -28,7 +29,7 @@
             <tr>
                 <td>{{ $assignment->title }}</td>
                 <td>{{ $assignment->task_type }}</td>
-                <td>{{ ucfirst($assignment->status) }}</td>
+                <td>{!! statusWithColor($assignment->status) !!}</td>
                 <td>{{ $assignment->assignee?->name }}</td>
                 <td>{{ $assignment->due_date ?? 'N/A' }}</td>
                 <td>{{ $assignment->price ?? '0' }}</td>

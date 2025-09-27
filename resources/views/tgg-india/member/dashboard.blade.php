@@ -2,11 +2,30 @@
 @section('title', 'Dashboard | TGG Meta | TGG India')
 
 @section('content')
-     <style>
-        .checkout-btn:hover{
-    background-color: #0056b3 !important;
+    <style>
+        .checkout-btn:hover {
+            background-color: #0056b3 !important;
         }
-     </style>
+
+        .checkout-btn-new:hover {
+            background-color: #0056b3 !important;
+        }
+
+        .btn-inside-model {
+                background: #265475;
+                 color: #fff;
+        }
+
+        .btn-inside-model:hover {
+            background-color: #0056b3 !important;
+            color: #fff !important;
+        }
+        
+         .checkout-btn-tgg_foundation:hover {
+            background-color: #0056b3 !important;
+        }
+        
+    </style>
     <div class="admin-container">
         @include('tgg-india.layouts.includes.message')
         <main class="dashboard-main">
@@ -16,7 +35,7 @@
                 <section class="welcome-note card">
                     <div class="card-inner-welcome">
                         <p>
-                            {!! $showcase->welcome_note_member  ??
+                            {!! $showcase->welcome_note_member ??
                                 'Welcome to the Volunteer Dashboard! Explore the Woodperker collections, review entrepreneurship opportunities, and keep an eye on the latest updates below.' !!}
                         </p>
                     </div>
@@ -33,12 +52,13 @@
                             width="300" height="150">
                     </div>
                     <div class="button-group">
-                        <a href="https://www.modicare.com/sign-in" style="
+                        <a href="https://www.modicare.com/sign-in"
+                            style="
                             color: white;
                             text-decoration: none;
-                        " class="btn-outline small checkout-btn">Login</a>
-                        <button type="button" class="btn-outline small checkout-btn"
-                            data-note="{{ isset($showcase->modicare_checkout) ? e($showcase->modicare_checkout) : '' }}"
+                        "
+                            class="btn-outline small checkout-btn">Login</a>
+                        <button type="button" class="btn-outline small checkout-btn" data-note="{!! htmlspecialchars($showcase->modicare_checkout, ENT_QUOTES) !!}"
                             data-html="1">Information
                         </button>
                     </div>
@@ -52,12 +72,13 @@
                             width="300" height="150">
                     </div>
                     <div class="button-group">
-                        <a href="https://invest.motilaloswal.com/" style="
+                        <a href="https://invest.motilaloswal.com/"
+                            style="
                             color: white;
                             text-decoration: none;
-                        " class="btn-outline small checkout-btn">Login</a>
-                        <button type="button" class="btn-outline small checkout-btn"
-                            data-note="{{ isset($showcase->motilal_checkout) ? e($showcase->motilal_checkout) : '' }}"
+                        "
+                            class="btn-outline small checkout-btn">Login</a>
+                        <button type="button" class="btn-outline small checkout-btn" data-note="{!! htmlspecialchars($showcase->motilal_checkout, ENT_QUOTES) !!}"
                             data-html="1">Information
                         </button>
                     </div>
@@ -74,13 +95,13 @@
                                         $img = is_array($item) ? $item['img'] ?? '' : $item;
                                         $note = is_array($item) ? $item['note'] ?? '' : '';
 
-                                    $isLive = (request()->getHost() === 'thegoldengreens.com');
-                                    $filename = basename($img);
+                                        $isLive = request()->getHost() === 'thegoldengreens.com';
+                                        $filename = basename($img);
 
-                                    // Re-assign $imgPath based on environment
-                                    $img = $isLive
-                                        ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
-                                        : $img;
+                                        // Re-assign $imgPath based on environment
+                                        $img = $isLive
+                                            ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
+                                            : $img;
                                     @endphp
                                     <div class="slide">
                                         <img src="{{ asset($img) }}" alt="Woodperker Image" class="card-img" />
@@ -99,8 +120,8 @@
                                 @php
                                     $img = is_array($item) ? $item['img'] ?? '' : $item;
                                     $note = is_array($item) ? $item['note'] ?? '' : '';
-                                    
-                                    $isLive = (request()->getHost() === 'thegoldengreens.com');
+
+                                    $isLive = request()->getHost() === 'thegoldengreens.com';
                                     $filename = basename($img);
 
                                     // Re-assign $imgPath based on environment
@@ -109,8 +130,8 @@
                                         : $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
-                                    <button style="width: 100%;" type="button" class="btn-outline small checkout-btn"  data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" 
-                                    data-html="1">Checkout</button>
+                                    <button style="width: 100%;" type="button" class="btn-outline small checkout-btn"
+                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" data-html="1">Checkout</button>
                                 </div>
                             @endforeach
                         @else
@@ -130,9 +151,12 @@
                                 <div class="project-row">
                                     <label class="project-left">
                                         <input type="radio" name="project" />
-                                        <span>{{ $opportunity }}</span>
+                                        <span>{{ $opportunity['title'] ?? '' }}</span>
                                     </label>
-                                    <button class="btn-outline checkout-btn">GO</button>
+                                    <button class="btn-outline checkout-btn-new" data-note="{!! htmlspecialchars($opportunity['note'] ?? '', ENT_QUOTES) !!}"
+                                        data-link="{{ $opportunity['link'] ?? '' }}" data-html="1">
+                                        Details
+                                    </button>
                                 </div>
                             @endforeach
                         @else
@@ -140,6 +164,7 @@
                         @endif
                     </div>
                 </div>
+
 
                 <!-- Travel -->
                 <div class="card travel">
@@ -152,14 +177,13 @@
                                         $img = is_array($item) ? $item['img'] ?? '' : $item;
                                         $note = is_array($item) ? $item['note'] ?? '' : '';
 
-                                                     
-                                    $isLive = (request()->getHost() === 'thegoldengreens.com');
-                                    $filename = basename($img);
+                                        $isLive = request()->getHost() === 'thegoldengreens.com';
+                                        $filename = basename($img);
 
-                                    // Re-assign $imgPath based on environment
-                                    $img = $isLive
-                                        ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
-                                        : $img;
+                                        // Re-assign $imgPath based on environment
+                                        $img = $isLive
+                                            ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
+                                            : $img;
                                     @endphp
                                     <div class="slide">
                                         <img src="{{ asset($img) }}" alt="Event Image" class="card-img" />
@@ -179,8 +203,7 @@
                                     $img = is_array($item) ? $item['img'] ?? '' : $item;
                                     $note = is_array($item) ? $item['note'] ?? '' : '';
 
-                                                                    
-                                    $isLive = (request()->getHost() === 'thegoldengreens.com');
+                                    $isLive = request()->getHost() === 'thegoldengreens.com';
                                     $filename = basename($img);
 
                                     // Re-assign $imgPath based on environment
@@ -189,11 +212,12 @@
                                         : $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
-                                    <button style="
+                                    <button
+                                        style="
                                         width: 100%;
-                                        " type="button" class="btn-outline small checkout-btn"
-                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" 
-                                    data-html="1">Checkout</button>
+                                        "
+                                        type="button" class="btn-outline small checkout-btn"
+                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" data-html="1">Checkout</button>
 
                                 </div>
                             @endforeach
@@ -216,14 +240,13 @@
                                         $img = is_array($item) ? $item['img'] ?? '' : $item;
                                         $note = is_array($item) ? $item['note'] ?? '' : '';
 
-                                                       
-                                    $isLive = (request()->getHost() === 'thegoldengreens.com');
-                                    $filename = basename($img);
+                                        $isLive = request()->getHost() === 'thegoldengreens.com';
+                                        $filename = basename($img);
 
-                                    // Re-assign $imgPath based on environment
-                                    $img = $isLive
-                                        ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
-                                        : $img;
+                                        // Re-assign $imgPath based on environment
+                                        $img = $isLive
+                                            ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
+                                            : $img;
                                     @endphp
                                     <div class="slide">
                                         <img src="{{ asset($img) }}" alt="TGG Foundation Image" class="card-img" />
@@ -243,8 +266,7 @@
                                     $img = is_array($item) ? $item['img'] ?? '' : $item;
                                     $note = is_array($item) ? $item['note'] ?? '' : '';
 
-                                                                    
-                                    $isLive = (request()->getHost() === 'thegoldengreens.com');
+                                    $isLive = request()->getHost() === 'thegoldengreens.com';
                                     $filename = basename($img);
 
                                     // Re-assign $imgPath based on environment
@@ -253,11 +275,12 @@
                                         : $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
-                                    <button style="
+                                    <button
+                                        style="
                                         width: 100%;
-                                        " type="button" class="btn-outline small checkout-btn"
-                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" 
-                                    data-html="1">Checkout</button>
+                                        "
+                                        type="button" class="btn-outline small checkout-btn-tgg_foundation"
+                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}"  data-link="{{ $item['link'] ?? '' }}"  data-html="1">Checkout</button>
 
                                 </div>
                             @endforeach
@@ -274,17 +297,17 @@
 
     <!-- Checkout Modal -->
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px;">
-        <div class="modal-content a4-modal">
-        <div class="modal-header">
-            <h5 class="modal-title">Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px;">
+            <div class="modal-content a4-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="checkoutModalBody">
+                    <!-- Dynamic content goes here -->
+                </div>
+            </div>
         </div>
-        <div class="modal-body" id="checkoutModalBody">
-            <!-- Dynamic content goes here -->
-        </div>
-        </div>
-    </div>
     </div>
 
 
@@ -311,6 +334,58 @@
                 checkoutModal.show();
             });
         });
+
+        document.querySelectorAll('.checkout-btn-new').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const note = this.dataset.note || '';
+                const link = this.dataset.link || '';
+                const isHtml = this.dataset.html === '1';
+                const checkoutModalBody = document.getElementById('checkoutModalBody');
+
+                let content = '';
+                if (isHtml) {
+                    content = note;
+                } else {
+                    content = `<p>${note || 'No details available.'}</p>`;
+                }
+
+                if (link) {
+                    content += `<div class="mt-3 " style="text-align: center;">
+                        <a href="${link}" target="_blank" class="btn btn-inside-model">Apply</a>
+                    </div>`;
+                }
+
+                checkoutModalBody.innerHTML = content;
+                checkoutModal.show();
+            });
+        });
+
+        document.querySelectorAll('.checkout-btn-tgg_foundation').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const note = this.dataset.note || '';
+        const link = this.dataset.link || '';
+        const isHtml = this.dataset.html === '1';
+        const checkoutModalBody = document.getElementById('checkoutModalBody');
+
+        let content = '';
+        if (isHtml) {
+            content = note;
+        } else {
+            content = `<p>${note || 'No details available.'}</p>`;
+        }
+
+        if (link) {
+            content += `<div class="mt-3 text-center">
+                <a href="${link}" target="_blank" class="btn btn-inside-model">Donate</a>
+            </div>`;
+        }
+
+        checkoutModalBody.innerHTML = content;
+        checkoutModal.show();
+    });
+});
+
+
 
         document.querySelectorAll('.modal .close-btn').forEach(close => {
             close.addEventListener('click', () => {

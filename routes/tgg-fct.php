@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProjectCollaborationController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ResearcherDashboardController;
+use App\Http\Controllers\TggFct\Researcher\DataController;
 use App\Http\Controllers\User\KnowledgeResearchController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\ProfileController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\ResearchAssistanceController;
 use App\Http\Controllers\User\UserApprovalController;
 use App\Http\Controllers\VolunteerDashboardController;
+use UniSharp\LaravelFilemanager\Lfm;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->prefix('tgg-edge/tgg-fct')->name('tgg-fct.')->group(function () {
@@ -65,6 +67,17 @@ Route::middleware('web')->prefix('tgg-edge/tgg-fct')->name('tgg-fct.')->group(fu
         Route::resource('assignments', \App\Http\Controllers\TggFct\Assignee\AssignmentController::class);
         Route::get('/profile', [\App\Http\Controllers\TggFct\Admin\ProfileController::class, 'show'])->name('profile');
         Route::post('/profile', [\App\Http\Controllers\TggFct\Admin\ProfileController::class, 'update'])->name('profile.update');
+
+        Route::prefix('research-assistance')->name('research-assistance.')->group(function () {
+        Route::get('/literature', [\App\Http\Controllers\TggFct\Assignee\ResearchAssistanceController::class, 'literature'])->name('literature');
+        Route::get('/videos', [\App\Http\Controllers\TggFct\Assignee\ResearchAssistanceController::class, 'videos'])->name('videos');
+        Route::get('/links', [\App\Http\Controllers\TggFct\Assignee\ResearchAssistanceController::class, 'links'])->name('links');
+        Route::get('/linkedin', [\App\Http\Controllers\TggFct\Assignee\ResearchAssistanceController::class, 'linkedin'])->name('linkedin');
+        });
+
+        Route::get('/knowledge-research', [\App\Http\Controllers\TggFct\Assignee\KnowledgeResearchController::class, 'knowledgeAndResearch'])->name('knowledge-research.index');
+            // end
+        
     });
 
 
@@ -86,14 +99,27 @@ Route::middleware('web')->prefix('tgg-edge/tgg-fct')->name('tgg-fct.')->group(fu
         Route::post('/project-collaboration-progress/update', [\App\Http\Controllers\TggFct\Researcher\ProjectCollaborationController::class, 'researcherProgressUpdate'])->name('project-collaboration-progress.update');
 
        
-         Route::prefix('research-assistance')->name('research-assistance.')->group(function () {
+        Route::prefix('research-assistance')->name('research-assistance.')->group(function () {
         Route::get('/literature', [\App\Http\Controllers\TggFct\Researcher\ResearchAssistanceController::class, 'literature'])->name('literature');
         Route::get('/videos', [\App\Http\Controllers\TggFct\Researcher\ResearchAssistanceController::class, 'videos'])->name('videos');
         Route::get('/links', [\App\Http\Controllers\TggFct\Researcher\ResearchAssistanceController::class, 'links'])->name('links');
         Route::get('/linkedin', [\App\Http\Controllers\TggFct\Researcher\ResearchAssistanceController::class, 'linkedin'])->name('linkedin');
-    });
+         });
 
-    Route::get('/knowledge-research', [\App\Http\Controllers\TggFct\Researcher\KnowledgeResearchController::class, 'knowledgeAndResearch'])->name('knowledge-research.index');
+        Route::get('/knowledge-research', [\App\Http\Controllers\TggFct\Researcher\KnowledgeResearchController::class, 'knowledgeAndResearch'])->name('knowledge-research.index');
+
+        Route::prefix('ai-tools-research')->name('ai-tools-research.')->group(function () {
+           Route::get('/research-material-organizer', function(){
+            return view('tgg-fct.researcher.ai-tools-research.research-material-organizer');
+           })->name('research-material-organizer');
+
+           Route::get('/kanban-note-board', function(){
+            return view('tgg-fct.researcher.ai-tools-research.kanban-note-board');
+           })->name('kanban-note-board');
+
+           Route::get('visualization/analytics', [DataController::class, 'showUploadForm'])->name('visualization-analytics.form');
+           Route::post('visualization/analytics', [DataController::class, 'upload'])->name('visualization-analytics.upload');
+        });
         // end
     });
 

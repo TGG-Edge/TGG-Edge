@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
   <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/choices/choices.min.css') }}">
 </head>
 
 <body style="font-family: 'POPPINS'">
@@ -50,7 +51,18 @@
   </div>
 
   @include('tgg-fct.layouts.includes.footer')
-
+  <script src="{{ asset('assets/choices/choices.min.js') }}"></script>
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('select[multiple]').forEach(function (el) {
+          new Choices(el, {
+              removeItemButton: true,
+              placeholderValue: el.getAttribute('placeholder') || 'Select options',
+              searchEnabled: true,
+          });
+      });
+  });
+  </script>
   {{-- CKEditor 5 super-build --}}
   <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/super-build/ckeditor.js"></script>
 

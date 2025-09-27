@@ -55,7 +55,7 @@
             </div>
 
              <div class="mb-3">
-                <label for="description" class="form-label">Price</label>
+                <label for="description" class="form-label">Fee</label>
                 <input type="number" name="price" value="{{ $assignment->price }}" class="form-control">
             </div>
 

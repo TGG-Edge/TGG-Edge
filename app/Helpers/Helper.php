@@ -42,3 +42,17 @@ function getEmbedUrl($url) {
 
     return $url; // fallback
 }
+
+if (! function_exists('statusWithColor')) {
+    function statusWithColor(string $status): string
+    {
+        $status = strtolower($status);
+
+        return match ($status) {
+            'pending'     => '<span class="badge page-button bg-warning text-dark">' . ucfirst($status) . '</span>',
+            'in_progress' => '<span class="badge page-button bg-primary">' . ucfirst(str_replace('_', ' ', $status)) . '</span>',
+            'completed'   => '<span class="badge page-button bg-success">' . ucfirst($status) . '</span>',
+            default       => '<span class="badge page-button bg-secondary">' . ucfirst($status) . '</span>',
+        };
+    }
+}

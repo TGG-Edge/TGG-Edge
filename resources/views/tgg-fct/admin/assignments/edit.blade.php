@@ -6,6 +6,7 @@
 @section('content')
 <div class="admin-container">
     <h4 class="mb-3 trainer-heading">Edit Assignment</h4>
+    @include('tgg-fct.layouts.includes.message')
     <div class="card p-3 mb-4">
         <form action="{{ route('tgg-fct.admin.assignments.update', $assignment) }}" method="POST">
             @csrf @method('PUT')
@@ -53,7 +54,7 @@
                 <input type="date" name="due_date" value="{{ $assignment->due_date }}" class="form-control">
             </div>
              <div class="mb-3">
-                <label for="description" class="form-label">Price</label>
+                <label for="description" class="form-label">Fee</label>
                 <input type="number" name="price" value="{{ $assignment->price }}" class="form-control">
             </div>
 

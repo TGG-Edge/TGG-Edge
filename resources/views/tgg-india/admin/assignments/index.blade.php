@@ -19,7 +19,7 @@
                 <th>Status</th>
                 <th>Member</th>
                 <th>Due Date</th>
-                <th>Price</th>
+                <th>Fee</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -28,7 +28,7 @@
             <tr>
                 <td>{{ $assignment->title }}</td>
                 <td>{{ $assignment->task_type }}</td>
-                <td>{{ ucfirst($assignment->status) }}</td>
+                <td>{!! statusWithColor($assignment->status) !!}</td>
                 <td>{{ $assignment->member?->name }}</td>
                 <td>{{ $assignment->due_date ?? 'N/A' }}</td>
                 <td>{{ $assignment->price ?? '0' }}</td>

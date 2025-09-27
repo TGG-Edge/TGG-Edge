@@ -177,6 +177,10 @@
     @endif
 
 
+    <a href="{{ route('tgg-india.referral') }}">
+        <i class="fas fa-user-friends"></i> Referral Program
+    </a>
+
     <a href="{{ route('tgg-india.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>
 
     @if (url()->current() === url('tgg-meta/tgg-india/member/dashboard'))

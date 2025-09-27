@@ -45,7 +45,6 @@ class ApplicationController extends Controller
    public function userProfileUpdate(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
@@ -55,17 +54,61 @@ class ApplicationController extends Controller
         ]);
 
         $user->update($validated);
+        
+        $user->update([
+           'research_assistance' => $request->research_assistance ?? 0,
+           'is_link_enabled' => $request->is_link_enabled ?? 0,
+        ]);
 
         return redirect()->back()->with('success', 'User updated successfully!');
     }
 
 
-    public function updateApproval(Request $request, $id)
+    public function updateApproval(Request $request, $id,AIService $aiService, YouTubeService $yt)
     {
         
 
         $user = User::findOrFail($id);
         $message = "";
+        if( $request->action == 'accepted' && $user->approval !== 'accepted' && $user->project != '' && $user->project != null){
+            $topic =$user->project;
+            $academicLevel =  'Graduate';
+            $prompt = $aiService->createPrompt($topic, $academicLevel);
+            $response = $aiService->getAiResponseWithFallback($prompt);
+            if (!$response) {
+                return back()->with('success', 'AI failed to generate content, Please try again.');
+                // return response()->json(['success' => false, 'error' => 'AI failed'], 500);
+            }
+            $parsed = $aiService->parseJsonResponse($response['content']);
+            // return      $parsed;
+            if($parsed == NULL) {
+                return back()->with('success', 'AI failed to generate parse data, Please try again.');
+                // return response()->json(['success' => false, 'error' => 'AI response failed'], 500);
+            }
+
+            $videos = [];
+            foreach ($parsed['video_search_queries'] ?? [] as $query) {
+                $videos = array_merge($videos, $yt->fetchVideos($query));
+            }
+
+            $parsed['videos'] = array_slice($videos, 0, 10);
+
+            
+            $ai_research_assistance_store = AiResearchAssistance::create([
+            'user_id'   => $user->id,
+            'literature'=> json_encode($parsed['literature']),
+            'videos'    => json_encode($parsed['videos']),
+            'links'     => json_encode($parsed['links']),
+            'linkedin'  => json_encode($parsed['linkedin_profiles']),
+            ]);
+
+            $message = " And Research Assistance Contents Generated";
+
+            // $result = $this->generateResearchForUser($user); // ✅ Call from Trait
+            // if (!$result['success']) {
+            //     return back()->with('error', 'User approved, but AI generation failed: ' . ($result['error'] ?? 'Unknown error'));
+            // }
+        }
         $user->approval = $request->action;
         $user->save();
 

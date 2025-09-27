@@ -1215,3 +1215,114 @@ ease-in-out;
 .project-row .btn-outline:hover {
     background: #565900; /* darker hover */
 }
+
+
+
+
+
+/* Book page wrapper */
+.book-page {
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* book page effect */
+}
+
+/* Text formatting */
+.book-page p {
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: justify;
+    color: #222;
+    margin: 15px 0;
+}
+
+.book-page ul li{
+    line-height: 1.8;
+    text-align: justify;
+    color: #222;
+    margin: 15px 0;
+    font-family: 'Cardo';
+    font-size: 12pt;
+}
+
+/* Chapter Header */
+.book-page .chapter-header {
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+}
+.book-page .chapter-header h4 {
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #666;
+    margin: 0;
+    font-size: 14px;
+}
+
+.book-page  h4 {
+   
+      color: #333;
+   
+}
+.book-page ol li{
+    line-height: 1.8;
+    text-align: justify;
+    color: #222;
+    margin: 15px 0;
+    font-family: 'Cardo';
+    font-size: 12pt;
+}
+.book-page .chapter-header h2 {
+    font-weight: 700;
+    margin: 5px 0 0;
+    font-size: 24px;
+     color: #111;
+}
+
+/* Drop-cap for first paragraph */
+.book-page p:first-of-type::first-letter {
+    font-size: 28px;
+    font-weight: bold;
+    float: left;
+    line-height: 1;
+    margin-right: 8px;
+}
+
+/* Blockquote */
+.book-page blockquote {
+    border-left: 4px solid #999;
+    padding-left: 15px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #444;
+}
+
+/* Images */
+.book-page .chapter-image {
+    text-align: center;
+    margin: 25px 0;
+}
+.book-page .chapter-image img {
+    max-width: 80%;
+    border: 1px solid #ccc;
+    padding: 6px;
+    background: #fafafa;
+}
+
+/* Subheadings */
+.book-page h3 {
+    font-size: 18px;
+    margin-top: 30px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* Page Footer */
+.book-page .page-footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+}
