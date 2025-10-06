@@ -28,7 +28,7 @@ class ChapterController extends Controller
 
 
         $chapters = $chapters->paginate(5);
-$chapters->appends($request->all());
+        $chapters->appends($request->all());
         $features = featureList();
         $feature_key = $features[0]['key'];
         $user = auth('web2')->user();
@@ -93,7 +93,7 @@ $chapters->appends($request->all());
         $chapter = Chapter::findOrFail($id);
         $chapter->update($request->all());
 
-        return redirect()->route('tgg-india.trainer.chapters.index')
+        return redirect()->route('tgg-india.trainer.chapters.index', ['section_id' =>  $request->section_id])
             ->with('success', 'Chapter updated successfully.');
     }
 

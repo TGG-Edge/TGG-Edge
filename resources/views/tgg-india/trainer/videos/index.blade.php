@@ -85,10 +85,26 @@
                             @if ($video->image)
                                 @php
                                     // Check if image is a full URL
-                                    $isUrl = Str::startsWith($video->image, ['http://', 'https://']);
+                                   $imagePath = $video->image;
+                                    $isUrl = Str::startsWith($imagePath, ['http://', 'https://']);
+                                    $imageSrc = '';
+
+                                    if ($isUrl) {
+                                        // Case 1: Full URL
+                                        $imageSrc = $imagePath;
+                                    } elseif (Storage::disk('public')->exists($imagePath)) {
+                                        // Case 2: Exists in storage/app/public
+                                        $imageSrc = asset('storage/' . $imagePath);
+                                    } elseif (file_exists(public_path($imagePath))) {
+                                        // Case 3: Exists directly in public folder
+                                        $imageSrc = asset($imagePath);
+                                    } else {
+                                        // Case 4: Fallback (optional placeholder)
+                                        $imageSrc = asset('images/default-thumbnail.jpg');
+                                    }
                                 @endphp
 
-                                <img src="{{ $isUrl ? $video->image : asset('storage/' . $video->image) }}"
+                                <img src="{{$imageSrc}}"
                                     alt="Video Image" width="60" height="40"
                                     style="object-fit: cover; border-radius: 4px;">
                             @else

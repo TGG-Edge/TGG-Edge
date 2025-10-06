@@ -93,8 +93,9 @@ class UserSecondary extends Authenticatable
 
     public function moduleInstances()
     {
-        return $this->hasMany(ModuleInstance::class);
+        return $this->hasMany(ModuleInstance::class, 'user_id', 'id');
     }
+
 
     // A User can be assigned to many modules via module_instances
     public function modules()

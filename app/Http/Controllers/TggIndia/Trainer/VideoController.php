@@ -168,7 +168,11 @@ class videoController extends Controller
     public function show()
     {
         //
-        $videos = Video::paginate(5);
+        $user_id = auth('web2')->id();
+
+        $videos = Video::whereHas('moduleInstance', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->latest()->paginate(5);
         return view('tgg-india.trainer.videos.show', compact('videos'));
     }
 

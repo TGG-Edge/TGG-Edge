@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\UserSecondary;
+
 if (!function_exists('featureList')) {
     function featureList()
     {
@@ -55,4 +57,14 @@ if (! function_exists('statusWithColor')) {
             default       => '<span class="badge page-button bg-secondary">' . ucfirst($status) . '</span>',
         };
     }
+}
+
+
+function generateUniqueReferralCode($length = 8)
+{
+    do {
+        $code = strtoupper(\Str::random($length));
+    } while (UserSecondary::where('referral_code', $code)->exists());
+
+    return $code;
 }

@@ -1219,70 +1219,46 @@ ease-in-out;
 
 
 
-
-/* Book page wrapper */
-.book-page {
+/* ===========================================
+   Base Book Page Wrapper
+=========================================== */
+.book-page,
+.book-chapter {
     padding: 40px;
     background: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* book page effect */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    color: #222;
+    line-height: 1.8;
 }
 
-/* Text formatting */
-.book-page p {
+/* ===========================================
+   Paragraphs & Text Formatting
+=========================================== */
+.book-page p,
+.book-chapter p {
     font-family: 'Georgia', serif;
     font-size: 16px;
-    line-height: 1.8;
     text-align: justify;
-    color: #222;
     margin: 15px 0;
 }
 
-.book-page ul li{
+.book-page ul li,
+.book-page ol li,
+.book-chapter ul li,
+.book-chapter ol li {
     line-height: 1.8;
     text-align: justify;
     color: #222;
-    margin: 15px 0;
-    font-family: 'Cardo';
+    margin: 10px 0;
+    font-family: 'Cardo', serif;
     font-size: 12pt;
-}
-
-/* Chapter Header */
-.book-page .chapter-header {
-    margin-bottom: 25px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #ccc;
-}
-.book-page .chapter-header h4 {
-    letter-spacing: 2px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #666;
-    margin: 0;
-    font-size: 14px;
-}
-
-.book-page  h4 {
-   
-      color: #333;
-   
-}
-.book-page ol li{
-    line-height: 1.8;
-    text-align: justify;
-    color: #222;
-    margin: 15px 0;
-    font-family: 'Cardo';
-    font-size: 12pt;
-}
-.book-page .chapter-header h2 {
-    font-weight: 700;
-    margin: 5px 0 0;
-    font-size: 24px;
-     color: #111;
 }
 
 /* Drop-cap for first paragraph */
-.book-page p:first-of-type::first-letter {
+.book-page p:first-of-type::first-letter,
+.book-chapter p:first-of-type::first-letter {
     font-size: 28px;
     font-weight: bold;
     float: left;
@@ -1290,39 +1266,167 @@ ease-in-out;
     margin-right: 8px;
 }
 
-/* Blockquote */
-.book-page blockquote {
+/* ===========================================
+   Chapter Header
+=========================================== */
+.book-page .chapter-header,
+.book-chapter .chapter-header {
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+}
+
+.book-page .chapter-header h4,
+.book-chapter .chapter-number {
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #666;
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Canva Sans', sans-serif;
+}
+
+.book-page .chapter-header h2,
+.book-chapter .chapter-title {
+    font-weight: 700;
+    margin: 5px 0 0;
+    font-size: 24px;
+    color: #111;
+    font-family: 'Glacial Indifferent', sans-serif;
+}
+
+/* ===========================================
+   Subheadings / Section Titles
+=========================================== */
+.book-page h3,
+.book-chapter .section-title {
+    font-size: 18px;
+    margin-top: 30px;
+    font-weight: 700;
+    color: #333;
+    font-family: 'Glacial Indifferent', sans-serif;
+}
+
+/* ===========================================
+   Sections
+=========================================== */
+.book-chapter .chapter-section {
+    margin-top: 25px;
+}
+
+.book-chapter .section-overview,
+.book-chapter .section-subtitle {
+    font-family: 'Cardo', serif;
+    margin-bottom: 6px;
+}
+
+/* Lists under sections */
+.book-chapter .section-list {
+    margin-left: 20px;
+    margin-bottom: 12px;
+}
+
+/* Pros / Cons / Features lists */
+.book-chapter .features-list li::marker {
+    color: #2d7;
+}
+.book-chapter .pros-list li::marker {
+    color: green;
+}
+.book-chapter .cons-list li::marker {
+    color: red;
+}
+
+/* ===========================================
+   Blockquotes / Summaries
+=========================================== */
+.book-page blockquote,
+.book-chapter .section-summary {
     border-left: 4px solid #999;
     padding-left: 15px;
     margin: 20px 0;
     font-style: italic;
     color: #444;
+    background: #f9f9f9;
 }
 
-/* Images */
-.book-page .chapter-image {
+/* ===========================================
+   Images
+=========================================== */
+.book-page .chapter-image,
+.book-chapter .chapter-image {
     text-align: center;
     margin: 25px 0;
 }
-.book-page .chapter-image img {
+
+.book-page .chapter-image img,
+.book-chapter .chapter-image img {
     max-width: 80%;
     border: 1px solid #ccc;
     padding: 6px;
     background: #fafafa;
 }
 
-/* Subheadings */
-.book-page h3 {
-    font-size: 18px;
+/* ===========================================
+   Activities Section
+=========================================== */
+.book-chapter .chapter-activities {
     margin-top: 30px;
-    font-weight: 700;
-    color: #333;
 }
 
-/* Page Footer */
-.book-page .page-footer {
+.book-chapter .activities-title {
+    font-family: 'Glacial Indifferent', sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.book-chapter .activities-list {
+    margin-left: 20px;
+}
+
+/* ===========================================
+   Page Footer
+=========================================== */
+.book-page .page-footer,
+.book-chapter .page-footer {
     margin-top: 40px;
     text-align: center;
     font-size: 13px;
     color: #666;
+    font-family: 'Canva Sans', sans-serif;
 }
+
+
+
+
+ .referral-page h1 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #222;
+    }
+    .referral-page h2 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    .referral-page p, 
+    .referral-page li {
+        font-size: 14px;
+        line-height: 1.7;
+        color: #555;
+    }
+    .referral-box {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 8px;
+    }
+    .referral-box input {
+        font-size: 14px;
+    }

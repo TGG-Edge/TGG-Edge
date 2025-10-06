@@ -107,8 +107,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 'heading', '|',
                 'bold', 'italic', 'underline', 'link', '|',
                 'bulletedList', 'numberedList', '|',
-                'insertTable', 'blockQuote', 'imageUpload', 'undo', 'redo'
+                'insertTable', 'blockQuote', 'imageUpload', 'undo', 'redo', '|',
+                'sourceEditing' 
             ],
+
+             htmlSupport: {
+                allow: [
+                    {
+                        name: /.*/,        // allow all tags
+                        attributes: true,  // keep all attributes
+                        classes: true,     // keep classes
+                        styles: true       // keep inline styles
+                    }
+                ]
+            },
 
             image: {
                 resizeUnit: '%',

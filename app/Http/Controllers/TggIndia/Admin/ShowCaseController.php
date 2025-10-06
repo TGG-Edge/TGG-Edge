@@ -4,6 +4,7 @@ namespace App\Http\Controllers\TggIndia\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AiResearchAssistance;
+use App\Models\ContentPage;
 use App\Models\ShowCase;
 use App\Models\User;
 use App\Models\UserSecondary;
@@ -49,178 +50,143 @@ class ShowCaseController extends Controller
         return view('tgg-india.admin.showcase.freelance-opportunities', compact('showcase'));
     }
 
+    public function editReferral()
+    {
+        $content = ContentPage::where('source_type', 'referral')->first();
+        $source_type = 'referral';
+        return view('tgg-india.admin.showcase.referral', compact('content', 'source_type'));
+    }
 
-    // public function update(Request $request)
-    // {
-    //     $showcase = Showcase::first();
+    public function editReward()
+    {
+        $content = ContentPage::where('source_type', 'reward')->first();
+        $source_type = 'reward';
+        return view('tgg-india.admin.showcase.reward', compact('content', 'source_type'));
+    }
 
-    //     // basic text fields
-    //     $data = $request->only([
-    //         'welcome_note',
-    //         'welcome_note_trainer',
-    //         'welcome_note_member',
-    //         'welcome_note_rhm_club',
-    //         'welcome_note_nomad_community',
-    //         'welcome_note_freelancer',
-    //     ]);
 
-    //     // add partner single checkout notes (Modicare, Motilal)
-    //     $data['modicare_checkout'] = $request->input('modicare_checkout');
-    //     $data['motilal_checkout']  = $request->input('motilal_checkout');
+   public function updateContent(Request $request, $source_type)
+    {
+        $validated = $request->validate([
+            'title'     => 'required|string|max:255',
+            'slug'      => 'nullable|string|max:255',
+            'content'   => 'nullable|string',
+            'min_size'  => 'nullable|integer',
+            'max_size'  => 'nullable|integer',
+        ]);
 
-    //     // Handle multiple comma-separated text fields
-    //     foreach (['entrepreneurship_opportunities', 'tgg_news'] as $field) {
-    //         $data[$field] = $request->input($field) ? array_values(array_filter(array_map('trim', explode(',', $request->input($field))))) : [];
-    //     }
-    //     // Freelancing opportunities
-    //     $data['investment_opportunities'] = $request->input('investment_opportunities', []);
+        // Generate slug if empty
+        $slug = $validated['slug'] ?? \Str::slug($validated['title']);
 
-    //     // Fields that will now be stored as array of objects { img, note }
-    //     $imageFields = ['woodpecker_collection', 'travel_and_events', 'tgg_homes', 'tgg_foundation'];
+        // Try to find existing record by slug
+        $content = ContentPage::where('slug', $slug)->first();
 
-    //     foreach ($imageFields as $field) {
-    //         $existing = [];
+        if ($content) {
+            // ✅ Update existing
+            $content->update([
+                'title'     => $validated['title'],
+                'content'   => $validated['content'],
+                'min_size'  => $validated['min_size'] ?? 0,
+                'max_size'  => $validated['max_size'] ?? 0,
+            ]);
+        } else {
+            // ✅ Create new
+            $content = ContentPage::create([
+                'title'     => $validated['title'],
+                'slug'      => $slug,
+                'content'   => $validated['content'],
+                'min_size'  => $validated['min_size'] ?? 0,
+                'max_size'  => $validated['max_size'] ?? 0,
+                'created_by'=> auth('web2')->id(),
+                'source_type' => $source_type,
+            ]);
+        }
 
-    //         // Existing items (hidden inputs that contain image path)
-    //         if ($request->has("{$field}_existing")) {
-    //             foreach ($request->input("{$field}_existing") as $i => $imgPath) {
-    //                 // Skip if user marked it for removal
-    //                 if ($request->has("remove_{$field}") && in_array($imgPath, $request->input("remove_{$field}"))) {
-    //                     continue;
-    //                 }
-    //                 $note = $request->input("{$field}_notes")[$i] ?? '';
-    //                 $link = ($field === 'tgg_foundation') ? ($request->input("{$field}_links")[$i] ?? '') : '';
-    //                 $existing[] = [
-    //                     'img' => $imgPath,
-    //                     'note' => $note,
-    //                     'link' => $link,
-    //                 ];
-    //             }
-    //         }
+        return redirect()->back()->with('success', ucfirst($source_type) . ' content updated successfully.');
+    }
 
-    //         // New uploads (files) with new notes
-    //         if ($request->hasFile($field)) {
-    //             foreach ($request->file($field) as $i => $file) {
-    //                 $path = $file->store('showcase', 'public');
-    //                 $note = $request->input("{$field}_new_notes")[$i] ?? '';
-    //                 $link = ($field === 'tgg_foundation') ? ($request->input("{$field}_new_links")[$i] ?? '') : '';
-        
-    //                 $existing[] = [
-    //                     'img' => '/storage/' . $path,
-    //                     'note' => $note,
-    //                     'link' => $link,
-    //                 ];
-    //             }
-    //         }
 
-    //         // Backwards-compatibility: if no array built, check if DB already had string-array items
-    //         if (empty($existing) && $showcase) {
-    //             $current = $showcase->{$field} ?? null;
-    //             if ($current && is_array($current)) {
-    //                 // If current items are strings, convert to objects with empty note
-    //                 foreach ($current as $item) {
-    //                     if (is_string($item)) {
-    //                         $existing[] = ['img' => $item, 'note' => ''];
-    //                     } elseif (is_array($item) && isset($item['img'])) {
-    //                         $existing[] = $item;
-    //                     }
-    //                 }
-    //             }
-    //         }
-
-    //         $data[$field] = array_values($existing);
-    //     }
-
-    //     // Save
-    //     if ($showcase) {
-    //         $showcase->update($data);
-    //     } else {
-    //         $showcase = Showcase::create($data);
-    //     }
-
-    //     return redirect()->back()->with('success', 'Showcase updated successfully.');
-    // }
 
     public function update(Request $request)
-{
-    $showcase = Showcase::first() ?? new Showcase();
+    {
+        $showcase = Showcase::first() ?? new Showcase();
 
-    // Start with existing data so nothing is lost
-    $data = $showcase->toArray();
+        // Start with existing data so nothing is lost
+        $data = $showcase->toArray();
 
-    // ✅ Only overwrite if field is present in the request
-    foreach ([
-        'welcome_note',
-        'welcome_note_trainer',
-        'welcome_note_member',
-        'welcome_note_rhm_club',
-        'welcome_note_nomad_community',
-        'welcome_note_freelancer',
-        'modicare_checkout',
-        'motilal_checkout',
-    ] as $field) {
-        if ($request->has($field)) {
-            $data[$field] = $request->input($field);
+        // ✅ Only overwrite if field is present in the request
+        foreach ([
+            'welcome_note',
+            'welcome_note_trainer',
+            'welcome_note_member',
+            'welcome_note_rhm_club',
+            'welcome_note_nomad_community',
+            'welcome_note_freelancer',
+            'modicare_checkout',
+            'motilal_checkout',
+        ] as $field) {
+            if ($request->has($field)) {
+                $data[$field] = $request->input($field);
+            }
         }
-    }
 
-    // ✅ Comma-separated fields
-    foreach (['entrepreneurship_opportunities', 'tgg_news'] as $field) {
-        if ($request->has($field)) {
-            $data[$field] = $request->input($field)
-                ? array_values(array_filter(array_map('trim', explode(',', $request->input($field)))))
-                : [];
+        // ✅ Comma-separated fields
+        foreach (['entrepreneurship_opportunities', 'tgg_news'] as $field) {
+            if ($request->has($field)) {
+                $data[$field] = $request->input($field)
+                    ? array_values(array_filter(array_map('trim', explode(',', $request->input($field)))))
+                    : [];
+            }
         }
-    }
 
-    // ✅ Freelancing opportunities
-    if ($request->has('investment_opportunities')) {
-        $data['investment_opportunities'] = $request->input('investment_opportunities', []);
-    }
+        // ✅ Freelancing opportunities
+        if ($request->has('investment_opportunities')) {
+            $data['investment_opportunities'] = $request->input('investment_opportunities', []);
+        }
 
-    // ✅ Image fields
-    $imageFields = ['woodpecker_collection', 'travel_and_events', 'tgg_homes', 'tgg_foundation'];
+        // ✅ Image fields
+        $imageFields = ['woodpecker_collection', 'travel_and_events', 'tgg_homes', 'tgg_foundation'];
 
-    foreach ($imageFields as $field) {
-        if ($request->has("{$field}_existing") || $request->hasFile($field)) {
-            $existing = [];
+        foreach ($imageFields as $field) {
+            if ($request->has("{$field}_existing") || $request->hasFile($field)) {
+                $existing = [];
 
-            if ($request->has("{$field}_existing")) {
-                foreach ($request->input("{$field}_existing") as $i => $imgPath) {
-                    if ($request->has("remove_{$field}") && in_array($imgPath, $request->input("remove_{$field}"))) {
-                        continue;
+                if ($request->has("{$field}_existing")) {
+                    foreach ($request->input("{$field}_existing") as $i => $imgPath) {
+                        if ($request->has("remove_{$field}") && in_array($imgPath, $request->input("remove_{$field}"))) {
+                            continue;
+                        }
+                        $note = $request->input("{$field}_notes")[$i] ?? '';
+                        $link = ($field === 'tgg_foundation') ? ($request->input("{$field}_links")[$i] ?? '') : '';
+                        $existing[] = [
+                            'img' => $imgPath,
+                            'note' => $note,
+                            'link' => $link,
+                        ];
                     }
-                    $note = $request->input("{$field}_notes")[$i] ?? '';
-                    $link = ($field === 'tgg_foundation') ? ($request->input("{$field}_links")[$i] ?? '') : '';
-                    $existing[] = [
-                        'img' => $imgPath,
-                        'note' => $note,
-                        'link' => $link,
-                    ];
                 }
-            }
 
-            if ($request->hasFile($field)) {
-                foreach ($request->file($field) as $i => $file) {
-                    $path = $file->store('showcase', 'public');
-                    $note = $request->input("{$field}_new_notes")[$i] ?? '';
-                    $link = ($field === 'tgg_foundation') ? ($request->input("{$field}_new_links")[$i] ?? '') : '';
-                    $existing[] = [
-                        'img' => '/storage/' . $path,
-                        'note' => $note,
-                        'link' => $link,
-                    ];
+                if ($request->hasFile($field)) {
+                    foreach ($request->file($field) as $i => $file) {
+                        $path = $file->store('showcase', 'public');
+                        $note = $request->input("{$field}_new_notes")[$i] ?? '';
+                        $link = ($field === 'tgg_foundation') ? ($request->input("{$field}_new_links")[$i] ?? '') : '';
+                        $existing[] = [
+                            'img' => '/storage/' . $path,
+                            'note' => $note,
+                            'link' => $link,
+                        ];
+                    }
                 }
-            }
 
-            $data[$field] = array_values($existing);
+                $data[$field] = array_values($existing);
+            }
         }
+
+        // ✅ Save back
+        $showcase->fill($data)->save();
+
+        return redirect()->back()->with('success', 'Showcase updated successfully.');
     }
-
-    // ✅ Save back
-    $showcase->fill($data)->save();
-
-    return redirect()->back()->with('success', 'Showcase updated successfully.');
-}
 
 }

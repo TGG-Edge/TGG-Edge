@@ -14,6 +14,20 @@ use App\Http\Controllers\DataController;
 // Route::get('sheet/upload', [DataController::class, 'showUploadForm'])->name('sheet.upload.form');
 // Route::post('sheet/upload', [DataController::class, 'upload'])->name('sheet.upload');
 
+
+
+Route::get('/referral-code', function () {
+    $users = \App\Models\UserSecondary::all();
+    foreach ($users as $user) {
+        if (!$user->referral_code) {
+            $user->referral_code = generateUniqueReferralCode();
+            $user->save();
+        }
+    }
+    return 'okay referral code done';
+});
+
+
 Route::get('/', function () {
     return view('welcome');
 });

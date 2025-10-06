@@ -16,17 +16,16 @@ class LinkController extends Controller
      */
     public function index()
     {
-         $user_id = auth('web2')->id();
+        $user_id = auth('web2')->id();
 
-    $links = Link::whereHas('moduleInstance', function ($q) use ($user_id) {
-        $q->where('user_id', $user_id);
-    })->latest()->paginate(5);
+        $links = Link::whereHas('moduleInstance', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->latest()->paginate(5);
         $features = featureList();
         $feature_key = $features[1]['key'];
         $user = auth('web2')->user();
         $feature_usage = FeatureUsage::where('user_id', $user->id)->where('feature_key', $feature_key)->first();
         $feature_limit = FeatureLimit::where('feature_key', $feature_key)->first();
-
         $is_exceeded = false; // default
 
         if ($feature_limit) {
@@ -96,7 +95,10 @@ class LinkController extends Controller
     public function show()
     {
         //
-        $links = Link::paginate(5);
+        $user_id = auth('web2')->id();
+        $links = Link::whereHas('moduleInstance', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id);
+        })->latest()->paginate(5);
         return view('tgg-india.trainer.links.show', compact('links'));
     }
 

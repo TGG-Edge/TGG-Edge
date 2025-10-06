@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\DonationController;
 use App\Http\Controllers\TggIndia\Admin\ApplicationController;
 use App\Http\Controllers\TggIndia\Admin\FeatureLimitController;
+use App\Http\Controllers\TggIndia\Admin\IncentiveController;
 use App\Http\Controllers\TggIndia\LoginController;
 use App\Http\Controllers\TggIndia\Admin\ModuleController;
 use App\Http\Controllers\TggIndia\Admin\ProfileController;
+use App\Http\Controllers\TggIndia\Admin\ReferralController;
+use App\Http\Controllers\TggIndia\Admin\RewardController;
 use App\Http\Controllers\TggIndia\Admin\ShowCaseController;
 use App\Http\Controllers\TggIndia\RegisterController;
 use App\Http\Controllers\TggIndia\Trainer\ChapterController;
@@ -13,11 +17,16 @@ use App\Http\Controllers\TggIndia\Trainer\LiteratureController;
 use App\Http\Controllers\TggIndia\Trainer\PricingController;
 use App\Http\Controllers\TggIndia\Trainer\SectionController;
 use App\Http\Controllers\TggIndia\Trainer\VideoController;
+use App\Models\Donation;
+use App\Models\Incentive;
+use App\Models\Reward;
 use Illuminate\Support\Facades\Route;
 
 
 
 Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->group(function () {
+
+ 
 
   Route::get('/login', [LoginController::class, 'show'])->name('show');
   Route::post('/login', [LoginController::class, 'login'])->name('login');
@@ -27,15 +36,18 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       return view('tgg-india.referral');
   })->name('referral');
 
-  Route::get('/referral/XASFSDF3223WDSCDW', function () {
-      return redirect()->route('tgg-india.register.show',['user_type' => 'members']);
-  });
+ 
   // Public registration routes
   Route::prefix('register')->name('register.')->group(function () {
     Route::get('{user_type}', [RegisterController::class, 'show'])->name('show');
     Route::post('{user_type}', [RegisterController::class, 'store'])->name('store');
+    Route::get('/referral/{referral_code}', [RegisterController::class, 'showReferral']);
+    Route::post('referral/{user_type}', [RegisterController::class, 'referralStore'])->name('referral.store');
+    Route::post('/payment/verify', [RegisterController::class, 'verifyPayment'])->name('payment.verify');
   });
 
+  Route::post('/donate', [DonationController::class, 'createOrder'])->name('donate.create');
+  Route::post('/donate/verify', [DonationController::class, 'verifyDonation'])->name('donate.verify');
 
   Route::get('/dashboard', function () {
     return view('tgg-india.dashboard');
@@ -49,6 +61,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     })->name('dashboard');
 
     Route::resource('assignments', \App\Http\Controllers\TggIndia\Admin\AssignmentController::class);
+
 
     Route::prefix('profile')->name('profile.')->group(function () {
       Route::get('/', [ProfileController::class, 'show'])->name('index');
@@ -81,7 +94,38 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
         ->name('main-projects.edit');
     Route::get('/freelance-opportunities/edit', [ShowCaseController::class, 'editFreelanceOpportunities'])
         ->name('freelance-opportunities.edit');
-     Route::post('/update', [ShowcaseController::class, 'update'])->name('update');
+    Route::post('/update', [ShowcaseController::class, 'update'])->name('update');
+    
+    Route::get('/referral/edit', [ShowCaseController::class, 'editReferral'])
+        ->name('referral.edit');
+    Route::get('/reward/edit', [ShowCaseController::class, 'editReward'])
+        ->name('reward.edit');
+    Route::post('/content-update/{source_type}', [ShowcaseController::class, 'updateContent'])->name('content.update');
+    });
+
+    Route::prefix('referral')->name('referral.')->group(function () {
+      Route::get('/', [ReferralController::class, 'content'])->name('content.index');
+      Route::post('/referral', [ReferralController::class, 'contentUpdate'])->name('content.update');
+    });
+
+    Route::prefix('rewards')->name('rewards.')->group(function () {
+      Route::get('/', [RewardController::class, 'index'])->name('index');
+      Route::post('/reward', [RewardController::class, 'contentUpdate'])->name('content.update');
+    });
+
+    Route::prefix('incentives')->name('incentives.')->group(function () {
+      Route::get('/', [IncentiveController::class, 'index'])->name('index');
+      Route::post('/incentive', [IncentiveController::class, 'update'])->name('update');
+      Route::post('/status-update/{id}', [IncentiveController::class, 'updateStatus'])->name('update.status');
+
+    });
+
+    Route::prefix('donations')->name('donations.')->group(function () {
+      Route::get('/', [\App\Http\Controllers\TggIndia\Admin\DonationController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('payments')->name('payments.')->group(function () {
+      Route::get('/', [\App\Http\Controllers\TggIndia\Admin\PaymentController::class, 'index'])->name('index');
     });
   });
 
@@ -184,5 +228,21 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     });
 
      Route::resource('assignments', \App\Http\Controllers\TggIndia\Member\AssignmentController::class);
+
+
+     Route::prefix('referral')->name('referral.')->group(function () {
+      Route::get('/program', [ReferralController::class, 'program'])->name('program');
+      Route::get('/tracking', [ReferralController::class, 'tracking'])->name('tracking');
+    });
+
+    Route::prefix('rewards')->name('rewards.')->group(function () {
+      Route::get('/', [\App\Http\Controllers\TggIndia\Member\RewardController::class, 'index'])->name('index');
+      Route::post('/reward', [\App\Http\Controllers\TggIndia\Member\RewardController::class, 'contentUpdate'])->name('content.update');
+    });
+
+    Route::prefix('incentives')->name('incentives.')->group(function () {
+      Route::get('/', [\App\Http\Controllers\TggIndia\Member\IncentiveController::class, 'index'])->name('index');
+      Route::post('/incentive', [\App\Http\Controllers\TggIndia\Member\IncentiveController::class, 'update'])->name('update');
+    });
   });
 });

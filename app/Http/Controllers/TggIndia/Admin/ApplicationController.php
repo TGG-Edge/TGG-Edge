@@ -4,6 +4,8 @@ namespace App\Http\Controllers\TggIndia\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AiResearchAssistance;
+use App\Models\Incentive;
+use App\Models\Reward;
 use App\Models\User;
 use App\Models\UserSecondary;
 use App\Services\AIService;
@@ -131,5 +133,19 @@ class ApplicationController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function incentiveIndex()
+    {
+        $incentives = Incentive::paginate(10);
+
+        return view('tgg-india.incentives', compact('incentives'));
+    }
+
+        public function rewardIndex()
+    {
+         $rewards = Reward::paginate(10);
+
+        return view('tgg-india.rewards', compact('rewards'));
     }
 }

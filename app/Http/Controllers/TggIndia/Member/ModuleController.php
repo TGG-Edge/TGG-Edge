@@ -32,17 +32,18 @@ class ModuleController extends Controller
         return view('tgg-india.member.modules.investments.chapters', compact('chapter'));
     }
 
-    public function links()
+    public function links(Request $request)
     {
         //
-        $links = Link::paginate(5);
+
+        $links = Link::where('module_instance_id',$request->module_instance_id)->paginate(5);
         return view('tgg-india.member.modules.investments.links', compact('links'));
     }
 
-    public function videos()
+    public function videos(Request $request)
     {
         //
-        $videos = Video::paginate(5);
+        $videos = Video::where('module_instance_id',$request->module_instance_id)->paginate(5);
         return view('tgg-india.member.modules.investments.videos', compact('videos'));
     }
 }

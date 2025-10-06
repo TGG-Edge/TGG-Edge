@@ -1,15 +1,10 @@
     @php
         $user = auth('web2')->user();
-        $investmentModules = $user->modules->filter(function ($module) {
-            return $module->slug === 'investment' || $module->name === 'investment';
-        });
         // Combine all feature objects from all modules into one list
         $features = $user->modules->flatMap->features;
-        // Check for specific feature keys
         $hasLiteratures = $features->contains('feature_key', 'literatures');
         $hasLinks = $features->contains('feature_key', 'links');
         $hasVideos = $features->contains('feature_key', 'videos');
-
         $otherAccounts = \App\Models\UserSecondary::where('email', $user->email)->where('id', '!=', $user->id)->get();
     @endphp
     <a href="{{ route('tgg-india.trainer.dashboard') }}"
@@ -47,7 +42,7 @@
             class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-meta/tgg-india/trainer/*') ? 'active' : '' }}"
             data-bs-toggle="collapse" data-bs-target="#investmentDropdown"
             aria-expanded="{{ request()->is('tgg-meta/tgg-india/trainer/*') ? 'true' : 'false' }}">
-            <span><i class="fas fa-flask"></i> Investment </span>
+            <span><i class="fas fa-flask"></i> {{$user->modules->last()->name}} </span>
             <i class="fas fa-caret-down"></i>
         </a>
 
@@ -72,13 +67,13 @@
                 @endif
                 @if ($hasLinks)
                     <a href="{{ route('tgg-india.trainer.links.index') }}"
-                        class="{{ request()->is('tgg-meta/tgg-india/trainer/links*') ? 'active' : '' }}">
+                        class="{{ request()->is('tgg-meta/tgg-india/trainer/links/index') ? 'active' : '' }}">
                         <i class="fas fa-link"></i> Links
                     </a>
                 @endif
                 @if ($hasVideos)
                     <a href="{{ route('tgg-india.trainer.videos.index') }}"
-                        class="{{ request()->is('tgg-meta/tgg-india/trainer/videos*') ? 'active' : '' }}">
+                        class="{{ request()->is('tgg-meta/tgg-india/trainer/videos/index') ? 'active' : '' }}">
                         <i class="fas fa-video"></i> Videos
                     </a>
                 @endif
@@ -96,44 +91,65 @@
                 id="viewSectionDropdown">
 
                 @if ($hasLiteratures)
-                    @foreach ($user->literatures as $literature)
-                        <a href="#" class="dropdown-toggle d-flex justify-content-between align-items-center"
-                            data-bs-toggle="collapse" data-bs-target="#literature-{{ $literature->id }}"
-                            aria-expanded="{{ request()->is('tgg-meta/tgg-india/trainer/chapters*') ? 'true' : 'false' }}"
-                            title="{{ $literature->title }}">
-                            <span><i class="fas fa-book"></i> Literature</span>
-                            <i class="fas fa-caret-down"></i>
-                        </a>
+                   @foreach ($user->literatures as $literature)
+                    @php
+                        // Check if any section/chapter inside this literature is active
+                        $isActiveLiterature = $literature->sections->contains(function ($section) {
+                            return $section->chapters->contains(function ($chapter) {
+                                return request()->is('tgg-meta/tgg-india/trainer/chapters/' . $chapter->id);
+                            });
+                        });
+                    @endphp
 
-                        @if ($literature->sections && $literature->sections->count() > 0)
-                            <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/trainer/chapters*') ? 'show' : '' }}"
-                                id="literature-{{ $literature->id }}">
-                                @foreach ($literature->sections as $section)
-                                    @if ($section->chapters && $section->chapters->count() > 0)
-                                        <a href="#"
-                                            class="dropdown-toggle d-flex justify-content-between align-items-center"
-                                            data-bs-toggle="collapse" data-bs-target="#section-{{ $section->id }}"
-                                            aria-expanded="{{ request()->is('tgg-meta/tgg-india/trainer/chapters*') ? 'true' : 'false' }}"
-                                            title="{{ $section->title }}">
-                                            <span><i class="fas fa-list"></i> {{ $section->title }}</span>
-                                            <i class="fas fa-caret-down"></i>
-                                        </a>
+                    <a href="#"
+                        class="dropdown-toggle d-flex justify-content-between align-items-center"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#literature-{{ $literature->id }}"
+                        aria-expanded="{{ $isActiveLiterature ? 'true' : 'false' }}"
+                        title="{{ $literature->title }}">
+                        <span><i class="fas fa-book"></i> {{ $literature->title }}</span>
+                        <i class="fas fa-caret-down"></i>
+                    </a>
 
-                                        <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/trainer/chapters*') ? 'show' : '' }}"
-                                            id="section-{{ $section->id }}">
-                                            @foreach ($section->chapters as $chapter)
-                                                <a href="{{ route('tgg-india.trainer.chapters.show', $chapter->id) }}"
-                                                    title="{{ $chapter->title }}"
-                                                    class="{{ request()->is('tgg-meta/tgg-india/trainer/chapters/' . $chapter->id) ? 'active' : '' }}">
-                                                    <i class="fas fa-book"></i> {{ $chapter->title }}
-                                                </a>
-                                            @endforeach
-                                        </div>
-                                    @endif
-                                @endforeach
-                            </div>
-                        @endif
-                    @endforeach
+                    @if ($literature->sections && $literature->sections->count() > 0)
+                        <div class="collapse ps-3 {{ $isActiveLiterature ? 'show' : '' }}"
+                            id="literature-{{ $literature->id }}">
+
+                            @foreach ($literature->sections as $section)
+                                @php
+                                    // Check if this section contains the current active chapter
+                                    $isActiveSection = $section->chapters->contains(function ($chapter) {
+                                        return request()->is('tgg-meta/tgg-india/trainer/chapters/' . $chapter->id);
+                                    });
+                                @endphp
+
+                                @if ($section->chapters && $section->chapters->count() > 0)
+                                    <a href="#"
+                                        class="dropdown-toggle d-flex justify-content-between align-items-center"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#section-{{ $section->id }}"
+                                        aria-expanded="{{ $isActiveSection ? 'true' : 'false' }}"
+                                        title="{{ $section->title }}">
+                                        <span><i class="fas fa-list"></i> {{ $section->title }}</span>
+                                        <i class="fas fa-caret-down"></i>
+                                    </a>
+
+                                    <div class="collapse ps-3 {{ $isActiveSection ? 'show' : '' }}"
+                                        id="section-{{ $section->id }}">
+                                        @foreach ($section->chapters as $chapter)
+                                            <a href="{{ route('tgg-india.trainer.chapters.show', $chapter->id) }}"
+                                                title="{{ $chapter->title }}"
+                                                class="{{ request()->is('tgg-meta/tgg-india/trainer/chapters/' . $chapter->id) ? 'active' : '' }}">
+                                                <i class="fas fa-book"></i> {{ $chapter->title }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                @endforeach
+
                 @endif
 
                 @if ($hasLinks)

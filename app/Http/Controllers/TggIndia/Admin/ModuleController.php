@@ -111,6 +111,16 @@ class ModuleController extends Controller
         //         'user_id'   => $userId,
         //     ]);
         // }
+        foreach ($request->users as $userId) {
+            ModuleInstance::updateOrCreate(
+                [
+                    'module_id' => $module->id,
+                    'user_id'   => $userId,
+                ],
+                [] // no extra fields to update
+            );
+        }
+
 
         // Sync features (clear old & insert new)
         ModuleFeature::where('module_id', $module->id)->delete();

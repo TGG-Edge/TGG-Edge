@@ -45,6 +45,15 @@
         <a href="{{ route('tgg-india.admin.showcases.freelance-opportunities.edit') }}#freelance-opportunities" class="d-block py-1">
             <i class="fas fa-briefcase me-2"></i> Freelance Opportunities
         </a>
+
+        <a href="{{ route('tgg-india.admin.showcases.referral.edit') }}#main-projects" class="d-block py-1">
+            <i class="fas fa-user-friends me-2"></i> Referral Content
+        </a>
+
+        <a href="{{ route('tgg-india.admin.showcases.reward.edit') }}#freelance-opportunities" class="d-block py-1">
+            <i class="fas fa-gift me-2"></i> Reward Content
+</a>
+
     </div>
 </div>
 
@@ -52,6 +61,35 @@
 <a href="{{ route('tgg-india.admin.assignments.index') }}" class="{{ request()->is('user/knowledge-research') ? 'active' : '' }}">
     <i class="fas fa-clipboard-list"></i> Assignments
 </a>
+
+<div class="dropdown">
+    <a href="#"
+       class="dropdown-toggle d-flex justify-content-between align-items-center 
+       {{ request()->is('tgg-meta/tgg-india/admin/incentives*') || request()->is('tgg-meta/tgg-india/admin/rewards*') ||request()->is('tgg-meta/tgg-india/admin/donations*')||request()->is('tgg-meta/tgg-india/admin/payments*')  ? 'active' : '' }}"
+       data-bs-toggle="collapse"
+       data-bs-target="#advancementDropdown"
+       aria-expanded="{{ request()->is('tgg-meta/tgg-india/admin/incentives*') || request()->is('tgg-meta/tgg-india/admin/rewards*') ? 'true' : 'false' }}">
+        <span><i class="fas fa-arrow-up me-2"></i> Advancement</span>
+        <i class="fas fa-caret-down"></i>
+    </a>
+    <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/admin/incentives*') || request()->is('tgg-meta/tgg-india/admin/rewards*') ||request()->is('tgg-meta/tgg-india/admin/donations*')||request()->is('tgg-meta/tgg-india/admin/payments*') ? 'show' : '' }}"
+         id="advancementDropdown">
+        <a href="{{ route('tgg-india.admin.incentives.index') }}" class="d-block py-1">
+            <i class="fas fa-gift me-2"></i> Incentive
+        </a>
+        <a href="{{ route('tgg-india.admin.rewards.index') }}" class="d-block py-1">
+            <i class="fas fa-trophy me-2"></i> Reward
+        </a>
+         <a href="{{ route('tgg-india.admin.donations.index') }}" class="d-block py-1">
+            <i class="fas fa-donate me-2"></i> Donation
+        </a>
+        <a href="{{ route('tgg-india.admin.payments.index') }}" class="d-block py-1">
+            <i class="fas fa-credit-card me-2"></i> Payment
+        </a>
+
+    </div>
+</div>
+
 
 <div class="dropdown">
     <a href="#sitemaplink"
@@ -74,6 +112,14 @@
         <a href="{{ url('tgg-meta/tgg-india/register/members') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-user-friends me-2"></i> Members Register
         </a>
+        @php
+         $referralCode = Auth('web2')->user()->referral_code;
+         $referralLink = url('tgg-meta/tgg-india/register/referral/' . $referralCode);
+        @endphp
+        <a href="{{ $referralLink }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-user-friends me-2"></i> Members Register - By Referral
+        </a>
+
          <a href="{{ url('tgg-meta/tgg-india/register/rhm-club') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-user-friends me-2"></i> Rhm Club Register
         </a>

@@ -19,8 +19,8 @@ class ModuleInstance extends Model
     // Each instance belongs to a user
     public function user()
     {
-        return $this->belongsTo(UserSecondary::class);
-    }   
+        return $this->belongsTo(UserSecondary::class, 'user_id', 'id');
+    } 
 
      public function literatures()
     {
@@ -28,7 +28,7 @@ class ModuleInstance extends Model
     }
     
     
- public function links()
+    public function links()
     {
         return $this->hasMany(Link::class, 'module_instance_id');
     }

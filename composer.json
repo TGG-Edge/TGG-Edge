@@ -15,6 +15,7 @@
         "maatwebsite/excel": "^3.1",
         "myclabs/php-enum": "^1.8",
         "nesbot/carbon": "^3.10",
+        "razorpay/razorpay": "^2.9",
         "symfony/css-selector": "^7.3",
         "symfony/dom-crawler": "^7.3",
         "unisharp/laravel-filemanager": "^2.11"
