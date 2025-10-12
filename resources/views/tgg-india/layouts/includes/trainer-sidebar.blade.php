@@ -1,12 +1,19 @@
     @php
-        $user = auth('web2')->user();
-        // Combine all feature objects from all modules into one list
-        $features = $user->modules->flatMap->features;
+    $user = auth('web2')->user();
+    $features = collect();
+    $hasLiteratures = $hasLinks = $hasVideos = false;
+    $otherAccounts = collect();
+
+    if ($user) {
+        $features = $user->modules->flatMap->features ?? collect();
         $hasLiteratures = $features->contains('feature_key', 'literatures');
         $hasLinks = $features->contains('feature_key', 'links');
         $hasVideos = $features->contains('feature_key', 'videos');
-        $otherAccounts = \App\Models\UserSecondary::where('email', $user->email)->where('id', '!=', $user->id)->get();
-    @endphp
+        $otherAccounts = \App\Models\UserSecondary::where('email', $user->email)
+            ->where('id', '!=', $user->id)
+            ->get();
+    }
+@endphp
     <a href="{{ route('tgg-india.trainer.dashboard') }}"
         class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
         <i class="fas fa-tachometer-alt"></i> Dashboard

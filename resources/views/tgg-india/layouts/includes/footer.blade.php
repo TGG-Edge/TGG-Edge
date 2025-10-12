@@ -15,7 +15,7 @@
     <!-- Contact Us -->
     <div class="footer-column-contactus">
         <h3>Contact Us</h3>
-        <p>
+        <p class="contactusp">
             TGG Eco Ventures Pvt. Ltd.  #677, 1st<br>
             Floor, 27th Main 13th Cross, Sector-1,<br>
 			HSR Layout, Bangalore-560102,<br>
@@ -40,7 +40,7 @@
 
     <!-- Member Login -->
     <div class="footer-column">
-        <h3>Admin Login</h3>
+        <h3 class="adminh3">Admin Login</h3>
         <form method="post" action="https://tggindia.com/wp-login.php">
             <input type="hidden" name="redirect_to" value="https://tggindia.com/my-account/">
 

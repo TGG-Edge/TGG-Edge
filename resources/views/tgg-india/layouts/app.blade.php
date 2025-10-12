@@ -39,7 +39,7 @@
               @yield('content')
           </div>
         @else
-        <div class="col-md-3 tgg-sidebar">
+        <div class="col-md-3 tgg-sidebar d-none d-lg-block">
           @if( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 1 )
               @include('tgg-india.layouts.includes.admin-sidebar')
           @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 2)
@@ -51,11 +51,41 @@
           @endif
         </div>
         <div class="col-md-9 tgg-content">
+            <!-- Hamburger button visible only on mobile -->
+            <button class="btn btn-dark d-lg-none mb-2" id="mobileSidebarToggle">
+                <i class="fas fa-bars"></i> Menu
+            </button>
           @yield('content')
         </div>
     @endif
     </div>
   </div>
+
+  <!-- Mobile Sidebar -->
+<div id="mobileSidebar" class="mobile-sidebar d-lg-none">
+    <div class="mobile-sidebar-content">
+        <button type="button" class="btn-close text-reset mb-2" id="mobileSidebarClose"></button>
+        @if( isset(auth('web2')->user()->user_role) && auth('web2')->user()->user_role == 1 )
+            @include('tgg-india.layouts.includes.admin-sidebar')
+        @elseif( isset(auth('web2')->user()->user_role) && auth('web2')->user()->user_role == 2 )
+            @include('tgg-india.layouts.includes.trainer-sidebar')
+        @elseif( isset(auth('web2')->user()->user_role) && auth('web2')->user()->user_role == 3 )
+            @include('tgg-india.layouts.includes.member-sidebar')
+        @else
+            @include('tgg-india.layouts.includes.trainer-sidebar')
+        @endif
+    </div>
+</div>
+
+<script>
+document.getElementById('mobileSidebarToggle').addEventListener('click', function() {
+    document.getElementById('mobileSidebar').classList.add('active');
+});
+
+document.getElementById('mobileSidebarClose').addEventListener('click', function() {
+    document.getElementById('mobileSidebar').classList.remove('active');
+});
+</script>
 
   @include('tgg-india.layouts.includes.footer')
 

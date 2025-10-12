@@ -1430,3 +1430,164 @@ ease-in-out;
     .referral-box input {
         font-size: 14px;
     }
+
+
+/* Mobile sidebar styles */
+.mobile-sidebar {
+    position: fixed;
+    top: 125px; /* header height */
+    left: -270px; /* hidden initially */
+    width: 270px;
+    min-height: calc(100% - 60px);
+    background: #f7f7f7;
+    border-right: 1px solid #e0e0e0;
+    padding: 20px;
+    transition: left 0.3s ease;
+    z-index: 9999;
+    overflow-y: auto;
+}
+
+.mobile-sidebar.active {
+    left: 0;
+}
+
+.mobile-sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.mobile-sidebar a:hover,
+.mobile-sidebar a.active {
+    background: #e6e6e6;
+}
+
+.mobile-sidebar i {
+    margin-right: 10px;
+}
+
+.mobile-sidebar .btn-close {
+    float: right;
+    margin-bottom: 10px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+    .admin-container {
+        padding: 15px;
+    }
+    .admin-container h4.showcase-heading {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    .card {
+        padding: 15px !important;
+    }
+    .btn.w-100 {
+        margin-top: 10px;
+    }
+    .position-relative img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Default: mobile */
+.custom-margin {
+    margin-left: 1.2rem; /* Mobile margin */
+}
+
+/* Desktop */
+@media (min-width: 992px) {  /* lg and above */
+    .custom-margin {
+        margin-left: 6.5rem; /* Desktop margin */
+    }
+}
+
+/* Prevent entire page horizontal scroll */
+body {
+  overflow-x: hidden !important;
+}
+
+/* Mobile table handling */
+.table-responsive {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 600px; /* Ensures columns don't squish too much on mobile */
+}
+
+@media (max-width: 768px) {
+  .table {
+    font-size: 13px;
+  }
+  .table th, .table td {
+    white-space: nowrap; /* Prevent breaking long text */
+  }
+}
+
+
+/* --- iPad View (Landscape + Portrait) --- */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mobile-sidebar {
+    position: fixed;
+    top: 85px; /* height of your header */
+    bottom: 365px;
+    min-height: 500px; /* space from footer */
+    left: -280px; /* hidden initially */
+    width: 280px; 
+    padding: 25px 20px;
+    font-size: 14px;
+    overflow-y: auto; /* scroll if content too long */
+    background: #f7f7f7;
+    border-right: 1px solid #e0e0e0;
+    transition: left 0.3s ease;
+    z-index: 9999;
+  }
+
+  .mobile-sidebar.active {
+    left: 0; /* visible when toggled */
+  }
+
+  .mobile-sidebar a {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+
+  .mobile-sidebar .btn-close {
+    margin-bottom: 15px;
+  }
+
+  .admin-container {
+    padding: 20px 25px;
+  }
+
+  .admin-container h4.showcase-heading {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    padding: 20px !important;
+  }
+
+  .btn.w-100 {
+    margin-top: 12px;
+  }
+
+  .position-relative img {
+    max-width: 95%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+  }
+}

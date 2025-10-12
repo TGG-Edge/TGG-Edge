@@ -172,3 +172,5 @@
 </div>
 
 <a href="{{ route('tgg-india.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>
+
+
