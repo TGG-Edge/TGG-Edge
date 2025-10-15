@@ -1,6 +1,12 @@
 body {
   overflow-x: hidden !important;
 }
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden !important;
+}
 
 .wrapper_outer {
     font-family: Open Sans;
@@ -146,9 +152,6 @@ body {
     transition: linear all 0.3s;
 } */
 
-.my_navbar_outer ul li a.active {
-    /* color: #36e0a0 !important;    */
-}
 
 .navbar-nav .nav-link {
     padding: 0px 0px !important;
@@ -990,9 +993,26 @@ header {
    ============================= */
 @media (min-width: 481px) and (max-width: 1024px) {
 
-    .py-5{
-        padding: 0px !important;
-    }
+  .py-5 {
+    padding: 0 !important;
+  }
+
+  .gap-5{
+    gap: 2rem !important;
+  }
+
+  .loginbox{
+    margin-left:30px !important
+  }
+
+  .col-md-9{
+    width: 100%;
+  } 
+
+  .footer-column{
+    margin-right: 10px !important;
+  }
+
   header {
     flex-direction: column;
     align-items: center;
@@ -1015,8 +1035,12 @@ header {
     margin-right: 50px;
   }
 
-  .img-fluid{
-    margin-left: 30px !important;
+  .img-fluid {
+    margin-left: 40px !important;
+  }
+
+  .loginimg{
+    margin-left: 20px !important;
   }
 
   .menu ul {
@@ -1039,8 +1063,8 @@ header {
     margin-top: 8px;
   }
 
-  .ms-2{
-    margin: 0px !important;
+  .ms-2 {
+    margin: 0 !important;
   }
 
   .cart a {
@@ -1054,36 +1078,48 @@ header {
     gap: 10px;
   }
 
+  /* ✅ FOOTER LAYOUT FIX */
   .footer-container {
     display: flex;
-    flex-wrap: nowrap !important; /* keeps all 4 in one row */
-    justify-content: space-evenly;
+    flex-wrap: nowrap !important ;
+    justify-content: space-around;
     align-items: flex-start;
-    padding: 30px 30px;
-    height: auto !important;
-    overflow: hidden;
+    padding: 30px 20px;
+    /* min-height: 500px !important ;
+    max-height: 1000px !important; */
+    height: 60% !important;
+    gap: 10px;
   }
 
   .footer-column,
   .footer-column-pages,
   .footer-column-contactus {
-    flex: 1 1 25% !important;
-    margin: 0 10px !important;
+    flex: 1 1 22%;
     text-align: left;
+    margin-bottom: 20px !important;
   }
 
   .footer-column img {
     width: 90px !important;
-    margin: 80px auto 20px auto !important;
+    margin: 0 auto 20px auto !important;
     display: block;
+    margin-top: 150px !important;
+  }
+
+  .pagesh3{
+    margin: 0px !important; 
+    padding: 0px !important;
+    margin-top: 30px !important;
+    margin-left: 80px !important;
+    margin-bottom: 40px !important;
   }
 
   .footer-column-contactus h3,
-  .footer-column-pages h3,
   .footer-column h3 {
-    margin-left: 0 !important;
-    text-align: center;
+    text-align: left !important;
     font-size: 17px !important;
+    margin-bottom: 10px;
+    margin-left: 5px !important;
   }
 
   .footer-column-contactus p,
@@ -1092,34 +1128,33 @@ header {
   .footer-column input,
   .footer-column button,
   .footer-column a {
+    text-align: left;
     margin-left: 0 !important;
-    text-align: center;
   }
 
   .footer-column form {
-    align-items: center;
+    align-items: flex-start;
   }
 
-  .footer-b {
-    position: relative !important;
-    bottom: 0;
-    margin: 20px auto 0 auto !important;
-    text-align: center;
-  }
-
+  /* ✅ COPYRIGHT / BOTTOM PART */
   .footer-bottom {
-        padding: 25px 10px;     /* more space for tablet */
-        font-size: 14px;        /* slightly smaller font */
-        min-height: 120px;      /* ensure footer has enough height */
-    }
+    text-align: center;
+    padding: 25px 10px;
+    font-size: 14px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
 
-    .footer-bottom::before {
-        background-size: cover;  /* ensure background covers entire area */
-        background-position: center;
-    }
+  .footer-bottom::before {
+    background-size: cover;
+    background-position: center;
+  }
 
-    .footer-bottom p,
-    .footer-bottom > * {
-        font-size: 14px;        /* adjust text size for tablet */
-    }
+  .footer-bottom p,
+  .footer-bottom > * {
+    font-size: 14px;
+  }
+  .footer-b{
+    margin-left: 5px;
+  }
 }

@@ -14,12 +14,12 @@
     <div class="row justify-content-center align-items-center">
         {{-- Left Image --}}
         <div class="col-md-7 d-none d-md-block text-center">
-            <img src="{{ asset('assets/tgg-india/images/login-2.png') }}" alt="TGG Edge Login" class="img-fluid rounded-4 shadow" style="height: 500px">
+            <img src="{{ asset('assets/tgg-india/images/login-2.png') }}" alt="TGG Edge Login" class="img-fluid rounded-4 shadow loginimg" style="height: 500px">
         </div>
 
         {{-- Right Login Form --}}
         <div class="col-md-5 col-lg-5">
-            <div class="card shadow rounded-4 p-4" style="background-color: #fff;">
+            <div class="card shadow rounded-4 p-4 loginbox" style="background-color: #fff; ">
                 <h4 class="text-center mb-4 custom-heading">Login</h4>
 
                 {{-- Flash Messages --}}

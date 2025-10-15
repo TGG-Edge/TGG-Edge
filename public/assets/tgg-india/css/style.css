@@ -1541,7 +1541,7 @@ body {
   .mobile-sidebar {
     position: fixed;
     top: 85px; /* height of your header */
-    bottom: 365px;
+    bottom: 385px;
     min-height: 500px; /* space from footer */
     left: -280px; /* hidden initially */
     width: 280px; 

@@ -25,7 +25,7 @@
 
     <!-- Pages -->
     <div class="footer-column-pages">
-        <h3>Pages</h3>
+        <h3 class="pagesh3">Pages</h3>
         <ul>
             <li><a href="https://tggindia.com/">Home</a></li>
             <li><a href="https://tggindia.com/about-us/">About Us</a></li>
