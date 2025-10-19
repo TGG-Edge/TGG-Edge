@@ -12,16 +12,20 @@
             @csrf
             @method('PUT')
 
-            <label for="feature_key">Feature:</label>
-            <select name="feature_key" class="form-control" required>
-                <option value="literatures" {{ $featureLimit->feature_key == 'literatures' ? 'selected' : '' }}>Literatures</option>
-                <option value="links" {{ $featureLimit->feature_key == 'links' ? 'selected' : '' }}>Links</option>
-                <option value="videos" {{ $featureLimit->feature_key == 'videos' ? 'selected' : '' }}>Videos</option>
-                <option value="linkedins" {{ $featureLimit->feature_key == 'linkedins' ? 'selected' : '' }}>Linkedins</option>
-            </select>
+            <div class="mb-3">
+                <label for="feature_key" class="form-label">Feature:</label>
+                <select name="feature_key" class="form-control" required>
+                    <option value="literatures" {{ $featureLimit->feature_key == 'literatures' ? 'selected' : '' }}>Literatures</option>
+                    <option value="links" {{ $featureLimit->feature_key == 'links' ? 'selected' : '' }}>Links</option>
+                    <option value="videos" {{ $featureLimit->feature_key == 'videos' ? 'selected' : '' }}>Videos</option>
+                    <option value="linkedins" {{ $featureLimit->feature_key == 'linkedins' ? 'selected' : '' }}>Linkedins</option>
+                </select>
+            </div>
 
-            <label for="free_limit" class="mt-2">Free Limit:</label>
-            <input type="number" name="free_limit" class="form-control" min="0" value="{{ $featureLimit->free_limit }}" required>
+            <div class="mb-3">
+                <label for="free_limit" class="form-label">Free Limit:</label>
+                <input type="number" name="free_limit" class="form-control" min="0" value="{{ $featureLimit->free_limit }}" required>
+            </div>
 
             <button type="submit" class="btn btn-primary mt-3">Update</button>
         </form>

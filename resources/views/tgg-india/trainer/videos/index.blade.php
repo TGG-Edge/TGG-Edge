@@ -3,43 +3,49 @@
 @section('title', 'Videos | TGG Meta | TGG India')
 
 @section('content')
-    <div class="admin-container">
-        <!-- Create Button -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="mb-3 trainer-heading">Videos</h4>
-            <div class="d-flex align-items-center gap-2">
-                @if ($is_exceeded)
-                    <button class="btn btn-primary create-button" disabled>
-                        <i class="bi bi-plus-lg"></i> Create
-                    </button>
-                    <button class="btn btn-warning">
-                        <i class="bi bi-lock"></i> Upgrade to Create More
-                    </button>
-                    <button type="button" class="btn btn-primary aigen-button" disabled>
-                        <i class="bi bi-plus-lg"></i> AIGen
-                    </button>
-                @else
-                    <a href="{{ route('tgg-india.trainer.videos.create') }}" class="btn btn-primary create-button">
-                        <i class="bi bi-plus-lg"></i> Create
-                    </a>
-                    <a href="{{ route('tgg-india.trainer.videos.aigen') }}" class="btn btn-primary aigen-button">
-                        <i class="bi bi-plus-lg"></i> AIGen
-                    </a>
-                @endif
-            </div>
-        </div>
-        @include('tgg-india.layouts.includes.message')
+<div class="admin-container container-fluid py-3">
 
-        <table class="table table-striped table-bordered">
+    <!-- Header & Create Buttons -->
+    <div class="row mb-3 align-items-center">
+        <div class="col-12 col-md-6 mb-2 mb-md-0">
+            <h4 class="trainer-heading mb-0">Videos</h4>
+        </div>
+        <div class="col-12 col-md-6 d-flex flex-wrap justify-content-md-end gap-2">
+            @if ($is_exceeded)
+                <button class="btn btn-primary create-button" disabled>
+                    <i class="bi bi-plus-lg"></i> Create
+                </button>
+                <button class="btn btn-warning">
+                    <i class="bi bi-lock"></i> Upgrade to Create More
+                </button>
+                <button type="button" class="btn btn-primary aigen-button" disabled>
+                    <i class="bi bi-plus-lg"></i> AIGen
+                </button>
+            @else
+                <a href="{{ route('tgg-india.trainer.videos.create') }}" class="btn btn-primary create-button">
+                    <i class="bi bi-plus-lg"></i> Create
+                </a>
+                <a href="{{ route('tgg-india.trainer.videos.aigen') }}" class="btn btn-primary aigen-button">
+                    <i class="bi bi-plus-lg"></i> AIGen
+                </a>
+            @endif
+        </div>
+    </div>
+
+    @include('tgg-india.layouts.includes.message')
+
+    <!-- Responsive Table -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle text-center">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>URL</th>
-                    <th>Image</th>
-                    <th>Created At</th>
-                    <th>Action</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col" style="min-width: 200px;">Description</th>
+                    <th scope="col">URL</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,20 +53,18 @@
                     <tr>
                         <td>{{ ++$index }}</td>
                         <td>{{ $video->title }}</td>
-                        <td class="text-justify">
+                        <td class="text-start text-wrap">
                             @php
                                 $plainText = strip_tags($video->description);
                                 $preview = strlen($plainText) > 120 ? substr($plainText, 0, 120) . '...' : $plainText;
                             @endphp
-
-                            <!-- Preview (normal text, clickable, justified) -->
-                            <span style="cursor: pointer; display: block; text-align: justify;"
-                                data-bs-toggle="modal" data-bs-target="#descModal-{{ $video->id }}">
+                            <span style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#descModal-{{ $video->id }}">
                                 {{ $preview }}
                             </span>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="descModal-{{ $video->id }}" tabindex="-1" aria-labelledby="descModalLabel-{{ $video->id }}" aria-hidden="true">
+                            <div class="modal fade" id="descModal-{{ $video->id }}" tabindex="-1"
+                                aria-labelledby="descModalLabel-{{ $video->id }}" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -84,38 +88,21 @@
                         <td>
                             @if ($video->image)
                                 @php
-                                    // Check if image is a full URL
-                                   $imagePath = $video->image;
+                                    $imagePath = $video->image;
                                     $isUrl = Str::startsWith($imagePath, ['http://', 'https://']);
-                                    $imageSrc = '';
-
-                                    if ($isUrl) {
-                                        // Case 1: Full URL
-                                        $imageSrc = $imagePath;
-                                    } elseif (Storage::disk('public')->exists($imagePath)) {
-                                        // Case 2: Exists in storage/app/public
-                                        $imageSrc = asset('storage/' . $imagePath);
-                                    } elseif (file_exists(public_path($imagePath))) {
-                                        // Case 3: Exists directly in public folder
-                                        $imageSrc = asset($imagePath);
-                                    } else {
-                                        // Case 4: Fallback (optional placeholder)
-                                        $imageSrc = asset('images/default-thumbnail.jpg');
-                                    }
+                                    $imageSrc = $isUrl ? $imagePath : (Storage::disk('public')->exists($imagePath) ? asset('storage/' . $imagePath) : (file_exists(public_path($imagePath)) ? asset($imagePath) : asset('images/default-thumbnail.jpg')));
                                 @endphp
-
-                                <img src="{{$imageSrc}}"
-                                    alt="Video Image" width="60" height="40"
-                                    style="object-fit: cover; border-radius: 4px;">
+                                <img src="{{ $imageSrc }}" alt="Video Image"
+                                     style="width: 60px; height: 40px; object-fit: cover; border-radius: 4px;">
                             @else
                                 <span class="text-muted">No Image</span>
                             @endif
                         </td>
-                        <td class="align-middle">{{ $video->created_at->format('Y-m-d') }}</td>
-                        <td class="align-middle">
-                            <div class="d-flex align-items-center justify-content-center">
+                        <td>{{ $video->created_at->format('Y-m-d') }}</td>
+                        <td>
+                            <div class="d-flex flex-wrap justify-content-center gap-2">
                                 <a href="{{ route('tgg-india.trainer.videos.edit', $video->id) }}"
-                                    class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2"
+                                    class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0"
                                     style="width: 28px; height: 28px;">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -132,15 +119,20 @@
                                 </form>
                             </div>
                         </td>
-
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center">No videos found.</td>
+                        <td colspan="7" class="text-center">No videos found.</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-3">
         {{ $videos->links() }}
     </div>
+
+</div>
 @endsection

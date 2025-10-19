@@ -2,7 +2,6 @@
 
 @section('title', 'Assignments member | TGG Meta | TGG India')
 
-
 @section('content')
 <div class="admin-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -11,38 +10,43 @@
             {{-- <a href="{{ route('tgg-india.member.assignments.create') }}" class="btn btn-primary assignment-button"><i class="bi bi-plus-lg"></i>New Assignment</a> --}}
         </div>
     </div>
-    <table class="table table-striped table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>Title</th>
-                <th>Task Type</th>
-                <th>Status</th>
-                <th>Due Date</th>
-                 <th>Created By</th>
-                <th>Fee</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($assignments as $assignment)
-            <tr>
-                <td>{{ $assignment->title }}</td>
-                <td>{{ $assignment->task_type }}</td>
-                <td>{!! statusWithColor($assignment->status) !!}</td>
-                <td>{{ $assignment->due_date ?? '-' }}</td>
-                  <td>{{ $assignment->creator?->name }}</td>
-                   <td>{{ $assignment->price }}</td>
-                <td>
-                    <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{ route('tgg-india.member.assignments.edit', $assignment) }}" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
-                            style="width: 28px; height: 28px;">
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Task Type</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                    <th>Created By</th>
+                    <th>Fee</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($assignments as $assignment)
+                <tr>
+                    <td>{{ $assignment->title }}</td>
+                    <td>{{ $assignment->task_type }}</td>
+                    <td>{!! statusWithColor($assignment->status) !!}</td>
+                    <td>{{ $assignment->due_date ?? '-' }}</td>
+                    <td>{{ $assignment->creator?->name }}</td>
+                    <td>{{ $assignment->price }}</td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a href="{{ route('tgg-india.member.assignments.edit', $assignment) }}" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
+                                style="width: 28px; height: 28px;">
                                 <i class="fas fa-edit"></i>
-                    </a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
     {{ $assignments->links() }}
 </div>
 @endsection

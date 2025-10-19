@@ -1085,6 +1085,10 @@ button:hover {
     padding: 6px 16px;
     cursor: pointer;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .btn-outline.small {
@@ -1496,6 +1500,7 @@ ease-in-out;
         max-width: 100%;
         height: auto;
     }
+    
 }
 
 /* Default: mobile */
@@ -1590,4 +1595,158 @@ body {
     margin: 0 auto;
     display: block;
   }
+}
+
+/* =========================
+   Responsive adjustments
+   ========================= */
+
+/* Tablets (iPad landscape / medium screens) */
+@media (min-width: 481px) and (max-width: 1024px) {
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .dashboard-grid .welcome-note {
+        grid-column: span 2;
+        font-size: 13px;
+        padding: 6px;
+    }
+
+    /* Adjust inner card width for sliders */
+    .card.woodperker .card-inner,
+    .card.travel .card-inner,
+    .card.tgg-foundation .card-inner {
+        width: 90% !important;
+    }
+
+    .card.woodperker .slider,
+    .card.travel .slider,
+    .card.tgg-foundation .slider {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .card.woodperker .slide,
+    .card.travel .slide,
+    .card.tgg-foundation .slide {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .card.woodperker .slide img,
+    .card.travel .slide img,
+    .card.tgg-foundation .slide img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Freelancing card inner scroll */
+    .dashboard-grid .card.opportunities .card-inner {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Buttons wrap */
+    .button-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .project-row .btn-outline {
+        width: 40%;
+        text-align: center;
+    }
+
+    .dashboard-grid .card:first-child .card-inner, 
+    .dashboard-grid .card:nth-child(2) .card-inner {
+    width: 100% !important;
+    height: auto !important ;
+    }
+}
+
+/* Mobile (<768px) */
+@media (max-width: 480px) {
+
+    .dashboard-grid .card:first-child .card-inner, 
+    .dashboard-grid .card:nth-child(2) .card-inner {
+    width: 100% !important;
+    height: auto !important ;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .dashboard-grid .welcome-note {
+        grid-column: span 1;
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    /* Cards full width */
+    .dashboard-grid .card {
+        width: 100% !important;
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    /* Adjust inner cards for mobile */
+    .card.woodperker .card-inner,
+    .card.travel .card-inner,
+    .card.tgg-foundation .card-inner,
+    .dashboard-grid .card.opportunities .card-inner {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 10px;
+    }
+
+    /* Sliders full width and auto height */
+    .card.woodperker .slider,
+    .card.travel .slider,
+    .card.tgg-foundation .slider {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .card.woodperker .slide,
+    .card.travel .slide,
+    .card.tgg-foundation .slide {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .card.woodperker .slide img,
+    .card.travel .slide img,
+    .card.tgg-foundation .slide img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Buttons stack vertically */
+    .button-group {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+
+    /* Freelancing project row stack vertically */
+    .project-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .project-row .btn-outline {
+        width: 40%;
+        margin-left: 120px;
+        text-align: center;
+    }
 }

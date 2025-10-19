@@ -3,34 +3,37 @@
 @section('title', 'Links | TGG Meta | TGG India')
 
 @section('content')
-    <div class="admin-container">
-        <!-- Create Button -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="mb-3 trainer-heading">Links</h4>
-            <div class="d-flex align-items-center gap-2">
-                @if ($is_exceeded)
-                    <button class="btn btn-primary create-button" disabled>
-                        <i class="bi bi-plus-lg"></i> Create
-                    </button>
-                    <button class="btn btn-warning">
-                        <i class="bi bi-lock"></i> Upgrade to Create More
-                    </button>
-                    <button type="button" class="btn btn-primary aigen-button" disabled>
-                        <i class="bi bi-plus-lg"></i> AIGen
-                    </button>
-                @else
-                    <a href="{{ route('tgg-india.trainer.links.create') }}" class="btn btn-primary create-button">
-                        <i class="bi bi-plus-lg"></i> Create
-                    </a>
-                    <a href="{{ route('tgg-india.trainer.links.aigen') }}" 
-                        class="btn btn-primary aigen-button">
-                            <i class="bi bi-magic"></i> AIGen
-                    </a>
-                @endif
-            </div>
-        </div>
+<div class="admin-container container-fluid py-3">
 
-        @include('tgg-india.layouts.includes.message')
+    <!-- Create Button -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+        <h4 class="mb-3 trainer-heading">Links</h4>
+        <div class="d-flex flex-wrap align-items-center gap-2">
+            @if ($is_exceeded)
+                <button class="btn btn-primary create-button" disabled>
+                    <i class="bi bi-plus-lg"></i> Create
+                </button>
+                <button class="btn btn-warning">
+                    <i class="bi bi-lock"></i> Upgrade to Create More
+                </button>
+                <button type="button" class="btn btn-primary aigen-button" disabled>
+                    <i class="bi bi-plus-lg"></i> AIGen
+                </button>
+            @else
+                <a href="{{ route('tgg-india.trainer.links.create') }}" class="btn btn-primary create-button">
+                    <i class="bi bi-plus-lg"></i> Create
+                </a>
+                <a href="{{ route('tgg-india.trainer.links.aigen') }}" 
+                    class="btn btn-primary aigen-button">
+                        <i class="bi bi-magic"></i> AIGen
+                </a>
+            @endif
+        </div>
+    </div>
+
+    @include('tgg-india.layouts.includes.message')
+
+    <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
                 <tr>
@@ -53,7 +56,7 @@
                                 $preview = strlen($plainText) > 120 ? substr($plainText, 0, 120) . '...' : $plainText;
                             @endphp
 
-                            <!-- Clickable truncated text (looks like normal text) -->
+                            <!-- Clickable truncated text -->
                             <span style="cursor: pointer; display: block; text-align: justify;"
                                 data-bs-toggle="modal" data-bs-target="#descModal-{{ $link->id }}">
                                 {{ $preview }}
@@ -76,12 +79,11 @@
                         </td>
 
                         <td>{{ $link->url }}</td>
-
                         <td>{{ $link->created_at->format('Y-m-d') }}</td>
                         <td>
-                            <div class="d-flex align-items-center justify-content-center">
+                            <div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
                                 <a href="{{ route('tgg-india.trainer.links.edit', $link->id) }}"
-                                    class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2"
+                                    class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0"
                                     style="width: 28px; height: 28px;">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -99,15 +101,19 @@
                             </div>
                         </td>
 
-
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center">No links found.</td>
+                        <td colspan="6" class="text-center">No links found.</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-center">
         {{ $links->links() }}
     </div>
+
+</div>
 @endsection

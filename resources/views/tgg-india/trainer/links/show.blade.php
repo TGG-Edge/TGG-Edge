@@ -9,7 +9,7 @@
 
     <div class="row">
         @forelse ($links as $link)
-            <div class="col-md-6 col-lg-6 mb-4">
+            <div class="col-12 col-md-6 col-lg-6 mb-4">
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-body p-3">
                         <h6 class="card-title mb-1">
@@ -38,7 +38,7 @@
         @endforelse
     </div>
 
-    <div class="mt-4">
+    <div class="mt-4 d-flex justify-content-center">
         {{ $links->links() }}
     </div>
 </div>
