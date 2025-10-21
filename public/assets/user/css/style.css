@@ -508,12 +508,12 @@ body {
 
 .update-box {
     flex: 1;
-    min-width: 350px;
+    /* min-width: 350px; */
 }
 
 .volunteer-box {
     flex: 1;
-    min-width: 350px;
+    /* min-width: 350px; */
     padding: 20px 25px 0px 25px;
 }
 
@@ -748,3 +748,4 @@ button:hover {
     font-size: 17px;
     color: #265475;
 }
+

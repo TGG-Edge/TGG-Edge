@@ -614,6 +614,10 @@ body {
     padding-bottom: 30px;
 }
 
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    padding: 0px !important;
+}
+
 /* ======================= */
 /* RESPONSIVE MEDIA QUERIES */
 /* ======================= */
