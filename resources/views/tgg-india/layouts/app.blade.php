@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="{{ asset('assets/tgg-india/images/tgg-india-fav.jpg') }}" type="image/x-icon">
 
-  <!-- Fonts and Styles --> 
-   <link rel="stylesheet" href="{{ asset('assets/fonts/fonts.css') }}">
-  <!-- <link rel="stylesheet" href="{{ asset('assets/tgg-india/fonts/fontawesome.css') }}"> -->
-  <link rel="stylesheet" href="{{ asset('assets/tgg-india/css/style.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
-  <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
- <link rel="stylesheet" href="{{ asset('assets/tgg-india/css/header-footer.css') }}">
+    <!-- Fonts and Styles --> 
+    <link rel="stylesheet" href="{{ asset('assets/fonts/fonts.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('assets/tgg-india/fonts/fontawesome.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('assets/tgg-india/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+    <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/tgg-india/css/header-footer.css') }}">
 
   <!-- {{-- Font Awesome (local, downloaded) --}}
   <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}"> -->

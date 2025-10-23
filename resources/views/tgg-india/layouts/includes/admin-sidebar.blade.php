@@ -62,33 +62,47 @@
     <i class="fas fa-clipboard-list"></i> Assignments
 </a>
 
+@php
+    $isAdvancementActive = request()->is('tgg-meta/tgg-india/admin/incentives*')
+        || request()->is('tgg-meta/tgg-india/admin/rewards*')
+        || request()->is('tgg-meta/tgg-india/admin/donations*')
+        || request()->is('tgg-meta/tgg-india/admin/payments*')
+        || request()->is('tgg-meta/tgg-india/admin/invoices*')
+        || request()->is('tgg-meta/tgg-india/admin/receipts*');
+@endphp
+
 <div class="dropdown">
     <a href="#"
-       class="dropdown-toggle d-flex justify-content-between align-items-center 
-       {{ request()->is('tgg-meta/tgg-india/admin/incentives*') || request()->is('tgg-meta/tgg-india/admin/rewards*') ||request()->is('tgg-meta/tgg-india/admin/donations*')||request()->is('tgg-meta/tgg-india/admin/payments*')  ? 'active' : '' }}"
+       class="dropdown-toggle d-flex justify-content-between align-items-center {{ $isAdvancementActive ? 'active' : '' }}"
        data-bs-toggle="collapse"
        data-bs-target="#advancementDropdown"
-       aria-expanded="{{ request()->is('tgg-meta/tgg-india/admin/incentives*') || request()->is('tgg-meta/tgg-india/admin/rewards*') ? 'true' : 'false' }}">
+       aria-expanded="{{ $isAdvancementActive ? 'true' : 'false' }}">
         <span><i class="fas fa-arrow-up me-2"></i> Advancement</span>
         <i class="fas fa-caret-down"></i>
     </a>
-    <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/admin/incentives*') || request()->is('tgg-meta/tgg-india/admin/rewards*') ||request()->is('tgg-meta/tgg-india/admin/donations*')||request()->is('tgg-meta/tgg-india/admin/payments*') ? 'show' : '' }}"
-         id="advancementDropdown">
+
+    <div class="collapse ps-3 {{ $isAdvancementActive ? 'show' : '' }}" id="advancementDropdown">
         <a href="{{ route('tgg-india.admin.incentives.index') }}" class="d-block py-1">
             <i class="fas fa-gift me-2"></i> Incentive
         </a>
         <a href="{{ route('tgg-india.admin.rewards.index') }}" class="d-block py-1">
             <i class="fas fa-trophy me-2"></i> Reward
         </a>
-         <a href="{{ route('tgg-india.admin.donations.index') }}" class="d-block py-1">
+        <a href="{{ route('tgg-india.admin.donations.index') }}" class="d-block py-1">
             <i class="fas fa-donate me-2"></i> Donation
         </a>
         <a href="{{ route('tgg-india.admin.payments.index') }}" class="d-block py-1">
             <i class="fas fa-credit-card me-2"></i> Payment
         </a>
-
+        <a href="{{ route('tgg-india.admin.invoices.index') }}" class="d-block py-1">
+            <i class="fas fa-file-invoice me-2"></i> Invoice
+        </a>
+        <a href="{{ route('tgg-india.admin.receipts.index') }}" class="d-block py-1">
+            <i class="fas fa-receipt me-2"></i> Receipt
+        </a>
     </div>
 </div>
+    
 
 
 <div class="dropdown">

@@ -21,6 +21,9 @@ return Application::configure(basePath: dirname(__DIR__))
             require base_path('routes/user.php');
             require base_path('routes/web.php');
             require base_path('routes/tgg-india.php');
+            require base_path('routes/tgg-india/admin.php');
+            require base_path('routes/tgg-india/trainer.php');
+            require base_path('routes/tgg-india/members.php');
             require base_path('routes/tgg-fct.php');
         },
         commands: base_path('routes/console.php'),
