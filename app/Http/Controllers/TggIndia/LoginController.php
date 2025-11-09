@@ -49,7 +49,7 @@ class LoginController extends Controller
                 case 2:
                     return redirect()->route('tgg-india.trainer.dashboard');
                 case 3:
-                    return redirect()->route('tgg-india.member.dashboard');
+                    return redirect()->route('tgg-india.advisor.dashboard');
                 default:
                     return redirect()->route('tgg-india.login');
             }
@@ -84,7 +84,7 @@ class LoginController extends Controller
             return redirect()->route('tgg-india.trainer.dashboard'); 
 
             }elseif(auth('web2')->user()->user_role == 3){
-            return redirect()->route('tgg-india.member.dashboard'); 
+            return redirect()->route('tgg-india.advisor.dashboard'); 
 
             }
             elseif(auth('web2')->user()->user_role == 4){
@@ -94,7 +94,22 @@ class LoginController extends Controller
             elseif(auth('web2')->user()->user_role == 5){
             return redirect()->route('tgg-india.nomad-community.dashboard'); 
 
-            }else{
+            }
+            elseif(auth('web2')->user()->user_role == 6){
+             return redirect()->route('tgg-india.freelancer.dashboard'); 
+
+            }
+            elseif(auth('web2')->user()->user_role == 7){
+             return redirect()->route('tgg-india.co-creator.dashboard'); 
+
+            }
+            elseif(auth('web2')->user()->user_role == 8){
+             return redirect()->route('tgg-india.facilitator.dashboard'); 
+            }
+            elseif(auth('web2')->user()->user_role == 9){
+             return redirect()->route('tgg-india.spouse.dashboard'); 
+            }
+            else{
                  return redirect()->route('tgg-india.freelancer.dashboard'); 
             }
         }

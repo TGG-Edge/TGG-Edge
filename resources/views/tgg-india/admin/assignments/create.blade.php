@@ -10,6 +10,9 @@
     <div class="card p-3 mb-4">
         <form action="{{ route('tgg-india.admin.assignments.store') }}" method="POST">
             @csrf
+            @if(request()->has('parent_id'))
+                <input type="hidden" value="{{ request()->parent_id}}" name="parent_id">
+            @endif
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" name="title" class="form-control" required>
@@ -24,7 +27,14 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Task Type</label>
-                <input type="text" name="task_type" class="form-control">
+                <select name="task_type" class="form-control" required>
+                @foreach(taskTypes() as $key => $label)
+                    <option value="{{ $key }}" {{ old('task_type') == $key ? 'selected' : '' }}>
+                        {{ $label }}
+                    </option>
+                @endforeach
+
+            </select>   
             </div>
 
             <div class="mb-3">

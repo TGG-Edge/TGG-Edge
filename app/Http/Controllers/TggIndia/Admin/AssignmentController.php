@@ -15,15 +15,26 @@ class AssignmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-   public function index()
+   public function index(Request $request)
     {
-        $assignments = AssignmentSecondary::with(['member', 'creator'])->latest()->paginate(10);
+         $query = AssignmentSecondary::query()
+        ->latest();
+
+        // ✅ If 'parent_id' is passed, filter by it
+        if ($request->has('parent_id') && !empty($request->parent_id)) {
+            $query->where('parent_id', $request->parent_id);
+        } else {
+            // ✅ Otherwise, show only root (top-level) assignments
+            $query->whereNull('parent_id');
+        }
+
+        $assignments = $query->paginate(10);
         return view('tgg-india.admin.assignments.index', compact('assignments'));
     }
 
     public function create()
     {
-        $users = UserSecondary::where('user_role',3)->get(); // All users who can be assignees
+        $users = UserSecondary::whereIn('user_role',[3,7,8])->get(); // All users who can be assignees
         return view('tgg-india.admin.assignments.create', compact('users'));
     }
 
@@ -46,7 +57,14 @@ class AssignmentController extends Controller
             'created_by'  => Auth('web2')->id(),
             'due_date'    => $request->due_date,
             'price'    => $request->price,
+            'parent_id'   => $request->parent_id ?? null,
         ]);
+
+        if ($request->filled('parent_id')) {
+            return redirect()
+                ->route('tgg-india.admin.assignments.index', ['parent_id' => $request->parent_id])
+                ->with('success', 'Sub-assignment created successfully.');
+        }
 
         return redirect()->route('tgg-india.admin.assignments.index')->with('success', 'Assignment created successfully.');
 }
@@ -81,6 +99,12 @@ class AssignmentController extends Controller
             'price'    => $request->price,
         ]);
 
+         if ( $assignment->parent_id != null)  {
+            return redirect()
+                ->route('tgg-india.admin.assignments.index', ['parent_id' => $assignment->parent_id])
+                ->with('success', 'Sub-assignment updated successfully.');
+        }
+
         return redirect()->route('tgg-india.admin.assignments.index')->with('success', 'Assignment updated successfully.');
     }
 
@@ -89,6 +113,7 @@ class AssignmentController extends Controller
      */
     public function destroy(AssignmentSecondary $assignment)
     {
+        AssignmentSecondary::where('parent_id', $assignment->id)->delete(); 
         $assignment->delete();
         return redirect()->route('tgg-india.admin.assignments.index')->with('success', 'Assignment deleted successfully.');
     }

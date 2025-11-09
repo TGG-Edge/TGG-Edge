@@ -64,6 +64,20 @@ class ShowCaseController extends Controller
         return view('tgg-india.admin.showcase.reward', compact('content', 'source_type'));
     }
 
+    public function editLeadReferral()
+    {
+        $content = ContentPage::where('source_type', 'lead-referral')->first();
+        $source_type = 'lead-referral';
+        return view('tgg-india.admin.showcase.lead-referral', compact('content', 'source_type'));
+    }
+
+    public function editSpouseReferral()
+    {
+        $content = ContentPage::where('source_type', 'spouse-referral')->first();
+        $source_type = 'spouse-referral';
+        return view('tgg-india.admin.showcase.spouse-referral', compact('content', 'source_type'));
+    }
+
 
    public function updateContent(Request $request, $source_type)
     {
@@ -119,9 +133,11 @@ class ShowCaseController extends Controller
             'welcome_note',
             'welcome_note_trainer',
             'welcome_note_member',
+            'welcome_note_facilitator',
             'welcome_note_rhm_club',
             'welcome_note_nomad_community',
             'welcome_note_freelancer',
+            'welcome_note_spouse',
             'modicare_checkout',
             'motilal_checkout',
         ] as $field) {

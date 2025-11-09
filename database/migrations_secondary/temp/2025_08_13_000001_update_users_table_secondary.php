@@ -8,13 +8,13 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::connection('mysql2')->table('users', function (Blueprint $table) {
-            $table->string('phone')->nullable();
-            $table->string('address')->nullable();
-            $table->string('rhm_number')->nullable();
-            $table->string('image')->nullable();
+            // $table->string('phone')->nullable();
+            // $table->string('address')->nullable();
+            // $table->string('rhm_number')->nullable();
+            // $table->string('image')->nullable();
             // $table->enum('user_role', ['admin', 'trainer', 'members', 'rhm-club', 'nomad-community', 'freelancers'])->default('Members');
-            $table->enum('user_role', ['1','2','3','4','5','6'])->default('3');
-            $table->enum('approval', ['pending', 'accepted', 'rejected'])->default('pending');
+            // $table->enum('user_role', ['1','2','3','4','5','6'])->default('3');
+            // $table->enum('approval', ['pending', 'accepted', 'rejected'])->default('pending');
         });
     }
 

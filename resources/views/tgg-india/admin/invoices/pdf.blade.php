@@ -47,6 +47,16 @@
         .footer p {
             margin: 3px 0;
         }
+        .bank-details {
+            border: 1px solid #000;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+        .bank-details strong {
+            display: inline-block;
+            width: 180px;
+        }
     </style>
 </head>
 <body>
@@ -82,6 +92,7 @@
         foreach ($items as $item) {
             $totalAmount += floatval($item['amount'] ?? 0);
         }
+        $bank = \App\Models\UserBankDetailSecondary::where('user_id', $invoice->source_id)->first();
     @endphp
 
     <table class="table">
@@ -111,6 +122,18 @@
             </tr>
         </tbody>
     </table>
+
+     {{-- BANK DETAILS --}}
+    @if($bank)
+        <div class="bank-details">
+            <strong>Bank Name:</strong> {{ $bank->bank_name ?? 'N/A' }}<br>
+            <strong>Account Holder Name:</strong> {{ $bank->account_holder_name ?? 'N/A' }}<br>
+            <strong>Account Number:</strong> {{ $bank->account_number ?? 'N/A' }}<br>
+            <strong>IFSC Code:</strong> {{ $bank->ifsc_code ?? 'N/A' }}<br>
+            <strong>Branch Name:</strong> {{ $bank->branch_name ?? 'N/A' }}
+        </div>
+    @endif
+
 
     {{-- FOOTER --}}
     <div class="footer">

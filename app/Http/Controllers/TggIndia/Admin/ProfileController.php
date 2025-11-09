@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\TggIndia\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserBankDetailSecondary;
+use App\Models\UserIdProofSecondary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -40,9 +42,10 @@ class ProfileController extends Controller
     public function show()
     {
         //
-      $user = auth('web2')->user();
-
-        return view('tgg-india.admin.profile', compact('user'));
+        $user = auth('web2')->user();
+        $idProof = \App\Models\UserIdProofSecondary::where('user_id', $user->id)->first();
+        $bankDetail = \App\Models\UserBankDetailSecondary::where('user_id', $user->id)->first();
+        return view('tgg-india.admin.profile', compact('user', 'idProof', 'bankDetail'));
     }
 
     /**
@@ -86,6 +89,8 @@ class ProfileController extends Controller
             $user->save();
         }
 
+
+
         // Update password if needed
         if ($request->filled('new_password')) {
             if (!Hash::check($request->current_password, $user->password)) {
@@ -95,6 +100,33 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->new_password);
             $user->save();
         }
+
+
+        $proof = UserIdProofSecondary::on('mysql2')->firstOrNew(['user_id' => $user->id]);
+        $proof->id_proof_type = $request->id_proof_type;
+        $proof->id_proof_number = $request->id_proof_number;
+
+        if ($request->hasFile('id_proof_file')) {
+            $proof->id_proof_file = $request->file('id_proof_file')->store('id_proofs', 'public');
+        }
+
+        $proof->save();
+
+        $bank = UserBankDetailSecondary::on('mysql2')->firstOrNew(['user_id' => $user->id]);
+        $bank->fill($request->only([
+            'bank_name',
+            'account_holder_name',
+            'account_number',
+            'ifsc_code',
+            'branch_name',
+        ]));
+
+        if ($request->hasFile('bank_document')) {
+            $bank->bank_document = $request->file('bank_document')->store('bank_docs', 'public');
+        }
+
+        $bank->save();
+
 
         return back()->with('success', 'Profile updated successfully.');
     }

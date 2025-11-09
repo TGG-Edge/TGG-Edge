@@ -42,8 +42,8 @@ class UserSecondary extends Authenticatable
             'key'  => 'trainer'
         ],
         3 => [
-            'name' => 'Members',
-            'key'  => 'members'
+            'name' => 'Advisor',
+            'key'  => 'advisor'
         ],
         4 => [
             'name' => 'RHM Club',
@@ -56,6 +56,18 @@ class UserSecondary extends Authenticatable
         6 => [
             'name' => 'Freelancers',
             'key'  => 'freelancers'
+        ],
+        7 => [
+            'name' => 'Co Creator',
+            'key'  => 'co-creator'
+        ],
+        8 => [
+            'name' => 'Facilitator',
+            'key'  => 'facilitator'
+        ],
+        9 => [
+            'name' => 'Spouse',
+            'key'  => 'spouse'
         ],
     ];
     /**
@@ -122,4 +134,9 @@ class UserSecondary extends Authenticatable
     //         'id'                    // Local key on module_instances table
     //     );
     // }
+
+    public function enquiries()
+    {
+        return $this->hasMany(Enquiry::class, 'referral_code', 'referral_code');
+    }
 }

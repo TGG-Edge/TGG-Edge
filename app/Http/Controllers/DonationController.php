@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 use App\Models\Payment;
 use App\Models\Incentive;
 use App\Models\Reward;
+use App\Traits\MailTrait;
+
 
 class DonationController extends Controller
 {
-    use RazorpayPaymentTrait;
+    use RazorpayPaymentTrait,MailTrait;
 
     // Show donation page
     public function showDonationForm()
@@ -42,9 +44,9 @@ class DonationController extends Controller
             'payer_id'       =>  0,
             'payer_type'     => 'donation',
             'feature_key'    => 'donation',
-            'amount'         => null,
+            'amount'         => $request['amount'],
             'status'         => 'captured',
-            'transaction_id' =>  null,
+            'transaction_id' =>  $request['transaction_id'],
             'payment_method' => null,
             'currency'       =>  'INR',
             'meta'           =>  null,
@@ -52,6 +54,20 @@ class DonationController extends Controller
             'source_type'    => 'donation',
         ]);
 
+
+        $to = $request['email'];
+        $subject = 'Thank You for Your Donation - TGG India';
+        $view = 'tgg-india.emails.tgg-template';
+        $data = [
+            'name' => $request['name'],
+            'message' => 'We sincerely thank you for your generous contribution to TGG India. Your support helps us continue our mission and make a meaningful difference. A receipt for your donation will be attached for your records.',
+            'button_text' => 'Visit Our Website',
+            'button_url' => url('https://thegoldengreens.com')
+        ];
+
+        $ok = $this->sendMail($to, $subject, $view, $data);
+
+        return redirect()->back()->with('success', 'Donation successful! Thank you for supporting TGG India.');
 
         return response()->json(['success' => true, 'message' => 'Donation successful! Thank you for supporting TGG India.', 'returnUrl' =>  $data['returnUrl']]);
 

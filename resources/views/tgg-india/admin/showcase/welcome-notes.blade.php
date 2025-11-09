@@ -33,9 +33,16 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="welcome_note_member" class="form-label">Welcome Note For Member</label>
+                    <label for="welcome_note_member" class="form-label">Welcome Note For Advisor</label>
                     <textarea id="welcome_note_member" name="welcome_note_member" class="form-control-textarea " rows="5">
                 {!! old('welcome_note_member', $showcase?->welcome_note_member ?? '') !!}
+            </textarea>
+                </div>
+
+                 <div class="mb-3">
+                    <label for="welcome_note_facilitator" class="form-label">Welcome Note For Facilitator</label>
+                    <textarea id="welcome_note_facilitator" name="welcome_note_facilitator" class="form-control-textarea " rows="5">
+                {!! old('welcome_note_facilitator', $showcase?->welcome_note_facilitator ?? '') !!}
             </textarea>
                 </div>
 
@@ -58,10 +65,16 @@
                     <label for="welcome_note_freelancer" class="form-label">Welcome Note For Freelancer</label>
                     <textarea id="welcome_note_freelancer" name="welcome_note_freelancer" class="form-control-textarea " rows="5">
                 {!! old('welcome_note_freelancer', $showcase?->welcome_note_freelancer ?? '') !!}
-            </textarea>
+                </textarea>
                 </div>
 
-               
+                <div class="mb-3">
+                    <label for="welcome_note_spouse" class="form-label">Welcome Note For Spouse</label>
+                    <textarea id="welcome_note_spouse" name="welcome_note_spouse" class="form-control-textarea " rows="5">
+                {!! old('welcome_note_spouse', $showcase?->welcome_note_spouse ?? '') !!}
+                </textarea>
+                </div>
+
 
                 <button type="submit" class="btn btn-primary">Update Showcase</button>
             </form>

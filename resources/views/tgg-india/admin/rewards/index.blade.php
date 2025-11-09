@@ -6,6 +6,11 @@
 <div class="admin-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-3 trainer-heading">My Rewards</h4>
+         <a href="{{ route('tgg-india.download.excel', ['model' => 'Reward']) }}"
+                class="btn btn-outline-success  d-flex align-items-center justify-content-center"
+                title="Download Excel">
+            <i class="fas fa-file-excel"></i>Download Excel 
+            </a>
     </div>
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
@@ -18,7 +23,7 @@
                 <th>Status</th>
                 <th>Amount</th>
                 <th>Created At</th>
-                {{-- <th>Actions</th> --}}
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,11 +40,28 @@
 
                 <td>{{ number_format($reward->amount, 2) }}</td>
                 <td>{{ \Carbon\Carbon::parse($reward->created_at)->format('d M Y') }}</td>
-                {{-- <td>
-                    <a href="#" class="btn btn-primary btn-sm">
-                        <i class="fas fa-eye"></i>
+                <td>
+                     @php
+                        $receiptExists = \App\Models\Receipt::where('model_type', 'App\Models\Reward')
+                                                            ->where('model_id', $reward->id)
+                                                            ->exists();
+                        $receiptExists = false;
+                    @endphp
+                    <a href="{{ $receiptExists ? '#' : route('tgg-india.admin.receipts.global-store', [
+                        'model_type' => 'App\Models\Reward',
+                        'model_id'   => $reward->id,
+                        'source_id'  => auth()->id(),      // Optional: current user as source
+                        'title'=> $reward->title,
+                        'status'     => 'pending',
+                        'price'      => $reward->amount,
+                        'task_type'      => $reward->task_type,
+                            ]) }}" 
+                        class="btn btn-success btn-sm d-flex align-items-center justify-content-center p-0 {{ $receiptExists ? 'disabled' : '' }}" 
+                        style="width: 28px; height: 28px;" 
+                        title="Create receipt {{ $receiptExists ? '(Already exists)' : '' }}">
+                        <i class="fas fa-receipt"></i>
                     </a>
-                </td> --}}
+                </td>
             </tr>
             @empty
             <tr>

@@ -150,7 +150,7 @@
             <div class="card shadow rounded-4 p-4 mb-4">
                 <h5 class="mb-3"> Make a Donation <small class="text-muted">(Optional)</small></h5>
                 <p class="text-muted small">
-                    TGG AID is a social initiative by the TGG Family, managed through the TGG Foundation Charitable Trust with the active participation of its members. Its primary focus is the education and well-being of children, with ongoing support for Anganwadi projects that nurture early childhood development. The second priority is empowering women in rural areas through livelihood opportunities that foster dignity and self-reliance. The third focus is compassionate care for the elderly, ensuring they live with respect, comfort, and community support.
+                    TGG AID is a social initiative by the TGG Family, managed through the TGG Foundation Charitable Trust with the active participation of its advisors. Its primary focus is the education and well-being of children, with ongoing support for Anganwadi projects that nurture early childhood development. The second priority is empowering women in rural areas through livelihood opportunities that foster dignity and self-reliance. The third focus is compassionate care for the elderly, ensuring they live with respect, comfort, and community support.
                 </p>
 
                 <form action="{{ route('tgg-india.donate.create') }}" method="POST">

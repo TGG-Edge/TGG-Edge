@@ -19,35 +19,38 @@
 
         /* Sidebar */
         .receipt-sidebar {
-            width: 25%;
-            background-color: #e8f1fb;
-            padding: 30px 20px;
+            width: 220px; /* match the first screenshot width */
+            background-color: #D0E1F3;
+            padding: 10px;
+            margin: 20px;
             text-align: center;
         }
 
         .receipt-sidebar h5 {
-            background-color: #0b4da2;
+            background-color: #1155cc;
             color: #fff;
-            padding: 10px 0;
-            margin-bottom: 20px;
+            padding: 50px 0;
+            margin: 0;
             font-size: 16px;
             letter-spacing: 1px;
         }
 
         .receipt-sidebar img {
-            width: 80px;
-            margin: 15px 0;
+            width: 60px;
+            margin: 20px 0;
         }
 
         .company-info {
-            font-size: 13px;
-            line-height: 1.6;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #797979ff;
+            padding: 0 15px 20px 15px;
         }
 
         /* Main Body */
         .receipt-body {
-            width: 75%;
-            padding: 40px;
+            flex: 1;
+            padding: 40px 50px;
             box-sizing: border-box;
         }
 
@@ -64,20 +67,24 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         table th {
             background-color: #0b4da2;
             color: #fff;
             padding: 10px;
-            text-align: center;
+            text-align: left;
         }
 
         table td {
             border: 1px solid #ccc;
             padding: 10px;
-            text-align: center;
+            text-align: left;
+        }
+
+        table td.amount {
+            text-align: right;
         }
 
         .text-end {
@@ -86,17 +93,44 @@
 
         .fw-bold { font-weight: bold; }
 
-        .signature-line {
+        /* .signature-line {
             border-top: 1px solid #000;
             width: 200px;
             margin-left: auto;
             margin-top: 5px;
+        } */
+        
+        .signature-line1 {
+            border-top: 1px solid #c6c6c6ff;
+            width: 170px;
+            margin-left: auto;
+            margin-top: -6px;
+        }
+
+        .signature-line {
+            border-top: 1px solid #c6c6c6ff;
+            width: 130px;
+            margin-top: -6px;
+            margin-right:740px;
         }
 
         .amount-section {
-            margin-top: 20px;
+            margin-top: 10px;
             font-size: 13px;
         }
+
+        .date-receipt{
+            margin-left:700px;
+        }
+
+        .comp{
+            margin-right:775px !important;
+        }
+
+        .sign{
+            margin-top:130px;
+        }
+
     </style>
 </head>
 <body>
@@ -105,29 +139,33 @@
     <!-- Sidebar -->
     <div class="receipt-sidebar">
         <h5>RECEIPT</h5>
-        <img src="{{ public_path('images/tgg-logo.png') }}" alt="Company Logo">
+        <img src="{{ asset('assets/tgg-india/images/tgg-india-fav.jpg') }}" alt="Company Logo">
         <div class="company-info">
-            <p><strong>TGG Eco Ventures Pvt. Ltd.</strong></p>
-            <p>#577, 1st Floor<br>
-                27th Main 13th Cross,<br>
-                Sector-1, HSR Layout<br>
-                Bangalore-560102,<br>
-                Karnataka, India</p>
-            <p>office@tggindia.com</p>
+            <strong>TGG Eco Ventures Pvt. Ltd.</strong><br>
+            <br/>
+            #677, 1st Floor<br>
+            27th Main 13th Cross,<br>
+            Sector-1, HSR Layout<br>
+            Bangalore-560102,<br>
+            Karnataka, India<br>
+            office@tggindia.com
         </div>
     </div>
 
     <!-- Main Body -->
     <div class="receipt-body">
-        <div class="d-flex mb-3">
+        <div class="d-flex mb-3 date-receipt">
             <div>
                 <p><strong>DATE:</strong> {{ $receipt->created_at?->format('d M, Y') ?? 'N/A' }}</p>
+                <div class="signature-line1"></div>
                 <p><strong>RECEIPT NO:</strong> {{ $receipt->receipt_number }}</p>
+                <div class="signature-line1"></div>
             </div>
         </div>
 
         <div class="mb-4">
-            <p><strong>TO</strong><br>
+            <p><strong>TO</strong>
+            <div class="signature-line"></div>
                 <strong>{{ $receipt->target?->name ?? 'Name' }}</strong><br>
                 {{ $receipt->target?->address ?? 'Address' }}<br>
                 {{ $receipt->target?->phone ?? '' }} {{ $receipt->target?->email ? '/ ' . $receipt->target?->email : '' }}
@@ -142,28 +180,30 @@
             }
         @endphp
 
-        <table>
-            <thead>
-                <tr>
-                    <th>DESCRIPTION</th>
-                    <th>AMOUNT</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($items as $item)
-                    <tr>
-                        <td>{{ $item['description'] ?? 'N/A' }}</td>
-                        <td>{{ number_format($item['amount'] ?? 0, 2) }}</td>
-                    </tr>
-                @empty
-                    <tr><td colspan="2">No items added</td></tr>
-                @endforelse
-                <tr>
-                    <td class="text-end fw-bold">Received</td>
-                    <td>{{ number_format($totalAmount, 2) }}</td>
-                </tr>
-            </tbody>
-        </table>
+       <table style="width:100%; border-collapse: collapse; font-family: 'Poppins', sans-serif;">
+    <thead>
+        <tr style="background-color:#1966d2; color:white; text-align:left; height:30px;">
+            <th style="padding:5px 10px; border:1px solid #ccc;">DESCRIPTION</th>
+            <th style="padding:5px 10px; border:1px solid #ccc;">AMOUNT</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse ($items as $item)
+            <tr>
+                <td style="padding:5px 10px; border:1px solid #ccc;">{{ $item['description'] ?? 'N/A' }}</td>
+                <td style="padding:5px 10px; border:1px solid #ccc; text-align:right;">{{ number_format($item['amount'] ?? 0, 2) }}</td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="2" style="padding:5px 10px; border:1px solid #ccc; background-color:#f2f2f2;">No items added</td>
+            </tr>
+        @endforelse
+        <tr>
+            <td style="padding:5px 10px; text-align:right; font-weight:bold; border:1px solid #ccc;">Received</td>
+            <td style="padding:5px 10px; border:1px solid #ccc; background-color:#dbe9f8; text-align:right;">{{ number_format($totalAmount, 2) }}</td>
+        </tr>
+    </tbody>
+</table>
 
         @php
             $totalAmount = floatval($totalAmount ?? 0);
@@ -184,8 +224,8 @@
             <p><strong>Amount in words:</strong> {{ $amountInWords }}</p>
         </div>
 
-        <div class="text-end mt-5">
-            <p>Company Signature</p>
+        <div class="text-end mt-5 sign">
+            <p class='comp'>Company Signature</p>
             <div class="signature-line"></div>
         </div>
     </div>

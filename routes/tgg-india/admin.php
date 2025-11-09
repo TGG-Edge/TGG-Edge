@@ -72,6 +72,10 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
         ->name('referral.edit');
     Route::get('/reward/edit', [ShowCaseController::class, 'editReward'])
         ->name('reward.edit');
+    Route::get('/lead-referral/edit', [ShowCaseController::class, 'editLeadReferral'])
+        ->name('lead-referral.edit');
+    Route::get('/spouse-referral/edit', [ShowCaseController::class, 'editSpouseReferral'])
+        ->name('spouse-referral.edit');
     Route::post('/content-update/{source_type}', [ShowcaseController::class, 'updateContent'])->name('content.update');
     });
 
@@ -115,12 +119,20 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       Route::get('/', [ReceiptController::class, 'index'])->name('index');
       Route::get('/create', [ReceiptController::class, 'create'])->name('create');
       Route::post('/store', [ReceiptController::class, 'store'])->name('store');
+      Route::get('/global-store', [ReceiptController::class, 'globalStore'])->name('global-store');
       Route::get('/edit/{id}', [ReceiptController::class, 'edit'])->name('edit');
       Route::put('/update/{id}', [ReceiptController::class, 'update'])->name('update');
       Route::get('/show/{id}', [ReceiptController::class, 'show'])->name('show');
       Route::get('/download/{id}', [ReceiptController::class, 'download'])->name('download');
       Route::delete('/delete/{id}', [ReceiptController::class, 'destroy'])->name('destroy');
     });
+
+    Route::prefix('referral')->name('referral.')->group(function () {
+      Route::get('/program', [ReferralController::class, 'program'])->name('program');
+      Route::get('/tracking', [ReferralController::class, 'tracking'])->name('tracking');
+    });
+    Route::get('enquiry/referral/tracking', [ReferralController::class, 'enquiryReferralTracking'])->name('enquiry.referral.tracking');
+    
 
   });
 });

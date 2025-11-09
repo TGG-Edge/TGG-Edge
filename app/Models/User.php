@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-      protected $guarded = ['id'];
+    protected $guarded = ['id'];
 
 
     /**

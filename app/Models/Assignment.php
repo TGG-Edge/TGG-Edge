@@ -20,4 +20,22 @@ class Assignment extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(Assignment::class, 'parent_id');
+    }
+
+    /**
+     * Child assignments (sub-tasks)
+     */
+    public function children()
+    {
+        return $this->hasMany(Assignment::class, 'parent_id');
+    }
+
+    public function allChildren()
+    {
+        return $this->children()->with('allChildren');
+    }
 }

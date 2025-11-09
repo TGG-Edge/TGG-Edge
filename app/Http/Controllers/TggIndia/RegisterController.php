@@ -4,6 +4,7 @@ namespace App\Http\Controllers\TggIndia;
 
 use App\Http\Controllers\Controller;
 use App\Models\AssignmentSecondary;
+use App\Models\Enquiry;
 use App\Models\Incentive;
 use App\Models\ModuleInstance;
 use App\Models\Payment;
@@ -14,10 +15,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use App\Traits\RazorpayPaymentTrait;
+use App\Traits\MailTrait;
+
 
 class RegisterController extends Controller
 {
-    use RazorpayPaymentTrait;
+    use RazorpayPaymentTrait,MailTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -42,7 +46,7 @@ class RegisterController extends Controller
         //
         if ($user_type == 'trainer') {
             $user_type = 2;
-        } elseif ($user_type == 'members') {
+        } elseif ($user_type == 'advisor') {
             $user_type = 3;
         } elseif ($user_type == 'admin') {
             $user_type = 1;
@@ -50,8 +54,16 @@ class RegisterController extends Controller
             $user_type = 4;
         } elseif ($user_type == 'nomad-community') {
             $user_type = 5;
-        } else {
-            $user_type = 6;
+        }elseif ($user_type == 'co-creator') {
+            $user_type = 7;
+        }elseif ($user_type == 'facilitator') {
+            $user_type = 8;
+        }
+        elseif ($user_type == 'spouse') {
+            $user_type = 9;
+        }
+         else {
+            $user_type = 10;
         }
 
         $request->validate([
@@ -79,6 +91,7 @@ class RegisterController extends Controller
             'address' => $request->address,
             'user_role' => $user_type,
             'rhm_number' => $request->rhm_number,
+            'parent_rhm_number' => $request->parent_rhm_number,
             'password' => Hash::make('default-password'),
             'referral_code' => generateUniqueReferralCode(),
         ]);
@@ -157,7 +170,7 @@ class RegisterController extends Controller
             'responsible_human_mission' => isset($request['rhm_alignment']) && $request['rhm_alignment'] === 'yes' ? 1 : 0,
             'linkedin_profile' => $request['linkedin'] ?? null,
             'consent_declaration' => isset($request['consent']) ? 1 : 0,
-             'rhm_number' => $request->rhm_number ?? 0,
+            'rhm_number' => $request->rhm_number ?? null,
             'project' => $request['project'] ?? null,
             'phone' => $request['phone'],
             'email' => $request['email'],
@@ -180,6 +193,17 @@ class RegisterController extends Controller
             ]);
         }
 
+         if (!empty($request['referral_code'])) {
+            $referrerUser = UserSecondary::where('referral_code', $request['referral_code'])->first();
+            if ($referrerUser) {
+                Referral::create([
+                    'referrer_id' => $referrerUser->id,
+                    'referred_id' => $referredUser->id,
+                    'step' => 0
+                ]);
+            }
+        }
+
           $paymentRecord = Payment::create([
             'payer_id' => $referredUser->id,
             'payer_type' => 'registration',
@@ -200,6 +224,31 @@ class RegisterController extends Controller
             'source_id' => $referredUser->id,
             'source_type' => 'UserSecondary',
         ]);
+
+        Incentive::create([
+            'title'       => 'Referral Incentive',
+            'source_id'   => $referrerUser->id,
+            'source_type' => 'registration',
+            'target_id'   =>  1,  
+            'target_type' => null,
+            'description' => 'Incentive for successful registration via referral',
+            'reason'      => 'registration_referral',
+            'amount'      => 250,   
+            'status'      => 'pending',
+        ]);
+
+        $to = $request['email'];
+        $subject = 'Welcome to TGG India - Registration Successful';
+        $view = 'tgg-india.emails.tgg-template';
+        $data = [
+            'name' => $request['name'],
+            'message' => 'Thank you for registering with TGG India! Your account has been successfully created. We’re excited to have you on board and look forward to your journey with us.',
+            'button_text' => 'Login to Your Account',
+            'button_url' => url('https://thegoldengreens.com/tgg-meta/tgg-india/login')
+        ];
+
+        $ok = $this->sendMail($to, $subject, $view, $data);
+
 
         return redirect()->route('tgg-india.login')->with('success', 'Registration successful!');
 
@@ -254,10 +303,12 @@ class RegisterController extends Controller
         $roleMap = [
             'admin' => 1,
             'trainer' => 2,
-            'members' => 3,
+            'advisor' => 3,
             'rhm-club' => 4,
             'nomad-community' => 5,
             'researcher' => 6,
+            'facilitator' => 8,
+            'spouse' => 9,
         ];
         $user_type_id = $roleMap[$userType] ?? 3;
 
@@ -271,7 +322,6 @@ class RegisterController extends Controller
             'responsible_human_mission' => isset($regData['rhm_alignment']) && $regData['rhm_alignment'] === 'yes' ? 1 : 0,
             'linkedin_profile' => $regData['linkedin'] ?? null,
             'consent_declaration' => isset($regData['consent']) ? 1 : 0,
-
             'project' => $regData['project'] ?? null,
             'phone' => $regData['phone'],
             'email' => $regData['email'],
@@ -365,7 +415,7 @@ class RegisterController extends Controller
 
     public function showReferral($referrer_code)
     {
-        $user_type = 'members';
+        $user_type = 'advisor';
         return view('tgg-india.referral-register', compact('user_type', 'referrer_code'));
     }
 
@@ -392,4 +442,34 @@ class RegisterController extends Controller
     {
         //
     }
+
+    public function showEnquiry($referral_code)
+    {
+        return view('tgg-india.enquiry', compact('referral_code'));
+    }
+
+    public function storeEnquiry(Request $request, $referral_code)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'role' => 'required|string',
+            'message' => 'nullable|string',
+        ]);
+
+        Enquiry::create([
+            'referral_code' => $referral_code,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'role' => $request->role,
+            'message' => $request->message,
+        ]);
+
+        return redirect()->back()->with('success', 'Your enquiry has been submitted successfully!');
+    }
+
 }

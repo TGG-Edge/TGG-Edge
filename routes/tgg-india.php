@@ -21,6 +21,7 @@ use App\Models\Donation;
 use App\Models\Incentive;
 use App\Models\Reward;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExportController;
 
 
 
@@ -46,11 +47,19 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     Route::post('/payment/verify', [RegisterController::class, 'verifyPayment'])->name('payment.verify');
   });
 
+  Route::get('/enquiry/referral/{referral_code}', [RegisterController::class, 'showEnquiry']);
+  Route::post('enquiry/referral/{referral_code}', [RegisterController::class, 'storeEnquiry'])->name('enquiry.referral.store');
+   
+
   Route::post('/donate', [DonationController::class, 'createOrder'])->name('donate.create');
   Route::post('/donate/verify', [DonationController::class, 'verifyDonation'])->name('donate.verify');
 
   Route::get('/dashboard', function () {
     return view('tgg-india.dashboard');
   });
+
+  Route::get('/download-excel/{model}', [ExportController::class, 'downloadExcel'])
+    ->name('download.excel');
+  
 
 });

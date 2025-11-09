@@ -10,7 +10,13 @@
             <a href="{{ route('tgg-india.admin.receipts.create') }}" class="btn btn-primary assignment-button">
                 <i class="bi bi-plus-lg"></i> + New Receipt
             </a>
+             <a href="{{ route('tgg-india.download.excel', ['model' => 'Receipt']) }}"
+                class="btn btn-outline-success  d-flex align-items-center justify-content-center"
+                title="Download Excel">
+            <i class="fas fa-file-excel"></i>Download Excel 
+            </a>
         </div>
+          @include('tgg-india.layouts.includes.message')
     </div>
 
     <table class="table table-striped table-bordered">

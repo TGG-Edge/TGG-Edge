@@ -46,6 +46,12 @@
               @include('tgg-india.layouts.includes.trainer-sidebar')
           @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 3)
               @include('tgg-india.layouts.includes.member-sidebar')
+          @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 7)
+              @include('tgg-india.layouts.includes.co-creator-sidebar')
+          @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 8)
+              @include('tgg-india.layouts.includes.facilitator-sidebar')
+         @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 9)
+              @include('tgg-india.layouts.includes.spouse-sidebar')
           @else
               @include('tgg-india.layouts.includes.trainer-sidebar')
           @endif

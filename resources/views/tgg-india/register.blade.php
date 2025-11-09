@@ -1,5 +1,5 @@
 @extends('tgg-india.layouts.app')
-@include('tgg-india.layouts.includes.message')
+
 
 @section('title', 'User Registration | TGG Meta | TGG India') 
 @php
@@ -14,7 +14,7 @@
         <div class="mb-3">
             <p class="text-muted small">
             Welcome to the TGG Meta Registration Portal
-            This registration is intended  the TGG India community. Trainers can create and share learning modules, while members/users can access and utilize these modules for their growth. Please ensure all details are filled in accurately. Fields marked with * are mandatory.
+            This registration is intended  the TGG India community. Trainers can create and share learning modules, while advisors/users can access and utilize these modules for their growth. Please ensure all details are filled in accurately. Fields marked with * are mandatory.
             </p>
         </div>
 
@@ -76,6 +76,13 @@
                     <input type="text" class="form-control" name="rhm_number" placeholder="If applicable" required>
                 </div>
 
+                @if($user_type == 'spouse' )
+                <div class="mb-3 col-md-6">
+                    <label class="form-label">RHM NO. (husband/wife/another) *</label>
+                    <input type="text" class="form-control" name="parent_rhm_number" placeholder="If applicable" required>
+                </div>
+                @endif
+
                 {{-- Address --}}
                 <div class="mb-3 col-md-6">
                     <label class="form-label">Address *</label>
@@ -90,7 +97,7 @@
                 </div>
                 @endif
 
-                @if($user_type != 'admin' && $user_type != 'trainer')
+                @if($user_type != 'admin' && $user_type != 'trainer' && $user_type != 'co-creator'  && $user_type != 'facilitator' && $user_type != 'spouse')
                     <div class="mb-3 col-12">
                         <label for="modules" class="form-label">Select Modules</label>
                         <select name="modules[]" id="modules" class="form-select" multiple>

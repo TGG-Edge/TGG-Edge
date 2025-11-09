@@ -52,7 +52,15 @@
 
         <a href="{{ route('tgg-india.admin.showcases.reward.edit') }}#freelance-opportunities" class="d-block py-1">
             <i class="fas fa-gift me-2"></i> Reward Content
-</a>
+        </a>
+
+        <a href="{{ route('tgg-india.admin.showcases.lead-referral.edit') }}#freelance-opportunities" class="d-block py-1">
+            <i class="fas fa-project-diagram me-2"></i>  Facilitator Referral Content
+        </a>
+
+         <a href="{{ route('tgg-india.admin.showcases.spouse-referral.edit') }}#freelance-opportunities" class="d-block py-1">
+            <i class="fas fa-user-friends me-2"></i>  Spouse Referral Content
+        </a>
 
     </div>
 </div>
@@ -123,15 +131,15 @@
         <a href="{{ url('tgg-meta/tgg-india/register/trainer') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-user-edit me-2"></i> Trainer Register
         </a>
-        <a href="{{ url('tgg-meta/tgg-india/register/members') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-user-friends me-2"></i> Members Register
+        <a href="{{ url('tgg-meta/tgg-india/register/advisor') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-user-friends me-2"></i> Advisors Register
         </a>
         @php
          $referralCode = Auth('web2')->user()->referral_code;
          $referralLink = url('tgg-meta/tgg-india/register/referral/' . $referralCode);
         @endphp
         <a href="{{ $referralLink }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-user-friends me-2"></i> Members Register - By Referral
+            <i class="fas fa-user-friends me-2"></i> Advisors Register - By Referral
         </a>
 
          <a href="{{ url('tgg-meta/tgg-india/register/rhm-club') }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
@@ -183,6 +191,37 @@
             <i class="fas fa-check-circle me-2"></i> Processed Applications
         </a>
     </div>
+</div>
+
+<div class="dropdown">
+        <a href="#referrallink" 
+        class="dropdown-toggle d-flex justify-content-between align-items-center"
+        data-bs-toggle="collapse" 
+        role="button" 
+        aria-expanded="false" 
+        aria-controls="referrallink">
+            <span><i class="fas fa-share-alt me-2"></i>Referral</span>
+            <i class="fas fa-caret-down"></i>
+        </a>
+
+        <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/admin/referral-program*') || request()->is('tgg-meta/tgg-india/admin/referral-tracking*') || request()->is('tgg-meta/tgg-india/admin/enquiry/referral/tracking*') ? 'show' : '' }}"
+            id="referrallink">
+            
+            <a href="{{ route('tgg-india.admin.referral.program') }}" 
+            class="d-block py-1">
+                <i class="fas fa-project-diagram me-2"></i>Referral Program
+            </a>
+
+            <a href="{{ route('tgg-india.admin.referral.tracking') }}" 
+            class="d-block py-1">
+                <i class="fas fa-chart-line me-2"></i>Referral Tracking
+            </a>
+
+            <a href="{{ route('tgg-india.admin.enquiry.referral.tracking') }}"
+                class="d-block py-1 {{ request()->is('tgg-india/admin/enquiry/referral/tracking*') ? 'active' : '' }}">
+                <i class="fas fa-bullseye me-2"></i>Lead Generated Tracking
+            </a>
+        </div>
 </div>
 
 <a href="{{ route('tgg-india.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>

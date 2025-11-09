@@ -13,7 +13,7 @@ class AssignmentSecondary extends Model
     protected $table = 'assignments';
     protected $guarded = ['id'];
 
-    public function member()
+    public function advisor()
     {
         return $this->belongsTo(UserSecondary::class, 'assigned_to');
     }
@@ -21,5 +21,21 @@ class AssignmentSecondary extends Model
     public function creator()
     {
         return $this->belongsTo(UserSecondary::class, 'created_by');
+    }
+
+     public function parent()
+    {
+        return $this->belongsTo(Assignment::class, 'parent_id');
+    }
+
+    
+     public function children()
+    {
+        return $this->hasMany(Assignment::class, 'parent_id');
+    }
+
+    public function allChildren()
+    {
+        return $this->children()->with('allChildren');
     }
 }

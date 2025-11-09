@@ -29,13 +29,13 @@ class ApplicationController extends Controller
 
     public function  newApplication()
     {
-        $newApplications = UserSecondary::whereIn('user_role', [2,3,4,5,6])->where('approval','pending')->latest()->paginate(10);
+        $newApplications = UserSecondary::whereIn('user_role', [2,3,4,5,6,7,8,9])->where('approval','pending')->latest()->paginate(10);
         return view('tgg-india.admin.applications.new-application', compact('newApplications'));
     }
 
     public function processedApplication()
     {
-       $processedApplications = UserSecondary::whereIn('user_role', [2,3,4,5,6])->where('approval','!=','pending')->latest()->paginate(10);
+       $processedApplications = UserSecondary::whereIn('user_role', [2,3,4,5,6,7,8,9])->where('approval','!=','pending')->latest()->paginate(10);
         return view('tgg-india.admin.applications.processed-application', compact('processedApplications'));
     }
 

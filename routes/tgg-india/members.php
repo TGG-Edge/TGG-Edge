@@ -10,6 +10,8 @@ use App\Http\Controllers\TggIndia\Admin\ProfileController;
 use App\Http\Controllers\TggIndia\Admin\ReferralController;
 use App\Http\Controllers\TggIndia\Admin\RewardController;
 use App\Http\Controllers\TggIndia\Admin\ShowCaseController;
+use App\Http\Controllers\TggIndia\Member\InvoiceController;
+use App\Http\Controllers\TggIndia\Member\ReceiptController;
 use App\Http\Controllers\TggIndia\RegisterController;
 use App\Http\Controllers\TggIndia\Trainer\ChapterController;
 use App\Http\Controllers\TggIndia\Trainer\LinkController;
@@ -23,8 +25,8 @@ use App\Models\Reward;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->group(function () {
-     //members
-  Route::middleware('member')->prefix('member')->name('member.')->group(function () {
+     //advisor
+  Route::middleware('advisor')->prefix('advisor')->name('advisor.')->group(function () {
       Route::get('/dashboard', [\App\Http\Controllers\TggIndia\Member\DashboardController::class, 'index'])->name('dashboard');
 
     // Route::get('/dashboard', function () {
@@ -45,9 +47,9 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
      Route::resource('assignments', \App\Http\Controllers\TggIndia\Member\AssignmentController::class);
 
 
-     Route::prefix('referral')->name('referral.')->group(function () {
-      Route::get('/program', [ReferralController::class, 'program'])->name('program');
-      Route::get('/tracking', [ReferralController::class, 'tracking'])->name('tracking');
+    Route::prefix('referral')->name('referral.')->group(function () {
+      Route::get('/program', [\App\Http\Controllers\TggIndia\Member\ReferralController::class, 'program'])->name('program');
+      Route::get('/tracking', [\App\Http\Controllers\TggIndia\Member\ReferralController::class, 'tracking'])->name('tracking');
     });
 
     Route::prefix('rewards')->name('rewards.')->group(function () {
@@ -59,6 +61,31 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       Route::get('/', [\App\Http\Controllers\TggIndia\Member\IncentiveController::class, 'index'])->name('index');
       Route::post('/incentive', [\App\Http\Controllers\TggIndia\Member\IncentiveController::class, 'update'])->name('update');
     });
+
+    Route::prefix('invoices')->name('invoices.')->group(function () {
+      Route::get('/', [InvoiceController::class, 'index'])->name('index');
+      Route::get('/create', [InvoiceController::class, 'create'])->name('create');
+      Route::post('/store', [InvoiceController::class, 'store'])->name('store');
+      Route::get('/global-store', [InvoiceController::class, 'globalStore'])->name('global-store');
+      Route::get('/edit/{id}', [InvoiceController::class, 'edit'])->name('edit');
+      Route::put('/update/{id}', [InvoiceController::class, 'update'])->name('update');
+      Route::get('/show/{id}', [InvoiceController::class, 'show'])->name('show');
+      Route::get('/download/{id}', [InvoiceController::class, 'download'])->name('download');
+      Route::delete('/delete/{id}', [InvoiceController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('receipts')->name('receipts.')->group(function () {
+      Route::get('/', [ReceiptController::class, 'index'])->name('index');
+      Route::get('/create', [ReceiptController::class, 'create'])->name('create');
+      Route::post('/store', [ReceiptController::class, 'store'])->name('store');
+      Route::get('/global-store', [ReceiptController::class, 'globalStore'])->name('global-store');
+      Route::get('/edit/{id}', [ReceiptController::class, 'edit'])->name('edit');
+      Route::put('/update/{id}', [ReceiptController::class, 'update'])->name('update');
+      Route::get('/show/{id}', [ReceiptController::class, 'show'])->name('show');
+      Route::get('/download/{id}', [ReceiptController::class, 'download'])->name('download');
+      Route::delete('/delete/{id}', [ReceiptController::class, 'destroy'])->name('destroy');
+    });
+    
   });
 });
 

@@ -14,6 +14,7 @@
                     <tr>
                         <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">NAME</th>
                         <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">RHM REGISTRATION</th>
+                        <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">EMAIL</th>
                         <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">ENGAGEMENT TYPE</th>
                         <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">PROFILE</th>
                         <th class="admin-application-table" style="    font-weight: 500;  background: lightgray;">APPROVAL</th>
@@ -24,6 +25,7 @@
                     <tr>
                         <td>{{ $app->name }}</td>
                         <td>{{ $app->rhm_number }}</td>
+                         <td>{{ $app->email }}</td>
                         <td>{{ $app->role_name }}</td>
                         <td>
                             <a href="{{ route('tgg-india.admin.user-profile',$app->id) }}">View/Edit</a>

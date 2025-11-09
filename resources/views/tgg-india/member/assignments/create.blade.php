@@ -6,7 +6,7 @@
 <div class="container">
     <h2>Create Assignment</h2>
 
-    <form action="{{ route('tgg-india.member.assignments.store') }}" method="POST">
+    <form action="{{ route('tgg-india.advisor.assignments.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">
@@ -49,7 +49,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Create</button>
-        <a href="{{ route('tgg-india.member.assignments.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('tgg-india.advisor.assignments.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

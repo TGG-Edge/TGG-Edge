@@ -10,6 +10,11 @@
             <a href="{{ route('tgg-india.admin.invoices.create') }}" class="btn btn-primary assignment-button">
                 <i class="bi bi-plus-lg"></i> + New Invoice
             </a>
+            <a href="{{ route('tgg-india.download.excel', ['model' => 'Invoice']) }}"
+                class="btn btn-outline-success  d-flex align-items-center justify-content-center"
+                title="Download Excel">
+            <i class="fas fa-file-excel"></i>Download Excel 
+            </a>
         </div>
     </div>
 
@@ -37,7 +42,7 @@
                     <td>{{ array_sum(array_column( $invoice->items ?? [], 'amount')); }} INR</td>
                     <td>
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="{{ route('tgg-india.admin.invoices.show', $invoice->id) }}" class="btn btn-info btn-sm me-2 d-flex align-items-center justify-content-center p-0" style="width:28px;height:28px;">
+                            <a href="{{ route('tgg-india.admin.invoices.show', $invoice->id) }}" class="btn btn-info btn-sm me-2 d-flex align-items-center justify-content-center p-0" target="_blank" style="width:28px;height:28px;">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <a href="{{ route('tgg-india.admin.invoices.edit', $invoice->id) }}" class="btn btn-primary btn-sm me-2 d-flex align-items-center justify-content-center p-0" style="width:28px;height:28px;">
