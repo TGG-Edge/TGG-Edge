@@ -4,6 +4,7 @@ namespace App\Http\Controllers\TggIndia\Spouse;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContentPage;
+use App\Models\Enquiry;
 use App\Models\Referral;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ class ReferralController extends Controller
     public function program()
     {
         //
-        $content = ContentPage::where('source_type', 'spouse-referral')->first();
+        $content = ContentPage::where('source_type', 'spouse-referral-description')->first();
         return view('tgg-india.spouse.referral.program', compact('content'));
     }
 
@@ -46,6 +47,8 @@ class ReferralController extends Controller
             ->where('referrer_id', $referrerId)
             ->paginate(10);
 
+        $enquiries = Enquiry::with('referrer')->where('referral_code', auth('web2')->user()->referral_code)->latest()->paginate(10);
+        return view('tgg-india.spouse.referral.enquiry-tracking', compact('enquiries'));
         return view('tgg-india.spouse.referral.tracking', compact('referrals'));
     }
 

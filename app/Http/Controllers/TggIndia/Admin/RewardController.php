@@ -4,6 +4,7 @@ namespace App\Http\Controllers\TggIndia\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reward;
+use App\Models\UserSecondary;
 use Illuminate\Http\Request;
 
 class RewardController extends Controller
@@ -23,46 +24,57 @@ class RewardController extends Controller
      */
     public function create()
     {
-        //
+        $users = UserSecondary::orderBy('name')->get();
+        return view('tgg-india.admin.rewards.create', compact('users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'source_id' => 'required',
+            'target_id' => 'required',
+            'reason' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'amount' => 'nullable|numeric',
+            'status' => 'required|string',
+        ]);
+        Reward::create($request->all());
+
+        return redirect()->route('tgg-india.admin.rewards.index')->with('success', 'Reward created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $reward = Reward::findOrFail($id);
+        $users = UserSecondary::orderBy('name')->get();
+        return view('tgg-india.admin.rewards.edit', compact('reward', 'users'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $reward = Reward::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'source_id' => 'required',
+            'target_id' => 'required',
+            'reason' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'amount' => 'nullable|numeric',
+            'status' => 'required|string',
+        ]);
+
+        $reward->update($request->all());
+
+        return redirect()->route('tgg-india.admin.rewards.index')->with('success', 'Reward updated successfully!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $reward = Reward::findOrFail($id);
+        $reward->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('tgg-india.admin.rewards.index')->with('success', 'Reward deleted successfully!');
     }
 }

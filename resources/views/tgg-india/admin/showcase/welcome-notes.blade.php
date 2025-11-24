@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="welcome_note_nomad_community" class="form-label">Welcome Note For Nomad Community</label>
+                    <label for="welcome_note_nomad_community" class="form-label">Welcome Note For Co-Creator </label>
                     <textarea id="welcome_note_nomad_community" name="welcome_note_nomad_community" class="form-control-textarea "
                         rows="5">
                 {!! old('welcome_note_nomad_community', $showcase?->welcome_note_nomad_community ?? '') !!}

@@ -35,7 +35,8 @@
         {{-- Left: Form --}}
         <div class="col-md-8">
             <div class="card shadow rounded-4 p-4 mb-4">
-                <h4 class="text-center mb-4">Registration</h4>
+                <h4 class="text-center mb-4">{{ strtoupper($user_type) }} REGISTRATION</h4>
+
                  <p class="text-muted small mb-4">
                     To enroll in TGG's Eco-Entrepreneurship Program, participants are required to complete the registration form and submit a one-time program access fee of ₹10,000. This fee covers 14 hours of training, mentorship, Co-Creating access, TGG-Meta "POWER OF 5" platform for self-employment and an "Art of Gifting" pack. Upon successful payment, participants will receive a confirmation email with onboarding details and access credentials wtihin 3 working days.  
                     </p>

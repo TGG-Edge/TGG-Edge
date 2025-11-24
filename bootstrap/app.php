@@ -5,6 +5,7 @@ use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsAssignee;
 use App\Http\Middleware\IsCoCreator;
 use App\Http\Middleware\IsFacilitator;
+use App\Http\Middleware\IsFreelancer;
 use App\Http\Middleware\IsMember;
 use App\Http\Middleware\IsResearcher;
 use App\Http\Middleware\IsSpouse;
@@ -30,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
             require base_path('routes/tgg-india/co-creator.php');
             require base_path('routes/tgg-india/facilitator.php');
             require base_path('routes/tgg-india/spouse.php');
+            require base_path('routes/tgg-india/freelancer.php');
             require base_path('routes/tgg-fct.php');
         },
         commands: base_path('routes/console.php'),
@@ -48,6 +50,7 @@ return Application::configure(basePath: dirname(__DIR__))
         'co-creator' => IsCoCreator::class,
         'facilitator' => IsFacilitator::class,
         'spouse' => IsSpouse::class,
+        'freelancer' => IsFreelancer::class,
          ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

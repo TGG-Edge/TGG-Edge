@@ -78,12 +78,12 @@
             <a href="{{ route('tgg-india.spouse.rewards.index') }}" class="d-block py-1">
                 <i class="fas fa-trophy me-2"></i> Reward
             </a>
-            <a href="{{ route('tgg-india.spouse.invoices.index') }}" class="d-block py-1">
+            {{-- <a href="{{ route('tgg-india.spouse.invoices.index') }}" class="d-block py-1">
                 <i class="fas fa-file-invoice me-2"></i> Invoice
             </a>
             <a href="{{ route('tgg-india.spouse.receipts.index') }}" class="d-block py-1">
                 <i class="fas fa-receipt me-2"></i> Receipt
-            </a>
+            </a> --}}
         </div>
     </div>
 

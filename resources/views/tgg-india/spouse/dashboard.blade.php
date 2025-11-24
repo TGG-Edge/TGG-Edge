@@ -33,12 +33,19 @@
 
             <!-- Welcome Note -->
             <div class="dashboard-grid-welcome">
-                 <div class="text-end mb-2">
-                    <p>
-                        Relation (spouse) -
-                        {{ \App\Models\UserSecondary::where('rhm_number', auth('web2')->user()->parent_rhm_number)->first()->name ?? 'N/A' }}
-                    </p>
+              @php
+                    $user = \App\Models\UserSecondary::find(auth('web2')->id());
+                    $mainApplicant = \App\Models\UserSecondary::where('rhm_number', $user->parent_rhm_number ?? '')->first();
+                @endphp
+
+                <div class="d-flex justify-content-end align-items-center flex-wrap gap-3 mb-2">
+                    <span><strong>Name:</strong> {{ $user->name ?? 'N/A' }}</span>
+                    <span><strong>Role:</strong> {{ $user->role_name ?? 'N/A' }}</span>
+                    <span><strong>RHM No:</strong> {{ $user->rhm_number ?? 'N/A' }}</span>
+                    <span><strong>Main Applicant:</strong> {{ $mainApplicant->name ?? 'N/A' }} - {{ $mainApplicant->rhm_number ?? 'N/A' }}</span>
                 </div>
+
+
                 <section class="welcome-note card">
                     <div class="card-inner-welcome">
                         <p>
@@ -91,87 +98,9 @@
                     </div>
                 </div>
 
-                <!-- Woodperker -->
-                <div class="card woodperker">
-                    <h3 class="card-title">WOODPERKER COLLECTIONS</h3>
-                    <div class="card-inner">
-                        <div class="slider">
-                            @if (!empty($showcase->woodpecker_collection))
-                                @foreach ($showcase->woodpecker_collection as $item)
-                                    @php
-                                        $img = is_array($item) ? $item['img'] ?? '' : $item;
-                                        $note = is_array($item) ? $item['note'] ?? '' : '';
+                
 
-                                        $isLive = request()->getHost() === 'thegoldengreens.com';
-                                        $filename = basename($img);
-
-                                        // Re-assign $imgPath based on environment
-                                        $img = $isLive
-                                            ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
-                                            : $img;
-                                    @endphp
-                                    <div class="slide">
-                                        <img src="{{ asset($img) }}" alt="Woodperker Image" class="card-img" />
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="slide">
-                                    <p>No collections available</p>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="slider" style="height: 30px !important; flex: 0 0 40px !important;">
-                        @if (!empty($showcase->woodpecker_collection))
-                            @foreach ($showcase->woodpecker_collection as $item)
-                                @php
-                                    $img = is_array($item) ? $item['img'] ?? '' : $item;
-                                    $note = is_array($item) ? $item['note'] ?? '' : '';
-
-                                    $isLive = request()->getHost() === 'thegoldengreens.com';
-                                    $filename = basename($img);
-
-                                    // Re-assign $imgPath based on environment
-                                    $img = $isLive
-                                        ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
-                                        : $img;
-                                @endphp
-                                <div class="slide" style="height: 30px">
-                                    <button style="width: 100%;" type="button" class="btn-outline small checkout-btn"
-                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" data-html="1">Checkout</button>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="slide">
-                                <p>No collections available</p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                <!-- Freelancing Opportunities -->
-                <div class="card opportunities">
-                    <h3 class="card-title">FREELANCING OPPORTUNITIES</h3>
-                    <div class="card-inner">
-                        @if (!empty($showcase->investment_opportunities))
-                            @foreach ($showcase->investment_opportunities as $opportunity)
-                                <div class="project-row">
-                                    <label class="project-left">
-                                        <input type="radio" name="project" />
-                                        <span>{{ $opportunity['title'] ?? '' }}</span>
-                                    </label>
-                                    <button class="btn-outline checkout-btn-new" data-note="{!! htmlspecialchars($opportunity['note'] ?? '', ENT_QUOTES) !!}"
-                                        data-link="{{ $opportunity['link'] ?? '' }}" data-html="1">
-                                        Details
-                                    </button>
-                                </div>
-                            @endforeach
-                        @else
-                            <p>No opportunities available</p>
-                        @endif
-                    </div>
-                </div>
-
+                
 
                 <!-- Travel -->
                 <div class="card travel">

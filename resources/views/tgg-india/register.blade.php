@@ -8,7 +8,8 @@
 @section('content')
 <div class="container py-2 d-flex justify-content-center align-items-center my-2">
     <div class="card shadow rounded-4 p-4" style="max-width: 600px; width: 100%; background-color: #fff;">
-        <h4 class="text-center mb-4">Register</h4>
+       <h4 class="text-center mb-4">{{ strtoupper($user_type) }} REGISTRATION</h4>
+
 
         {{-- Info Section --}}
         <div class="mb-3">
@@ -78,7 +79,7 @@
 
                 @if($user_type == 'spouse' )
                 <div class="mb-3 col-md-6">
-                    <label class="form-label">RHM NO. (husband/wife/another) *</label>
+                    <label class="form-label">RHM No. Main Applicant *</label>
                     <input type="text" class="form-control" name="parent_rhm_number" placeholder="If applicable" required>
                 </div>
                 @endif
@@ -97,7 +98,7 @@
                 </div>
                 @endif
 
-                @if($user_type != 'admin' && $user_type != 'trainer' && $user_type != 'co-creator'  && $user_type != 'facilitator' && $user_type != 'spouse')
+                @if($user_type != 'admin' && $user_type != 'trainer' && $user_type != 'co-creator'  && $user_type != 'facilitator' && $user_type != 'spouse' && $user_type != 'freelancer')
                     <div class="mb-3 col-12">
                         <label for="modules" class="form-label">Select Modules</label>
                         <select name="modules[]" id="modules" class="form-select" multiple>

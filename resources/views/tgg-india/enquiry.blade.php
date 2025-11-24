@@ -8,9 +8,20 @@
 
 @section('content')
     <div class="container py-4 ">
-        <div class="card shadow rounded-4 p-4 ">
+        <div class="card shadow rounded-4 p-4 " style="text-align:justify;">
             @php
-                $content = \App\Models\ContentPage::where('source_type', 'lead-referral')->first();
+                $user  = \App\Models\UserSecondary::where('referral_code',$referral_code)->first();
+                $source_type = 'lead-referral';
+                $roleKey = \App\Models\UserSecondary::$user_types[$user->user_role]['key'] ?? null;
+                if( $user->user_role == 1){
+                    $source_type = 'referral-link';
+                }else{
+                    $source_type = $roleKey 
+                    ? $roleKey . '-referral-link' 
+                    : 'lead-referral'; 
+                }
+                $content = \App\Models\ContentPage::where('source_type', $source_type)->first();
+
             @endphp
             {!! $content->content !!}
 
@@ -59,16 +70,51 @@
                             <input type="text" name="address" class="form-control">
                         </div>
 
-                        <div class="mb-3 col-md-12">
+                        {{-- <div class="mb-3 col-md-12">
                             <label class="form-label">Role *</label>
                             <select name="role" class="form-select" required>
                                 <option value="">Select Role</option>
                                 <option value="Advisor">Advisor</option>
-                                {{-- <option value="Trainer">Trainer</option>
+                                <option value="Trainer">Trainer</option>
                         <option value="Co-Creator">Co-Creator</option>
-                        <option value="Facilitator">Facilitator</option> --}}
+                        <option value="Facilitator">Facilitator</option>
                             </select>
-                        </div>
+                        </div> --}}
+
+                        @php
+                        // Your role definitions from model
+                        $roleTypes = \App\Models\UserSecondary::$user_types;
+
+                        // Allowed role mapping
+                        $availableRoleOptions = [
+                            'admin' => ['advisor', 'co-creator', 'facilitator', 'freelancer', 'spouse'],
+                            'advisor' => ['co-creator'],
+                            'co-creator' => ['freelancer'],
+                            'facilitator' => ['advisor'],
+                            'spouse' => ['spouse'],
+                            'freelancer' => ['facilitator'],
+                        ];
+
+                        // Get user role key
+                        $roleKey = $roleKey ?? null;
+
+                        // Get allowed roles for this user
+                        $allowed = $availableRoleOptions[$roleKey] ?? [];
+                    @endphp
+
+                    <div class="mb-3 col-md-12">
+                        <label class="form-label">Role *</label>
+                        <select name="role" class="form-select" required>
+                            <option value="">Select Role</option>
+
+                            @foreach($roleTypes as $role)
+                                @if(in_array($role['key'], $allowed))
+                                    <option value="{{ $role['name'] }}">{{ $role['name'] }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+
 
                         <div class="mb-3 col-12">
                             <label class="form-label">Message (Optional)</label>

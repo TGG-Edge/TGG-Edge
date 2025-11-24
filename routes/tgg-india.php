@@ -29,7 +29,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
  
 
-  Route::get('/login', [LoginController::class, 'show'])->name('show');
+  Route::get('/login/XCJBDSNJK43RWEFSKDJCXNFL34KRN3DKL3MREFWLMNKL32M', [LoginController::class, 'show'])->name('show');
   Route::post('/login', [LoginController::class, 'login'])->name('login');
   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
   Route::get('/switch/account/{id}', [LoginController::class, 'switchAccount'])->name('switch.account');
@@ -40,7 +40,7 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
  
   // Public registration routes
   Route::prefix('register')->name('register.')->group(function () {
-    Route::get('{user_type}', [RegisterController::class, 'show'])->name('show');
+    Route::get('{user_type}/DSLKFN43KREFWLDCMXKLWNEMR34RKL32NWMEDKQWJASNCKNRWDECNK3EW', [RegisterController::class, 'show'])->name('show');
     Route::post('{user_type}', [RegisterController::class, 'store'])->name('store');
     Route::get('/referral/{referral_code}', [RegisterController::class, 'showReferral']);
     Route::post('referral/{user_type}', [RegisterController::class, 'referralStore'])->name('referral.store');

@@ -54,8 +54,8 @@ class UserSecondary extends Authenticatable
             'key'  => 'nomad-community'
         ],
         6 => [
-            'name' => 'Freelancers',
-            'key'  => 'freelancers'
+            'name' => 'Freelancer',
+            'key'  => 'freelancer'
         ],
         7 => [
             'name' => 'Co Creator',

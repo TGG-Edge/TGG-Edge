@@ -57,6 +57,34 @@ class ShowCaseController extends Controller
         return view('tgg-india.admin.showcase.referral', compact('content', 'source_type'));
     }
 
+    public function editReferralDescription($user_role = null)
+    {
+        $source_type = 'referral-description';
+        if($user_role != 'admin'){
+         $source_type = $user_role.'-referral-description';
+        }
+        $content = ContentPage::where('source_type',  $source_type)->first();
+        // if($user_role != 'admin'){
+        //     return view('tgg-india.' . $user_role . '.showcase.referral', compact('content', 'source_type'));
+        // }else{
+            return view('tgg-india.admin.showcase.referral', compact('content', 'source_type'));
+        // }
+    }
+
+    public function editReferralLink($user_role = null)
+    {
+        $source_type = 'referral-link';
+        if($user_role != 'admin'){
+         $source_type = $user_role.'-referral-link';
+        }
+        $content = ContentPage::where('source_type',  $source_type)->first();
+        // if($user_role != 'admin'){
+        //     return view('tgg-india.' . $user_role . '.showcase.referral', compact('content', 'source_type'));
+        // }else{
+            return view('tgg-india.admin.showcase.referral-link', compact('content', 'source_type'));
+        // }
+    }
+
     public function editReward()
     {
         $content = ContentPage::where('source_type', 'reward')->first();
@@ -76,6 +104,14 @@ class ShowCaseController extends Controller
         $content = ContentPage::where('source_type', 'spouse-referral')->first();
         $source_type = 'spouse-referral';
         return view('tgg-india.admin.showcase.spouse-referral', compact('content', 'source_type'));
+    }
+
+    
+    public function editFreelancerReferral()
+    {
+        $content = ContentPage::where('source_type', 'freelancer-referral')->first();
+        $source_type = 'freelancer-referral';
+        return view('tgg-india.admin.showcase.freelancer-referral', compact('content', 'source_type'));
     }
 
 

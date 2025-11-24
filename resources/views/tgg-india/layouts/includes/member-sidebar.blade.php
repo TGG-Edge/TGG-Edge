@@ -119,7 +119,7 @@
                 @foreach ($user->modules as $module)
                     @php
                         $moduleId = 'module-' . $module->id;
-                        $moduleInstance = \App\Models\ModuleInstance::where('module_id', $module->id)->first();
+                        $moduleInstance = \App\Models\ModuleInstance::where('module_id', $module->id)->where('user_id', $user->id)->first();
                         $moduleInstanceId = $moduleInstance ? $moduleInstance->id : null;
                         $literatures = \App\Models\Literature::where('module_instance_id', $moduleInstanceId)->get();
 

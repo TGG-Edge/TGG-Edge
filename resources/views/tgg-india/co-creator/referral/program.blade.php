@@ -18,7 +18,7 @@
     <div class="input-group" style="justify-content: space-between; align-items: center;">
         @php
             $referralCode = Auth('web2')->user()->referral_code;
-            $referralLink = url('tgg-meta/tgg-india/register/referral/' . $referralCode);
+            $referralLink = url('tgg-meta/tgg-india/enquiry/referral/' . $referralCode);
         @endphp
 
         <input type="text" id="referralLink" class="form-control" value="{{ $referralLink }}" readonly style="max-width: 70%;">

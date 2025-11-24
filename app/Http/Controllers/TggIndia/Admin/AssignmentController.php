@@ -34,7 +34,7 @@ class AssignmentController extends Controller
 
     public function create()
     {
-        $users = UserSecondary::whereIn('user_role',[3,7,8])->get(); // All users who can be assignees
+        $users = UserSecondary::whereIn('user_role',[3,7,8,6])->get(); // All users who can be assignees
         return view('tgg-india.admin.assignments.create', compact('users'));
     }
 

@@ -23,7 +23,7 @@ class ReferralController extends Controller
     public function program()
     {
         //
-        $content = ContentPage::where('source_type', 'referral')->first();
+        $content = ContentPage::where('source_type', 'co-creator-referral-description')->first();
         return view('tgg-india.co-creator.referral.program', compact('content'));
     }
 

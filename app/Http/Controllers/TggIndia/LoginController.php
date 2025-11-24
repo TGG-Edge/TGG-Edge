@@ -124,7 +124,7 @@ class LoginController extends Controller
     {
         //
         Auth::guard('web2')->logout();
-        return redirect()->route('tgg-india.login');
+        return redirect()->route('tgg-india.show');
     }
 
     /**

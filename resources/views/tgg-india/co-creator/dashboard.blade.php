@@ -32,6 +32,17 @@
 
             <!-- Welcome Note -->
             <div class="dashboard-grid-welcome">
+                 @php
+                    $user = \App\Models\UserSecondary::find(auth('web2')->id());
+                    $mainApplicant = \App\Models\UserSecondary::where('rhm_number', $user->parent_rhm_number ?? '')->first();
+                @endphp
+
+                <div class="d-flex justify-content-end align-items-center flex-wrap gap-3 mb-2">
+                    <span><strong>Name:</strong> {{ $user->name ?? 'N/A' }}</span>
+                    <span><strong>Role:</strong> {{ $user->role_name ?? 'N/A' }}</span>
+                    <span><strong>RHM No:</strong> {{ $user->rhm_number ?? 'N/A' }}</span>
+                    
+                </div>
                 <section class="welcome-note card">
                     <div class="card-inner-welcome">
                         <p>

@@ -54,7 +54,11 @@ class RegisterController extends Controller
             $user_type = 4;
         } elseif ($user_type == 'nomad-community') {
             $user_type = 5;
-        }elseif ($user_type == 'co-creator') {
+        }
+         elseif ($user_type == 'freelancer') {
+            $user_type = 6;
+        }
+        elseif ($user_type == 'co-creator') {
             $user_type = 7;
         }elseif ($user_type == 'facilitator') {
             $user_type = 8;
@@ -62,7 +66,7 @@ class RegisterController extends Controller
         elseif ($user_type == 'spouse') {
             $user_type = 9;
         }
-         else {
+        else {
             $user_type = 10;
         }
 
@@ -133,7 +137,7 @@ class RegisterController extends Controller
             ]);
         }
 
-        return redirect()->route('tgg-india.login')->with('success', 'Registration successful!');
+        return redirect()->route('tgg-india.show')->with('success', 'Registration successful!');
     }
 
     public function referralStore(Request $request, $user_type)
@@ -244,7 +248,7 @@ class RegisterController extends Controller
             'name' => $request['name'],
             'message' => 'Thank you for registering with TGG India! Your account has been successfully created. We’re excited to have you on board and look forward to your journey with us.',
             'button_text' => 'Login to Your Account',
-            'button_url' => url('https://thegoldengreens.com/tgg-meta/tgg-india/login')
+            'button_url' => url('https://thegoldengreens.com/tgg-meta/tgg-india/login/XCJBDSNJK43RWEFSKDJCXNFL34KRN3DKL3MREFWLMNKL32M')
         ];
 
         $ok = $this->sendMail($to, $subject, $view, $data);

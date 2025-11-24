@@ -70,12 +70,19 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     
     Route::get('/referral/edit', [ShowCaseController::class, 'editReferral'])
         ->name('referral.edit');
+    Route::get('/referral-description/edit/{user_role}', [ShowCaseController::class, 'editReferralDescription'])
+        ->name('referral-description.edit');
+    Route::get('/referral-link/edit/{user_role}', [ShowCaseController::class, 'editReferralLink'])
+        ->name('referral-link.edit');
+
     Route::get('/reward/edit', [ShowCaseController::class, 'editReward'])
         ->name('reward.edit');
     Route::get('/lead-referral/edit', [ShowCaseController::class, 'editLeadReferral'])
         ->name('lead-referral.edit');
     Route::get('/spouse-referral/edit', [ShowCaseController::class, 'editSpouseReferral'])
         ->name('spouse-referral.edit');
+    Route::get('/freelancer-referral/edit', [ShowCaseController::class, 'editFreelancerReferral'])
+        ->name('freelancer-referral.edit');
     Route::post('/content-update/{source_type}', [ShowcaseController::class, 'updateContent'])->name('content.update');
     });
 
@@ -86,6 +93,11 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
     Route::prefix('rewards')->name('rewards.')->group(function () {
       Route::get('/', [RewardController::class, 'index'])->name('index');
+      Route::get('/create', [RewardController::class, 'create'])->name('create');
+      Route::post('/store', [RewardController::class, 'store'])->name('store');
+      Route::get('/{id}/edit', [RewardController::class, 'edit'])->name('edit');
+      Route::put('/{id}/update', [RewardController::class, 'update'])->name('update');
+      Route::delete('/{id}', [RewardController::class, 'destroy'])->name('destroy');
       Route::post('/reward', [RewardController::class, 'contentUpdate'])->name('content.update');
     });
 

@@ -3,6 +3,10 @@
 @section('title', 'TGG India Referral Program | TGG Meta | TGG India')
 @section('content')
 <!-- Referral Link Box -->
+<div>
+        {!! $content->content !!}
+    </div>
+    <hr>
 <div class="referral-box">
    
     <h2>Your Lead Referral Link</h2>

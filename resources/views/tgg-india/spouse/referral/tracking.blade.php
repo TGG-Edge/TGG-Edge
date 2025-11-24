@@ -14,6 +14,7 @@
                 <th>#</th>
                 <th>Referred User</th>
                 <th>Email</th>
+                <th>Phone</th>
                 <th>Step</th>
                 <th>Joined At</th>
             </tr>
@@ -24,6 +25,7 @@
                     <td>{{ $index + $referrals->firstItem() }}</td>
                     <td>{{ $referral->referredUser?->name ?? 'N/A' }}</td>
                     <td>{{ $referral->referredUser?->email ?? 'N/A' }}</td>
+                    <td>{{ $referral->referredUser?->phone ?? 'N/A' }}</td>
                     <td>
                         @if($referral->step == 0)
                             <span class="badge bg-warning">Pending</span>

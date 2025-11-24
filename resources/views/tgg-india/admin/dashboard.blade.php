@@ -38,7 +38,19 @@ $receiptAmount   = Schema::hasColumn('receipts', 'amount') ? Receipt::sum('amoun
 @section('content')
 <div class="admin-container">
             @include('tgg-india.layouts.includes.message')
-            <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('user.logout') }}">Log out</a>)</p>
+            @php
+                    $user = \App\Models\UserSecondary::find(auth('web2')->id());
+                    $mainApplicant = \App\Models\UserSecondary::where('rhm_number', $user->parent_rhm_number ?? '')->first();
+                @endphp
+
+                <div class="d-flex justify-content-end align-items-center flex-wrap gap-3 mb-2">
+                    <span><strong>Name:</strong> {{ $user->name ?? 'N/A' }}</span>
+                    <span><strong>Role:</strong> {{ $user->role_name ?? 'N/A' }}</span>
+                    <span><strong>RHM No:</strong> {{ $user->rhm_number ?? 'N/A' }}</span>
+                    
+                </div>
+
+            <p>Hello <strong>{{ Auth::user()->name ?? 'User' }}</strong> (not <strong>{{ Auth::user()->name ?? 'User' }}</strong>? <a href="{{ route('tgg-india.logout') }}">Log out</a>)</p>
 
             <p><strong>WELCOME TO TGG-EDGE</strong></p>
 
