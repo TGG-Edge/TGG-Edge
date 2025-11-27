@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="admin-container">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-3">
         <h4 class="mb-3 trainer-heading">Assignmnets</h4>
           @include('tgg-india.layouts.includes.message')
         <div class="d-flex align-items-center justify-content-end gap-2">
@@ -55,14 +55,17 @@
                                         style="width: 28px; height: 28px;">
                                     <i class="fas fa-trash"></i>
                                 </button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-    {{ $assignments->links() }}
+    <div class="mt-3">
+        {{ $assignments->links() }}
+    </div>
 </div>
 @endsection

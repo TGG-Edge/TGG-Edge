@@ -84,7 +84,7 @@
     }
 </style>
 
-<header class="py-5 shadow-sm bg-white sticky-top">
+<header class="py-5 shadow-sm bg-white sticky-top header-padding">
     <div class="container d-flex align-items-center justify-content-between flex-wrap">
         
         <!-- Logo -->
@@ -96,6 +96,12 @@
 
         <!-- Navigation -->
         <nav class="col-md-6 d-flex flex-column align-items-center" style="margin-right: 25px;">
+        
+         <button class="mobile-menu-toggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="menu-container">    
             <ul class="nav justify-content-center">
                 <li class="nav-item"><a class="nav-link fw-bold text-dark" href="{{ url('https://tggindia.com/') }}">Home</a></li>
                 <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://tggindia.com/about-us/">About Us</a></li>
@@ -104,6 +110,7 @@
                 <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://thegoldengreens.com/tgg-meta/tgg-india/login/XCJBDSNJK43RWEFSKDJCXNFL34KRN3DKL3MREFWLMNKL32M">Login</a></li>
                  <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://tggindia.com/contact-us/">Contact Us</a></li>
             </ul>
+        </div>
            
         </nav>
 
@@ -132,4 +139,15 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggle = document.querySelector(".mobile-menu-toggle");
+            const menu = document.querySelector(".menu-container");
+
+            toggle.addEventListener("click", function() {
+                menu.classList.toggle("active");
+            });
+        });
+    </script>
+
 </header>

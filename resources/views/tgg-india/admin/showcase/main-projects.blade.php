@@ -34,7 +34,7 @@
                             Please upload multiple images in <strong>400 x 400 px</strong> size for best results.
                         </small>
 
-                        <div class="mt-2 d-flex flex-wrap">
+                        <div class="row mt-2">
                             @foreach ($showcase->{$field} ?? [] as $index => $item)
                                 @php
                                     // item may be string (old data) or array ['img'=>..., 'note'=>...]
@@ -50,12 +50,12 @@
                                         : $imgPath;
                                 @endphp
 
-                                <div class="position-relative m-1 p-2 border rounded" style="width: 49%;">
-                                    <img src="{{ $imgPath }}" width="200" style="    margin-left: 6.5rem !important;" class="rounded shadow mb-1">
-                                    <label class="d-block text-center small mb-1">
-                                        <input type="checkbox" name="remove_{{ $field }}[]"
-                                            value="{{ $imgPath }}"> Remove
-                                    </label>
+                                <div class="col-12 col-sm-6 col-md-6 col-lg-6 mb-3">
+                                <div class="position-relative m-1 p-2 border rounded col-12 col-sm-6 col-lg-12" style="width:100%;">
+                                        <img src="{{ $imgPath }}" width="200" class="rounded shadow mb-1 custom-margin">
+                                        <label class="d-block text-center small mb-1">
+                                            <input type="checkbox" name="remove_{{ $field }}[]" value="{{ $imgPath }}"> Remove
+                                        </label>
 
                                     <textarea name="{{ $field }}_notes[]" class="js-ckeditor form-control form-control-sm " rows="2"
                                         placeholder="Checkout note (for this image)">{{ $note }}</textarea>
@@ -69,11 +69,12 @@
                                     <input type="hidden" name="{{ $field }}_existing[]"
                                         value="{{ $imgPath }}">
                                 </div>
+                                </div>
                             @endforeach
                         </div>
 
                         <!-- new files notes area (populated by JS when admin selects files) -->
-                        <div class="new-{{ $field }}-notes mt-2"></div>
+                        <div class="row new-{{ $field }}-notes mt-2"></div>
                         <small class="form-text text-muted">When you select new files, a note box will appear for each file.
                             Save to store them together.</small>
                     </div>

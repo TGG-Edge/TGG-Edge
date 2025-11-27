@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Create Assignment</h2>
+    <h2 class="mb-4">Create Assignment</h2>
 
     <form action="{{ route('assignee.assignments.store') }}" method="POST">
         @csrf
@@ -23,7 +23,7 @@
 
         <div class="mb-3">
             <label class="form-label">Task Type</label>
-            <select name="task_type" class="form-control" required>
+            <select name="task_type" class="form-select" required>
                 <option value="">-- Select Task Type --</option>
                 <option value="verification" {{ old('task_type') == 'verification' ? 'selected' : '' }}>Verification</option>
                 <option value="interview" {{ old('task_type') == 'interview' ? 'selected' : '' }}>Interview</option>
@@ -34,7 +34,7 @@
 
         <div class="mb-3">
             <label class="form-label">Status</label>
-            <select name="status" class="form-control" required>
+            <select name="status" class="form-select" required>
                 <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
                 <option value="in_progress" {{ old('status') == 'in_progress' ? 'selected' : '' }}>In Progress</option>
                 <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>Completed</option>
@@ -48,8 +48,10 @@
             @error('due_date') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
 
-        <button type="submit" class="btn btn-success">Create</button>
-        <a href="{{ route('tgg-fct.assignee.assignments.index') }}" class="btn btn-secondary">Cancel</a>
+        <div class="d-flex flex-column flex-sm-row gap-2">
+            <button type="submit" class="btn btn-success">Create</button>
+            <a href="{{ route('tgg-fct.assignee.assignments.index') }}" class="btn btn-secondary">Cancel</a>
+        </div>
     </form>
 </div>
 @endsection

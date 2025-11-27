@@ -1,37 +1,39 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Show videos | TGG Meta | TGG India')
-@section('content')
+@section('title', 'Show Videos | TGG Meta | TGG India')
 
-<div class="container">
-    <h2 class="litheader">Video Recommendations</h2>
+@section('content')
+<div class="container py-3">
+    <h2 class="litheader mb-4">Video Recommendations</h2>
     @include('tgg-india.layouts.includes.message')
+
     <div class="row">
         @forelse ($videos as $video)
-            <div class="col-md-6 mb-3">
-                <div class="card">
+            <div class="col-12 col-md-6 mb-3">
+                <div class="card h-100">
                     @php
                         $imageSrc = Str::startsWith($video->image, ['http://', 'https://']) 
                             ? $video->image 
-                            : asset('storage/app/public/' . $video->image);
+                            : (isset($video->image) ? asset('storage/' . $video->image) : '#');
                     @endphp
-                    <img src="{{ $imageSrc  ?? '#' }}" class="card-img-top" style="
-    height: 250px;
-" alt="Thumbnail">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $video['title']?? 'N/A'  }}</h5>
-                        <p class="card-text">{!! $video['description']?? 'N/A'  !!}</p>
-                        <a href="{{ $video['url'] ?? 'N/A' }}" target="_blank" class="btn btn-primary">Watch</a>
+                    <img src="{{ $imageSrc }}" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Thumbnail">
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ $video['title'] ?? 'N/A' }}</h5>
+                        <p class="card-text flex-grow-1">{!! $video['description'] ?? 'N/A' !!}</p>
+                        <a href="{{ $video['url'] ?? '#' }}" target="_blank" class="btn btn-primary mt-2">Watch</a>
                     </div>
                 </div>
             </div>
         @empty
-            <p class="litfeildtext">No video data available.</p>
+            <div class="col-12">
+                <p class="litfeildtext">No video data available.</p>
+            </div>
         @endforelse
     </div>
-     <div class="mt-4">
+
+    <div class="mt-4 d-flex justify-content-center">
         {{ $videos->links() }}
     </div>
 </div>
-
 @endsection

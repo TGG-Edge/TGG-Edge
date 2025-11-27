@@ -57,7 +57,7 @@
         </section>
 
         <div class="bottom-footer">
-            <div class="container py-10" style="padding-top: 40px; padding-bottom: 30px;">
+            <div class="container py-10 downfoot">
                 <!-- social links area -->
                 <!-- social links area -->
                 <div class="footer-menu"><!-- Footer Menu-->

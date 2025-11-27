@@ -3,16 +3,13 @@
 @section('title', 'Assignment Details | TGG Meta | TGG India')
 
 @section('content')
-<div class="container">
-    <h2>Create Assignment</h2>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
 
     <form action="{{ route('tgg-india.advisor.assignments.store') }}" method="POST">
         @csrf
 
-        <div class="mb-3">
-            <label class="form-label">Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
-            @error('title') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
 
         <div class="mb-3">

@@ -3,7 +3,7 @@
 @section('title', 'Profile | Tgg Edge | Tgg Fct')
 
 @section('content')
-<div class="container">
+<div class="container" style="padding: 10px !important;">
     <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="page-heading">USER PROFILE</h2>
     {{-- @if(Auth::check() && Auth::user()->user_role != 1) --}}

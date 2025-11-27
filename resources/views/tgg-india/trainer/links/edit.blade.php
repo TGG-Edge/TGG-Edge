@@ -3,7 +3,7 @@
 @section('title', 'Edit Link | TGG Meta | TGG India')
 
 @section('content')
-<div class="admin-container">
+<div class="admin-container container-fluid py-3">
     <h4 class="mb-3 trainer-heading">Edit Link</h4>
     @include('tgg-india.layouts.includes.message')
 
@@ -12,8 +12,9 @@
             @csrf
             @method('PUT')
 
+            <!-- Title -->
             <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
+                <label for="title" class="form-label fw-semibold">Title</label>
                 <input 
                     type="text" 
                     name="title" 
@@ -25,8 +26,9 @@
                 >
             </div>
 
+            <!-- Description -->
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
+                <label for="description" class="form-label fw-semibold">Description</label>
                 <textarea 
                     id="description" 
                     name="description" 
@@ -35,8 +37,9 @@
                 >{{ old('description', $link->description) }}</textarea>
             </div>
 
+            <!-- URL -->
             <div class="mb-3">
-                <label for="url" class="form-label">URL</label>
+                <label for="url" class="form-label fw-semibold">URL</label>
                 <input 
                     type="url" 
                     name="url" 
@@ -47,9 +50,13 @@
                     required
                 >
             </div>
-            
-            <button type="submit" class="btn btn-primary save-button">Update</button>
-            <a href="{{ route('tgg-india.trainer.links.index') }}" class="btn btn-secondary">Cancel</a>
+
+            <!-- Actions -->
+            <div class="d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-primary save-button">Update</button>
+                <a href="{{ route('tgg-india.trainer.links.index') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+
         </form>
     </div>
 </div>

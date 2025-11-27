@@ -28,7 +28,7 @@
       </div>
     @else
     
-    <div class="col-md-3 tgg-sidebar">
+    <div class="col-md-3 tgg-sidebar d-none d-lg-block">
       @if( isset(auth()->user()->user_role) &&  auth()->user()->user_role == 1 )
               @include('tgg-fct.layouts.includes.admin-sidebar')
       @elseif( isset(auth()->user()->user_role) &&  auth()->user()->user_role == 2)
@@ -43,12 +43,58 @@
     </div>
 
     <div class="col-md-9 tgg-content">
-     
-      @yield('content')
-    </div>
+            <button class="btn btn-dark d-lg-none mb-2" id="mobileSidebarToggle">
+                <i class="fas fa-bars"></i> Menu
+            </button>
+          @yield('content') 
+        </div> 
+        
+        {{-- @yield('content') --}}
     @endif
     </div>
   </div>
+
+   <!-- =========================
+       MOBILE SIDEBAR SECTION
+       ========================= -->
+  @if(!request()->is('tgg-edge/tgg-fct/login') && !request()->is('tgg-edge/tgg-fct/register*'))
+  <div id="mobileSidebar" class="mobile-sidebar d-lg-none">
+    <div class="mobile-sidebar-content">
+        <button type="button" class="btn-close text-reset mb-2" id="mobileSidebarClose"></button>
+        @if( isset(auth()->user()->user_role) && auth()->user()->user_role == 1 )
+            @include('tgg-fct.layouts.includes.admin-sidebar')
+        @elseif( isset(auth()->user()->user_role) && auth()->user()->user_role == 2 )
+            @include('tgg-fct.layouts.includes.researcher-sidebar')
+        @elseif( isset(auth()->user()->user_role) && auth()->user()->user_role == 3 )
+            @include('tgg-fct.layouts.includes.volunteer-sidebar')
+        @elseif( isset(auth()->user()->user_role) && auth()->user()->user_role == 5 )
+            @include('tgg-fct.layouts.includes.assignee-sidebar')
+        @else
+            @include('tgg-fct.layouts.includes.sidebar')
+        @endif
+    </div>
+  </div>
+  @endif
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.getElementById('mobileSidebar');
+      const toggle = document.getElementById('mobileSidebarToggle');
+      const close = document.getElementById('mobileSidebarClose');
+
+      if (toggle && sidebar) {
+          toggle.addEventListener('click', function() {
+              sidebar.classList.add('active');
+          });
+      }
+
+      if (close && sidebar) {
+          close.addEventListener('click', function() {
+              sidebar.classList.remove('active');
+          });
+      }
+    });
+  </script>
 
   @include('tgg-fct.layouts.includes.footer')
   <script src="{{ asset('assets/choices/choices.min.js') }}"></script>

@@ -78,28 +78,28 @@
             </div>
         </div>
 
-        <div class="info-fields">
-            <div class="field-box">
-                <label>Selected Project</label>
-                <input type="text" class="classtext" readonly value="{{ $selected_project->project->title  ?? 'N/A'}}" />
-            </div>
-            <div class="field-box">
-                <label>Researcher</label>
-                <input type="text"  class="classtext" readonly value="{{ $selected_project->project->researcher    ->name ?? 'N/A'}}" />
-            </div>
-            <div class="field-box">
-                <label>Application Status</label>
-                @if( $selected_project && $selected_project->status == 'running')
-                <input type="text" class="classtext" readonly value="Processing" />
-
-                @else
-                <input type="text" class="classtext" readonly value="{{ $selected_project->status ?? 'N/A'}}" />
-                @endif
-            </div>
-        </div>
+        <div class="info-fields row">
+    <div class="field-box col-12 col-md-auto">
+        <label>Selected Project</label>
+        <input type="text" class="classtext" readonly value="{{ $selected_project->project->title  ?? 'N/A'}}" />
+    </div>
+    <div class="field-box col-12 col-md-auto">
+        <label>Researcher</label>
+        <input type="text" class="classtext" readonly value="{{ $selected_project->project->researcher->name ?? 'N/A'}}" />
+    </div>
+    <div class="field-box col-12 col-md-auto">
+        <label>Application Status</label>
+        @if( $selected_project && $selected_project->status == 'running')
+        <input type="text" class="classtext" readonly value="Processing" />
+        @else
+        <input type="text" class="classtext" readonly value="{{ $selected_project->status ?? 'N/A'}}" />
+        @endif
+    </div>
+</div>
 
         <section class="volunteer-status">
             <h3>RESEARCH VOLUNTEERING STATUS</h3>
+            <div class="table-responsive">
             <table>
                 <colgroup>
                     <col style="width: 18%;"> 
@@ -166,6 +166,7 @@
                         @endif
                     </tbody>
             </table>
+</div>
         </section>
 </div>
     

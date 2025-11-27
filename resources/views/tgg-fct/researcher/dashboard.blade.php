@@ -158,6 +158,7 @@
 <!-- === BOTTOM SECTION: Research Volunteering Status === -->
 <div class="section full-width" style="margin-top: 40px;">
     <h3>RESEARCH VOLUNTEERING STATUS</h3>
+    <div class="table-responsive">
     <table class="researcher-table">
         <colgroup>
             <col style="width: 15%;"> 
@@ -169,8 +170,7 @@
         </colgroup>
         <thead>
             <tr>
-                <th style="width: 30%;
-">Volunteer Name</th>
+                <th style="width: 30%;">Volunteer Name</th>
                 <th>Upload your research page</th>
                 <th>Date</th>
                 <th>Progress % </th>
@@ -205,6 +205,7 @@
             @endif
         </tbody>
     </table class="researcher-table">
+</div>
 </div>
 
     
