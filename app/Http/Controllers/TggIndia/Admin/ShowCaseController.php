@@ -129,9 +129,10 @@ class ShowCaseController extends Controller
         $slug = $validated['slug'] ?? \Str::slug($validated['title']);
 
         // Try to find existing record by slug
-        $content = ContentPage::where('slug', $slug)->first();
+        $content = ContentPage::where('source_type', $source_type)->first();
 
         if ($content) {
+
             // ✅ Update existing
             $content->update([
                 'title'     => $validated['title'],
@@ -139,6 +140,7 @@ class ShowCaseController extends Controller
                 'min_size'  => $validated['min_size'] ?? 0,
                 'max_size'  => $validated['max_size'] ?? 0,
             ]);
+
         } else {
             // ✅ Create new
             $content = ContentPage::create([
