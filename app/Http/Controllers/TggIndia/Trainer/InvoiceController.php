@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\TggIndia\Member;
+namespace App\Http\Controllers\TggIndia\Trainer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
@@ -19,14 +19,14 @@ class InvoiceController extends Controller
     {
         //
         $invoices = Invoice::with(['source', 'target'])->where('source_id',auth('web2')->id())->latest()->paginate(10);
-        return view('tgg-india.member.invoices.index', compact('invoices'));
+        return view('tgg-india.trainer.invoices.index', compact('invoices'));
 
     }
 
     public function create()
     {
         $users = UserSecondary::select('id', 'name', 'email')->get();
-        return view('tgg-india.member.invoices.create', compact('users'));
+        return view('tgg-india.trainer.invoices.create', compact('users'));
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class InvoiceController extends Controller
         $items = $request->input('items', []);
         $invoice->items = $items;
         $invoice->save();
-        return redirect()->route('tgg-india.advisor.invoices.index')->with('success', 'Invoice created successfully.');
+        return redirect()->route('tgg-india.trainer.invoices.index')->with('success', 'Invoice created successfully.');
     
     }
 
@@ -115,7 +115,7 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice,$id)
     {
         $invoice =   Invoice::findOrFail($id);
-        return view('tgg-india.member.invoices.show', compact('invoice'));
+        return view('tgg-india.trainer.invoices.show', compact('invoice'));
     }
 
     /**
@@ -126,7 +126,7 @@ class InvoiceController extends Controller
         //
         $invoice = Invoice::findOrFail($id);
         $users = UserSecondary::select('id', 'name', 'email')->get();
-        return view('tgg-india.member.invoices.edit', compact('invoice', 'users'));
+        return view('tgg-india.trainer.invoices.edit', compact('invoice', 'users'));
     }
 
     /**
@@ -150,7 +150,7 @@ class InvoiceController extends Controller
         $invoice->items = $items;
         $invoice->save();
 
-        return redirect()->route('tgg-india.advisor.invoices.index')->with('success', 'Invoice updated successfully.');
+        return redirect()->route('tgg-india.trainer.invoices.index')->with('success', 'Invoice updated successfully.');
     }
 
     /**
@@ -169,7 +169,7 @@ class InvoiceController extends Controller
     {
       
         $invoice = Invoice::with(['source', 'target'])->findOrFail($id);
-        $pdf = Pdf::loadView('tgg-india.member.invoices.pdf', compact('invoice'))
+        $pdf = Pdf::loadView('tgg-india.trainer.invoices.pdf', compact('invoice'))
             ->setPaper('A4');
         $fileName = 'Invoice_' . $invoice->invoice_number . '.pdf';
         $filePath = 'invoices/' . $fileName; 

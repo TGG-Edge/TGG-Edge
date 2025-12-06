@@ -8,11 +8,11 @@
     @include('tgg-india.layouts.includes.message')
 
     <div class="card p-3 mb-4">
-        <form action="{{ route('tgg-india.admin.receipts.update', $receipt->id) }}" method="POST">
+        <form action="{{ route('tgg-india.trainer.receipts.update', $receipt->id) }}" method="POST">
             @csrf
             @method('PUT')
 
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label class="form-label">Source (From)</label>
                 <select name="source_id" class="form-control">
                     <option value="">-- Select Source --</option>
@@ -34,12 +34,18 @@
                         </option>
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
+
+            @php
+                $authId = auth('web2')->id();
+            @endphp
+            <input type="hidden" name="source_id" value="{{ $authId }}">
+            <input type="hidden" name="target_id" value="1">
 
             <div class="mb-3">
                 <label class="form-label">Issue Date</label>
                 <input type="date" name="issue_date" class="form-control"
-                    value="{{ old('issue_date', $receipt->created_at ? $receipt->created_at->format('Y-m-d') : '') }}">
+                    value="{{ old('issue_date', $receipt->issue_date ? $receipt->issue_date->format('Y-m-d') : '') }}">
             </div>
 
             <div class="mb-3">
@@ -62,7 +68,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary save-button">Update</button>
-            <a href="{{ route('tgg-india.admin.receipts.index') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('tgg-india.trainer.receipts.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>

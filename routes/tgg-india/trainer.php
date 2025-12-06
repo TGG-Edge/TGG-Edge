@@ -12,9 +12,11 @@ use App\Http\Controllers\TggIndia\Admin\RewardController;
 use App\Http\Controllers\TggIndia\Admin\ShowCaseController;
 use App\Http\Controllers\TggIndia\RegisterController;
 use App\Http\Controllers\TggIndia\Trainer\ChapterController;
+use App\Http\Controllers\TggIndia\Trainer\InvoiceController;
 use App\Http\Controllers\TggIndia\Trainer\LinkController;
 use App\Http\Controllers\TggIndia\Trainer\LiteratureController;
 use App\Http\Controllers\TggIndia\Trainer\PricingController;
+use App\Http\Controllers\TggIndia\Trainer\ReceiptController;
 use App\Http\Controllers\TggIndia\Trainer\SectionController;
 use App\Http\Controllers\TggIndia\Trainer\VideoController;
 use App\Models\Donation;
@@ -31,6 +33,8 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       Route::get('/', [\App\Http\Controllers\TggIndia\Trainer\ProfileController::class, 'show'])->name('index');
       Route::post('/profile', [\App\Http\Controllers\TggIndia\Trainer\ProfileController::class, 'update'])->name('update');
     });
+
+    Route::resource('assignments', \App\Http\Controllers\TggIndia\Trainer\AssignmentController::class);
 
     Route::prefix('literatures')->name('literatures.')->group(function () {
 
@@ -76,6 +80,31 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     Route::resource('feature-limits', \App\Http\Controllers\TggIndia\Trainer\FeatureLimitController::class);
     Route::post('feature-limits/set-price', [\App\Http\Controllers\TggIndia\Trainer\FeatureLimitController::class, 'setPrice'])
     ->name('feature-limits.setPrice');
+
+
+    Route::prefix('invoices')->name('invoices.')->group(function () {
+      Route::get('/', [InvoiceController::class, 'index'])->name('index');
+      Route::get('/create', [InvoiceController::class, 'create'])->name('create');
+      Route::post('/store', [InvoiceController::class, 'store'])->name('store');
+      Route::get('/global-store', [InvoiceController::class, 'globalStore'])->name('global-store');
+      Route::get('/edit/{id}', [InvoiceController::class, 'edit'])->name('edit');
+      Route::put('/update/{id}', [InvoiceController::class, 'update'])->name('update');
+      Route::get('/show/{id}', [InvoiceController::class, 'show'])->name('show');
+      Route::get('/download/{id}', [InvoiceController::class, 'download'])->name('download');
+      Route::delete('/delete/{id}', [InvoiceController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('receipts')->name('receipts.')->group(function () {
+      Route::get('/', [ReceiptController::class, 'index'])->name('index');
+      Route::get('/create', [ReceiptController::class, 'create'])->name('create');
+      Route::post('/store', [ReceiptController::class, 'store'])->name('store');
+      Route::get('/global-store', [ReceiptController::class, 'globalStore'])->name('global-store');
+      Route::get('/edit/{id}', [ReceiptController::class, 'edit'])->name('edit');
+      Route::put('/update/{id}', [ReceiptController::class, 'update'])->name('update');
+      Route::get('/show/{id}', [ReceiptController::class, 'show'])->name('show');
+      Route::get('/download/{id}', [ReceiptController::class, 'download'])->name('download');
+      Route::delete('/delete/{id}', [ReceiptController::class, 'destroy'])->name('destroy');
+    });
 
   });
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\TggIndia\Member;
+namespace App\Http\Controllers\TggIndia\Trainer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Receipt;
@@ -19,14 +19,14 @@ class ReceiptController extends Controller
     {
         //
         $receipts = Receipt::with(['source', 'target'])->where('source_id',auth('web2')->id())->latest()->paginate(10);
-        return view('tgg-india.member.receipts.index', compact('receipts'));
+        return view('tgg-india.trainer.receipts.index', compact('receipts'));
 
     }
 
     public function create()
     {
         $users = UserSecondary::select('id', 'name', 'email')->get();
-        return view('tgg-india.member.receipts.create', compact('users'));
+        return view('tgg-india.trainer.receipts.create', compact('users'));
     }
 
     public function store(Request $request)
@@ -53,14 +53,14 @@ class ReceiptController extends Controller
         $receipt->items = $items;
         $receipt->save();
 
-        return redirect()->route('tgg-india.advisor.receipts.index')->with('success', 'receipt created successfully.');
+        return redirect()->route('tgg-india.trainer.receipts.index')->with('success', 'receipt created successfully.');
     
     }
 
     public function show(Receipt $receipt,$id)
     {
         $receipt =   Receipt::findOrFail($id);
-        return view('tgg-india.member.receipts.show', compact('receipt'));
+        return view('tgg-india.trainer.receipts.show', compact('receipt'));
     }
 
     /**
@@ -71,7 +71,7 @@ class ReceiptController extends Controller
         //
         $receipt = Receipt::findOrFail($id);
         $users = UserSecondary::select('id', 'name', 'email')->get();
-        return view('tgg-india.member.receipts.edit', compact('receipt', 'users'));
+        return view('tgg-india.trainer.receipts.edit', compact('receipt', 'users'));
     }
 
     /**
@@ -95,7 +95,7 @@ class ReceiptController extends Controller
         $receipt->items = $items;
         $receipt->save();
 
-        return redirect()->route('tgg-india.advisor.receipts.index')->with('success', 'receipt updated successfully.');
+        return redirect()->route('tgg-india.trainer.receipts.index')->with('success', 'receipt updated successfully.');
     }
 
     /**
@@ -110,7 +110,7 @@ class ReceiptController extends Controller
     {
       
         $receipt = Receipt::with(['source', 'target'])->findOrFail($id);
-        $pdf = Pdf::loadView('tgg-india.member.receipts.pdf', compact('receipt'))
+        $pdf = Pdf::loadView('tgg-india.trainer.receipts.pdf', compact('receipt'))
             ->setPaper('A4');
         $fileName = 'receipt_' . $receipt->receipt_number . '.pdf';
         $filePath = 'receipts/' . $fileName; 
