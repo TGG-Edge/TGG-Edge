@@ -124,6 +124,39 @@
           });
       });
   });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const para = document.getElementById("expandWelcome");
+        const toggleBtn = document.getElementById("toggleExpandWelcome");
+
+        // Calculate max 8 lines height
+        let lineHeight = parseFloat(window.getComputedStyle(para).lineHeight);
+        let maxHeight = lineHeight * 8;
+
+        // Show read more only if content overflows
+        if (para.scrollHeight > maxHeight) {
+            toggleBtn.style.display = "inline-block";
+        }
+
+        toggleBtn.addEventListener("click", function () {
+            if (para.style.webkitLineClamp === "unset") {
+                para.style.webkitLineClamp = "8";
+                toggleBtn.innerText = "Read More";
+            } else {
+                para.style.webkitLineClamp = "unset";
+                toggleBtn.innerText = "Read Less";
+            }
+        });
+    });
+
+    document.querySelectorAll('.toggle-pass').forEach(btn => {
+        btn.onclick = () => {
+            let input = btn.previousElementSibling;
+            input.type = input.type === "password" ? "text" : "password";
+        };
+    });
+
   </script>
 
   {{-- CKEditor 5 --}}

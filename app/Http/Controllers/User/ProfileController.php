@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\UserSecondary;
+use App\Traits\MailTrait;
 
 class ProfileController extends Controller
 {
+    use MailTrait;
     /**
      * Display a listing of the resource.
      */
@@ -100,6 +103,32 @@ class ProfileController extends Controller
 
             $user->password = Hash::make($request->new_password);
             $user->save();
+            $to = $user->email;
+            $subject = 'TGG India – Password Updated Successfully';
+            $view = 'tgg-india.emails.tgg-template';
+            $data = [
+                'name' => $user->name,
+                'message' => 'Your password has been updated successfully. If this was not done by you, please reset your password immediately or contact our support team.',
+                'button_text' => 'Login to Your Account',
+                'button_url' => url('https://thegoldengreens.com/tgg-meta/tgg-india/login/XCJBDSNJK43RWEFSKDJCXNFL34KRN3DKL3MREFWLMNKL32M')
+            ];
+            $this->sendMail($to, $subject, $view, $data);
+
+            $admin = UserSecondary::where('id', 1)->first();
+            $to = $admin->email;
+            $subject = 'TGG India – User Password Updated';
+            $view = 'tgg-india.emails.tgg-template';
+            $data = [
+                'name' => $admin->name,
+                'message' => 'A user has updated their password in the TGG India platform. 
+                            Here are the account details:<br><br>
+                            <strong>Name:</strong> '.$user->name.'<br>
+                            <strong>Email:</strong> '.$user->email.'<br>
+                            <br>If this activity was not initiated by the account holder, please take appropriate action.',
+                'button_text' => 'View User Profile',
+                'button_url' => url('https://thegoldengreens.com/tgg-meta/tgg-india/users/'.$user->id)
+            ];
+            $this->sendMail($to, $subject, $view, $data);
         }
 
         return back()->with('success', 'Profile updated successfully.');

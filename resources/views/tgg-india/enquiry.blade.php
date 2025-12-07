@@ -23,11 +23,11 @@
                 $content = \App\Models\ContentPage::where('source_type', $source_type)->first();
 
             @endphp
-            {!! $content->content !!}
+            {!! $content->content ?? '' !!}
 
             <hr>
             <div class="card shadow rounded-4 p-4">
-                <h4 class="text-center mb-3">Submit Your Enquiry</h4>
+                <h4 class="text-center mb-3">Fill the following details to participate</h4>
 
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -123,7 +123,7 @@
                     </div>
 
                     <button type="submit" class="btn w-100 text-white" style="background-color:#033576;">
-                        Submit Enquiry
+                        Submit
                     </button>
                 </form>
             </div>

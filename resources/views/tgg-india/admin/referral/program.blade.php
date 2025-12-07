@@ -14,7 +14,7 @@
     @endphp
 
 <div class="referral-box">
-    <h2>Your Referral Link</h2>
+    <h2 class="page-heading">YOUR REFERRAL LINK</h2>
     <div class="input-group" style="justify-content: space-between; align-items: center;">
         @php
             $referralCode = Auth('web2')->user()->referral_code;
@@ -28,7 +28,7 @@
         </button>
     </div>
     <hr>
-    <h2>Your Lead Referral Link</h2>
+    <h2 class="page-heading">YOUR LEAD REFERRAL LINK </h2>
     <div class="input-group" style="justify-content: space-between; align-items: center;">
         @php
             $referralCode = Auth('web2')->user()->referral_code;
@@ -37,7 +37,7 @@
 
         <input type="text" id="referralLink1" class="form-control" value="{{ $referralLink }}" readonly style="max-width: 70%;">
 
-        <button type="button" class="btn btn-sm btn-primary ms-2" onclick="copyReferral()">
+        <button type="button" class="btn btn-sm btn-primary ms-2" onclick="copyReferral1()">
             Copy
         </button>   
 </div>
@@ -53,7 +53,7 @@
         });
     }
 
-    function copyReferral() {
+    function copyReferral1() {
         let input = document.getElementById("referralLink1");
         input.select();
         input.setSelectionRange(0, 99999); // For mobile devices
