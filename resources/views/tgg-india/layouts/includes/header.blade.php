@@ -85,12 +85,12 @@
 </style>
 
 <header class="py-5 shadow-sm bg-white sticky-top header-padding">
-    <div class="container d-flex align-items-center justify-content-between flex-wrap">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap header-container-ipad">
         
         <!-- Logo -->
         <div class="col-md-3 text-center text-md-start mb-2 mb-md-0" style="margin-left: -60px;">
             <a href="{{ url('https://tggindia.com/') }}">
-                <img src="https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-1024x281.png" alt="TGG India Logo" class="img-fluid" style="max-height: 73px;">
+                <img src="https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-1024x281.png" alt="TGG India Logo" class="img-fluid tgg-meta-logo-header" style="height: 73px;">
             </a>
         </div>
 
@@ -115,9 +115,9 @@
         </nav>
 
         <!-- Cart & Social Icons -->
-        <div class="col-md-3 d-flex justify-content-between align-items-center gap-5">
+        <div class="col-md-3 d-flex justify-content-between align-items-center gap-5 cartnew">
             <!-- Cart -->
-            <a href="#" class="btn btn-dark position-relative d-flex align-items-center" style="margin-left: -12px;">
+            <a href="#" class="btn btn-dark position-relative d-flex align-items-center cart-btn-ipad" style="margin-left: 110px;">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="ms-2">₹0.00</span>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">

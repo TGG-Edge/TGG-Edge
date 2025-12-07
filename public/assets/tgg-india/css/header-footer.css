@@ -573,7 +573,7 @@ header {
 } */
 
 .footer-column-contactus h3 {
-    margin-top: 30px !important;
+    margin-top: 10px !important;
     font-size: 19px;
     margin-left: 130px;
 }
@@ -585,16 +585,16 @@ header {
 }
 
 .footer-column-pages h3 {
-    margin-top: 30px;
+    margin-top: 10px;
     font-size: 19px;
     margin-left: 150px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .footer-column-pages ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin-top:-20px !important;
     font-size: 14px;
     margin-left: 60px;
 }
@@ -618,7 +618,7 @@ header {
 }
 
 .footer-column h3 {
-    margin-top: 30px;
+    margin-top: 10px;
     font-size: 19px;
     margin-left: 63px;
 }
@@ -757,11 +757,12 @@ header {
   border: none;
   font-size: 26px;
   cursor: pointer;
-  color: #000;
+  color: #746666;
   position: absolute;
   top: 5px;
   right: -10px;
   z-index: 1000;
+  margin-right: 60px;
 }
 
 .menu-container {
@@ -815,6 +816,18 @@ header {
   }
 }
 
+.tgg-meta-logo-header {
+    margin-left: 35px;
+}
+ 
+.justify-content-center{
+    margin-left: 10px !important;
+}
+
+.contact-ipad {
+    display: none;
+}
+
 
 /* =============================
    MOBILE-SPECIFIC ADJUSTMENTS for HEADER + FOOTER
@@ -824,12 +837,19 @@ header {
     /* HEADER */
     @media (max-width: 480px) {
 
+    .tgg-meta-logo-header{
+        height: 40px !important;
+        margin: 0px !important;
+        padding: 0px !important;
+        margin-left: 70px !important;
+    }
+
     .img-fluid {
   width: 60%;
   height: auto;
   display: block;
   max-width: 100%;
-  margin-left: 40px; /* pushes right if parent has width */
+  margin-left: 40px; 
 }
 
 .header-padding{
@@ -925,10 +945,8 @@ header {
   }
 
     .footer-column-contactus h3,
-    .footer-column-contactus p,
     .footer-column-pages h3,
     .footer-column-pages ul,
-    .footer-column label,
     .footer-column input,
     .footer-column button,
     .footer-column a {
@@ -938,16 +956,25 @@ header {
     .footer-column-contactus h3 {
         margin-top: 20px !important;
         font-size: 16px;
+        margin-right: 260px !important;
+    }
+
+    .footer-column-contactus p{
+        margin-left: 0px !important;
+        text-align: left !important;
     }
 
     .footer-column-pages h3 {
         margin-top: 20px;
         font-size: 16px;
+        margin-right: 293px !important;
     }
 
     .footer-column-pages ul li,
     .footer-column-pages ul li a {
         font-size: 13px;
+        text-align: left !important;
+        margin-right: 175px !important;
     }
 
     .footer-column input[type="text"],
@@ -967,15 +994,27 @@ header {
         text-align: center;
         position: relative !important;
     }
+    .footer-column h3 {
+        margin: 0px !important;
+        padding: 0 !important;
+        text-align: left;
+        font-size: 16px;
+        margin-right: 250px !important;
+    }
+    .footer-column label{
+        margin-left: 0 !important;
+        margin-right: 180px !important;
+        text-align: left;
+    }
 }
 
 .footer-column-pages ul li {
     margin-left: 85px !important;
 }
 
-.footer-column h3 {
+/* .footer-column h3 {
     margin-right: 85px !important;
-}
+} */
 
 /* Extra small phones (≤360px) */
 @media (max-width: 360px) {
@@ -992,6 +1031,41 @@ header {
    TABLET VIEW (iPad) STYLES
    ============================= */
 @media (min-width: 481px) and (max-width: 1024px) {
+
+    .mobile-menu-toggle {
+        display: block !important;
+        margin-top: 30px !important;
+        max-width: 100px !important;
+    }
+
+    .header-container-ipad{
+        height: 180px;
+    }
+    
+   .tgg-meta-logo-header{
+    height: 100px !important ;
+    max-width: 350px !important ;
+    margin: 0px !important;
+    padding: 0px !important;
+    margin-bottom: 60px !important;
+    margin-left: 100px !important;
+   } 
+
+   .cartnew {
+        max-width: 130% !important;           /* full width */
+        justify-content: flex-start !important;
+        margin-top: -30px !important;  /* move up */
+        margin-bottom: 20px !important;  /* space below */
+        margin-right: 40px !important;
+    }
+
+    .cart-btn-ipad {
+        margin-left: 0 !important;        /* remove Bootstrap left push */     
+    }
+
+    .social-icon {
+        display: none !important;
+    }
 
   .py-5 {
     padding: 0 !important;
@@ -1035,9 +1109,9 @@ header {
     margin-right: 50px;
   }
 
-  .img-fluid {
+  /* .img-fluid {
     margin-left: 40px !important;
-  }
+  } */
 
   .loginimg{
     margin-left: 20px !important;
@@ -1079,62 +1153,138 @@ header {
   }
 
   /* ✅ FOOTER LAYOUT FIX */
-  .footer-container {
+  
+  /* .footer-container {
     display: flex;
     flex-wrap: nowrap !important ;
     justify-content: space-around;
     align-items: flex-start;
     padding: 30px 20px;
-    /* min-height: 500px !important ;
-    max-height: 1000px !important; */
+    min-height: 500px !important ;
+    max-height: 1000px !important;
     height: 60% !important;
     gap: 10px;
-  }
+  } */
 
-  .footer-column,
-  .footer-column-pages,
-  .footer-column-contactus {
-    flex: 1 1 22%;
-    text-align: left;
-    margin-bottom: 20px !important;
-  }
+  /* Footer container */
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+    }
 
-  .footer-column img {
-    width: 90px !important;
-    margin: 0 auto 20px auto !important;
-    display: block;
-    margin-top: 150px !important;
-  }
+    /* Show only iPad version */
+    .contactusp {
+        display: none !important;
+    }
+    .contact-ipad {
+        display: block !important;
+        font-size: 19px !important;
+        line-height: 26px;
+        color: #fff;
+        margin-left: 0px !important;
+    }
 
-  .pagesh3{
-    margin: 0px !important; 
-    padding: 0px !important;
-    margin-top: 30px !important;
-    margin-left: 80px !important;
-    margin-bottom: 40px !important;
-  }
+    /* Contact Us heading */
+    .footer-column-contactus h3 {
+        font-size: 26px;
+        margin-bottom: 0px !important;
+        margin-left: 0px !important;
+    }
 
-  .footer-column-contactus h3,
-  .footer-column h3 {
-    text-align: left !important;
-    font-size: 17px !important;
-    margin-bottom: 10px;
-    margin-left: 5px !important;
-  }
+    /* Logo */
+    .footer-column img {
+        width: 260px !important;
+        margin: 0 auto; /* center image */
+        display: block;
+    }
 
-  .footer-column-contactus p,
-  .footer-column-pages ul,
-  .footer-column label,
-  .footer-column input,
-  .footer-column button,
-  .footer-column a {
-    text-align: left;
-    margin-left: 0 !important;
-  }
+    /* Pages Section */
+    .footer-column-pages h3 {
+        font-size: 26px !important;
+        margin-bottom: 29px !important;
+        margin-left: 0px !important;
+    }
 
-  .footer-column form {
-    align-items: flex-start;
-  }
+    .footer-column-pages ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        margin-left: -80px !important;
+        font-size: 19px !important;
+    }
+
+    .footer-column-pages ul li a {
+        font-size: 18px !important;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    /* Admin Login */
+    .adminh3 {
+        font-size: 26px !important;
+        margin-bottom: 15px !important;
+        margin-left: 0px !important;
+    }
+
+    .footer-column form label {
+        font-size: 16px;
+        display: block;
+        margin-left: 0px !important;
+    }
+
+    .footer-column form input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 12px;
+        margin-left: 0px !important;
+    }
+
+    .footer-column form button {
+        padding: 10px 20px;
+        width: 100%;
+        cursor: pointer;
+        margin-left: 0px !important;
+    }
+
+    .footer-column input[type="text"]{
+        width: 720px;
+    }
+
+    .footer-column input[type="password"] {
+        width: 720px;
+    }
+
+    .footer-column input[type="checkbox"] {
+        margin-left: -345px !important;
+    }
+
+    .remember-text{
+        margin-left: -350px !important;
+    }
+
+    .login-btn-wrap{
+        margin-top: -15px !important;
+    }
+
+    .footer-column a {
+        margin-left: 0px !important;
+        margin-top: -10px !important;
+    }
+
+    /* Footer bottom */
+    .footer-b p {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 16px;
+        margin-bottom: -0px !important;
+        margin-left: 200px !important;
+    }
+  
 
   /* ✅ COPYRIGHT / BOTTOM PART */
   .footer-bottom {

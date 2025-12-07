@@ -45,40 +45,70 @@
                 </select>
             </div>
 
+            {{-- RECEIPT ITEMS --}}
             <div class="mb-3">
-            <label class="form-label">Receipt Items</label>
+                <label class="form-label">Receipt Items</label>
 
-            <div id="items-container">
-                <div class="item-row border p-3 mb-2 rounded">
-                    <div class="row">
-                        <div class="col-md-8 mb-2">
-                            <label class="form-label">Description</label>
-                            <textarea name="items[0][description]" class="form-control" rows="2"></textarea>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <label class="form-label">Amount</label>
-                            <input type="number" name="items[0][amount]" class="form-control" step="0.01">
-                        </div>
-                        <div class="col-md-1 d-flex align-items-end mb-2">
-                            <button type="button" class="btn btn-danger btn-sm remove-item w-100">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                <div id="items-container">
+                    <div class="item-row border p-3 mb-2 rounded">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12 mb-2">
+                                <label class="form-label">Description</label>
+                                <textarea name="items[0][description]" class="form-control" rows="2"></textarea>
+                            </div>
+
+                            <div class="col-md-3 col-sm-9 mb-2">
+                                <label class="form-label">Amount</label>
+                                <input type="number" name="items[0][amount]" class="form-control" step="0.01">
+                            </div>
+
+                            <div class="col-md-1 col-sm-3 d-flex align-items-end mb-2">
+                                <button type="button" class="btn btn-danger btn-sm remove-item w-100">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <button type="button" id="add-item" class="btn btn-secondary btn-sm mt-2">
+                    <i class="fas fa-plus"></i> Add More
+                </button>
             </div>
 
-            <button type="button" id="add-item" class="btn btn-secondary btn-sm mt-2">
-                <i class="fas fa-plus"></i> Add More
-            </button>
-        </div>
-
-
-            <button type="submit" class="btn btn-primary save-button">Save</button>
+            <button type="submit" class="btn btn-primary save-button mt-3">Save</button>
         </form>
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+/* ---------- MOBILE + IPAD RESPONSIVE FIXES ---------- */
+
+@media (max-width: 991.98px) { /* iPad + Mobile */
+    .save-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 575.98px) { /* Mobile Only */
+    #items-container .row > div {
+        margin-bottom: 10px;
+    }
+
+    #items-container textarea,
+    #items-container input {
+        width: 100% !important;
+    }
+
+    .remove-item {
+        width: 100% !important;
+    }
+}
+</style>
+@endpush
+
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -89,23 +119,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('items-container');
         const newItem = document.createElement('div');
         newItem.classList.add('item-row', 'border', 'p-3', 'mb-2', 'rounded');
+
         newItem.innerHTML = `
             <div class="row">
-                <div class="col-md-8 mb-2">
+                <div class="col-md-8 col-sm-12 mb-2">
                     <label class="form-label">Description</label>
                     <textarea name="items[${itemIndex}][description]" class="form-control" rows="2"></textarea>
                 </div>
-                <div class="col-md-3 mb-2">
+
+                <div class="col-md-3 col-sm-9 mb-2">
                     <label class="form-label">Amount</label>
                     <input type="number" name="items[${itemIndex}][amount]" class="form-control" step="0.01">
                 </div>
-                <div class="col-md-1 d-flex align-items-end mb-2">
+
+                <div class="col-md-1 col-sm-3 d-flex align-items-end mb-2">
                     <button type="button" class="btn btn-danger btn-sm remove-item w-100">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
             </div>
         `;
+
         container.appendChild(newItem);
         itemIndex++;
     });

@@ -16,10 +16,13 @@
     <div class="footer-column-contactus">
         <h3>Contact Us</h3>
         <p class="contactusp">
-            TGG Eco Ventures Pvt. Ltd.  #677, 1st<br>
-            Floor, 27th Main 13th Cross, Sector-1,<br>
-			HSR Layout, Bangalore-560102,<br>
-            Karnataka, India
+            TGG Eco Ventures Pvt. Ltd.  #677, 1st Floor, 27th<br>
+            Main 13th Cross, Sector-1, HSR Layout,<br>
+			Bangalore-560102, Karnataka, India<br>
+        </p>
+        <p class="contact-ipad">
+            TGG Eco Ventures Pvt. Ltd. #677, 1st Floor, 27th Main 13th Cross, Sector-1<br>
+            HSR Layout, Bangalore-560102<br>
         </p>
     </div>
 
@@ -56,11 +59,12 @@
 
             <div>
                 <label>
-                    <input type="checkbox" name="rememberme" value="forever"> Remember Me
+                    <input type="checkbox" name="rememberme" value="forever"> 
+                    <span class="remember-text">Remember Me</span>
                 </label>
             </div>
 
-            <div>
+            <div class="login-btn-wrap">
                 <button type="submit" name="wp-submit">Log In</button>
             </div>
 

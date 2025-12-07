@@ -3,6 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>Invoice #{{ $invoice->invoice_number }}</title>
+
+    <!-- Basic Bootstrap-like responsive behavior -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -13,6 +17,13 @@
             width: 95%;
             margin: auto;
         }
+
+        /* Responsive table wrapper for mobile/iPad */
+        .responsive-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
         .header-table, .table {
             width: 100%;
             border-collapse: collapse;
@@ -57,6 +68,29 @@
             display: inline-block;
             width: 180px;
         }
+
+        /* ----------------------------------------- */
+        /* RESPONSIVE FOR MOBILE + IPAD              */
+        /* ----------------------------------------- */
+
+        @media (max-width: 768px) {
+            .header-table td {
+                display: block;
+                width: 100% !important;
+                text-align: left !important;
+                margin-bottom: 10px;
+            }
+            .header-table .right {
+                text-align: left !important;
+                margin-top: 10px;
+            }
+
+            .bank-details strong {
+                width: 100% !important;
+                margin-bottom: 4px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -85,7 +119,6 @@
         <p><strong>Invoice Status:</strong> {{ ucfirst($invoice->status) }}</p>
     </div>
 
-    {{-- ITEM TABLE --}}
     @php
         $items = $invoice->items ?? [];
         $totalAmount = 0;
@@ -95,35 +128,38 @@
         $bank = \App\Models\UserBankDetailSecondary::where('user_id', $invoice->source_id)->first();
     @endphp
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Description</th>
-                <th class="text-right">Amount (INR)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($items as $index => $item)
+    {{-- ITEM TABLE WRAPPED FOR MOBILE --}}
+    <div class="responsive-wrapper">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $item['description'] ?? 'N/A' }}</td>
-                    <td class="text-right">{{ number_format($item['amount'] ?? 0, 2) }}</td>
+                    <th>#</th>
+                    <th>Description</th>
+                    <th class="text-right">Amount (INR)</th>
                 </tr>
-            @empty
+            </thead>
+            <tbody>
+                @forelse ($items as $index => $item)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $item['description'] ?? 'N/A' }}</td>
+                        <td class="text-right">{{ number_format($item['amount'] ?? 0, 2) }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="3" style="text-align:center;">No items added.</td>
+                    </tr>
+                @endforelse
+
                 <tr>
-                    <td colspan="3" style="text-align:center;">No items added.</td>
+                    <td colspan="2" class="text-right"><strong>Total</strong></td>
+                    <td class="text-right"><strong>{{ number_format($totalAmount, 2) }} INR</strong></td>
                 </tr>
-            @endforelse
+            </tbody>
+        </table>
+    </div>
 
-            <tr>
-                <td colspan="2" class="text-right"><strong>Total</strong></td>
-                <td class="text-right"><strong>{{ number_format($totalAmount, 2) }} INR</strong></td>
-            </tr>
-        </tbody>
-    </table>
-
-     {{-- BANK DETAILS --}}
+    {{-- BANK DETAILS --}}
     @if($bank)
         <div class="bank-details">
             <strong>Bank Name:</strong> {{ $bank->bank_name ?? 'N/A' }}<br>

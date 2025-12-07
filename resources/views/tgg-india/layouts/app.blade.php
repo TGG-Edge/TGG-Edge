@@ -41,7 +41,7 @@
               @include('tgg-india.layouts.includes.co-creator-sidebar')
           @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 8)
               @include('tgg-india.layouts.includes.facilitator-sidebar')
-         @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 9)
+          @elseif( isset(auth('web2')->user()->user_role) &&  auth('web2')->user()->user_role == 9)
               @include('tgg-india.layouts.includes.spouse-sidebar')
           @else
               @include('tgg-india.layouts.includes.trainer-sidebar')
@@ -55,21 +55,19 @@
             </button>
           @yield('content')
         </div> 
-        
-        {{-- @yield('content') --}}
     @endif
     </div>
   </div>
 
   {{-- ===========================
-       MOBILE SIDEBAR (REMOVED)
+       MOBILE SIDEBAR (FULLY REMOVED)
        =========================== --}}
+{{--
 @if(!request()->is('tgg-meta/tgg-india/login') && !request()->is('tgg-meta/tgg-india/register*'))
-         
   <div id="mobileSidebar" class="mobile-sidebar d-lg-none">
       <div class="mobile-sidebar-content">
-       
           <button type="button" class="btn-close text-reset mb-2" id="mobileSidebarClose"></button>
+
           @if( isset(auth('web2')->user()->user_role) && auth('web2')->user()->user_role == 1 )
               @include('tgg-india.layouts.includes.admin-sidebar')
           @elseif( isset(auth('web2')->user()->user_role) && auth('web2')->user()->user_role == 2 )
@@ -79,35 +77,35 @@
           @else
              @include('tgg-india.layouts.includes.trainer-sidebar') 
           @endif 
-          
       </div>
   </div>
-  
-    @endif
+@endif
+--}}
+
   {{-- ===========================
-       MOBILE SIDEBAR SCRIPT (REMOVED)
+       MOBILE SIDEBAR SCRIPT (FULLY REMOVED)
        =========================== --}}
-  
-  <script>
-        document.addEventListener('DOMContentLoaded', function() {
+{{--
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
         const sidebar = document.getElementById('mobileSidebar');
         const toggle = document.getElementById('mobileSidebarToggle');
         const close = document.getElementById('mobileSidebarClose');
 
         if (toggle && sidebar) {
             toggle.addEventListener('click', function() {
-            sidebar.classList.add('active');
+                sidebar.classList.add('active');
             });
         }
 
         if (close && sidebar) {
             close.addEventListener('click', function() {
-            sidebar.classList.remove('active');
+                sidebar.classList.remove('active');
             });
         }
-        });
-    </script>
-
+    });
+</script>
+--}}
 
   @include('tgg-india.layouts.includes.footer')
 
