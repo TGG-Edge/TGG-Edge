@@ -117,9 +117,7 @@
                                         $filename = basename($img);
 
                                         // Re-assign $imgPath based on environment
-                                        $img = $isLive
-                                            ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
-                                            : $img;
+                                        $img =  $img;
                                     @endphp
                                     <div class="slide">
                                         <img src="{{ asset($img) }}" alt="Event Image" class="card-img" />
@@ -143,9 +141,7 @@
                                     $filename = basename($img);
 
                                     // Re-assign $imgPath based on environment
-                                    $img = $isLive
-                                        ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
-                                        : $img;
+                                    $img =  $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
                                     <button
@@ -180,9 +176,7 @@
                                         $filename = basename($img);
 
                                         // Re-assign $imgPath based on environment
-                                        $img = $isLive
-                                            ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
-                                            : $img;
+                                        $img =  $img;
                                     @endphp
                                     <div class="slide">
                                         <img src="{{ asset($img) }}" alt="TGG Foundation Image" class="card-img" />
@@ -206,9 +200,7 @@
                                     $filename = basename($img);
 
                                     // Re-assign $imgPath based on environment
-                                    $img = $isLive
-                                        ? "https://thegoldengreens.com/storage/app/public/showcase/{$filename}"
-                                        : $img;
+                                    $img =  $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
                                     <button

@@ -18,7 +18,7 @@ class ReceiptController extends Controller
     public function index()
     {
         //
-        $receipts = Receipt::with(['source', 'target'])->latest()->paginate(10);
+        $receipts = Receipt::with(['source', 'target'])->where('source_id',auth('web2')->id())->latest()->paginate(10);
         return view('tgg-india.member.receipts.index', compact('receipts'));
 
     }

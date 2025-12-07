@@ -18,7 +18,7 @@ class InvoiceController extends Controller
     public function index()
     {
         //
-        $invoices = Invoice::with(['source', 'target'])->latest()->paginate(10);
+        $invoices = Invoice::with(['source', 'target'])->where('source_id',auth('web2')->id())->latest()->paginate(10);
         return view('tgg-india.member.invoices.index', compact('invoices'));
 
     }

@@ -39,7 +39,7 @@
             <div class="mb-3">
                 <label class="form-label">Issue Date</label>
                 <input type="date" name="issue_date" class="form-control"
-                    value="{{ old('issue_date', $receipt->issue_date ? $receipt->issue_date->format('Y-m-d') : '') }}">
+                    value="{{ old('issue_date', $receipt->created_at ? $receipt->created_at->format('Y-m-d') : '') }}">
             </div>
 
             <div class="mb-3">

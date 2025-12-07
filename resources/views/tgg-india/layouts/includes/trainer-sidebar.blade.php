@@ -13,6 +13,7 @@
             ->where('id', '!=', $user->id)
             ->get();
     }
+     $assignments = \App\Models\AssignmentSecondary::where('assigned_to', auth('web2')->id())->get();
 @endphp
     <a href="{{ route('tgg-india.trainer.dashboard') }}"
         class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
@@ -41,6 +42,13 @@
                 @endforeach
             </div>
         </div>
+    @endif
+
+    @if ($assignments->count() > 0)
+        <a href="{{ route('tgg-india.trainer.assignments.index') }}"
+            class="{{ request()->is('tgg-meta/tgg-india/trainer/assignments*') ? 'active' : '' }}">
+            <i class="fas fa-book"></i> Assignments
+        </a>
     @endif
     {{-- @if ($investmentModules->isNotEmpty()) --}}
     <div class="dropdown">
@@ -195,6 +203,26 @@
         </div>
     </div>
 
+    <div class="dropdown">
+        <a href="#"
+            class="dropdown-toggle d-flex justify-content-between align-items-center 
+        {{ request()->is('tgg-meta/tgg-india/trainer/incentives*') || request()->is('tgg-meta/tgg-india/trainer/rewards*') || request()->is('tgg-meta/tgg-india/trainer/invoices*') || request()->is('tgg-meta/tgg-india/trainer/receipts*') ? 'active' : '' }}"
+            data-bs-toggle="collapse" data-bs-target="#advancementDropdown"
+            aria-expanded="{{ request()->is('tgg-meta/tgg-india/trainer/incentives*') || request()->is('tgg-meta/tgg-india/trainer/rewards*') || request()->is('tgg-meta/tgg-india/trainer/invoices*') || request()->is('tgg-meta/tgg-india/trainer/receipts*') ? 'true' : 'false' }}">
+            <span><i class="fas fa-arrow-up me-2"></i> Advancement</span>
+            <i class="fas fa-caret-down"></i>
+        </a>
+        <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/trainer/incentives*') || request()->is('tgg-meta/tgg-india/trainer/rewards*') || request()->is('tgg-meta/tgg-india/trainer/invoices*') || request()->is('tgg-meta/tgg-india/trainer/receipts*') ? 'show' : '' }}"
+            id="advancementDropdown">
+           
+            <a href="{{ route('tgg-india.trainer.invoices.index') }}" class="d-block py-1">
+                <i class="fas fa-file-invoice me-2"></i> Invoice
+            </a>
+            <a href="{{ route('tgg-india.trainer.receipts.index') }}" class="d-block py-1">
+                <i class="fas fa-receipt me-2"></i> Receipt
+            </a>
+        </div>
+    </div>
 
 
     {{-- @endif --}}
