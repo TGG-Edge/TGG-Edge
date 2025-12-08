@@ -1764,3 +1764,8 @@ body {
         text-align: center;
     }
 }
+
+.refbox{
+    margin-left: 13px !important;
+    width: 903px !important;
+}

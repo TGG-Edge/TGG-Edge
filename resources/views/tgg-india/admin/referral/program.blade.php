@@ -13,8 +13,8 @@
     $referralLink = url('/register?ref=' . auth()->id());
 @endphp
 
-<div class="referral-box mb-4">
-    <h2>Your Referral Link</h2>
+<div class="referral-box mb-4 refbox">
+    <h5>Your Referral Link</h5>
     <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
         @php
             $referralCode = Auth('web2')->user()->referral_code;
@@ -30,8 +30,8 @@
 
 <hr>
 
-<div class="referral-box mb-4">
-    <h2>Your Lead Referral Link</h2>
+<div class="referral-box mb-4 refbox">
+    <h5>Your Lead Referral Link</h5>
     <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2">
         @php
             $referralLink = url('tgg-meta/tgg-india/enquiry/referral/' . $referralCode);

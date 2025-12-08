@@ -3,21 +3,23 @@
 @section('title', 'TGG India Referral Program | TGG Meta | TGG India')
 @section('content')
 <!-- Referral Link Box -->
-<div class="referral-box">
+
    
     <div>
         {!! $content->content !!}
     </div>
     <hr>
+
+    <div class="referral-box mb-4 refbox">
     
-    <h2>Your Lead Referral Link</h2>
+    <h5>Your Lead Referral Link</h5>
     <div class="input-group" style="justify-content: space-between; align-items: center;">
         @php
             $referralCode = Auth('web2')->user()->referral_code;
             $referralLink = url('tgg-meta/tgg-india/enquiry/referral/' . $referralCode);
         @endphp
 
-        <input type="text" id="referralLink" class="form-control" value="{{ $referralLink }}" readonly style="max-width: 70%;">
+        <input type="text" id="referralLink" class="form-control" value="{{ $referralLink }}" readonly style="max-width: 100%;">
 
         <button type="button" class="btn btn-sm btn-primary ms-2" onclick="copyReferral()">
             Copy

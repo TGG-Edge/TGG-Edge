@@ -80,7 +80,6 @@
       </div>
   </div>
 @endif
---}}
 
   {{-- ===========================
        MOBILE SIDEBAR SCRIPT (FULLY REMOVED)
