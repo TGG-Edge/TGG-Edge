@@ -193,9 +193,13 @@ $summary = [
                 </div>
                 <section class="welcome-note card">
                     <div class="card-inner-welcome">
-                        <p style="text-align: justify;">{!! $showcase->welcome_note_facilitator ??
+                        <p id="expandWelcome" class="welcome-expand-note" style="text-align: justify;">{!! $showcase->welcome_note_facilitator ??
                                 'Welcome to the Volunteer Dashboard! Explore the Woodperker collections, review entrepreneurship opportunities, and keep an eye on the latest updates below.' !!}
                         </p>
+                         <span id="toggleExpandWelcome" class="text-primary"
+                            style="cursor:pointer; display:none; font-weight:600;">
+                            Read More
+                        </span>
                     </div>
                 </section>
             </div>

@@ -73,7 +73,7 @@ class RegisterController extends Controller
         $request->validate([
             'name' => 'required|string',
             'age' => 'required|integer',
-            'number' => 'required|string',
+            'number' => 'required|string|max:10',
             'email' => [
                 'required',
                 'email',
@@ -84,6 +84,15 @@ class RegisterController extends Controller
             'address' => 'required|string',
             'rhm_number' => 'required'
         ]);
+
+        // ======== EXTRA REGEX VALIDATION USING HELPER ========
+
+        if ($request->filled('rhm_number')) {
+            [$valid, $msg] = validatePattern('rhm_number', $request->rhm_number);
+            if (!$valid) return back()->withErrors(['rhm_number' => $msg])->withInput();
+        }
+
+        
 
         // Store user
         $user = UserSecondary::create([
@@ -155,6 +164,14 @@ class RegisterController extends Controller
             ],
             'address' => 'required|string',
         ]);
+
+        // ======== EXTRA REGEX VALIDATION USING HELPER ========
+
+        if ($request->filled('rhm_number')) {
+            [$valid, $msg] = validatePattern('rhm_number', $request->rhm_number);
+            if (!$valid) return back()->withErrors(['rhm_number' => $msg])->withInput();
+        }
+
 
         if($request->rhm_alignment == 'No'){
              return redirect()->back()->with('error', 'This opportunity is for Responsible Humans only.');
@@ -460,7 +477,7 @@ class RegisterController extends Controller
             'phone' => 'required|string|max:20',
             'address' => 'nullable|string|max:255',
             'role' => 'required|string',
-            'message' => 'nullable|string',
+            'message' => 'nullable|string|max:100',
         ]);
 
         Enquiry::create([

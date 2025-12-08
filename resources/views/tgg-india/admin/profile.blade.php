@@ -129,14 +129,17 @@
             <div class="col-md-6 mb-3 page-text">
                 <label>Current Password:</label>
                 <input type="password" name="current_password" class="form-control page-inputtext">
+                <span class="input-group-text toggle-pass" style="cursor:pointer;">👁</span>
             </div>
             <div class="col-md-6 mb-3 page-text">
                 <label>New Password:</label>
                 <input type="password" name="new_password" class="form-control page-inputtext">
+                <span class="input-group-text toggle-pass" style="cursor:pointer;">👁</span>
             </div>
             <div class="col-md-6 mb-3 page-text">
                 <label>Confirm New Password:</label>
                 <input type="password" name="new_password_confirmation" class="form-control page-inputtext">
+                <span class="input-group-text toggle-pass" style="cursor:pointer;">👁</span>
             </div>
         </div>
 

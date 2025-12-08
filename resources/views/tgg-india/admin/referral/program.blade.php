@@ -37,8 +37,9 @@
             $referralLink = url('tgg-meta/tgg-india/enquiry/referral/' . $referralCode);
         @endphp
 
-        <input type="text" id="referralLink1" class="form-control flex-grow-1" value="{{ $referralLink }}" readonly>
-        <button type="button" class="btn btn-sm btn-primary" onclick="copyReferralLeadLink()">
+        <input type="text" id="referralLink1" class="form-control" value="{{ $referralLink }}" readonly style="max-width: 70%;">
+
+        <button type="button" class="btn btn-sm btn-primary ms-2" onclick="copyReferral()">
             Copy
         </button>
     </div>
@@ -57,7 +58,7 @@
         });
     }
 
-    function copyReferralLeadLink() {
+    function copyReferral1() {
         let input = document.getElementById("referralLink1");
         input.select();
         input.setSelectionRange(0, 99999); // For mobile devices

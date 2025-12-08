@@ -1765,6 +1765,28 @@ body {
     }
 }
 
+
+.welcome-expand-note {
+    display: -webkit-box;
+    -webkit-line-clamp: 8;  /* SHOW ONLY 8 LINES */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 20px; /* Adjust based on UI */
+    text-align: justify;
+}
+
+.page-text {
+    position: relative;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 13px;
+    bottom: 1px;
+    cursor: pointer;
+    font-size: 18px;
+}
 .refbox{
     margin-left: 13px !important;
     width: 903px !important;

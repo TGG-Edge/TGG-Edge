@@ -115,12 +115,81 @@ if (!function_exists('taskTypes')) {
     {
         return [
             'Verification'   => 'Verification',
-            'interview'      => 'Interview',
+            'Interview'      => 'Interview',
             'Interview'  => 'Documentation',
             'Lead Generation' => 'Lead Generation',
             'On Boarding'     => 'On Boarding',
             'Training'       => 'Training', // you can add more here
+            'Freelance Assignment' => 'Freelance Assignment'
 
         ];
+    }
+}
+
+
+
+
+if (!function_exists('validatePattern')) {
+
+    function validatePattern($type, $value)
+    {
+        $patterns = [
+            'ifsc' => [
+                'regex' => '/^[A-Z]{4}0[A-Z0-9]{6}$/',
+                'example' => 'Ifsc Code Example: SBIN0001234'
+            ],
+
+            // ===== BANK DETAILS =====
+            'account_number' => [
+                // Common Indian Bank Account Format (9 to 18 digits)
+                'regex' => '/^[0-9]{9,18}$/',
+                'example' => 'Account number should be 9 to 18 digits'
+            ],
+            'ifsc_code' => [ // alias, same as ifsc
+                'regex' => '/^[A-Z]{4}0[A-Z0-9]{6}$/',
+                'example' => 'Ifsc Code Example Example: HDFC0001234'
+            ],
+
+            // ===== PERSONAL ID =====
+            'pan' => [
+                'regex' => '/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/',
+                'example' => 'Pan Number should be - Example: ABCDE1234F'
+            ],
+            'aadhaar' => [
+                'regex' => '/^[2-9]{1}[0-9]{11}$/',
+                'example' => '12 Digit Aadhaar – should not start with 0 or 1'
+            ],
+            'voter_id' => [
+                'regex' => '/^[A-Z]{3}[0-9]{7}$/',
+                'example' => 'Voter id should be Example: XYZ1234567'
+            ],
+
+            'driving_license' => [
+                // Example: MH1420012345678 or UP1420012345678
+                'regex' => '/^[A-Z]{2}[0-9]{2}[0-9]{11,14}$/',
+                'example' => 'Driving License should be Example: MH1420012345678'
+            ],
+
+            // ===== CUSTOM =====
+            'rhm_number' => [
+                // Format: RHM/KL/QLN/0001 (supports any 2–4 letter state and district)
+                'regex' => '/^RHM\/[A-Z]{2,3}\/[A-Z]{2,4}\/[0-9]{4}$/',
+                'example' => 'Rhm Number Correct Format is: RHM/KL/QLN/0001'
+            ],
+        ];
+
+        $type = strtolower($type);
+
+        if (!isset($patterns[$type])) {
+            return [false, 'Invalid pattern type requested'];
+        }
+
+        // Validate
+        if (preg_match($patterns[$type]['regex'], trim($value))) {
+            return [true, 'Valid'];
+        }
+
+        // Failed — return example format
+        return [false, $patterns[$type]['example']];
     }
 }

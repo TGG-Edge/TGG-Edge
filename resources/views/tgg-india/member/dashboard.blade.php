@@ -45,10 +45,14 @@
                 </div>
                 <section class="welcome-note card">
                     <div class="card-inner-welcome">
-                        <p>
+                        <p id="expandWelcome" class="welcome-expand-note">
                             {!! $showcase->welcome_note_member ??
                                 'Welcome to the Volunteer Dashboard! Explore the Woodperker collections, review entrepreneurship opportunities, and keep an eye on the latest updates below.' !!}
                         </p>
+                         <span id="toggleExpandWelcome" class="text-primary"
+                            style="cursor:pointer; display:none; font-weight:600;">
+                            Read More
+                        </span>
                     </div>
                 </section>
             </div>

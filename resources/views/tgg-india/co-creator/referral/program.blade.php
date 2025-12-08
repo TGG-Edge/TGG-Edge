@@ -14,7 +14,7 @@
     @endphp
 
 <div class="referral-box">
-    <h2>Your Referral Link</h2>
+    <h2 class="page-heading">YOUR REFERRAL LINK</h2>
     <div class="input-group" style="justify-content: space-between; align-items: center;">
         @php
             $referralCode = Auth('web2')->user()->referral_code;

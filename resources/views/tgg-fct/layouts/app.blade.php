@@ -108,6 +108,13 @@
           });
       });
   });
+
+   document.querySelectorAll('.toggle-pass').forEach(btn => {
+        btn.onclick = () => {
+            let input = btn.previousElementSibling;
+            input.type = input.type === "password" ? "text" : "password";
+        };
+    });
   </script>
   {{-- CKEditor 5 super-build --}}
   <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/super-build/ckeditor.js"></script>

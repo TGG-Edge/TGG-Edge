@@ -828,3 +828,15 @@ button:hover {
     width: 100% !important;
   }
 }
+
+.page-text {
+    position: relative;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 13px;
+    bottom: 1px;
+    cursor: pointer;
+    font-size: 18px;
+}

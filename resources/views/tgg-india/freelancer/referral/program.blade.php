@@ -12,7 +12,7 @@
 
     <div class="referral-box mb-4 refbox">
     
-    <h5>Your Lead Referral Link</h5>
+    <h5 class="page-heading">YOUR LEAD REFERRAL LINK</h5>
     <div class="input-group" style="justify-content: space-between; align-items: center;">
         @php
             $referralCode = Auth('web2')->user()->referral_code;

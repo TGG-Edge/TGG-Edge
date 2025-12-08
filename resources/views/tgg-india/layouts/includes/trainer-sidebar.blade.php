@@ -54,14 +54,14 @@
     <div class="dropdown">
         {{-- Main Dropdown --}}
         <a href="#"
-            class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-meta/tgg-india/trainer/*') ? 'active' : '' }}"
+            class="dropdown-toggle d-flex justify-content-between align-items-center "
             data-bs-toggle="collapse" data-bs-target="#investmentDropdown"
-            aria-expanded="{{ request()->is('tgg-meta/tgg-india/trainer/*') ? 'true' : 'false' }}">
+            aria-expanded="">
             <span><i class="fas fa-flask"></i> {{$user->modules->last()->name}} </span>
             <i class="fas fa-caret-down"></i>
         </a>
 
-        <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/trainer/*') ? 'show' : '' }}"
+        <div class="collapse ps-3 "
             id="investmentDropdown">
 
             {{-- ================= Create Section ================= --}}

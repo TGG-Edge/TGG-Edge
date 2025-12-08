@@ -110,7 +110,7 @@
             $referralLink = url('/register?ref=' . auth()->id());
         @endphp
 
-        <h2>Your Referral Link</h2>
+        <h2 class="page-heading">YOUR REFERRAL LINK</h2>
         <div class="referral-box">
     <div class="input-group" style="    justify-content: space-between;">
         @php
