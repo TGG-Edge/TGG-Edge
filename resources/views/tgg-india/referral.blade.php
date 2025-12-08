@@ -110,8 +110,9 @@
             $referralLink = url('/register?ref=' . auth()->id());
         @endphp
 
-        <h2 class="page-heading">YOUR REFERRAL LINK</h2>
-        <div class="referral-box">
+        
+        <div class="referral-box mb-4 refbox">
+            <h5 class="page-heading">YOUR REFERRAL LINK</h5>
     <div class="input-group" style="    justify-content: space-between;">
         @php
             // Example referral code (replace with dynamic value later if needed)

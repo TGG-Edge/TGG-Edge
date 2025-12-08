@@ -13,8 +13,8 @@
         $referralLink = url('/register?ref=' . auth()->id());
     @endphp
 
-<div class="referral-box">
-    <h2 class="page-heading">YOUR REFERRAL LINK</h2>
+<div class="referral-box mb-4 refbox">
+    <h5 class="page-heading">YOUR REFERRAL LINK</h5>
     <div class="input-group" style="justify-content: space-between; align-items: center;">
         @php
             $referralCode = Auth('web2')->user()->referral_code;

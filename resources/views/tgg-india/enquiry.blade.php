@@ -25,8 +25,11 @@
             @endphp
             {!! $content->content ?? '' !!}
 
+            <div class="card shadow-lg rounded-4 p-4 enquirybox">
+                <h1>"dhcjgjsdgjsgdcjdg"</h1>
+            </div>
             <hr>
-            <div class="card shadow rounded-4 p-4">
+            <div class="card shadow rounded-4 p-4 enquirybox">
                 <h4 class="text-center mb-3">Fill the following details to participate</h4>
 
                 @if (session('success'))

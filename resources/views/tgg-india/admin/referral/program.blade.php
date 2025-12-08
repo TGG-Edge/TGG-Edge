@@ -37,7 +37,7 @@
             $referralLink = url('tgg-meta/tgg-india/enquiry/referral/' . $referralCode);
         @endphp
 
-        <input type="text" id="referralLink1" class="form-control" value="{{ $referralLink }}" readonly style="max-width: 70%;">
+        <input type="text" id="referralLink1" class="form-control" value="{{ $referralLink }}" readonly style="max-width: 100%;">
 
         <button type="button" class="btn btn-sm btn-primary ms-2" onclick="copyReferral()">
             Copy

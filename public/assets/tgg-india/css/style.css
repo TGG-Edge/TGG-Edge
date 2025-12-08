@@ -1559,7 +1559,7 @@ body {
 @media (min-width: 768px) and (max-width: 1024px) {
   .mobile-sidebar {
     position: fixed;
-    top: 85px; /* height of your header */
+    top: 180px; /* height of your header */
     bottom: 0px;
     height: calc(100vh - 85px - 50px);
     left: -280px; /* hidden initially */
@@ -1789,5 +1789,79 @@ body {
 }
 .refbox{
     margin-left: 13px !important;
-    width: 903px !important;
+    width: 900px !important;
+    max-width: 100%;
+}
+
+/* Mobile ≤ 575px */
+@media (max-width: 575.98px) {
+
+    .refbox{
+    margin-left: 13px !important;
+    width: 328px !important;
+    max-width: 100%;
+}
+
+    .refbox h5 {
+        font-size: 16px;
+    }
+
+    .refbox .d-flex {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+    }
+
+    .refbox input.form-control {
+        width: 100% !important;
+        font-size: 14px;
+    }
+
+    .refbox button {
+        width: 100% !important;
+        font-size: 14px;
+    }
+
+     .enquirybox {
+        width: 100% !important;
+    }
+}
+
+/* iPad / Tablets 576px – 991px */
+@media (min-width: 576px) and (max-width: 991.98px) {
+
+    .refbox{
+    margin-left: 26px !important;
+    width: 690px !important;
+    max-width: 100%;
+    }
+
+    .refbox h5 {
+        font-size: 18px;
+    }
+
+    .refbox .d-flex {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+
+    .refbox input.form-control {
+        width: 100% !important;
+        font-size: 15px;
+    }
+
+    .refbox button {
+        width: 100% !important;
+        font-size: 15px;
+    }
+
+    .enquirybox {
+        width: 90% !important;
+    }
+}
+
+.enquirybox{
+    width: 1060px !important;
+    max-width: 100%;
 }

@@ -62,8 +62,9 @@
   {{-- ===========================
        MOBILE SIDEBAR (FULLY REMOVED)
        =========================== --}}
-@if(!request()->is('tgg-meta/tgg-india/login*') && !request()->is('tgg-meta/tgg-india/register*'))
-         
+@if(request()->is('tgg-meta/tgg-india/login*') || request()->is('tgg-meta/tgg-india/register*'))
+
+{{--    
   <div id="mobileSidebar" class="mobile-sidebar d-lg-none">
       <div class="mobile-sidebar-content">
           <button type="button" class="btn-close text-reset mb-2" id="mobileSidebarClose"></button>
@@ -79,6 +80,7 @@
           @endif 
       </div>
   </div>
+  --}}
 @endif
 
   {{-- ===========================
