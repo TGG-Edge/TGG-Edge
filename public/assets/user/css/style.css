@@ -752,7 +752,7 @@ button:hover {
 /* Mobile sidebar styles */
 .mobile-sidebar {
     position: fixed;
-    top: 187px; /* header height */
+    top: 150px; /* header height */
     left: -270px; /* hidden initially */
     width: 270px;
     min-height: calc(100% - 60px);
@@ -797,7 +797,7 @@ button:hover {
 @media (min-width: 768px) and (max-width: 1024px) {
   .mobile-sidebar {
     position: absolute;
-    top: 167px; /* height of your header */
+    top: 180px; /* height of your header */
     bottom: 0;
     height: calc(100vh - 167px - 385px);
     left: -280px; /* hidden initially */

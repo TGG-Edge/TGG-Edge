@@ -6,7 +6,7 @@
                     <div class="col-lg-4 col-md-4 footer-links">
                         <!-- <img class="ftr_logo" src="assets/dist/images/logo.jpg"> -->
                         <h3>ABOUT US</h3>
-                        <p>TGG Foundation is a self-sustaining, not-for-profit, registered Public Charitable Trust with
+                        <p class="aboutus">TGG Foundation is a self-sustaining, not-for-profit, registered Public Charitable Trust with
                             a Global Vision. It works for the welfare of the rural community especially women, youths
                             and elderly people through its Sustainable Rural Development Goals (TSRDG). It also provides
                             opportunities for people from across the world to participate in their transformation
@@ -38,7 +38,7 @@
                         </ul>
 
                         <div id="section-g3fc223"
-                            class="wp-block-gutentor-e2 section-g3fc223 gutentor-element gutentor-element-button button-align-left-desktop">
+                            class="wp-block-gutenftor-e2 section-g3fc223 gutentor-element gutentor-element-button button-align-left-desktop">
                             <span class="gutentor-button-wrap"><a
                                     class="gutentor-button gutentor-block-button gutentor-icon-after"
                                     href="http://tggfct.org/download/1974/" style="padding: 10px;

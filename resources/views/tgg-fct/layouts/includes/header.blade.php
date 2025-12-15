@@ -36,12 +36,23 @@
             <a class="navbar-brand" href="index.html"><img src="{{ asset('assets/user/images/tgg-fnd.jpg')}}"></a>
         </div>
 
-        <nav class="navbar navbar-expand-xl navbar-dark my_navbar_outer">
+        <nav class="navbar navbar-expand-xl navbar-dark my_navbar_outer nav-menu">
             <div class="container p-0">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"><i class='icon-menu'></i></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
+                    aria-expanded="false" aria-label="Toggle navigation">
+
+                    <span class="menu-wrap">
+                        <span class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        </span>
+                        <span class="menu-text">MENU</span>
+                    </span>
+
                 </button>
+
                 <div class="collapse navbar-collapse " id="navbarCollapse">
                     <ul class="navbar-nav nav ">
                         <li class="nav-item">
@@ -120,9 +131,45 @@
                     </ul>
 
                 </div>
+
+                <div id="mobileMenuContainer"></div>
             </div>
         </nav>
 
 
 
     </header>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const burger = document.querySelector('.navbar-toggler');
+    const mobileMenu = document.getElementById('mobileMenuContainer');
+    const desktopMenu = document.querySelector('#navbarCollapse ul.nav');
+
+    function setupMobileMenu() {
+        if(window.innerWidth <= 1024) {
+            mobileMenu.innerHTML = '';
+            const clonedMenu = desktopMenu.cloneNode(true);
+            mobileMenu.appendChild(clonedMenu);
+
+            // Add toggle for dropdowns
+            mobileMenu.querySelectorAll('.nav-item.dropdown > a').forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    link.parentElement.classList.toggle('show');
+                });
+            });
+        } else {
+            mobileMenu.innerHTML = ''; // remove cloned menu on desktop
+        }
+    }
+
+    burger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+    });
+
+    window.addEventListener('load', setupMobileMenu);
+    window.addEventListener('resize', setupMobileMenu);
+});
+</script>
