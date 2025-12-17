@@ -35,7 +35,7 @@
                 <div class="mb-3">
                     <label for="welcome_note_member" class="form-label">Welcome Note For Advisor</label>
                     <textarea id="welcome_note_member" name="welcome_note_member" class="form-control-textarea " rows="5">
-                {!! old('welcome_note_member', $showcase?->welcome_note_member ?? '') !!}
+                {{ old('welcome_note_member', $showcase?->welcome_note_member ?? '') }}
             </textarea>
                 </div>
 
