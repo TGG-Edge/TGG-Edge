@@ -223,7 +223,7 @@ html, body {
 }
 
 .footer-top h3 {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 600;
     margin: 0 0 30px;
     font-family: Times New Roman;
@@ -256,12 +256,12 @@ html, body {
 
 .footer-top .footer-links ul a {
     color: #656565;
-    font-size: 15px;
+    font-size: 13px;
     /* text-decoration: none; */
     font-family: Times New Roman;
 }
 .footer-top .footer-links p {
-    font-size: 15px;
+    font-size: 13px;
     font-family: Times New Roman;
     margin: 0;
 }

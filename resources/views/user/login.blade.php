@@ -55,7 +55,7 @@
                     <div class="mb-3" style="  position: relative;">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
-                        <span class="input-group-text toggle-pass" style="cursor:pointer;right: 0px;height: 32px;">👁</span>
+                        <span class="input-group-text toggle-pass" style="cursor:pointer;right: 0px;height: 40px;">👁</span>
                     </div>
                     <button type="submit" class="btn w-100 mt-2 text-white login-btn" style="background-color: #033576; border-color: #033576;">
                         Login
