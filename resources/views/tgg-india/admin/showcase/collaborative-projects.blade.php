@@ -29,6 +29,23 @@
                     <textarea id="motilal_checkout" name="motilal_checkout" class="form-control js-ckeditor" rows="3">{{ old('motilal_checkout', $showcase->motilal_checkout ?? '') }}</textarea>
                 </div>
 
+                <div class="mb-3">
+                    <label for="india_insure_checkout" class="form-label">India Insure Information Note</label>
+                    <textarea id="india_insure_checkout"
+                            name="india_insure_checkout"
+                            class="form-control js-ckeditor"
+                            rows="3">{{ old('india_insure_checkout', $showcase->india_insure_checkout ?? '') }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tgg_foundation_checkout" class="form-label">TGG Foundation Information Note</label>
+                    <textarea id="tgg_foundation_checkout"
+                            name="tgg_foundation_checkout"
+                            class="form-control js-ckeditor"
+                            rows="3">{{ old('tgg_foundation_checkout', $showcase->tgg_foundation_checkout ?? '') }}</textarea>
+                </div>
+
+
                 <button type="submit" class="btn btn-primary">Update Showcase</button>
             </form>
 

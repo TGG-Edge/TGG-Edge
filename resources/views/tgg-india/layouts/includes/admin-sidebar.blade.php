@@ -259,6 +259,16 @@
             rel="noopener noreferrer">
             <i class="fas fa-user-friends me-2"></i> Motilaloswal Register
         </a>
+
+        <a href="{{ url('https://pos.insureeasy.in/') }}" class="d-block py-1" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fas fa-user-friends me-2"></i>  India Insure Register
+        </a>
+
+        <a href="{{ url('user/login/') }}" class="d-block py-1" target="_blank"
+            rel="noopener noreferrer">
+            <i class="fas fa-user-friends me-2"></i>  TGG Foundation
+        </a>
     </div>
 </div>
 

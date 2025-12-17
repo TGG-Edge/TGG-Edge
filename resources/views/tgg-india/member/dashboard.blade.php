@@ -12,19 +12,26 @@
         }
 
         .btn-inside-model {
-                background: #265475;
-                 color: #fff;
+            background: #265475;
+            color: #fff;
         }
 
         .btn-inside-model:hover {
             background-color: #0056b3 !important;
             color: #fff !important;
         }
-        
-         .checkout-btn-tgg_foundation:hover {
+
+        .checkout-btn-tgg_foundation:hover {
             background-color: #0056b3 !important;
         }
-        
+
+        .card.woodperker {
+            grid-column: 1 / -1;
+        }
+
+        .card.opportunities {
+            grid-column: 1 / -1;
+        }
     </style>
     <div class="admin-container">
         @include('tgg-india.layouts.includes.message')
@@ -32,16 +39,19 @@
 
             <!-- Welcome Note -->
             <div class="dashboard-grid-welcome">
-                 @php
+                @php
                     $user = \App\Models\UserSecondary::find(auth('web2')->id());
-                    $mainApplicant = \App\Models\UserSecondary::where('rhm_number', $user->parent_rhm_number ?? '')->first();
+                    $mainApplicant = \App\Models\UserSecondary::where(
+                        'rhm_number',
+                        $user->parent_rhm_number ?? '',
+                    )->first();
                 @endphp
 
                 <div class="d-flex justify-content-end align-items-center flex-wrap gap-3 mb-2">
                     <span><strong>Name:</strong> {{ $user->name ?? 'N/A' }}</span>
                     <span><strong>Role:</strong> {{ $user->role_name ?? 'N/A' }}</span>
                     <span><strong>RHM No:</strong> {{ $user->rhm_number ?? 'N/A' }}</span>
-                    
+
                 </div>
                 <section class="welcome-note card">
                     <div class="card-inner-welcome">
@@ -49,7 +59,7 @@
                             {!! $showcase->welcome_note_member ??
                                 'Welcome to the Volunteer Dashboard! Explore the Woodperker collections, review entrepreneurship opportunities, and keep an eye on the latest updates below.' !!}
                         </p>
-                         <span id="toggleExpandWelcome" class="text-primary"
+                        <span id="toggleExpandWelcome" class="text-primary"
                             style="cursor:pointer; display:none; font-weight:600;">
                             Read More
                         </span>
@@ -72,7 +82,7 @@
                             color: white;
                             text-decoration: none;
                         "
-                            class="btn-outline small checkout-btn">Login</a>
+                            class="btn-outline small ">Login</a>
                         <button type="button" class="btn-outline small checkout-btn" data-note="{!! htmlspecialchars($showcase->modicare_checkout, ENT_QUOTES) !!}"
                             data-html="1">Information
                         </button>
@@ -92,18 +102,55 @@
                             color: white;
                             text-decoration: none;
                         "
-                            class="btn-outline small checkout-btn">Login</a>
+                            class="btn-outline small ">Login</a>
                         <button type="button" class="btn-outline small checkout-btn" data-note="{!! htmlspecialchars($showcase->motilal_checkout, ENT_QUOTES) !!}"
                             data-html="1">Information
                         </button>
                     </div>
                 </div>
 
+                <div class="card">
+                    <h3 class="card-title">INDIA INSURE</h3>
+                    <div class="card-inner" style="width: 420px !important; height: 200px !important;">
+                        <img src="{{ asset('assets/tgg-india/images/india-insure.png') }}" alt="India Insure Logo"
+                            class="card-img" width="300" height="150" style="    object-fit: cover;">
+                    </div>
+                    <div class="button-group">
+                        <a href="https://pos.insureeasy.in/" style="color: white; text-decoration: none;"
+                            class="btn-outline small ">
+                            Login
+                        </a>
+                        <button type="button" class="btn-outline small checkout-btn" data-note="{!! htmlspecialchars($showcase->india_insure_checkout, ENT_QUOTES) !!}"
+                            data-html="1">
+                            Information
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">TGG FOUNDATION</h3>
+                    <div class="card-inner" style="width: 420px !important; height: 200px !important; ">
+                        <img src="{{ asset('assets/tgg-india/images/tgg-foundation.png') }}" alt="TGG Foundation Logo"
+                            class="card-img" width="300" height="150" style="    object-fit: cover;">
+                    </div>
+                    <div class="button-group">
+                        <a href="https://thegoldengreens.com/user/login" style="color: white; text-decoration: none;"
+                            class="btn-outline small ">
+                            login
+                        </a>
+                        <button type="button" class="btn-outline small checkout-btn" data-note="{!! htmlspecialchars($showcase->tgg_foundation_checkout, ENT_QUOTES) !!}"
+                            data-html="1">
+                            Information
+                        </button>
+                    </div>
+                </div>
+
+
                 <!-- Woodperker -->
-                <div class="card woodperker">
+                <div class="card woodperker col-md-12">
                     <h3 class="card-title">WOODPERKER COLLECTIONS</h3>
-                    <div class="card-inner">
-                        <div class="slider">
+                    <div class="card-inner" style="width: auto !important; max-width: 100%; margin: 8px;">
+                        <div class="slider" style="margin: 8px auto; width: 1000px !important; max-width: 1000px;">
                             @if (!empty($showcase->woodpecker_collection))
                                 @foreach ($showcase->woodpecker_collection as $item)
                                     @php
@@ -114,10 +161,11 @@
                                         $filename = basename($img);
 
                                         // Re-assign $imgPath based on environment
-                                        $img =  $img;
+                                        $img = $img;
                                     @endphp
-                                    <div class="slide">
-                                        <img src="{{ asset($img) }}" alt="Woodperker Image" class="card-img" />
+                                    <div class="slide" style=" width: 1000px; max-width: 1000px;">
+                                        <img src="{{ asset($img) }}" alt="Woodperker Image" class="card-img"
+                                            style="width: 1000px; max-width: 1000px;     object-fit: cover;" />
                                     </div>
                                 @endforeach
                             @else
@@ -138,7 +186,7 @@
                                     $filename = basename($img);
 
                                     // Re-assign $imgPath based on environment
-                                    $img =  $img;
+                                    $img = $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
                                     <button style="width: 100%;" type="button" class="btn-outline small checkout-btn"
@@ -153,28 +201,7 @@
                     </div>
                 </div>
 
-                <!-- Freelancing Opportunities -->
-                <div class="card opportunities">
-                    <h3 class="card-title">FREELANCING OPPORTUNITIES</h3>
-                    <div class="card-inner">
-                        @if (!empty($showcase->investment_opportunities))
-                            @foreach ($showcase->investment_opportunities as $opportunity)
-                                <div class="project-row">
-                                    <label class="project-left">
-                                        <input type="radio" name="project" />
-                                        <span>{{ $opportunity['title'] ?? '' }}</span>
-                                    </label>
-                                    <button class="btn-outline checkout-btn-new" data-note="{!! htmlspecialchars($opportunity['note'] ?? '', ENT_QUOTES) !!}"
-                                        data-link="{{ $opportunity['link'] ?? '' }}" data-html="1">
-                                        Details
-                                    </button>
-                                </div>
-                            @endforeach
-                        @else
-                            <p>No opportunities available</p>
-                        @endif
-                    </div>
-                </div>
+
 
 
                 <!-- Travel -->
@@ -216,7 +243,7 @@
                                     $filename = basename($img);
 
                                     // Re-assign $imgPath based on environment
-                                    $img =  $img;
+                                    $img = $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
                                     <button
@@ -238,7 +265,7 @@
 
                 <!-- TGG Foundation -->
                 <div class="card tgg-foundation">
-                    <h3 class="card-title">TGG FOUNDATION</h3>
+                    <h3 class="card-title">THE ART OF GIFTING</h3>
                     <div class="card-inner">
                         <div class="slider" id="foundation-slider">
                             @if (!empty($showcase->tgg_foundation) && count($showcase->tgg_foundation) > 0)
@@ -251,7 +278,7 @@
                                         $filename = basename($img);
 
                                         // Re-assign $imgPath based on environment
-                                        $img =  $img;
+                                        $img = $img;
                                     @endphp
                                     <div class="slide">
                                         <img src="{{ asset($img) }}" alt="TGG Foundation Image" class="card-img" />
@@ -275,7 +302,7 @@
                                     $filename = basename($img);
 
                                     // Re-assign $imgPath based on environment
-                                    $img =  $img;
+                                    $img = $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
                                     <button
@@ -283,7 +310,8 @@
                                         width: 100%;
                                         "
                                         type="button" class="btn-outline small checkout-btn-tgg_foundation"
-                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}"  data-link="{{ $item['link'] ?? '' }}"  data-html="1">Checkout</button>
+                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" data-link="{{ $item['link'] ?? '' }}"
+                                        data-html="1">Checkout</button>
 
                                 </div>
                             @endforeach
@@ -291,6 +319,29 @@
                             <div class="slide">
                                 <p>No collections available</p>
                             </div>
+                        @endif
+                    </div>
+                </div>
+
+                <!-- Freelancing Opportunities -->
+                <div class="card opportunities">
+                    <h3 class="card-title">FREELANCING OPPORTUNITIES</h3>
+                    <div class="card-inner" style="width: auto !important; max-width: 100%; margin: 8px;">
+                        @if (!empty($showcase->investment_opportunities))
+                            @foreach (array_reverse($showcase->investment_opportunities) as $opportunity)
+                                <div class="project-row">
+                                    <label class="project-left">
+                                        <input type="radio" name="project" />
+                                        <span>{{ $opportunity['title'] ?? '' }}</span>
+                                    </label>
+                                    <button class="btn-outline checkout-btn-new" data-note="{!! htmlspecialchars($opportunity['note'] ?? '', ENT_QUOTES) !!}"
+                                        data-link="{{ $opportunity['link'] ?? '' }}" data-html="1">
+                                        Details
+                                    </button>
+                                </div>
+                            @endforeach
+                        @else
+                            <p>No opportunities available</p>
                         @endif
                     </div>
                 </div>
@@ -364,29 +415,29 @@
         });
 
         document.querySelectorAll('.checkout-btn-tgg_foundation').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const note = this.dataset.note || '';
-        const link = this.dataset.link || '';
-        const isHtml = this.dataset.html === '1';
-        const checkoutModalBody = document.getElementById('checkoutModalBody');
+            btn.addEventListener('click', function() {
+                const note = this.dataset.note || '';
+                const link = this.dataset.link || '';
+                const isHtml = this.dataset.html === '1';
+                const checkoutModalBody = document.getElementById('checkoutModalBody');
 
-        let content = '';
-        if (isHtml) {
-            content = note;
-        } else {
-            content = `<p>${note || 'No details available.'}</p>`;
-        }
+                let content = '';
+                if (isHtml) {
+                    content = note;
+                } else {
+                    content = `<p>${note || 'No details available.'}</p>`;
+                }
 
-        if (link) {
-            content += `<div class="mt-3 text-center">
+                if (link) {
+                    content += `<div class="mt-3 text-center">
                 <a href="${link}" target="_blank" class="btn btn-inside-model">Donate</a>
             </div>`;
-        }
+                }
 
-        checkoutModalBody.innerHTML = content;
-        checkoutModal.show();
-    });
-});
+                checkoutModalBody.innerHTML = content;
+                checkoutModal.show();
+            });
+        });
 
 
 

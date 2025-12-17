@@ -23,7 +23,7 @@
                 @foreach ([
                         'woodpecker_collection' => 'Woodpecker Collection',
                         'travel_and_events' => 'Travel & Events',
-                        'tgg_foundation' => 'TGG Foundation',
+                        'tgg_foundation' => 'The Art of Gifting',
                     ] as $field => $label)
                     <div class="mb-3">
                         <label for="{{ $field }}" class="form-label">{{ $label }} (Upload Multiple
