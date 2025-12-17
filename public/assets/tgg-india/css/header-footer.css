@@ -791,11 +791,13 @@ header {
 
   /* Two-column layout for menu items */
   .menu-container ul {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 10px;
-    padding: 10px;
-    justify-items: center;
+    position: absolute;
+    top: 100%;          /* opens downward */
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 999;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12);
   }
 
   .menu-container ul li {
@@ -805,11 +807,12 @@ header {
 
   .menu-container ul li a {
     font-size: 15px;
+    font-weight: 900;
     color: #000;
     display: block;
     width: 100%;
     padding: 8px 0;
-    text-align: center;
+    text-align: left;
     border-bottom: 1px solid #eee;
   }
 
@@ -1033,6 +1036,49 @@ header {
    TABLET VIEW (iPad) STYLES
    ============================= */
 @media (min-width: 481px) and (max-width: 1024px) {
+
+    .menu-container {
+    display: none;
+    width: 100%;
+    background: #fff;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .menu-container.active {
+    display: block;
+  }
+
+  /* Two-column layout for menu items */
+  .menu-container ul {
+    position: absolute;
+    top: 100%;          /* opens downward */
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 999;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+  }
+
+  .menu-container ul li {
+    list-style: none;
+    width: 100%;
+  }
+
+  .menu-container ul li a {
+    font-size: 15px;
+    font-weight: 900;
+    color: #000;
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  .menu-container ul li a:hover {
+    color: #008cff;
+  }
 
     .mobile-menu-toggle {
         display: block !important;

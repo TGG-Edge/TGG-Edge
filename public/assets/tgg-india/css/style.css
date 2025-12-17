@@ -1444,11 +1444,11 @@ ease-in-out;
 }
 
 /* hide menu on tablets + mobile */
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
     .menu-container {
         display: none !important;
     }
-}
+} */
 
 /* Mobile sidebar styles */
 .mobile-sidebar {
