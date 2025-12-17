@@ -256,12 +256,12 @@ html, body {
 
 .footer-top .footer-links ul a {
     color: #656565;
-    font-size: 10px;
+    font-size: 15px;
     /* text-decoration: none; */
     font-family: Times New Roman;
 }
 .footer-top .footer-links p {
-    font-size: 10px;
+    font-size: 15px;
     font-family: Times New Roman;
     margin: 0;
 }
@@ -310,9 +310,9 @@ html, body {
 .site-info {
     width: 100%;
     text-align: center;
-    font-size: 13px;
-    color: #ccc;
-    padding: 20px 10px 0;
+    font-size: 14px;
+    color: #656565;
+    padding: 30px;
     border-top: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -658,13 +658,15 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    color: #9faf94;
+    margin-top: 25px;
   }
 
   .hamburger span {
     display: block;
     width: 22px;
     height: 2px;
-    background: #ffffff;
+    background: #9faf94;
     margin: 4px 0;
   }
 
@@ -838,6 +840,8 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    color: #9faf94;
+    margin-top: 25px;
   }
 
   .hamburger span {
@@ -851,11 +855,7 @@ body {
   .menu-text {
     font-size: 14px;
   }
-
-  .menu-wrap{
-    color: #9faf94;
-  }
-
+    
   #navbarCollapse { display: none; }
     #mobileMenuContainer {
         display: none;
