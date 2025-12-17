@@ -14,11 +14,12 @@
 
     <!-- Contact Us -->
     <div class="footer-column-contactus">
-        <h3>Contact Us</h3>
+        <h3 class="contactush">Contact Us</h3>
         <p class="contactusp">
-            TGG Eco Ventures Pvt. Ltd.  #677, 1st Floor, 27th<br>
-            Main 13th Cross, Sector-1, HSR Layout,<br>
-			Bangalore-560102, Karnataka, India<br>
+            TGG Eco Ventures Pvt. Ltd.  #677, 1st<br>
+            Floor, 27th Main 13th Cross, Sector-1,<br>
+			HSR Layout, Bangalore-560102,<br>
+            Karnataka, India
         </p>
         <p class="contact-ipad">
             TGG Eco Ventures Pvt. Ltd. #677, 1st Floor, 27th Main 13th Cross, Sector-1<br>
