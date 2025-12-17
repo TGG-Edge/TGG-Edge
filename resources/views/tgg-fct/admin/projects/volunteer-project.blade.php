@@ -10,7 +10,8 @@
             <h2 class="admin-newappheading text-center text-md-start mb-4">VOLUNTEER PROJECTS</h2>
             @include('tgg-fct.layouts.includes.message')
 
-            <div class="table-responsive">
+            <!-- Desktop Table (hidden on mobile/tablet) -->
+            <div class="table-responsive d-none d-lg-block">
                 <table class="table table-bordered table-striped align-middle">
                     <thead class="table-light">
                         <tr>
@@ -48,6 +49,60 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Mobile/Tablet Card View (hidden on desktop) -->
+            <div class="d-lg-none">
+                @foreach($volunteerProjects as $volunteerProject)
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-2">{{ $volunteerProject->volunteer->name }}</h5>
+                        <p class="text-muted small mb-3">Researcher: {{ $volunteerProject->project->researcher->name }}</p>
+                        
+                        <div class="row g-2 mb-3">
+                            <div class="col-12">
+                                <span class="text-muted small">PROJECT:</span>
+                                <p class="mb-0">{{ Str::limit($volunteerProject->project->title, 50) }}</p>
+                            </div>
+                            
+                            <div class="col-6">
+                                <span class="text-muted small">PROGRESS:</span>
+                                <p class="mb-0 fw-semibold">{{ $volunteerProject->progress_percentage ?? '0' }}%</p>
+                            </div>
+                            
+                            <div class="col-6">
+                                <span class="text-muted small">EVALUATE:</span>
+                                <p class="mb-0 fw-semibold">{{ $volunteerProject->researcher_progress_percentage ?? '0' }}%</p>
+                            </div>
+                            
+                            <div class="col-12 mt-2">
+                                <span class="text-muted small">WORKSHEET:</span>
+                                @if($volunteerProject->document_url)
+                                    <p class="mb-0">
+                                        <a href="{{ $volunteerProject->document_url }}" target="_blank" class="text-decoration-none">View worksheet →</a>
+                                    </p>
+                                @else
+                                    <p class="mb-0 text-muted">N/A</p>
+                                @endif
+                            </div>
+                            
+                            <div class="col-12 mt-2">
+                                <span class="text-muted small">STATUS:</span>
+                                <p class="mb-0">
+                                    <span class="badge {{ $volunteerProject->status == 'freezed' ? 'bg-dark' : 'bg-success' }}">
+                                        {{ $volunteerProject->status == 'freezed' ? 'Freezed' : 'Active' }}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <a href="{{ route('tgg-fct,admin.volunteer-project.freezed', $volunteerProject->id) }}"
+                           class="btn btn-sm {{ $volunteerProject->status == 'freezed' ? 'btn-dark' : 'btn-danger' }} w-100">
+                            {{ $volunteerProject->status == 'freezed' ? 'Freezed' : 'Freeze Project' }}
+                        </a>
+                    </div>
+                </div>
+                @endforeach
             </div>
 
             <hr class="my-4">

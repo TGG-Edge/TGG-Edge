@@ -942,6 +942,7 @@ body {
     font-family: 'Times New Roman', Times, serif;
     font-size: 14px;
     width: 340px;
+    line-height: 2;
 }
 
 /* Optional: Activity report button centered */

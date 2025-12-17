@@ -44,7 +44,7 @@
 
     <div class="col-md-9 tgg-content">
             <button class="btn btn-dark d-lg-none mb-2" id="mobileSidebarToggle">
-                <i class="fas fa-bars"></i> Sidebar
+                <i class="fas fa-bars"></i>
             </button>
           @yield('content') 
         </div> 

@@ -408,6 +408,11 @@ table button:hover {
     font-weight: bold;
 }
 
+.col-md-9 {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+
 @media screen and (max-width: 600px) {
     .search-container {
         float: none;
@@ -752,7 +757,7 @@ button:hover {
 
 /* Mobile sidebar styles */
 .mobile-sidebar {
-    position: fixed;
+    position: absolute;
     top: 150px; /* header height */
     left: -270px; /* hidden initially */
     width: 270px;
