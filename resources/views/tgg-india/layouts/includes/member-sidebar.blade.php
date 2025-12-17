@@ -100,6 +100,31 @@
                 rel="noopener noreferrer">
                 <i class="fas fa-sign-in-alt me-2"></i> Journey with TGG Login
             </a>
+
+            <a href="{{ url('https://www.modicare.com/sign-in') }}" class="d-block py-1" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fas fa-user-friends me-2"></i> Modicare Register
+            </a>
+
+            <a href="{{ url('https://invest.motilaloswal.com/') }}" class="d-block py-1" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fas fa-user-friends me-2"></i> Motilaloswal Register
+            </a>
+
+            <a href="{{ url('https://pos.insureeasy.in/') }}" class="d-block py-1" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fas fa-user-friends me-2"></i>  India Insure Register
+            </a>
+
+            <a href="{{ url('user/login/') }}" class="d-block py-1" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fas fa-user-friends me-2"></i>  TGG Foundation
+            </a>
+
+            <a href="{{ url('tgg-meta/tgg-india/login/XCJBDSNJK43RWEFSKDJCXNFL34KRN3DKL3MREFWLMNKL32M/') }}" class="d-block py-1" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fas fa-user-friends me-2"></i>  Member Login
+            </a>
         </div>
     </div>
 

@@ -178,6 +178,8 @@ class ShowCaseController extends Controller
             'welcome_note_spouse',
             'modicare_checkout',
             'motilal_checkout',
+            'india_insure_checkout',
+            'tgg_foundation_checkout',
         ] as $field) {
             if ($request->has($field)) {
                 $data[$field] = $request->input($field);
