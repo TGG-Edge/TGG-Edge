@@ -557,7 +557,7 @@ header {
 } */
 
 .footer-column img {
-    width: 110px;
+    width: 108px;
     height: auto;
     border-radius: 8px;
     background: white;
@@ -939,7 +939,7 @@ header {
 
     .footer-column img {
         margin: 20px 0;
-        width: 90px;
+        width: 110px;
     }
 
     footer-column,
@@ -962,6 +962,7 @@ header {
         margin-top: 20px !important;
         font-size: 16px;
         margin-right: 260px !important;
+        white-space: nowrap;
     }
 
     .footer-column-contactus p{
@@ -979,7 +980,8 @@ header {
     .footer-column-pages ul li a {
         font-size: 13px;
         text-align: left !important;
-        margin-right: 175px !important;
+        margin-left: -87px !important;
+        white-space: nowrap;
     }
 
     .footer-column input[type="text"],
@@ -1005,6 +1007,7 @@ header {
         text-align: left;
         font-size: 16px;
         margin-right: 250px !important;
+        white-space: nowrap;
     }
     .footer-column label{
         margin-left: 0 !important;
@@ -1242,6 +1245,7 @@ header {
         font-size: 26px;
         margin-bottom: 0px !important;
         margin-left: 0px !important;
+        margin-top: -7px !important;
     }
 
     /* Logo */
@@ -1256,6 +1260,7 @@ header {
         font-size: 26px !important;
         margin-bottom: 29px !important;
         margin-left: 0px !important;
+        margin-top: -10px !important;
     }
 
     .footer-column-pages ul {
