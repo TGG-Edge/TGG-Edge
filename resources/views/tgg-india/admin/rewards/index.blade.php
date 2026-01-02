@@ -9,9 +9,9 @@
         <h4 class="mb-3 trainer-heading">My Rewards</h4>
 
         <div class="d-flex flex-wrap justify-content-end align-items-center gap-2">
-            <a href="{{ route('tgg-india.admin.rewards.create') }}" class="btn btn-primary me-2">
+            {{-- <a href="{{ route('tgg-india.admin.rewards.create') }}" class="btn btn-primary me-2">
                 <i class="bi bi-plus-lg"></i> New Reward
-            </a>
+            </a> --}}
 
             <a href="{{ route('tgg-india.download.excel', ['model' => 'Reward']) }}"
                class="btn btn-outline-success d-flex align-items-center justify-content-center">
@@ -25,13 +25,15 @@
         <table class="table table-striped table-bordered align-middle">
             <thead class="table-dark">
                 <tr>
-                    <th>Title</th>
-                    <th>User</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Amount</th>
-                    <th>Created At</th>
+                    <th>Name</th>
+                    <th>RHM Reg. No: </th>
+                    {{-- <th>Receipt No</th> --}}
+                    {{-- <th>Status</th> --}}
+                    {{-- <th>Purpose</th> --}}
+                    <th>Entitlement</th>
+                    <th>Appraisal</th>
+                    <th>Point</th>
+                    <th>Updated At</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -39,24 +41,30 @@
             <tbody>
                 @forelse($rewards as $reward)
                     <tr>
-                        <td>{{ $reward->title }}</td>
-                        <td>{{ $reward->referrerUser->name ?? 'N/A' }}</td>
-                        <td>{{ $reward->source_type ?? 'donation' }}</td>
-                        <td>{{ $reward->description ?? 'N/A' }}</td>
-                        <td>{!! statusWithColor($reward->status) !!}</td>
+                        <td>{{ $reward->referrer->name ?? 'N/A' }}</td>
+                        <td>{{ $reward->referrer->rhm_number ?? 'N/A' }}</td>
+                        @php
+                        $donation = \App\Models\Donation::where('id', $reward->model_id)
+                            ->first();
+                        @endphp
+                        {{-- <td>{{ $donation->receipt_number ?? 'N/A' }}</td> --}}
+                        {{-- <td>{{ $donation->purpose ?? 'RHM Center' }}</td> --}}
+                        <td>{{ entitlement_plan($reward->amount) }}</td>
+                        <td>{{ appraisal_plan($reward->amount) }}</td>
+                        {{-- <td>{!! statusWithColor($reward->status) !!}</td> --}}
 
-                        <td>{{ number_format($reward->amount, 2) }}</td>
-                        <td>{{ \Carbon\Carbon::parse($reward->created_at)->format('d M Y') }}</td>
+                        <td>{{ number_format($reward->amount, 0) }}</td>
+                        <td>{{ \Carbon\Carbon::parse($reward->updated_at)->format('d M Y') }}</td>
 
                         <td>
                             <div class="d-flex flex-wrap gap-1 justify-content-center">
 
                                 <!-- Edit -->
-                                <a href="{{ route('tgg-india.admin.rewards.edit', $reward->id) }}"
+                                {{-- <a href="{{ route('tgg-india.admin.rewards.edit', $reward->id) }}"
                                    class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0"
                                    style="width:32px;height:32px;">
                                     <i class="fas fa-edit"></i>
-                                </a>
+                                </a> --}}
 
                                 <!-- Delete -->
                                 <form action="{{ route('tgg-india.admin.rewards.destroy', $reward->id) }}"

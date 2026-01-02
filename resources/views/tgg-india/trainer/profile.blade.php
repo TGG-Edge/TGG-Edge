@@ -49,7 +49,58 @@
                 <label>RHM Number:</label>
                 <input type="text" name="rhm_number" class="form-control page-inputtext" value="{{ $user->rhm_number }}">
             </div>
+
+            <div class="col-md-6 mb-3 page-text">
+                <label>GST No:</label>
+                <input type="text" name="gst_no" class="form-control page-inputtext" value="{{ $user->gst_no }}">
+            </div>
+
+            <div class="col-md-6 mb-3 page-text">
+                <label>Type of Engagement:</label>
+                <select name="type_of_engagement" class="form-control page-inputtext">
+                    <option value="">-- Select --</option>
+                    @foreach(getTypeOfEngagementOptions() as $key => $label)
+                        <option value="{{ $key }}"
+                            {{ (string)old('type_of_engagement', $user->type_of_engagement) === (string)$key ? 'selected' : '' }}>
+                            {{ $label }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
           
+        </div>
+         <hr>
+        {{-- ===================== ID PROOF SECTION ===================== --}}
+        <h5 class="page-heading mt-4">ID Proof Details</h5>
+        <div class="row">
+            <div class="col-md-4 mb-3 page-text">
+                <label>Proof Type:</label>
+                <select name="id_proof_type" class="form-control page-inputtext">
+                    <option value="">-- Select Proof Type --</option>
+                    {{-- <option value="Aadhaar" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'Aadhaar') ? 'selected' : '' }}>Aadhaar</option> --}}
+                    <option value="PAN" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'PAN') ? 'selected' : '' }}>PAN</option>
+                    {{-- <option value="Voter ID" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'Voter ID') ? 'selected' : '' }}>Voter ID</option>
+                    <option value="Driving License" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'Driving License') ? 'selected' : '' }}>Driving License</option> --}}
+                </select>
+            </div>
+
+            <div class="col-md-4 mb-3 page-text">
+                <label>Proof Number:</label>
+                <input type="text" name="id_proof_number" class="form-control page-inputtext" 
+                       value="{{ old('id_proof_number', $idProof?->id_proof_number) }}" placeholder="Enter proof number">
+            </div>
+
+            <div class="col-md-4 mb-3 page-text">
+                <label>Upload Proof File:</label>
+                <input type="file" name="id_proof_file" class="form-control page-inputtext">
+                @if(!empty($idProof?->id_proof_file))
+                    <div class="mt-1">
+                        <a href="{{ asset('storage/'.$idProof->id_proof_file) }}" target="_blank" class="text-primary">
+                            View Uploaded File
+                        </a>
+                    </div>
+                @endif
+            </div>
         </div>
 
         <hr>

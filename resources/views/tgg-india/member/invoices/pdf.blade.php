@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>Invoice #{{ $invoice->invoice_number }}</title>
 
-    <!-- Basic Bootstrap-like responsive behavior -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap for responsiveness -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
     <style>
         body {
@@ -17,13 +17,6 @@
             width: 95%;
             margin: auto;
         }
-
-        /* Responsive table wrapper for mobile/iPad */
-        .responsive-wrapper {
-            width: 100%;
-            overflow-x: auto;
-        }
-
         .header-table, .table {
             width: 100%;
             border-collapse: collapse;
@@ -69,14 +62,11 @@
             width: 180px;
         }
 
-        /* ----------------------------------------- */
-        /* RESPONSIVE FOR MOBILE + IPAD              */
-        /* ----------------------------------------- */
-
-        @media (max-width: 768px) {
+        /* Responsive for tablets and mobile */
+        @media (max-width: 992px) { /* iPad landscape & smaller */
             .header-table td {
                 display: block;
-                width: 100% !important;
+                width: 100%;
                 text-align: left !important;
                 margin-bottom: 10px;
             }
@@ -84,13 +74,29 @@
                 text-align: left !important;
                 margin-top: 10px;
             }
-
             .bank-details strong {
-                width: 100% !important;
-                margin-bottom: 4px;
+                width: 140px;
+            }
+            h2 {
+                font-size: 16px;
             }
         }
 
+        @media (max-width: 576px) { /* Mobile devices */
+            h2 {
+                font-size: 14px;
+            }
+            .bank-details strong {
+                width: 120px;
+            }
+            .table th, .table td {
+                padding: 4px;
+                font-size: 12px;
+            }
+            .footer {
+                font-size: 11px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -104,21 +110,32 @@
                 <strong>{{ $invoice->source?->name }}</strong><br>
                 {{ $invoice->source?->address ?? 'Address not provided' }}<br>
                 India<br>
-                Tax No: {{ $invoice->source?->tax_number ?? 'N/A' }}
+                 @php
+                $idProof = \App\Models\UserIdProofSecondary::where('user_id', $invoice->source->id)->first();
+                @endphp
+                Pan card No: {{ $idProof?->id_proof_number ?? 'N/A' }}
+                <br>
+                GST No: {{ $invoice->source?->gst_no ?? 'N/A' }}
+                <br>
+                Type Of Service: {{ $invoice->source?->type_of_engagement ?? 'N/A' }}
             </td>
             <td class="right">
                 <strong>INVOICE #{{ $invoice->invoice_number }}</strong><br>
-                Date of Issue: {{ $invoice->created_at?->format('d M, Y') ?? 'N/A' }}
+                Date of Issue: {{ $invoice->issue_date?->format('d M, Y') ?? 'N/A' }}
             </td>
         </tr>
     </table>
-
+    
     {{-- BILLING INFO --}}
     <div class="info">
-        <p><strong>Billed To:</strong> {{ $invoice->target?->name ?? 'N/A' }}</p>
+        <p><strong>Billed To:</strong> {{ $invoice->target?->address ?? 'TGG Eco Ventures Pvt. Ltd. #677, 1st
+                                        Floor, 27th Main 13th Cross, Sector-1,
+                                        HSR Layout, Bangalore-560102,
+                                        Karnataka, India' }}</p>
         <p><strong>Invoice Status:</strong> {{ ucfirst($invoice->status) }}</p>
     </div>
 
+    {{-- ITEM TABLE --}}
     @php
         $items = $invoice->items ?? [];
         $totalAmount = 0;
@@ -128,8 +145,7 @@
         $bank = \App\Models\UserBankDetailSecondary::where('user_id', $invoice->source_id)->first();
     @endphp
 
-    {{-- ITEM TABLE WRAPPED FOR MOBILE --}}
-    <div class="responsive-wrapper">
+    <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
@@ -160,6 +176,7 @@
     </div>
 
     {{-- BANK DETAILS --}}
+    <br>
     @if($bank)
         <div class="bank-details">
             <strong>Bank Name:</strong> {{ $bank->bank_name ?? 'N/A' }}<br>
@@ -169,6 +186,7 @@
             <strong>Branch Name:</strong> {{ $bank->branch_name ?? 'N/A' }}
         </div>
     @endif
+
 
     {{-- FOOTER --}}
     <div class="footer">

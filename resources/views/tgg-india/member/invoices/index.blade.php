@@ -23,6 +23,7 @@
 
         </div>
     </div>
+    @include('tgg-india.layouts.includes.message')
 
     <!-- RESPONSIVE TABLE WRAPPER -->
     <div class="table-responsive">
@@ -46,7 +47,7 @@
                     <td>{{ $invoice->source?->name ?? 'N/A' }}</td>
                     <td>{{ $invoice->target?->name ?? 'N/A' }}</td>
                     <td>{!! statusWithColor($invoice->status) !!}</td>
-                    <td>{{ $invoice->created_at ? $invoice->created_at->format('d M, Y') : 'N/A' }}</td>
+                    <td>{{ $invoice->issue_date ? $invoice->issue_date->format('d M, Y') : 'N/A' }}</td>
 
                     <td>{{ array_sum(array_column($invoice->items ?? [], 'amount')) }} INR</td>
 

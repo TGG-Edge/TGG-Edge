@@ -10,14 +10,15 @@ class Reward extends Model
     //
     protected $connection = 'mysql2';
     protected $guarded = ['id'];
+
     public function referrer()
     {
-        return $this->belongsTo(UserSecondary::class, 'referrer_id');
+        return $this->belongsTo(UserSecondary::class, 'source_id');
     }
 
     public function referred()
     {
-        return $this->belongsTo(UserSecondary::class, 'referred_id');
+        return $this->belongsTo(UserSecondary::class, 'target_id');
     }
 
 }

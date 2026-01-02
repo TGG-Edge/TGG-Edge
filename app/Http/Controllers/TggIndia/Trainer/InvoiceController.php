@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\UserSecondary;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -32,8 +33,7 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'source_id' => 'nullable|exists:users,id',
-            'target_id' => 'nullable|exists:users,id',
+            
             'issue_date' => 'nullable|date',
             'status' => 'nullable|string|max:50',
             'description' => 'nullable|string',
@@ -41,9 +41,9 @@ class InvoiceController extends Controller
         ]);
 
         $invoice = Invoice::create([
-            'invoice_number' => 'INV' . rand(10000, 99999),
-            'source_id' => $request->source_id,
-            'target_id' => $request->target_id,
+            'invoice_number' => generateInvoiceNumber($request->source_id),
+            'source_id' => Auth('web2')->id(),
+            'target_id' => 1,
             'issue_date' => $request->issue_date,
             'status' => $request->status,
             'description' => $request->description,
@@ -126,6 +126,9 @@ class InvoiceController extends Controller
         //
         $invoice = Invoice::findOrFail($id);
         $users = UserSecondary::select('id', 'name', 'email')->get();
+        if($invoice->status == 'paid'){
+            return redirect()->back()->with('error', 'Can not edit this invoice, Invoice already paid.');
+        }
         return view('tgg-india.trainer.invoices.edit', compact('invoice', 'users'));
     }
 
@@ -138,8 +141,6 @@ class InvoiceController extends Controller
         $invoice = Invoice::findOrFail($id);
 
         $invoice->update([
-            'source_id' => $request->source_id,
-            'target_id' => $request->target_id,
             'issue_date' => $request->issue_date,
             'status' => $request->status,
             'description' => $request->description,

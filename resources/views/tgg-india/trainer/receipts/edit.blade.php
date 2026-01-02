@@ -58,13 +58,54 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Description</label>
-                <textarea name="description" class="form-control" rows="3">{{ old('description', $receipt->description) }}</textarea>
-            </div>
+                <label class="form-label">Receipt Items</label>
 
-            <div class="mb-3">
-                <label class="form-label">Amount</label>
-                <input type="number" name="total" class="form-control" step="0.01" value="{{ old('total', $receipt->total) }}">
+                <div id="items-container">
+                    @forelse(old('items', $receipt->items ?? []) as $index => $item)
+                        <div class="item-row border p-3 mb-2 rounded">
+                            <div class="row">
+                                <div class="col-md-8 mb-2">
+                                    <label class="form-label">Description</label>
+                                    <textarea name="items[{{ $index }}][description]"
+                                            class="form-control" rows="2">{{ $item['description'] }}</textarea>
+                                </div>
+
+                                <div class="col-md-3 mb-2">
+                                    <label class="form-label">Amount</label>
+                                    <input type="number"
+                                        name="items[{{ $index }}][amount]"
+                                        class="form-control"
+                                        step="0.01"
+                                        value="{{ $item['amount'] }}">
+                                </div>
+
+                                <div class="col-md-1 d-flex align-items-end mb-2">
+                                    <button type="button" class="btn btn-danger btn-sm remove-item w-100">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        {{-- If no items exist --}}
+                        <div class="item-row border p-3 mb-2 rounded">
+                            <div class="row">
+                                <div class="col-md-8 mb-2">
+                                    <label class="form-label">Description</label>
+                                    <textarea name="items[0][description]" class="form-control" rows="2"></textarea>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label class="form-label">Amount</label>
+                                    <input type="number" name="items[0][amount]" class="form-control" step="0.01">
+                                </div>
+                            </div>
+                        </div>
+                    @endforelse
+                </div>
+
+                <button type="button" id="add-item" class="btn btn-success btn-sm mt-2">
+                    <i class="fas fa-plus"></i> Add Item
+                </button>
             </div>
 
             <button type="submit" class="btn btn-primary save-button">Update</button>
@@ -73,3 +114,46 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let itemIndex = document.querySelectorAll('.item-row').length;
+
+    document.getElementById('add-item').addEventListener('click', function () {
+        const container = document.getElementById('items-container');
+
+        const newItem = document.createElement('div');
+        newItem.classList.add('item-row', 'border', 'p-3', 'mb-2', 'rounded');
+
+        newItem.innerHTML = `
+            <div class="row">
+                <div class="col-md-8 mb-2">
+                    <label class="form-label">Description</label>
+                    <textarea name="items[${itemIndex}][description]" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <label class="form-label">Amount</label>
+                    <input type="number" name="items[${itemIndex}][amount]" class="form-control" step="0.01">
+                </div>
+
+                <div class="col-md-1 d-flex align-items-end mb-2">
+                    <button type="button" class="btn btn-danger btn-sm remove-item w-100">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+
+        container.appendChild(newItem);
+        itemIndex++;
+    });
+
+    document.getElementById('items-container').addEventListener('click', function (e) {
+        if (e.target.closest('.remove-item')) {
+            e.target.closest('.item-row').remove();
+        }
+    });
+});
+</script>
+@endpush

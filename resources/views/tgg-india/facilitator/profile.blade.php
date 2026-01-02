@@ -48,6 +48,24 @@
                 <label>RHM Number:</label>
                 <input type="text" name="rhm_number" class="form-control page-inputtext" value="{{ $user->rhm_number }}">
             </div>
+
+            <div class="col-md-6 mb-3 page-text">
+                <label>GST No:</label>
+                <input type="text" name="gst_no" class="form-control page-inputtext" value="{{ $user->gst_no }}">
+            </div>
+            
+            <div class="col-md-6 mb-3 page-text">
+                <label>Type of Engagement:</label>
+                <select name="type_of_engagement" class="form-control page-inputtext">
+                    <option value="">-- Select --</option>
+                    @foreach(getTypeOfEngagementOptions() as $key => $label)
+                        <option value="{{ $key }}"
+                            {{ (string)old('type_of_engagement', $user->type_of_engagement) === (string)$key ? 'selected' : '' }}>
+                            {{ $label }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
           
         </div>
 

@@ -38,10 +38,25 @@
                 </select>
             </div>
 
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label class="form-label">Reason</label>
                 <input type="text" name="reason" class="form-control" value="{{ $reward->reason }}">
-            </div>
+            </div> --}}
+
+            {{-- <div class="mb-3">
+                <label class="form-label">Reason</label>
+                <select name="reason" class="form-control" required>
+                    <option value="">-- Select Reason --</option>
+
+                    @foreach (getReasonOfReward() as $key => $value)
+                        <option value="{{ $key }}"
+                            {{ old('reason', $reward->reason ?? '') == $key ? 'selected' : '' }}>
+                            {{ $value }}
+                        </option>
+                    @endforeach
+                </select>
+            </div> --}}
+
 
             <div class="mb-3">
                 <label class="form-label">Description</label>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AuthenticateSession as MiddlewareAuthenticateSession;
+use App\Http\Middleware\DynamicRole;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsAssignee;
 use App\Http\Middleware\IsCoCreator;
@@ -51,6 +52,7 @@ return Application::configure(basePath: dirname(__DIR__))
         'facilitator' => IsFacilitator::class,
         'spouse' => IsSpouse::class,
         'freelancer' => IsFreelancer::class,
+        'dynamic_role' => DynamicRole::class,
          ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

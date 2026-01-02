@@ -46,7 +46,7 @@
                         <td>{{ $receipt->target?->name ?? 'N/A' }}</td>
                         <td>{!! statusWithColor($receipt->status) !!}</td>
 
-                        <td>{{ $receipt->created_at ? $receipt->created_at->format('d M, Y') : 'N/A' }}</td>
+                        <td>{{ $receipt->issue_date ? $receipt->issue_date->format('d M, Y') : 'N/A' }}</td>
 
                         <td>{{ array_sum(array_column( $receipt->items ?? [], 'amount')) }} INR</td>
 

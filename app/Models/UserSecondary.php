@@ -53,10 +53,6 @@ class UserSecondary extends Authenticatable
             'name' => 'Nomad Community',
             'key'  => 'nomad-community'
         ],
-        6 => [
-            'name' => 'Freelancer',
-            'key'  => 'freelancer'
-        ],
         7 => [
             'name' => 'Co Creator',
             'key'  => 'co-creator'
@@ -65,6 +61,11 @@ class UserSecondary extends Authenticatable
             'name' => 'Facilitator',
             'key'  => 'facilitator'
         ],
+        6 => [
+            'name' => 'Freelancer',
+            'key'  => 'freelancer'
+        ],
+        
         9 => [
             'name' => 'Spouse',
             'key'  => 'spouse'
@@ -84,9 +85,15 @@ class UserSecondary extends Authenticatable
     }
 
     public function getRoleNameAttribute()
-{
-    return self::$user_types[$this->user_role]['name'] ?? 'Unknown';
-}
+    {
+        return self::$user_types[$this->user_role]['name'] ?? 'Unknown';
+    }
+
+    public function getRoleKeyAttribute()
+    {
+        return self::$user_types[$this->user_role]['key'] ?? 'Unknown';
+    }
+    
     public function project()
     {
         return $this->hasOne(Project::class, 'researcher_id', 'id');

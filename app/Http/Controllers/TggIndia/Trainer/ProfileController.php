@@ -44,8 +44,10 @@ class ProfileController extends Controller
     {
         //
       $user = auth('web2')->user();
+      $idProof = \App\Models\UserIdProofSecondary::where('user_id', $user->id)->first();
+        $bankDetail = \App\Models\UserBankDetailSecondary::where('user_id', $user->id)->first();
 
-        return view('tgg-india.trainer.profile', compact('user'));
+        return view('tgg-india.trainer.profile', compact('user','idProof', 'bankDetail'));
     }
 
     /**
@@ -119,6 +121,7 @@ class ProfileController extends Controller
             'phone'           => $request->phone,
             'address'         => $request->address,
             'rhm_number'      => $request->rhm_number,
+            'type_of_engagement' => $request->type_of_engagement,
         ]);
 
         // Update image

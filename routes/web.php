@@ -11,6 +11,8 @@ use Xguard\Kanban\Models\Board;
 use Xguard\LaravelKanban\Models\Board as ModelsBoard;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\ExportController;
+use Illuminate\Support\Facades\Hash;
+use App\Models\UserSecondary;
 
 // Route::get('sheet/upload', [DataController::class, 'showUploadForm'])->name('sheet.upload.form');
 // Route::post('sheet/upload', [DataController::class, 'upload'])->name('sheet.upload');
@@ -26,6 +28,38 @@ Route::get('/referral-code', function () {
         }
     }
     return 'okay referral code done';
+});
+
+use App\Models\Invoice;
+
+Route::get('/invoices/generate-all-numbers', function () {
+
+    $invoices = Invoice::orderBy('id', 'asc')
+        ->get();
+
+    foreach ($invoices as $invoice) {
+        $invoice->invoice_number = generateInvoiceNumber($invoice->source_id);
+        $invoice->save();
+    }
+
+    return 'All invoice numbers generated successfully';
+
+})->name('invoice.generate.all');
+
+
+
+Route::get('/change-password-test', function () {
+
+    $user = UserSecondary::where('email', 'info.devfox@gmail.com')->first();
+
+    if (!$user) {
+        return 'User not found';
+    }
+
+    $user->password = Hash::make('123456');
+    $user->save();
+
+    return 'Password changed successfully';
 });
 
 

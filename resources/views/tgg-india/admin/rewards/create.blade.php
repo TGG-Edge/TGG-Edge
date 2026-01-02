@@ -11,7 +11,7 @@
             @csrf
 
             <div class="mb-3">
-                <label class="form-label">Title</label>
+                <label class="form-label">Name</label>
                 <input type="text" name="title" class="form-control" required>
             </div>
 
@@ -35,10 +35,24 @@
                 </select>
             </div>
 
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label class="form-label">Reason</label>
                 <input type="text" name="reason" class="form-control">
-            </div>
+            </div> --}}
+
+            {{-- <div class="mb-3">
+                <label class="form-label">Reason</label>
+                <select name="reason" class="form-control" required>
+                    <option value="">-- Select Reason --</option>
+
+                    @foreach (getReasonOfReward() as $key => $value)
+                        <option value="{{ $key }}"
+                            {{ old('reason', $reward->reason ?? '') == $key ? 'selected' : '' }}>
+                            {{ $value }}
+                        </option>
+                    @endforeach
+                </select>
+            </div> --}}
 
             <div class="mb-3">
                 <label class="form-label">Description</label>
@@ -48,6 +62,21 @@
             <div class="mb-3">
                 <label class="form-label">Amount</label>
                 <input type="number" name="amount" class="form-control" step="0.01">
+            </div>
+
+            {{-- <div class="mb-3">
+                <label class="form-label">Receipt No</label>
+                <input type="number" name="receipt_no" class="form-control" step="0.01">
+            </div> --}}
+
+            <div class="mb-3">
+                <label class="form-label">Entitlement</label>
+                <input type="number" name="entitlement" class="form-control" step="0.01">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Appraisal </label>
+                <input type="number" name="appraisal" class="form-control" step="0.01">
             </div>
 
             <div class="mb-3">

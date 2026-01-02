@@ -32,8 +32,6 @@ class ReceiptController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'source_id' => 'nullable|exists:users,id',
-            'target_id' => 'nullable|exists:users,id',
             'issue_date' => 'nullable|date',
             'status' => 'nullable|string|max:50',
             'description' => 'nullable|string',
@@ -41,9 +39,9 @@ class ReceiptController extends Controller
         ]);
 
         $receipt = Receipt::create([
-            'receipt_number' => 'INV' . rand(10000, 99999),
-            'source_id' => $request->source_id,
-            'target_id' => $request->target_id,
+            'receipt_number' => generateReceiptNumber(Auth('web2')->id()),
+            'source_id' => Auth('web2')->id(),
+            'target_id' => 1,
             'issue_date' => $request->issue_date,
             'status' => $request->status,
             'description' => $request->description,
@@ -83,8 +81,6 @@ class ReceiptController extends Controller
         $receipt = Receipt::findOrFail($id);
 
         $receipt->update([
-            'source_id' => $request->source_id,
-            'target_id' => $request->target_id,
             'issue_date' => $request->issue_date,
             'status' => $request->status,
             'description' => $request->description,
@@ -103,7 +99,13 @@ class ReceiptController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $receipt = Receipt::findOrFail($id);
+
+        $receipt->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Receipt deleted successfully.');
     }
 
     public function download(Receipt $receipt, $id)

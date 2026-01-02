@@ -110,10 +110,26 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
     Route::prefix('donations')->name('donations.')->group(function () {
       Route::get('/', [\App\Http\Controllers\TggIndia\Admin\DonationController::class, 'index'])->name('index');
+      Route::get('/create', [\App\Http\Controllers\TggIndia\Admin\DonationController::class, 'create'])
+        ->name('create');
+
+    Route::post('/', [\App\Http\Controllers\TggIndia\Admin\DonationController::class, 'store'])
+        ->name('store');
+
+    Route::get('/{donation}/edit', [\App\Http\Controllers\TggIndia\Admin\DonationController::class, 'edit'])
+        ->name('edit');
+
+    Route::put('/{donation}', [\App\Http\Controllers\TggIndia\Admin\DonationController::class, 'update'])
+        ->name('update');
+
+    Route::delete('/{donation}', [\App\Http\Controllers\TggIndia\Admin\DonationController::class, 'destroy'])->name('destroy');
     });
+
+    
 
     Route::prefix('payments')->name('payments.')->group(function () {
       Route::get('/', [\App\Http\Controllers\TggIndia\Admin\PaymentController::class, 'index'])->name('index');
+      
     });
 
     Route::prefix('invoices')->name('invoices.')->group(function () {
@@ -145,6 +161,11 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     });
     Route::get('enquiry/referral/tracking', [ReferralController::class, 'enquiryReferralTracking'])->name('enquiry.referral.tracking');
     
+    Route::get('/settings', [\App\Http\Controllers\TggIndia\SettingController::class, 'index'])
+        ->name('settings.index');
+
+    Route::post('/settings/update', [\App\Http\Controllers\TggIndia\SettingController::class, 'update'])
+        ->name('settings.update');
 
   });
 });

@@ -110,18 +110,28 @@
                 <strong>{{ $invoice->source?->name }}</strong><br>
                 {{ $invoice->source?->address ?? 'Address not provided' }}<br>
                 India<br>
-                Tax No: {{ $invoice->source?->tax_number ?? 'N/A' }}
+                 @php
+                $idProof = \App\Models\UserIdProofSecondary::where('user_id', $invoice->source->id)->first();
+                @endphp
+                Pan card No: {{ $idProof?->id_proof_number ?? 'N/A' }}
+                <br>
+                GST No: {{ $invoice->source?->gst_no ?? 'N/A' }}
+                <br>
+                Type Of Service: {{ $invoice->source?->type_of_engagement ?? 'N/A' }}
             </td>
             <td class="right">
                 <strong>INVOICE #{{ $invoice->invoice_number }}</strong><br>
-                Date of Issue: {{ $invoice->created_at?->format('d M, Y') ?? 'N/A' }}
+                Date of Issue: {{ $invoice->issue_date?->format('d M, Y') ?? 'N/A' }}
             </td>
         </tr>
     </table>
-
+    
     {{-- BILLING INFO --}}
     <div class="info">
-        <p><strong>Billed To:</strong> {{ $invoice->target?->name ?? 'N/A' }}</p>
+        <p><strong>Billed To:</strong> {{ $invoice->target?->address ?? 'TGG Eco Ventures Pvt. Ltd. #677, 1st
+                                        Floor, 27th Main 13th Cross, Sector-1,
+                                        HSR Layout, Bangalore-560102,
+                                        Karnataka, India' }}</p>
         <p><strong>Invoice Status:</strong> {{ ucfirst($invoice->status) }}</p>
     </div>
 
@@ -165,7 +175,8 @@
         </table>
     </div>
 
-     {{-- BANK DETAILS --}}
+    {{-- BANK DETAILS --}}
+    <br>
     @if($bank)
         <div class="bank-details">
             <strong>Bank Name:</strong> {{ $bank->bank_name ?? 'N/A' }}<br>

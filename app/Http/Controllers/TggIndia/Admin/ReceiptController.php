@@ -43,7 +43,7 @@ class ReceiptController extends Controller
         ]);
 
         $receipt = Receipt::create([
-            'receipt_number' => 'INV' . rand(10000, 99999),
+            'receipt_number' => generateReceiptNumber($request->source_id),
             'source_id' => $request->source_id,
             'target_id' => $request->target_id,
             'issue_date' => $request->issue_date,
@@ -87,7 +87,7 @@ class ReceiptController extends Controller
 
         // Create the Receipt
         $receipt = Receipt::create([
-            'receipt_number' => 'INV' . rand(10000, 99999),
+            'receipt_number' => generateReceiptNumber($request->source_id ?? auth('web2')->id()),
             'source_id'      => $request->source_id ?? auth('web2')->id(),
             'target_id'      => $request->target_id ?? 1,
             'issue_date'     => $request->issue_date ?? now(),
@@ -110,7 +110,7 @@ class ReceiptController extends Controller
         $receipt->items = $items;
         $receipt->save();
 
-        $to = UserSecondary::where('id', $request->target_id)->first()->email;
+        $to = UserSecondary::where('id', $request->target_id)->first()->email ?? null;
         $subject = 'Congratulations! You’ve Received an Incentive - TGG India';
         $view = 'tgg-india.emails.tgg-template';
         $data = [
@@ -185,7 +185,13 @@ class ReceiptController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $receipt = Receipt::findOrFail($id);
+
+        $receipt->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Receipt deleted successfully.');
     }
 
     public function download(Receipt $receipt, $id)
