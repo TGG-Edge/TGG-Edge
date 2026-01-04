@@ -72,6 +72,12 @@
                 <label>RHM Number:</label>
                 <input type="text" name="rhm_number" class="form-control page-inputtext" value="{{ $user->rhm_number }}">
             </div>
+
+            <div class="col-md-6 mb-3 page-text">
+                <label>GST No:</label>
+                <input type="text" name="gst_no" class="form-control page-inputtext" value="{{ $user->gst_no }}">
+            </div>
+            
             @if($user->user_role == 2)
             <div class="col-md-6 mb-3 page-text">
                 <label>Project:</label>

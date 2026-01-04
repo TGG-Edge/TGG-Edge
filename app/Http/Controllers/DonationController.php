@@ -54,6 +54,20 @@ class DonationController extends Controller
             'source_type'    => 'donation',
         ]);
 
+        $amount = round($request['amount'] * 0.10, 0, PHP_ROUND_HALF_UP);
+
+        Reward::create([
+            'title'       => 'Donation Incentive',
+            'source_id'   => auth('web2')->id() ?? null,  // link to payment
+            'source_type' => 'donation',
+            'target_id'   => 1, 
+            'target_type' => null,
+            'description' => 'Reward for supporting TGG India through donation from ' .session('donation.meta.user_name') ?? null .' '. session('donation.meta.user_details') ?? null,
+            'reason'      => 'donation_reward',
+            'amount'      => $amount,
+            'status'      => 'completed',
+        ]);
+
 
         $to = $request['email'];
         $subject = 'Thank You for Your Donation - TGG India';

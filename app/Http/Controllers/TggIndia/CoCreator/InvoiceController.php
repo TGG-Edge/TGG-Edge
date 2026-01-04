@@ -41,7 +41,7 @@ class InvoiceController extends Controller
         ]);
 
         $invoice = Invoice::create([
-            'invoice_number' => 'INV' . rand(10000, 99999),
+            'invoice_number' => generateInvoiceNumber($request->source_id),
             'source_id' => $request->source_id,
             'target_id' => $request->target_id,
             'issue_date' => $request->issue_date,
@@ -126,6 +126,9 @@ class InvoiceController extends Controller
         //
         $invoice = Invoice::findOrFail($id);
         $users = UserSecondary::select('id', 'name', 'email')->get();
+        if($invoice->status == 'paid'){
+            return redirect()->back()->with('error', 'Can not edit this invoice, Invoice already paid.');
+        }
         return view('tgg-india.co-creator.invoices.edit', compact('invoice', 'users'));
     }
 

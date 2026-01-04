@@ -76,7 +76,7 @@
     </div>
 
     <div class="footer-b">
-        <p>© TGG INDIA 2025 I All rights reserved</p>
+        <p>© TGG INDIA 2026 I All rights reserved</p>
     </div>
 </div>
 

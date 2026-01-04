@@ -156,7 +156,7 @@
     <div class="receipt-body">
         <div class="d-flex mb-3 date-receipt">
             <div>
-                <p><strong>DATE:</strong> {{ $receipt->created_at?->format('d M, Y') ?? 'N/A' }}</p>
+                <p><strong>DATE:</strong> {{ $receipt->issue_date?->format('d M, Y') ?? 'N/A' }}</p>
                 <div class="signature-line1"></div>
                 <p><strong>RECEIPT NO:</strong> {{ $receipt->receipt_number }}</p>
                 <div class="signature-line1"></div>
@@ -166,8 +166,11 @@
         <div class="mb-4">
             <p><strong>TO</strong>
             <div class="signature-line"></div>
-                <strong>{{ $receipt->target?->name ?? 'Name' }}</strong><br>
-                {{ $receipt->target?->address ?? 'Address' }}<br>
+                <strong>{{ $receipt->target?->name ?? 'Name' }}</strong>
+                
+                <br>
+                {{ $receipt->target?->address ?? 'Address' }}
+                <br>
                 {{ $receipt->target?->phone ?? '' }} {{ $receipt->target?->email ? '/ ' . $receipt->target?->email : '' }}
             </p>
         </div>

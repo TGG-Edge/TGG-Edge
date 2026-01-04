@@ -13,7 +13,7 @@
                 <strong>To:</strong> {{ $receipt->target?->name ?? 'N/A' }}
             </div>
             <div class="col-12 col-md-6 text-md-end">
-                <strong>Issue Date:</strong> {{ $receipt->created_at?->format('d M, Y') ?? 'N/A' }}<br>
+                <strong>Issue Date:</strong> {{ $receipt->issue_date?->format('d M, Y') ?? 'N/A' }}<br>
                 <strong>Status:</strong> {!! statusWithColor($receipt->status) !!}
             </div>
         </div>

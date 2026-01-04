@@ -846,3 +846,8 @@ button:hover {
     cursor: pointer;
     font-size: 18px;
 }
+
+
+.row{
+        flex-wrap: inherit !important;
+}

@@ -43,9 +43,11 @@ class InvoiceController extends Controller
             'total' => 'nullable|numeric',
         ]);
 
+        $sourceUser = UserSecondary::find($request->source_id);
+        $sourceUserLastInvoice = Invoice::where('source_id', $request->source_id)->count();
         $invoice = Invoice::create([
-            'invoice_number' => 'INV' . rand(10000, 99999),
             'source_id' => $request->source_id,
+            'invoice_number' => generateInvoiceNumber($request->source_id),
             'target_id' => $request->target_id,
             'issue_date' => $request->issue_date,
             'status' => $request->status,
@@ -115,6 +117,9 @@ class InvoiceController extends Controller
         //
         $invoice = Invoice::findOrFail($id);
         $users = UserSecondary::select('id', 'name', 'email')->get();
+        // if($invoice->status == 'paid'){
+        //     return redirect()->back()->with('error', 'Can not edit this invoice, Invoice already paid.');
+        // }
         return view('tgg-india.admin.invoices.edit', compact('invoice', 'users'));
     }
 
@@ -147,7 +152,13 @@ class InvoiceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $nvoice = Invoice::findOrFail($id);
+
+        $nvoice->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Invoice deleted successfully.');
     }
 
     public function download(Invoice $invoice, $id)

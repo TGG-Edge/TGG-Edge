@@ -61,7 +61,7 @@
                 <!-- social links area -->
                 <!-- social links area -->
                 <div class="footer-menu"><!-- Footer Menu-->
-                    <div class="site-info">All Rights Reserved.&nbsp; TGG Foundation Charitable Trust ©2025.&nbsp;
+                    <div class="site-info">All Rights Reserved.&nbsp; TGG Foundation Charitable Trust ©2026.&nbsp;
                         Designed By&nbsp;<a href="https://www.tggindia.com" > TGG India&nbsp;&nbsp;</a> &nbsp;&nbsp; <i></i> &nbsp; &nbsp; &nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div><!-- .site-info -->

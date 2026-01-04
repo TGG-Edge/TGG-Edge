@@ -1862,6 +1862,58 @@ body {
 }
 
 .enquirybox{
-    width: 1060px !important;
+    /* width: 1060px !important; */
     max-width: 100%;
+}
+
+
+.ck-editor-template img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block;
+}
+
+
+/* Apply .form-control styles to Select2 */
+.select2-container .select2-selection--single {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 13px !important;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    height: 40px !important;
+}
+
+/* Center text vertically */
+.select2-container .select2-selection__rendered {
+    line-height: 40px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Arrow alignment */
+.select2-container .select2-selection__arrow {
+    height: 40px;
+}
+
+/* Force Select2 border same as Bootstrap input */
+.select2-container .select2-selection--single {
+    border-color: var(--bs-border-color) !important;
+}
+
+/* On focus – same as normal input (no darker grey) */
+.select2-container--default.select2-container--focus 
+.select2-selection--single {
+    border-color: var(--bs-border-color) !important;
+    box-shadow: none !important;
 }

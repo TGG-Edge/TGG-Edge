@@ -119,6 +119,7 @@ class ProfileController extends Controller
             'phone'           => $request->phone,
             'address'         => $request->address,
             'rhm_number'      => $request->rhm_number,
+            'type_of_engagement' => $request->type_of_engagement,
         ]);
 
         // Update image

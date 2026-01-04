@@ -34,7 +34,7 @@
         @include('tgg-india.layouts.includes.message')
         {{-- Left: Form --}}
         <div class="col-md-8">
-            <div class="card shadow rounded-4 p-4 mb-4">
+            <div class="card shadow rounded-4 p-4 ">
                 {{-- <h4 class="text-center mb-4">{{ strtoupper($user_type) }} REGISTRATION</h4> --}}
                 <h4 class="text-center mb-4">CO-CREATOR REGISTRATION</h4>
                  <p class="text-muted small mb-4">
@@ -138,16 +138,16 @@
     </div>
 
     {{-- Section 3: Donation with Image Left --}}
-    <div class="row g-4 ">
+    {{-- <div class="row g-4 "> --}}
         {{-- Left: Image --}}
-        <div class="col-md-4">
+        {{-- <div class="col-md-4">
             <div class="card shadow rounded-4 overflow-hidden">
                 <img style="height: 500px" src="{{ asset('assets/tgg-india/images/donation-left.png') }}" class="img-fluid w-100" alt="Donation Image">
             </div>
-        </div>
+        </div> --}}
 
         {{-- Right: Donation Form --}}
-        <div class="col-md-8">
+        {{-- <div class="col-md-8">
             <div class="card shadow rounded-4 p-4 mb-4">
                 <h5 class="mb-3"> Make a Donation <small class="text-muted">(Optional)</small></h5>
                 <p class="text-muted small">
@@ -204,7 +204,7 @@
                     <button type="submit" class="btn btn-success w-100 mt-2">Submit</button>
                 </form>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection

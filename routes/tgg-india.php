@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\EmailCheckController;
 use App\Http\Controllers\TggIndia\Admin\ApplicationController;
 use App\Http\Controllers\TggIndia\Admin\FeatureLimitController;
 use App\Http\Controllers\TggIndia\Admin\IncentiveController;
@@ -22,8 +24,7 @@ use App\Models\Incentive;
 use App\Models\Reward;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExportController;
-
-
+use App\Http\Controllers\TemplateController;
 
 Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->group(function () {
 
@@ -60,6 +61,83 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
   Route::get('/download-excel/{model}', [ExportController::class, 'downloadExcel'])
     ->name('download.excel');
+  
+
+  //dynamic routes based on modules
+  Route::middleware(['dynamic_role:1,6'])
+    ->get('/{role}/templates', [TemplateController::class, 'index'])->name('templates.index');
+  Route::middleware(['dynamic_role:1,6'])
+    ->get('/{role}/templates/create', [TemplateController::class, 'create'])->name('templates.create');
+  Route::middleware(['dynamic_role:1,6'])
+  ->get('/{role}/templates/edit', [TemplateController::class, 'edit'])->name('templates.edit');
+  Route::middleware(['dynamic_role:1,6'])
+  ->get('/{role}/templates/show', [TemplateController::class, 'show'])->name('templates.show');
+  Route::middleware(['dynamic_role:1,6'])
+  ->get('/templates/delete/{id}', [TemplateController::class, 'destroy'])->name('templates.destroy');
+  Route::middleware(['dynamic_role:1,6'])
+  ->post('/templates/store', [TemplateController::class, 'store'])->name('templates.store');
+  Route::middleware(['dynamic_role:1,6'])
+  ->post('/templates/update/{id}', [TemplateController::class, 'update'])->name('templates.update');
+
+  Route::middleware(['dynamic_role:1,6'])
+      ->get('/{role}/campaigns', [CampaignController::class, 'index'])
+      ->name('campaigns.index');
+
+  Route::middleware(['dynamic_role:1,6'])
+      ->get('/{role}/campaigns/create', [CampaignController::class, 'create'])
+      ->name('campaigns.create');
+
+  Route::middleware(['dynamic_role:1,6'])
+      ->post('/campaigns/store', [CampaignController::class, 'store'])
+      ->name('campaigns.store');
+
+  Route::middleware(['dynamic_role:1,6'])
+      ->get('/{role}/campaigns/edit/{id}', [CampaignController::class, 'edit'])
+      ->name('campaigns.edit');
+
+  Route::middleware(['dynamic_role:1,6'])
+      ->post('/campaigns/update/{id}', [CampaignController::class, 'update'])
+      ->name('campaigns.update');
+
+  Route::middleware(['dynamic_role:1,6'])
+      ->get('/{role}/campaigns/show/{id}', [CampaignController::class, 'show'])
+      ->name('campaigns.show');
+
+  Route::middleware(['dynamic_role:1,6'])
+      ->get('/campaigns/delete/{id}', [CampaignController::class, 'destroy'])
+      ->name('campaigns.delete');
+      
+  Route::middleware(['dynamic_role:1,6'])
+    ->get('/{role}/campaigns/{id}', [CampaignController::class, 'show'])
+    ->name('campaigns.show');
+
+  Route::middleware(['dynamic_role:1,6'])->group(function () {
+
+      Route::get('/{role}/email-check', 
+          [EmailCheckController::class, 'index']
+      )->name('email-check.index');
+
+      Route::get('/{role}/email-check/create', 
+          [EmailCheckController::class, 'create']
+      )->name('email-check.create');
+
+      Route::post('/email-check/store', 
+          [EmailCheckController::class, 'store']
+      )->name('email-check.store');
+
+      Route::get('/{role}/email-check/show/{id}', 
+          [EmailCheckController::class, 'show']
+      )->name('email-check.show');
+
+      Route::get('/{role}/email-check/download', 
+          [EmailCheckController::class, 'downloadValid']
+      )->name('email-check.download');
+
+      Route::get('/email-check/delete/{id}', [EmailCheckController::class, 'destroy'])
+      ->name('email-check.delete');
+  });
+
+
   
 
 });

@@ -13,6 +13,7 @@ class Invoice extends Model
      protected $casts = [
         'items' => 'array',
         'payload' => 'array',
+        'issue_date' => 'date',
     ];
 
 

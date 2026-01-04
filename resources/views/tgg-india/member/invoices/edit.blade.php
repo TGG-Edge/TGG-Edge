@@ -47,7 +47,7 @@
                 <div class="col-12 col-md-6">
                     <label class="form-label">Issue Date</label>
                     <input type="date" name="issue_date" class="form-control"
-                        value="{{ old('issue_date', $invoice->created_at ? $invoice->created_at->format('Y-m-d') : '') }}">
+                        value="{{ old('issue_date', $invoice->issue_date ? $invoice->issue_date->format('Y-m-d') : '') }}">
                 </div>
 
                 {{-- STATUS --}}

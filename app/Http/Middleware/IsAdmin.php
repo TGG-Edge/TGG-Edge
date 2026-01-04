@@ -16,7 +16,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-       $isWebLoggedIn  = Auth::guard('web')->check();
+        $isWebLoggedIn  = Auth::guard('web')->check();
         $isWeb2LoggedIn = Auth::guard('web2')->check();
 
         // If user is not logged in at all

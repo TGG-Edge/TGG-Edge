@@ -15,7 +15,7 @@ class RewardController extends Controller
     public function index()
     {
         //
-        $rewards = Reward::paginate(10);
+        $rewards = Reward::latest()->paginate(10);
         return view('tgg-india.admin.rewards.index', compact('rewards'));
     }
 
@@ -39,6 +39,7 @@ class RewardController extends Controller
             'amount' => 'nullable|numeric',
             'status' => 'required|string',
         ]);
+        
         Reward::create($request->all());
 
         return redirect()->route('tgg-india.admin.rewards.index')->with('success', 'Reward created successfully!');
@@ -66,6 +67,14 @@ class RewardController extends Controller
         ]);
 
         $reward->update($request->all());
+
+        $data = $request->except('amount');
+
+        if ($request->filled('amount')) {
+            $data['amount'] = round($request->amount, 0, PHP_ROUND_HALF_UP);
+        }
+
+        $reward->update($data);
 
         return redirect()->route('tgg-india.admin.rewards.index')->with('success', 'Reward updated successfully!');
     }

@@ -72,10 +72,10 @@
                                     <label>Proof Type:</label>
                                     <select name="id_proof_type" class="form-control page-inputtext">
                                         <option value="">-- Select Proof Type --</option>
-                                        <option value="Aadhaar" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'Aadhaar') ? 'selected' : '' }}>Aadhaar</option>
+                                        {{-- <option value="Aadhaar" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'Aadhaar') ? 'selected' : '' }}>Aadhaar</option> --}}
                                         <option value="PAN" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'PAN') ? 'selected' : '' }}>PAN</option>
-                                        <option value="Voter ID" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'Voter ID') ? 'selected' : '' }}>Voter ID</option>
-                                        <option value="Driving License" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'Driving License') ? 'selected' : '' }}>Driving License</option>
+                                        {{-- <option value="Voter ID" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'Voter ID') ? 'selected' : '' }}>Voter ID</option>
+                                        <option value="Driving License" {{ (old('id_proof_type', $idProof?->id_proof_type) == 'Driving License') ? 'selected' : '' }}>Driving License</option> --}}
                                     </select>
                                 </div>
 

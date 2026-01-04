@@ -41,7 +41,7 @@ class ReceiptController extends Controller
         ]);
 
         $receipt = Receipt::create([
-            'receipt_number' => 'INV' . rand(10000, 99999),
+            'receipt_number' => generateReceiptNumber($request->source_id ?? auth('web2')->id()),
             'source_id' => $request->source_id,
             'target_id' => $request->target_id,
             'issue_date' => $request->issue_date,

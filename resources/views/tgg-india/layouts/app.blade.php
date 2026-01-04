@@ -13,6 +13,8 @@
   <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/tgg-india/css/header-footer.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
   <!-- Choices.js CSS -->
   <link rel="stylesheet" href="{{ asset('assets/choices/choices.min.css') }}">
@@ -62,7 +64,7 @@
   {{-- ===========================
        MOBILE SIDEBAR (FULLY REMOVED)
        =========================== --}}
-{{-- @if(!request()->is('tgg-meta/tgg-india/login/XCJBDSNJK43RWEFSKDJCXNFL34KRN3DKL3MREFWLMNKL32M') && !request()->is('tgg-meta/tgg-india/register/DSLKFN43KREFWLDCMXKLWNEMR34RKL32NWMEDKQWJASNCKNRWDECNK3EW'))
+@if(isset($is_sidebar) && $is_sidebar !== false)
          
   <div id="mobileSidebar" class="mobile-sidebar d-lg-none">
       <div class="mobile-sidebar-content">
@@ -80,48 +82,50 @@
       </div>
   </div>
   
-@endif --}}
+@endif
 
-  {{-- ===========================
-       MOBILE SIDEBAR SCRIPT (FULLY REMOVED)
-       =========================== --}}
-{{--
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const sidebar = document.getElementById('mobileSidebar');
-        const toggle = document.getElementById('mobileSidebarToggle');
-        const close = document.getElementById('mobileSidebarClose');
 
-        if (toggle && sidebar) {
-            toggle.addEventListener('click', function() {
-                sidebar.classList.add('active');
-            });
-        }
 
-        if (close && sidebar) {
-            close.addEventListener('click', function() {
-                sidebar.classList.remove('active');
-            });
-        }
-    });
-</script>
---}}
 
   @include('tgg-india.layouts.includes.footer')
 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('mobileSidebar');
+            const toggle = document.getElementById('mobileSidebarToggle');
+            const close = document.getElementById('mobileSidebarClose');
+
+            if (toggle && sidebar) {
+                toggle.addEventListener('click', function() {
+                    sidebar.classList.add('active');
+                });
+            }
+
+            if (close && sidebar) {
+                close.addEventListener('click', function() {
+                    sidebar.classList.remove('active');
+                });
+            }
+        });
+    </script>
+
   <!-- Choices.js JS -->
   <script src="{{ asset('assets/choices/choices.min.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
   <script>
-  document.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('select[multiple]').forEach(function (el) {
-          new Choices(el, {
-              removeItemButton: true,
-              placeholderValue: el.getAttribute('placeholder') || 'Select options',
-              searchEnabled: true,
-          });
-      });
-  });
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('select[multiple]').forEach(function (el) {
+            new Choices(el, {
+                removeItemButton: true,
+                placeholderValue: el.getAttribute('placeholder') || 'Select options',
+                searchEnabled: true,
+            });
+        });
+    });
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -161,77 +165,79 @@
   <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/super-build/ckeditor.js"></script>
 
   <script>
-  document.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('.js-ckeditor').forEach(function (el) {
-          if (el.dataset.ckeditorInited) return;
-          el.dataset.ckeditorInited = '1';
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.js-ckeditor').forEach(function (el) {
+            if (el.dataset.ckeditorInited) return;
+            el.dataset.ckeditorInited = '1';
 
-          CKEDITOR.ClassicEditor.create(el, {
-              extraPlugins: [ MyCustomUploadAdapterPlugin ],
-              removePlugins: [
-                  'CKBox','CKFinder','CKFinderUploadAdapter','EasyImage',
-                  'RealTimeCollaborativeComments','RealTimeCollaborativeTrackChanges',
-                  'RealTimeCollaborativeRevisionHistory','PresenceList','Comments',
-                  'TrackChanges','TrackChangesData','RevisionHistory','Pagination',
-                  'WProofreader','MathType','DocumentOutline','ExportPdf','ExportWord',
-                  'TableOfContents','FormatPainter','Template','SlashCommand',
-                  'PasteFromOfficeEnhanced'
-              ],
-              toolbar: [
-                  'heading', '|', 'bold', 'italic', 'underline', 'link', '|',
-                  'bulletedList', 'numberedList', '|', 'insertTable', 'blockQuote',
-                  'imageUpload', 'undo', 'redo', '|', 'sourceEditing'
-              ],
-              htmlSupport: {
-                  allow: [{ name: /.*/, attributes: true, classes: true, styles: true }]
-              },
-              image: {
-                  resizeUnit: '%',
-                  resizeOptions: [
-                      { name: 'resizeImage:original', label: 'Original', value: null },
-                      { name: 'resizeImage:25', label: '25%', value: '25' },
-                      { name: 'resizeImage:50', label: '50%', value: '50' },
-                      { name: 'resizeImage:75', label: '75%', value: '75' }
-                  ],
-                  toolbar: [
-                      'imageStyle:inline','imageStyle:block','imageStyle:side','|',
-                      'resizeImage','imageTextAlternative'
-                  ]
-              }
-          }).then(editor => {
-              editor.editing.view.change(writer => {
-                  writer.setStyle('font-size', '13px', editor.editing.view.document.getRoot());
-                  writer.setStyle('color', '#000', editor.editing.view.document.getRoot());
-                  writer.setStyle('font-family', 'poppins, system-ui, Arial, sans-serif', editor.editing.view.document.getRoot());
-              });
-          }).catch(console.error);
-      });
-  });
+            CKEDITOR.ClassicEditor.create(el, {
+                extraPlugins: [ MyCustomUploadAdapterPlugin ],
+                removePlugins: [
+                    'Base64UploadAdapter','CKBox','CKFinder','CKFinderUploadAdapter','EasyImage',
+                    'RealTimeCollaborativeComments','RealTimeCollaborativeTrackChanges',
+                    'RealTimeCollaborativeRevisionHistory','PresenceList','Comments',
+                    'TrackChanges','TrackChangesData','RevisionHistory','Pagination',
+                    'WProofreader','MathType','DocumentOutline','ExportPdf','ExportWord',
+                    'TableOfContents','FormatPainter','Template','SlashCommand',
+                    'PasteFromOfficeEnhanced'
+                ],
+                toolbar: [
+                    'heading', '|', 'bold', 'italic', 'underline', 'link', '|',
+                    'bulletedList', 'numberedList', '|', 'insertTable', 'blockQuote',
+                    'imageUpload', 'undo', 'redo', '|', 'sourceEditing'
+                ],
+                htmlSupport: {
+                    allow: [{ name: /.*/, attributes: true, classes: true, styles: true }]
+                },
+                image: {
+                    resizeUnit: '%',
+                    resizeOptions: [
+                        { name: 'resizeImage:original', label: 'Original', value: null },
+                        { name: 'resizeImage:25', label: '25%', value: '25' },
+                        { name: 'resizeImage:50', label: '50%', value: '50' },
+                        { name: 'resizeImage:75', label: '75%', value: '75' },
+                        { name: 'resizeImage:100', label: '100%', value: '100' }
+                    ],
+                    toolbar: [
+                        'imageStyle:inline','imageStyle:block','imageStyle:side','|',
+                        'resizeImage','imageTextAlternative'
+                    ]
+                }
+            }).then(editor => {
+                editor.editing.view.change(writer => {
+                    writer.setStyle('font-size', '13px', editor.editing.view.document.getRoot());
+                    writer.setStyle('color', '#000', editor.editing.view.document.getRoot());
+                    writer.setStyle('font-family', 'poppins, system-ui, Arial, sans-serif', editor.editing.view.document.getRoot());
+                });
+                
+            }).catch(console.error);
+        });
+    });
 
-  class UploadAdapter {
-      constructor(loader) { this.loader = loader; }
-      upload() {
-          return this.loader.file.then(file => new Promise((resolve, reject) => {
-              const data = new FormData();
-              data.append('upload', file);
-              data.append('_token', '{{ csrf_token() }}');
-              fetch('{{ route('ckeditor.upload') }}', {
-                  method: 'POST',
-                  body: data
-              })
-              .then(res => res.json())
-              .then(data => {
-                  if (data.url) resolve({ default: data.url });
-                  else reject(data.error || 'Upload failed');
-              })
-              .catch(reject);
-          }));
-      }
-      abort() {}
-  }
-  function MyCustomUploadAdapterPlugin(editor) {
-      editor.plugins.get('FileRepository').createUploadAdapter = loader => new UploadAdapter(loader);
-  }
+    class UploadAdapter {
+        constructor(loader) { this.loader = loader; }
+        upload() {
+            return this.loader.file.then(file => new Promise((resolve, reject) => {
+                const data = new FormData();
+                data.append('upload', file);
+                data.append('_token', '{{ csrf_token() }}');
+                fetch('{{ route('ckeditor.upload') }}', {
+                    method: 'POST',
+                    body: data
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.url) resolve({ default: data.url });
+                    else reject(data.error || 'Upload failed');
+                })
+                .catch(reject);
+            }));
+        }
+        abort() {}
+    }
+    function MyCustomUploadAdapterPlugin(editor) {
+        editor.plugins.get('FileRepository').createUploadAdapter = loader => new UploadAdapter(loader);
+    }
   </script>
 
   @stack('scripts')

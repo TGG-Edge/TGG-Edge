@@ -6,6 +6,10 @@
 <div class="admin-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-3 trainer-heading">Donations</h4>
+         <a href="{{ route('tgg-india.admin.donations.create') }}"
+       class="btn btn-primary assignment-button">
+        <i class="bi bi-plus-lg"></i> + New Donation
+    </a>
     </div>
 
     <!-- Responsive scrollable table -->
@@ -14,13 +18,13 @@
             <thead class="table-dark">
                 <tr>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
+                    <th>RHM Reg. No</th>
                     <th>PAN Card</th>
-                    <th>Amount (₹)</th>
                     <th>Purpose</th>
+                    <th>Type</th>
+                    <th>Amount (₹)</th>
                     <th>Receipt No.</th>
-                    <th>Date</th>
+                    <th>Created At</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -28,17 +32,50 @@
                 @forelse($donations as $donation)
                 <tr>
                     <td>{{ $donation->name }}</td>
-                    <td>{{ $donation->email }}</td>
-                    <td>{{ $donation->phone }}</td>
+                    @php
+                        $user = \App\Models\UserSecondary::where('email', $donation->email)->first();
+                    @endphp
+                    <td>{{  $user->rhm_number ?? 'N/A'  }}</td>
                     <td>{{ $donation->pan_card_number ?? 'N/A' }}</td>
-                    <td>{{ number_format($donation->amount, 2) }}</td>
                     <td>{{ $donation->purpose }}</td>
-                    <td>{{ $donation->receipt_number ?? 'Pending' }}</td>
+                    <td>{{ getDonationType()[$donation->type] ?? 'N/A' }}</td>
+                    <td>{{ number_format($donation->amount, 2) }}</td>
+                    <td>{{ $donation->receipt_number ?? 'N/A' }}</td>
                     <td>{{ \Carbon\Carbon::parse($donation->created_at)->format('d M Y') }}</td>
                     <td>
-                        <a href="#" class="btn btn-primary btn-sm">
+                       <div class="d-flex align-items-center justify-content-center flex-wrap">
+
+                        {{-- View --}}
+                        {{-- <a href="{{ route('tgg-india.admin.donations.show', $donation->id) }}"
+                        class="btn btn-info btn-sm me-2 d-flex align-items-center justify-content-center p-0"
+                        target="_blank"
+                        style="width:28px;height:28px;">
                             <i class="fas fa-eye"></i>
+                        </a> --}}
+
+                        {{-- Edit --}}
+                        <a href="{{ route('tgg-india.admin.donations.edit', $donation->id) }}"
+                        class="btn btn-primary btn-sm me-2 d-flex align-items-center justify-content-center p-0"
+                        style="width:28px;height:28px;">
+                            <i class="fas fa-edit"></i>
                         </a>
+
+                        {{-- Delete --}}
+                        <form action="{{ route('tgg-india.admin.donations.destroy', $donation->id) }}"
+                            method="POST"
+                            style="display:inline;"
+                            onsubmit="return confirm('Are you sure you want to delete this donation?')">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit"
+                                class="btn btn-danger btn-sm d-flex align-items-center justify-content-center p-0 me-2 me-md-0"
+                                style="width:28px;height:28px;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+
+                    </div>
                     </td>
                 </tr>
                 @empty

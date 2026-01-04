@@ -1,6 +1,11 @@
 <?php
 
+use App\Models\Invoice;
+use App\Models\Receipt;
 use App\Models\UserSecondary;
+use App\Models\Setting;
+use Illuminate\Support\Facades\Cache;
+
 
 if (!function_exists('featureList')) {
     function featureList()
@@ -58,7 +63,9 @@ if (! function_exists('statusWithColor')) {
             'pending'     => '<span class="badge page-button bg-warning text-dark">' . ucfirst($status) . '</span>',
             'in_progress' => '<span class="badge page-button bg-primary">' . ucfirst(str_replace('_', ' ', $status)) . '</span>',
             'accepted'    => '<span class="badge page-button bg-info text-dark">' . ucfirst($status) . '</span>',
+            'paid'    => '<span class="badge page-button bg-info text-dark">' . ucfirst($status) . '</span>',
             'rejected'    => '<span class="badge page-button bg-danger">' . ucfirst($status) . '</span>',
+            'unpaid'    => '<span class="badge page-button bg-danger">' . ucfirst($status) . '</span>',
             'completed'   => '<span class="badge page-button bg-success">' . ucfirst($status) . '</span>',
             default       => '<span class="badge page-button bg-secondary">' . ucfirst($status) . '</span>',
         };
@@ -172,9 +179,9 @@ if (!function_exists('validatePattern')) {
 
             // ===== CUSTOM =====
             'rhm_number' => [
-                // Format: RHM/KL/QLN/0001 (supports any 2–4 letter state and district)
-                'regex' => '/^RHM\/[A-Z]{2,3}\/[A-Z]{2,4}\/[0-9]{4}$/',
-                'example' => 'Rhm Number Correct Format is: RHM/KL/QLN/0001'
+                // Format: RHM/KL/QLN/1 (supports any 2–4 letter state and district)
+                'regex' => '/^RHM\/[A-Z]{2,3}\/[A-Z]{2,4}\/[0-9]{1,4}$/',
+                'example' => 'Rhm Number Correct Format is: RHM/KL/QLN/1'
             ],
         ];
 
@@ -191,5 +198,106 @@ if (!function_exists('validatePattern')) {
 
         // Failed — return example format
         return [false, $patterns[$type]['example']];
+    }
+}
+
+
+function generateInvoiceNumber($sourceId)
+{
+    $sourceUser = UserSecondary::find($sourceId);
+    $sourceUserLastInvoice = Invoice::where('source_id', $sourceId)->count();
+    return 'INV-'. str_replace('/', '-', $sourceUser->rhm_number).'-' . ($sourceUserLastInvoice + 1);
+}
+
+function generateReceiptNumber($sourceId)
+{
+    $sourceUser = UserSecondary::find($sourceId);
+    $sourceUserLastInvoice = Receipt::where('source_id', $sourceId)->count();
+    return 'RPT-'. str_replace('/', '-', $sourceUser->rhm_number).'-' . ($sourceUserLastInvoice + 1);
+}
+
+function getTypeOfEngagementOptions()
+{
+    return [
+        1 => 'Technical Service',
+        2 => 'Professional Service',
+    ];
+}
+
+function getReasonOfReward()
+{
+    return [
+        'RHM Center' => 'RHM Center',
+        'TGG AID' => 'TGG AID',
+        'TGG GRANT' => 'TGG GRANT',
+    ];
+}
+
+function getDonationType()
+{
+    return [
+        1 => '80G',
+        2 => 'FCRA',
+    ];
+}
+
+
+if (!function_exists('setting')) {
+
+    /**
+     * Get setting value by dot notation
+     * Example: setting('general.site_name')
+     */
+    function setting(string $key, $default = null)
+    {
+        [$group, $settingKey] = array_pad(explode('.', $key, 2), 2, null);
+
+        if (!$group || !$settingKey) {
+            return $default;
+        }
+
+        return Cache::rememberForever("setting.{$group}.{$settingKey}", function () use ($group, $settingKey, $default) {
+            return Setting::getValue($group, $settingKey, $default);
+        });
+    }
+}
+
+
+if (!function_exists('entitlement_plan')) {
+
+    function entitlement_plan(int $value, $default = 'basic')
+    {
+        $rules = setting('general.entitlement_rules', []);
+
+        foreach ($rules as $rule) {
+            if (
+                $value >= $rule['min'] &&
+                (is_null($rule['max']) || $value <= $rule['max'])
+            ) {
+                return $rule['plan'];
+            }
+        }
+
+        return $default;
+    }
+}
+
+
+if (!function_exists('appraisal_plan')) {
+
+    function appraisal_plan(int $value, $default = 'basic')
+    {
+        $rules = setting('general.appraisal_rules', []);
+
+        foreach ($rules as $rule) {
+            if (
+                $value >= $rule['min'] &&
+                (is_null($rule['max']) || $value <= $rule['max'])
+            ) {
+                return $rule['plan'];
+            }
+        }
+
+        return $default;
     }
 }

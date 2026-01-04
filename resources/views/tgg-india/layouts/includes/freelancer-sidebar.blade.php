@@ -81,6 +81,49 @@
         </div>
     </div>
 
+    <div class="dropdown">
+        <a href="#"
+            class="dropdown-toggle d-flex justify-content-between align-items-center
+            {{ request()->is('tgg-meta/tgg-india/*/templates*') ? 'active' : '' }}"
+            data-bs-toggle="collapse"
+            data-bs-target="#campaignDropdown"
+            aria-expanded="{{ request()->is('tgg-meta/tgg-india/*/templates*') ? 'true' : 'false' }}">
+            
+            <span>
+                <i class="fas fa-bullhorn me-2"></i> Campaign
+            </span>
+            <i class="fas fa-caret-down"></i>
+        </a>
+
+        <div class="collapse ps-3
+            {{ request()->is('tgg-meta/tgg-india/*/templates*') ? 'show' : '' }}"
+            id="campaignDropdown">
+
+            {{-- Templates --}}
+            {{-- <a href="{{ route('tgg-india.templates.index', 'freelancer') }}"
+            class="d-block py-1
+            {{ request()->is('tgg-meta/tgg-india/*/templates') ? 'active' : '' }}">
+                <i class="fas fa-envelope-open-text me-2"></i> Templates
+            </a> --}}
+
+            {{-- Future (campaigns, logs, reports) --}}
+            
+            <a href="{{ route('tgg-india.campaigns.index', 'freelancer') }}"
+                class="d-block py-1
+                {{ request()->is('tgg-meta/tgg-india/*/campaigns*') ? 'active' : '' }}">
+                    <i class="fas fa-paper-plane me-2"></i> Campaigns
+            </a>
+        
+            <a href="{{ route('tgg-india.email-check.index', 'freelancer') }}"
+            class="d-block py-1
+            {{ request()->is('tgg-meta/tgg-india/*/email-check*') ? 'active' : '' }}">
+                <i class="fas fa-envelope-circle-check me-2"></i> Email Check
+            </a>
+
+
+        </div>
+    </div>
+
 
     <div class="dropdown">
         <a href="#referrallink"

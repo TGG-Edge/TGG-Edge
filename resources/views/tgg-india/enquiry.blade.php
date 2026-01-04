@@ -25,110 +25,111 @@
             @endphp
             {!! $content->content ?? '' !!}
 
-            <div class="card shadow-lg rounded-4 p-4 enquirybox">
-                <h1>"dhcjgjsdgjsgdcjdg"</h1>
-            </div>
             <hr>
-            <div class="card shadow rounded-4 p-4 enquirybox">
-                <h4 class="text-center mb-3">Fill the following details to participate</h4>
+            
+            <div class="container referral-page">
 
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                @endif
-
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                @endif
-
-                <form method="POST" action="{{ route('tgg-india.enquiry.referral.store', $referral_code) }}">
-                    @csrf
-                    <div class="row">
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Full Name *</label>
-                            <input type="text" name="name" class="form-control" required>
+                <div class="card shadow rounded-2 p-4 enquirybox">
+                    <h4 class="text-center mb-3">Fill the following details to participate</h4>
+    
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
-
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Email *</label>
-                            <input type="email" name="email" class="form-control" required>
+                    @endif
+    
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
-
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Phone *</label>
-                            <input type="text" name="phone" class="form-control" required>
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Address</label>
-                            <input type="text" name="address" class="form-control">
-                        </div>
-
-                        {{-- <div class="mb-3 col-md-12">
+                    @endif
+    
+                    <form method="POST" action="{{ route('tgg-india.enquiry.referral.store', $referral_code) }}">
+                        @csrf
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Full Name *</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+    
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Email *</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+    
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Phone *</label>
+                                <input type="text" name="phone" class="form-control" required>
+                            </div>
+    
+                            <div class="mb-3 col-md-6">
+                                <label class="form-label">Address</label>
+                                <input type="text" name="address" class="form-control">
+                            </div>
+    
+                            {{-- <div class="mb-3 col-md-12">
+                                <label class="form-label">Role *</label>
+                                <select name="role" class="form-select" required>
+                                    <option value="">Select Role</option>
+                                    <option value="Advisor">Advisor</option>
+                                    <option value="Trainer">Trainer</option>
+                            <option value="Co-Creator">Co-Creator</option>
+                            <option value="Facilitator">Facilitator</option>
+                                </select>
+                            </div> --}}
+    
+                            @php
+                            // Your role definitions from model
+                        $roleTypes = \App\Models\UserSecondary::$user_types;
+    
+                            // Allowed role mapping
+                            $availableRoleOptions = [
+                                'admin' => ['advisor', 'co-creator', 'facilitator', 'freelancer', 'spouse'],
+                                'advisor' => ['co-creator'],
+                                'co-creator' => ['freelancer'],
+                                'facilitator' => ['advisor'],
+                                'spouse' => ['spouse'],
+                                'freelancer' => ['advisor','co-creator','facilitator', 'freelancer'],
+                            ];
+    
+                            // Get user role key
+                            $roleKey = $roleKey ?? null;
+    
+                            // Get allowed roles for this user
+                            $allowed = $availableRoleOptions[$roleKey] ?? [];
+                        @endphp
+    
+                        <div class="mb-3 col-md-12">
                             <label class="form-label">Role *</label>
                             <select name="role" class="form-select" required>
                                 <option value="">Select Role</option>
-                                <option value="Advisor">Advisor</option>
-                                <option value="Trainer">Trainer</option>
-                        <option value="Co-Creator">Co-Creator</option>
-                        <option value="Facilitator">Facilitator</option>
+    
+                                @foreach($roleTypes as $role)
+                                    @if(in_array($role['key'], $allowed))
+                                        <option value="{{ $role['name'] }}">{{ $role['name'] }}</option>
+                                    @endif
+                                @endforeach
                             </select>
-                        </div> --}}
-
-                        @php
-                        // Your role definitions from model
-                        $roleTypes = \App\Models\UserSecondary::$user_types;
-
-                        // Allowed role mapping
-                        $availableRoleOptions = [
-                            'admin' => ['advisor', 'co-creator', 'facilitator', 'freelancer', 'spouse'],
-                            'advisor' => ['co-creator'],
-                            'co-creator' => ['freelancer'],
-                            'facilitator' => ['advisor'],
-                            'spouse' => ['spouse'],
-                            'freelancer' => ['facilitator'],
-                        ];
-
-                        // Get user role key
-                        $roleKey = $roleKey ?? null;
-
-                        // Get allowed roles for this user
-                        $allowed = $availableRoleOptions[$roleKey] ?? [];
-                    @endphp
-
-                    <div class="mb-3 col-md-12">
-                        <label class="form-label">Role *</label>
-                        <select name="role" class="form-select" required>
-                            <option value="">Select Role</option>
-
-                            @foreach($roleTypes as $role)
-                                @if(in_array($role['key'], $allowed))
-                                    <option value="{{ $role['name'] }}">{{ $role['name'] }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-
-
-                        <div class="mb-3 col-12">
-                            <label class="form-label">Message (Optional)</label>
-                            <textarea name="message" rows="3" class="form-control" placeholder="Any specific details..."></textarea>
                         </div>
-                    </div>
-
-                    <button type="submit" class="btn w-100 text-white" style="background-color:#033576;">
-                        Submit
-                    </button>
-                </form>
+    
+    
+                            <div class="mb-3 col-12">
+                                <label class="form-label">Message (Optional)</label>
+                                <textarea name="message" rows="3" class="form-control" placeholder="Any specific details..."></textarea>
+                            </div>
+                        </div>
+    
+                        <button type="submit" class="btn w-100 text-white" style="background-color:#033576;">
+                            Submit
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
         {{-- <hr> --}}
