@@ -67,7 +67,7 @@
                                 </a> --}}
 
                                 <!-- Delete -->
-                                <form action="{{ route('tgg-india.admin.rewards.destroy', $reward->id) }}"
+                                {{-- <form action="{{ route('tgg-india.admin.rewards.destroy', $reward->id) }}"
                                       method="POST">
                                     @csrf @method('DELETE')
                                     <button type="submit"
@@ -76,7 +76,7 @@
                                             style="width:32px;height:32px;">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                </form>
+                                </form> --}}
 
                                 @php
                                     $receiptExists = \App\Models\Receipt::where('model_type', 'App\Models\Reward')
@@ -86,7 +86,7 @@
                                 @endphp
 
                                 <!-- Create Receipt -->
-                                <a href="{{ $receiptExists
+                                {{-- <a href="{{ $receiptExists
                                     ? '#'
                                     : route('tgg-india.admin.receipts.global-store', [
                                         'model_type' => 'App\Models\Reward',
@@ -101,7 +101,7 @@
                                    style="width:32px;height:32px;"
                                    title="Create receipt {{ $receiptExists ? '(Already exists)' : '' }}">
                                     <i class="fas fa-receipt"></i>
-                                </a>
+                                </a> --}}
 
                             </div>
                         </td>
