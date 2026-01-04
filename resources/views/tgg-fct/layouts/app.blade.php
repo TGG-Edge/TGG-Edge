@@ -42,14 +42,12 @@
       @endif
     </div>
 
-    <div class="col-md-9 tgg-content">
+    <div class="col-lg-9 offset-lg-3 tgg-content">
             <button class="btn btn-dark d-lg-none mb-2" id="mobileSidebarToggle">
                 <i class="fas fa-bars"></i>
             </button>
           @yield('content') 
         </div> 
-        
-        {{-- @yield('content') --}}
     @endif
     </div>
   </div>

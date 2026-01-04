@@ -755,6 +755,12 @@ button:hover {
     color: #265475;
 }
 
+@media (min-width: 992px) {
+    .offset-lg-3 {
+        margin-left:0% !important; 
+    }
+}
+
 /* Mobile sidebar styles */
 .mobile-sidebar {
     position: absolute;
@@ -847,7 +853,11 @@ button:hover {
     font-size: 18px;
 }
 
-
-.row{
+/* .row{
         flex-wrap: inherit !important;
+} */
+
+.row {
+    --bs-gutter-x: 0;
 }
+
