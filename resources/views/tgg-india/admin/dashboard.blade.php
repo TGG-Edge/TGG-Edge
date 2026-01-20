@@ -123,6 +123,88 @@ $paymentAmount = Schema::connection('mysql2')->hasColumn('payments', 'amount') ?
         @endforeach
     </div>
 
+    {{-- =================== OUR SERVICES (SLIDER) =================== --}}
+<h4 class="fw-semibold mb-3 mt-4">Our Services</h4>
+
+@php
+$services = [
+    ['title'=>'Website Development','image'=>'images/Website_Development.png','content'=>'Static ₹5,000 (5 pages)<br>Non-Member ₹7,000<br>Dynamic: Ask for quote'],
+    ['title'=>'Digital Marketing','image'=>'images/Digital_Marketing.jpg','content'=>'Member ₹8,000/month<br>Non-Member ₹10,000/month'],
+    ['title'=>'TGG News','image'=>'images/News.jpg','content'=>'AI Podcast / Video Promotion<br>Members only ₹4,000'],
+    ['title'=>'Business Development Support','image'=>'images/Business_Development_Support.jpg','content'=>'Members only<br>₹8,000 / month'],
+    ['title'=>'Incorporation Support','image'=>'images/Incorporation_Support.png','content'=>'Members only<br>Pricing varies'],
+    ['title'=>'Accounting & Auditing Support','image'=>'images/Accounting_Auditing_Support.jpg','content'=>'Only for members'],
+    ['title'=>'Legal Support','image'=>'images/Legal_Support.jpg','content'=>'Only for members'],
+    ['title'=>'AI Powered Problem Solving','image'=>'images/AI_Powered_Problem_Solving.jpg','content'=>'Instant solutions<br>TGG Family only'],
+    ['title'=>'App Development','image'=>'images/App_Development.jpg','content'=>'Member ₹10,000<br>Non-Member ₹15,000'],
+    ['title'=>'Custom Software','image'=>'images/Custom_Software.jpg','content'=>'Member ₹10,000<br>Non-Member ₹15,000'],
+];
+@endphp
+
+@php
+$perSlide = 3;
+$remainder = count($services) % $perSlide;
+
+if ($remainder !== 0) {
+    $services = array_merge(
+        $services,
+        array_slice($services, 0, $perSlide - $remainder)
+    );
+}
+@endphp
+
+<div class="services-carousel-wrapper">
+    <div id="servicesCarousel"
+     class="carousel slide"
+     data-bs-ride="carousel"
+     data-bs-interval="5000"
+     data-bs-pause="false">
+    <div class="carousel-inner">
+
+        @foreach(array_chunk($services, 3) as $index => $chunk)
+        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+            <div class="row g-4">
+                @foreach($chunk as $service)
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-lg rounded-4 service-card text-center">
+                        <div class="card-body p-4 service-card-body">
+
+                            <img
+                                src="{{ asset($service['image']) }}"
+                                alt="{{ $service['title'] }}"
+                                class="service-img mb-3"
+                            >
+
+                            <h6 class="fw-semibold mb-2 text-center">
+                                {{ $service['title'] }}
+                            </h6>
+
+                            <p class="text-muted small mb-0 text-center">
+                                {!! $service['content'] !!}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endforeach
+
+    </div>
+
+    {{-- controls --}}
+    <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+</div>
+
+
     {{-- =================== OVERVIEW SECTION =================== --}}
     <div class="card border-0 shadow-sm rounded-4 mb-4">
         <div class="card-header bg-light border-0 fw-semibold fs-5">
