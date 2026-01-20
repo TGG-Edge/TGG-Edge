@@ -124,7 +124,7 @@ $paymentAmount = Schema::connection('mysql2')->hasColumn('payments', 'amount') ?
     </div>
 
     {{-- =================== OUR SERVICES (SLIDER) =================== --}}
-<h4 class="fw-semibold mb-3 mt-4">Our Services</h4>
+<h4 class="fw-semibold mb-3 mt-4">Venture Bench Services</h4>
 
 @php
 $services = [
