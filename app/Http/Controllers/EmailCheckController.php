@@ -15,7 +15,7 @@ class EmailCheckController extends Controller
      public function index($role)
     {
         $emails = CampaignCheckEmail::latest()->paginate(20);
-        if(auth('web2')->user()->role_key == 'freelancer'){
+        if(auth('web2')->user()->role_key == 'freelancer' || auth('web2')->user()->role_key == 'facilitator'){
             $emails = CampaignCheckEmail::where('created_by', auth('web2')->id())
                 ->latest()
                 ->paginate(10);

@@ -44,7 +44,7 @@ return Application::configure(basePath: dirname(__DIR__))
         'auth' => Authenticate::class, 
         'web' => StartSession::class,
         'trainer' => IsTrainer::class,
-        'advisor' => IsMember::class,
+        'associate' => IsMember::class,
         'assignee' => IsAssignee::class,
         'researcher' => IsResearcher::class,
         'volunteer' => IsVolunteer::class,

@@ -8,7 +8,7 @@
         <h4 class="mb-3 trainer-heading">Receipts</h4>
 
         <div class="d-flex flex-wrap align-items-center justify-content-end gap-2">
-            <a href="{{ route('tgg-india.advisor.receipts.create') }}" 
+            <a href="{{ route('tgg-india.associate.receipts.create') }}" 
                class="btn btn-primary assignment-button ">
                 <i class="bi bi-plus-lg"></i> + New Receipt
             </a>
@@ -49,26 +49,26 @@
 
                         <td>
                             <div class="d-flex align-items-center justify-content-center action-buttons-wrapper">
-                                <a href="{{ route('tgg-india.advisor.receipts.show', $receipt->id) }}" 
+                                <a href="{{ route('tgg-india.associate.receipts.show', $receipt->id) }}" 
                                    class="btn btn-info btn-sm me-2 d-flex align-items-center justify-content-center p-0" 
                                    style="width:28px;height:28px;">
                                     <i class="fas fa-eye"></i>
                                 </a>
 
-                                <a href="{{ route('tgg-india.advisor.receipts.edit', $receipt->id) }}" 
+                                <a href="{{ route('tgg-india.associate.receipts.edit', $receipt->id) }}" 
                                    class="btn btn-primary btn-sm me-2 d-flex align-items-center justify-content-center p-0" 
                                    style="width:28px;height:28px;">
                                     <i class="fas fa-edit"></i>
                                 </a>
 
-                                <a href="{{ route('tgg-india.advisor.receipts.download', $receipt->id) }}" 
+                                <a href="{{ route('tgg-india.associate.receipts.download', $receipt->id) }}" 
                                    class="btn btn-success btn-sm me-2 d-flex align-items-center justify-content-center p-0" 
                                    style="width:28px;height:28px;" 
                                    title="Download PDF">
                                     <i class="fas fa-download"></i>
                                 </a>
 
-                                <form action="{{ route('tgg-india.advisor.receipts.destroy', $receipt->id) }}" 
+                                <form action="{{ route('tgg-india.associate.receipts.destroy', $receipt->id) }}" 
                                       method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

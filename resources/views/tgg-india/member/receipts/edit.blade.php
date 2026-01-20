@@ -8,7 +8,7 @@
     @include('tgg-india.layouts.includes.message')
 
     <div class="card p-3 mb-4">
-        <form action="{{ route('tgg-india.advisor.receipts.update', $receipt->id) }}" method="POST">
+        <form action="{{ route('tgg-india.associate.receipts.update', $receipt->id) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -62,7 +62,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary save-button">Update</button>
-            <a href="{{ route('tgg-india.advisor.receipts.index') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('tgg-india.associate.receipts.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>

@@ -77,7 +77,7 @@
                                 <label class="form-label">Role *</label>
                                 <select name="role" class="form-select" required>
                                     <option value="">Select Role</option>
-                                    <option value="Advisor">Advisor</option>
+                                    <option value="Associate">Associate</option>
                                     <option value="Trainer">Trainer</option>
                             <option value="Co-Creator">Co-Creator</option>
                             <option value="Facilitator">Facilitator</option>
@@ -90,12 +90,12 @@
     
                             // Allowed role mapping
                             $availableRoleOptions = [
-                                'admin' => ['advisor', 'co-creator', 'facilitator', 'freelancer', 'spouse'],
-                                'advisor' => ['co-creator'],
+                                'admin' => ['associate', 'co-creator', 'facilitator', 'freelancer', 'spouse'],
+                                'associate' => ['co-creator'],
                                 'co-creator' => ['freelancer'],
-                                'facilitator' => ['advisor'],
+                                'facilitator' => ['associate'],
                                 'spouse' => ['spouse'],
-                                'freelancer' => ['advisor','co-creator','facilitator', 'freelancer'],
+                                'freelancer' => ['associate','co-creator','facilitator', 'freelancer'],
                             ];
     
                             // Get user role key

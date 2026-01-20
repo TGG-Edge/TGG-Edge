@@ -28,8 +28,8 @@
         </div>
 
         <div class="mt-4 text-md-end text-start d-flex flex-column flex-md-row gap-2">
-            <a href="{{ route('tgg-india.advisor.receipts.index') }}" class="btn btn-secondary w-100 w-md-auto">Back</a>
-            <a href="{{ route('tgg-india.advisor.receipts.edit', $receipt->id) }}" class="btn btn-primary w-100 w-md-auto">Edit</a>
+            <a href="{{ route('tgg-india.associate.receipts.index') }}" class="btn btn-secondary w-100 w-md-auto">Back</a>
+            <a href="{{ route('tgg-india.associate.receipts.edit', $receipt->id) }}" class="btn btn-primary w-100 w-md-auto">Edit</a>
         </div>
     </div>
 </div>

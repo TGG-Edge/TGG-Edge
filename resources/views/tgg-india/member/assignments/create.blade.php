@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
 
-    <form action="{{ route('tgg-india.advisor.assignments.store') }}" method="POST">
+    <form action="{{ route('tgg-india.associate.assignments.store') }}" method="POST">
         @csrf
 
         </div>
@@ -46,7 +46,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Create</button>
-        <a href="{{ route('tgg-india.advisor.assignments.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('tgg-india.associate.assignments.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

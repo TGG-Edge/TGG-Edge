@@ -147,6 +147,7 @@ class ProfileController extends Controller
             'address'         => $request->address,
             'rhm_number'      => $request->rhm_number,
             'type_of_engagement' => $request->type_of_engagement,
+            'gst_no'          => $request->gst_no,
         ]);
 
         // Update image

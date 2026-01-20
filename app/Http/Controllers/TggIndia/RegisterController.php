@@ -7,6 +7,7 @@ use App\Models\AssignmentSecondary;
 use App\Models\Enquiry;
 use App\Models\Incentive;
 use App\Models\ModuleInstance;
+use App\Models\ModuleInstanceAssign;
 use App\Models\Payment;
 use App\Models\Referral;
 use App\Models\User;
@@ -46,7 +47,7 @@ class RegisterController extends Controller
         //
         if ($user_type == 'trainer') {
             $user_type = 2;
-        } elseif ($user_type == 'advisor') {
+        } elseif ($user_type == 'associate') {
             $user_type = 3;
         } elseif ($user_type == 'admin') {
             $user_type = 1;
@@ -139,12 +140,16 @@ class RegisterController extends Controller
             $modules[] = 1;
         }
 
-        foreach ($modules as $moduleId) {
-            ModuleInstance::create([
-                'module_id' => $moduleId,
-                'user_id'   => $user->id,
-            ]);
-        }
+        $assign = ModuleInstanceAssign::firstOrCreate(
+                ['user_id' => $user->id],
+                ['module_instance_ids' => $modules]
+        );
+        // foreach ($modules as $moduleId) {
+        //     ModuleInstance::create([
+        //         'module_id' => $moduleId,
+        //         'user_id'   => $user->id,
+        //     ]);
+        // }
 
         return redirect()->route('tgg-india.show')->with('success', 'Registration successful!');
     }
@@ -324,7 +329,7 @@ class RegisterController extends Controller
         $roleMap = [
             'admin' => 1,
             'trainer' => 2,
-            'advisor' => 3,
+            'associate' => 3,
             'rhm-club' => 4,
             'nomad-community' => 5,
             'researcher' => 6,
@@ -436,7 +441,7 @@ class RegisterController extends Controller
 
     public function showReferral($referrer_code)
     {
-        $user_type = 'advisor';
+        $user_type = 'associate';
         return view('tgg-india.referral-register', compact('user_type', 'referrer_code'));
     }
 

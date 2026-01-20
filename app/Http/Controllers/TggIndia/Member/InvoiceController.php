@@ -52,7 +52,7 @@ class InvoiceController extends Controller
         $items = $request->input('items', []);
         $invoice->items = $items;
         $invoice->save();
-        return redirect()->route('tgg-india.advisor.invoices.index')->with('success', 'Invoice created successfully.');
+        return redirect()->route('tgg-india.associate.invoices.index')->with('success', 'Invoice created successfully.');
     
     }
 
@@ -153,7 +153,7 @@ class InvoiceController extends Controller
         $invoice->items = $items;
         $invoice->save();
 
-        return redirect()->route('tgg-india.advisor.invoices.index')->with('success', 'Invoice updated successfully.');
+        return redirect()->route('tgg-india.associate.invoices.index')->with('success', 'Invoice updated successfully.');
     }
 
     /**

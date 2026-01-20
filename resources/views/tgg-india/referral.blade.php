@@ -39,7 +39,7 @@
         <!-- Hero Section -->
         <h1 class="text-center text-primary">TGG India Referral Program</h1>
         <p class="text-center" style="font-size:14px; max-width: 700px; margin: auto;">
-            You are a proud advisor of <strong>TGG India</strong>. Invite your friends to join our program.  
+            You are a proud associate of <strong>TGG India</strong>. Invite your friends to join our program.  
             When they register successfully and their account is verified, you will receive a reward of 
             <strong>₹1000</strong> directly in your account.  
         </p>
@@ -57,7 +57,7 @@
         <!-- What is Referral Program -->
         <h2>What is the Referral Program?</h2>
         <p>
-            The TGG India Referral Program allows advisors to earn rewards by inviting others to join.  
+            The TGG India Referral Program allows associates to earn rewards by inviting others to join.  
             Each successful referral that leads to a verified registration will reward you with 
             <strong>₹1000</strong>. There’s no cap on how much you can earn—your efforts decide your success.  
         </p>

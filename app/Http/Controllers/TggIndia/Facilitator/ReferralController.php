@@ -51,7 +51,8 @@ class ReferralController extends Controller
 
     public function enquiryReferralTracking()
     {
-        $enquiries = Enquiry::with('referrer')->latest()->paginate(10);
+        $referrerCode = auth('web2')->user()->referral_code;
+        $enquiries = Enquiry::with('referrer')->where('referral_code',$referrerCode)->latest()->paginate(10);
         return view('tgg-india.facilitator.referral.enquiry-tracking', compact('enquiries'));
     }
 

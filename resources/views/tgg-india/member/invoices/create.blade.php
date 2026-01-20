@@ -11,7 +11,7 @@
 
     <div class="card p-3 mb-4">
 
-        <form action="{{ route('tgg-india.advisor.invoices.store') }}" method="POST">
+        <form action="{{ route('tgg-india.associate.invoices.store') }}" method="POST">
             @csrf
 
             <div class="row gy-3">

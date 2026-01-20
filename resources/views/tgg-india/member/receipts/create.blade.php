@@ -8,7 +8,7 @@
     @include('tgg-india.layouts.includes.message')
 
     <div class="card p-3 mb-4">
-        <form action="{{ route('tgg-india.advisor.receipts.store') }}" method="POST">
+        <form action="{{ route('tgg-india.associate.receipts.store') }}" method="POST">
             @csrf
 
             <div class="mb-3">

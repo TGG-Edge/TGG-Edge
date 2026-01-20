@@ -77,12 +77,12 @@
                     <i class="fas fa-project-diagram me-2"></i> Admin  Link
                 </a>
 
-                <a href="{{ route('tgg-india.admin.showcases.referral-description.edit',['advisor']) }}#main-projects" class="d-block py-1">
-                    <i class="fas fa-user-friends me-2"></i> Advisor Description 
+                <a href="{{ route('tgg-india.admin.showcases.referral-description.edit',['associate']) }}#main-projects" class="d-block py-1">
+                    <i class="fas fa-user-friends me-2"></i> Associate Description 
                 </a>
 
                 <a href="#" class="d-block py-1">
-                    <i class="fas fa-project-diagram me-2"></i> Advisor Link
+                    <i class="fas fa-project-diagram me-2"></i> Associate Link
                 </a>
 
                 <a href="{{  route('tgg-india.admin.showcases.referral-description.edit',['co-creator'])}}#main-projects" class="d-block py-1">
@@ -255,9 +255,9 @@
             class="d-block py-1" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-user-edit me-2"></i> Trainer Register
         </a>
-        <a href="{{ url('tgg-meta/tgg-india/register/advisor/DSLKFN43KREFWLDCMXKLWNEMR34RKL32NWMEDKQWJASNCKNRWDECNK3EW') }}"
+        <a href="{{ url('tgg-meta/tgg-india/register/associate/DSLKFN43KREFWLDCMXKLWNEMR34RKL32NWMEDKQWJASNCKNRWDECNK3EW') }}"
             class="d-block py-1" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-user-friends me-2"></i> Advisors Register
+            <i class="fas fa-user-friends me-2"></i> Associates Register
         </a>
         @php
             $referralCode = Auth('web2')->user()->referral_code;
@@ -265,7 +265,7 @@
         @endphp
 
         {{-- <a href="{{ $referralLink }}" class="d-block py-1" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-user-friends me-2"></i> Advisors Register - By Referral
+            <i class="fas fa-user-friends me-2"></i> Associates Register - By Referral
         </a> --}}
 
         <a href="{{ url('tgg-meta/tgg-india/register/rhm-club/DSLKFN43KREFWLDCMXKLWNEMR34RKL32NWMEDKQWJASNCKNRWDECNK3EW') }}"

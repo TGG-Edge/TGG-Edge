@@ -49,7 +49,7 @@ class LoginController extends Controller
                 case 2:
                     return redirect()->route('tgg-india.trainer.dashboard');
                 case 3:
-                    return redirect()->route('tgg-india.advisor.dashboard');
+                    return redirect()->route('tgg-india.associate.dashboard');
                 default:
                     return redirect()->route('tgg-india.login');
             }
@@ -84,7 +84,7 @@ class LoginController extends Controller
             return redirect()->route('tgg-india.trainer.dashboard'); 
 
             }elseif(auth('web2')->user()->user_role == 3){
-            return redirect()->route('tgg-india.advisor.dashboard'); 
+            return redirect()->route('tgg-india.associate.dashboard'); 
 
             }
             elseif(auth('web2')->user()->user_role == 4){

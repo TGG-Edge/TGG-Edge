@@ -53,7 +53,7 @@ class ReceiptController extends Controller
         $receipt->items = $items;
         $receipt->save();
 
-        return redirect()->route('tgg-india.advisor.receipts.index')->with('success', 'receipt created successfully.');
+        return redirect()->route('tgg-india.associate.receipts.index')->with('success', 'receipt created successfully.');
     
     }
 
@@ -95,7 +95,7 @@ class ReceiptController extends Controller
         $receipt->items = $items;
         $receipt->save();
 
-        return redirect()->route('tgg-india.advisor.receipts.index')->with('success', 'receipt updated successfully.');
+        return redirect()->route('tgg-india.associate.receipts.index')->with('success', 'receipt updated successfully.');
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Module;
 use App\Models\ModuleFeature;
 use App\Models\ModuleInstance;
+use App\Models\ModuleInstanceAssign;
 use App\Models\UserSecondary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -39,7 +40,8 @@ class ModuleController extends Controller
     {
         $request->validate([
             'name'   => 'required|string|max:255',
-            'users'  => 'required|array'
+            'users'  => 'required|array',
+            'user_id' => 'required',
         ]);
 
         $module = Module::create([
@@ -47,11 +49,65 @@ class ModuleController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
-        foreach ($request->users as $userId) {
-            ModuleInstance::create([
-                'module_id' => $module->id,
-                'user_id'   => $userId,
-            ]);
+        $module_instance = ModuleInstance::create([
+            'module_id' => $module->id,
+            'user_id'   => $request->user_id,
+        ]);
+
+        // foreach ($request->users as $userId) {
+        //     $module_instance_array = ModuleInstanceAssign::where(
+        //         'user_id',$userId)->pluck('module_instances_id')->toArray();
+            
+        //     if(!in_array($module_instance->id, $module_instance_array)){
+        //         $module_instance_array[] = $module_instance->id;
+        //     }
+
+        //     ModuleInstanceAssign::create([
+        //         'module_instances_id' => $module_instance->id,
+        //         'user_id'   => $userId,
+        //     ]);
+        // }
+
+        $moduleInstanceId = $module_instance->id;
+        $incomingUsers   = $request->users ?? [];
+
+        /**
+         * STEP 1: REMOVE module_instance_id
+         * from users NOT present in request
+         */
+        if (!empty($incomingUsers)) {
+            ModuleInstanceAssign::whereNotIn('user_id', $incomingUsers)
+                ->whereJsonContains('module_instance_ids', $moduleInstanceId)
+                ->get()
+                ->each(function ($assign) use ($moduleInstanceId) {
+                    $assign->update([
+                        'module_instance_ids' => array_values(
+                            array_diff($assign->module_instance_ids, [$moduleInstanceId])
+                        ),
+                    ]);
+                });
+        }
+
+        /**
+         * STEP 2: ADD / KEEP module_instance_id
+         * for users present in request
+         */
+        foreach ($incomingUsers as $userId) {
+            $assign = ModuleInstanceAssign::firstOrCreate(
+                ['user_id' => $userId],
+                ['module_instance_ids' => []]
+            );
+
+            if (!in_array($moduleInstanceId, $assign->module_instance_ids)) {
+                $assign->update([
+                    'module_instance_ids' => array_values(
+                        array_unique(array_merge(
+                            $assign->module_instance_ids,
+                            [$moduleInstanceId]
+                        ))
+                    ),
+                ]);
+            }
         }
 
 
@@ -103,27 +159,61 @@ class ModuleController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
-        // Sync users (clear old & insert new)
-        // ModuleInstance::where('module_id', $module->id)->delete();
-        // foreach ($request->users as $userId) {
-        //     ModuleInstance::create([
-        //         'module_id' => $module->id,
-        //         'user_id'   => $userId,
-        //     ]);
-        // }
-        foreach ($request->users as $userId) {
-            ModuleInstance::updateOrCreate(
-                [
-                    'module_id' => $module->id,
-                    'user_id'   => $userId,
-                ],
-                [] // no extra fields to update
-            );
+        ModuleInstance::where('module_id', $module->id)
+        ->where('user_id', '!=', $request->user_id)
+        ->update([
+            'user_id' => $request->user_id
+        ]);
+
+        $module_instance = ModuleInstance::where('module_id', $module->id)->first();
+        $moduleInstanceId = $module_instance->id;
+        $incomingUsers   = $request->users ?? [];
+
+        /**
+         * STEP 1: REMOVE module_instance_id
+         * from users NOT present in request
+         */
+        if (!empty($incomingUsers)) {
+            ModuleInstanceAssign::whereNotIn('user_id', $incomingUsers)
+                ->whereJsonContains('module_instance_ids', $moduleInstanceId)
+                ->get()
+                ->each(function ($assign) use ($moduleInstanceId) {
+                    $assign->update([
+                        'module_instance_ids' => array_values(
+                            array_diff($assign->module_instance_ids, [$moduleInstanceId])
+                        ),
+                    ]);
+                });
         }
+
+        /**
+         * STEP 2: ADD / KEEP module_instance_id
+         * for users present in request
+         */
+        foreach ($incomingUsers as $userId) {
+            $assign = ModuleInstanceAssign::firstOrCreate(
+                ['user_id' => $userId],
+                ['module_instance_ids' => []]
+            );
+
+            if (!in_array($moduleInstanceId, $assign->module_instance_ids)) {
+                $assign->update([
+                    'module_instance_ids' => array_values(
+                        array_unique(array_merge(
+                            $assign->module_instance_ids,
+                            [$moduleInstanceId]
+                        ))
+                    ),
+                ]);
+            }
+        }
+
+        
 
 
         // Sync features (clear old & insert new)
         ModuleFeature::where('module_id', $module->id)->delete();
+
         foreach ($request->features as $featureKey) {
             ModuleFeature::create([
                 'module_id'    => $module->id,

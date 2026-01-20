@@ -5,7 +5,7 @@
 
 
     <div>
-        {!! $content->content !!}
+        {!! $content->content ?? '' !!}
     </div>
     <hr>
     <!-- Referral Link Box -->

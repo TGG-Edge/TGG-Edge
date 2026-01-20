@@ -16,12 +16,33 @@
                 <label>Name:</label>
                 <input type="text" name="name" value="{{ old('name', $module->name) }}" class="form-control">
 
+                <label class="mt-2">Created By:</label>
+                @php
+                    $module_instance = $module->moduleInstances->first();
+                @endphp
+                <select name="user_id" placeholder="Select User who create this module" class="form-control mb-2">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}" @if($module_instance->user_id == $user->id) {{'selected'}} @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
+
                 <!-- Assign Users -->
+                @php
+                $moduleInstanceId = \App\Models\ModuleInstance::where('module_id', $module->id)
+                            ->orderBy('id')
+                            ->value('id');
+                $assigns = \App\Models\ModuleInstanceAssign::whereJsonContains(
+                    'module_instance_ids',
+                    $moduleInstanceId
+                )->get();
+                $userIds = $assigns->pluck('user_id')->unique()->values();
+                $assigned_users = \App\Models\UserSecondary::whereIn('id', $userIds)->get();
+                @endphp
                 <label>Assign Users:</label>
                 <select name="users[]" multiple id="users-select">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}"
-                            {{ in_array($user->id, $module->users->pluck('id')->toArray()) ? 'selected' : '' }}>
+                            {{ in_array($user->id, $assigned_users->pluck('id')->toArray()) ? 'selected' : '' }}>
                             {{ $user->name. ' - '. $user->role_name }}
                         </option>
                     @endforeach

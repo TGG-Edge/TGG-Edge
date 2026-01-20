@@ -15,7 +15,7 @@
         <div class="mb-3">
             <p class="text-muted small">
             Welcome to the TGG Meta Registration Portal
-            This registration is intended  the TGG India community. Trainers can create and share learning modules, while advisors/users can access and utilize these modules for their growth. Please ensure all details are filled in accurately. Fields marked with * are mandatory.
+            This registration is intended  the TGG India community. Trainers can create and share learning modules, while associates/users can access and utilize these modules for their growth. Please ensure all details are filled in accurately. Fields marked with * are mandatory.
             </p>
         </div>
 

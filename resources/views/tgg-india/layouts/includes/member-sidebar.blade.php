@@ -23,12 +23,12 @@
         $literatures = \App\Models\Literature::get();
         $assignments = \App\Models\AssignmentSecondary::where('assigned_to', auth('web2')->id())->get();
     @endphp
-    <a href="{{ route('tgg-india.advisor.dashboard') }}"
+    <a href="{{ route('tgg-india.associate.dashboard') }}"
         class="{{ request()->is('tgg-india/dashboard') ? 'active' : '' }}">
         <i class="fas fa-tachometer-alt"></i> Dashboard
     </a>
 
-    <a href="{{ route('tgg-india.advisor.profile.index') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i
+    <a href="{{ route('tgg-india.associate.profile.index') }}" class="{{ request()->is('user/profile') ? 'active' : '' }}"><i
             class="fas fa-user"></i> Profile</a>
 
 
@@ -55,7 +55,7 @@
     @endif
 
     @if ($assignments->count() > 0)
-        <a href="{{ route('tgg-india.advisor.assignments.index') }}"
+        <a href="{{ route('tgg-india.associate.assignments.index') }}"
             class="{{ request()->is('tgg-edge/tgg-fct/assignee/assignments*') ? 'active' : '' }}">
             <i class="fas fa-book"></i> Assignments
         </a>
@@ -64,24 +64,24 @@
     <div class="dropdown">
         <a href="#"
             class="dropdown-toggle d-flex justify-content-between align-items-center 
-        {{ request()->is('tgg-meta/tgg-india/advisor/incentives*') || request()->is('tgg-meta/tgg-india/advisor/rewards*') || request()->is('tgg-meta/tgg-india/advisor/invoices*') || request()->is('tgg-meta/tgg-india/advisor/receipts*') ? 'active' : '' }}"
+        {{ request()->is('tgg-meta/tgg-india/associate/incentives*') || request()->is('tgg-meta/tgg-india/associate/rewards*') || request()->is('tgg-meta/tgg-india/associate/invoices*') || request()->is('tgg-meta/tgg-india/associate/receipts*') ? 'active' : '' }}"
             data-bs-toggle="collapse" data-bs-target="#advancementDropdown"
-            aria-expanded="{{ request()->is('tgg-meta/tgg-india/advisor/incentives*') || request()->is('tgg-meta/tgg-india/advisor/rewards*') || request()->is('tgg-meta/tgg-india/advisor/invoices*') || request()->is('tgg-meta/tgg-india/advisor/receipts*') ? 'true' : 'false' }}">
+            aria-expanded="{{ request()->is('tgg-meta/tgg-india/associate/incentives*') || request()->is('tgg-meta/tgg-india/associate/rewards*') || request()->is('tgg-meta/tgg-india/associate/invoices*') || request()->is('tgg-meta/tgg-india/associate/receipts*') ? 'true' : 'false' }}">
             <span><i class="fas fa-arrow-up me-2"></i> Advancement</span>
             <i class="fas fa-caret-down"></i>
         </a>
-        <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/advisor/incentives*') || request()->is('tgg-meta/tgg-india/advisor/rewards*') || request()->is('tgg-meta/tgg-india/advisor/invoices*') || request()->is('tgg-meta/tgg-india/advisor/receipts*') ? 'show' : '' }}"
+        <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/associate/incentives*') || request()->is('tgg-meta/tgg-india/associate/rewards*') || request()->is('tgg-meta/tgg-india/associate/invoices*') || request()->is('tgg-meta/tgg-india/associate/receipts*') ? 'show' : '' }}"
             id="advancementDropdown">
-            <a href="{{ route('tgg-india.advisor.incentives.index') }}" class="d-block py-1">
+            <a href="{{ route('tgg-india.associate.incentives.index') }}" class="d-block py-1">
                 <i class="fas fa-gift me-2"></i> Incentive
             </a>
-            <a href="{{ route('tgg-india.advisor.rewards.index') }}" class="d-block py-1">
+            <a href="{{ route('tgg-india.associate.rewards.index') }}" class="d-block py-1">
                 <i class="fas fa-trophy me-2"></i> Reward
             </a>
-            <a href="{{ route('tgg-india.advisor.invoices.index') }}" class="d-block py-1">
+            <a href="{{ route('tgg-india.associate.invoices.index') }}" class="d-block py-1">
                 <i class="fas fa-file-invoice me-2"></i> Invoice
             </a>
-            <a href="{{ route('tgg-india.advisor.receipts.index') }}" class="d-block py-1">
+            <a href="{{ route('tgg-india.associate.receipts.index') }}" class="d-block py-1">
                 <i class="fas fa-receipt me-2"></i> Receipt
             </a>
         </div>
@@ -128,25 +128,35 @@
         </div>
     </div>
 
-    @if ($user->modules->isNotEmpty())
+    @php
+      $module_instance_ids = \App\Models\ModuleInstanceAssign::where('user_id', $user->id)->pluck('module_instance_ids')->toArray();
+      
+      $module_instance_ids_count = \App\Models\ModuleInstanceAssign::where('user_id', $user->id)->count();
+
+    @endphp
+    @if ($module_instance_ids_count > 0)
         {{-- Top-level Modules dropdown --}}
         <div class="dropdown">
             <a href="#"
-                class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-meta/tgg-india/advisor/modules*') ? 'active' : '' }}"
+                class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-meta/tgg-india/associate/modules*') ? 'active' : '' }}"
                 data-bs-toggle="collapse" data-bs-target="#modulesDropdown"
-                aria-expanded="{{ request()->is('tgg-meta/tgg-india/advisor/modules*') ? 'true' : 'false' }}">
+                aria-expanded="{{ request()->is('tgg-meta/tgg-india/associate/modules*') ? 'true' : 'false' }}">
                 <span><i class="fas fa-flask"></i> Modules</span>
                 <i class="fas fa-caret-down"></i>
             </a>
 
-            <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/advisor/modules*') ? 'show' : '' }}"
+            <div class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/associate/modules*') ? 'show' : '' }}"
                 id="modulesDropdown">
-                @foreach ($user->modules as $module)
+
+                @php
+                    sort($module_instance_ids[0]);
+                @endphp
+                @foreach ($module_instance_ids[0] as $module_instance_id)
                     @php
-                        $moduleId = 'module-' . $module->id;
-                        $moduleInstance = \App\Models\ModuleInstance::where('module_id', $module->id)->where('user_id', $user->id)->first();
-                        $moduleInstanceId = $moduleInstance ? $moduleInstance->id : null;
-                        $literatures = \App\Models\Literature::where('module_instance_id', $moduleInstanceId)->get();
+                        $module_instance = \App\Models\ModuleInstance::where('id', $module_instance_id)->first();
+                        $module = \App\Models\Module::find($module_instance->module_id);
+                        $module_instance_id = $module_instance ? $module_instance->id : null;
+                        $literatures = \App\Models\Literature::where('module_instance_id', $module_instance_id)->get();
 
                         // Default flags
                         $isModuleActive = false;
@@ -158,7 +168,7 @@
                         foreach ($literatures as $lit) {
                             foreach ($lit->sections as $sec) {
                                 foreach ($sec->chapters as $ch) {
-                                    if (request()->is('tgg-meta/tgg-india/advisor/modules/chapters/' . $ch->id)) {
+                                    if (request()->is('tgg-meta/tgg-india/associate/modules/chapters/' . $ch->id)) {
                                         $isModuleActive = true;
                                         $activeLiteratureId = $lit->id;
                                         $activeSectionId = $sec->id;
@@ -168,10 +178,10 @@
                             }
                         }
                         if (
-                            (request()->is('tgg-meta/tgg-india/advisor/modules/links') &&
-                                request()->get('module_instance_id') == $moduleInstanceId) ||
-                            (request()->is('tgg-meta/tgg-india/advisor/modules/videos') &&
-                                request()->get('module_instance_id') == $moduleInstanceId)
+                            (request()->is('tgg-meta/tgg-india/associate/modules/links') &&
+                                request()->get('module_instance_id') ==  $module_instance_id) ||
+                            (request()->is('tgg-meta/tgg-india/associate/modules/videos') &&
+                                request()->get('module_instance_id') ==  $module_instance_id)
                         ) {
                             $isModuleActive = true;
                         }
@@ -181,14 +191,14 @@
                     <div class="dropdown">
                         <a href="#"
                             class="dropdown-toggle d-flex justify-content-between align-items-center {{ $isModuleActive ? 'active' : '' }}"
-                            data-bs-toggle="collapse" data-bs-target="#{{ $moduleId }}"
+                            data-bs-toggle="collapse" data-bs-target="#{{ $module->id }}"
                             aria-expanded="{{ $isModuleActive ? 'true' : 'false' }}"
-                            aria-controls="{{ $moduleId }}">
+                            aria-controls="{{  $module->id }}">
                             <span><i class="fas fa-flask"></i> {{ $module->name }}</span>
                             <i class="fas fa-caret-down"></i>
                         </a>
 
-                        <div class="collapse ps-3 {{ $isModuleActive ? 'show' : '' }}" id="{{ $moduleId }}"
+                        <div class="collapse ps-3 {{ $isModuleActive ? 'show' : '' }}" id="{{  $module->id}}"
                             data-bs-parent="#modulesDropdown">
 
                             {{-- LITERATURES --}}
@@ -208,7 +218,7 @@
                                 </a>
 
                                 <div class="collapse ps-3 {{ $isLiteratureActive ? 'show' : '' }}"
-                                    id="{{ $literatureId }}" data-bs-parent="#{{ $moduleId }}">
+                                    id="{{ $literatureId }}" data-bs-parent="#{{  $module->id }}">
 
                                     {{-- SECTIONS --}}
                                     @foreach ($literature->sections as $section)
@@ -230,8 +240,8 @@
                                             id="{{ $sectionId }}" data-bs-parent="#{{ $literatureId }}">
                                             {{-- CHAPTERS --}}
                                             @foreach ($section->chapters as $chapter)
-                                                <a href="{{ route('tgg-india.advisor.modules.chapters', $chapter->id) }}"
-                                                    class="{{ request()->is('tgg-meta/tgg-india/advisor/modules/chapters/' . $chapter->id) ? 'active' : '' }}">
+                                                <a href="{{ route('tgg-india.associate.modules.chapters', $chapter->id) }}"
+                                                    class="{{ request()->is('tgg-meta/tgg-india/associate/modules/chapters/' . $chapter->id) ? 'active' : '' }}">
                                                     <i class="fas fa-book"></i> {{ $chapter->title }}
                                                 </a>
                                             @endforeach
@@ -241,20 +251,20 @@
                             @endforeach
 
                             {{-- LINKS --}}
-                            @if ($hasLinks)
-                                <a href="{{ route('tgg-india.advisor.modules.links') }}?module_instance_id={{ $moduleInstanceId }}"
-                                    class="{{ request()->is('tgg-meta/tgg-india/advisor/modules/links') ? 'active' : '' }}">
+                            {{--@if ($hasLinks)--}}
+                                <a href="{{ route('tgg-india.associate.modules.links') }}?module_instance_id={{  $module_instance_id }}"
+                                    class="{{ request()->is('tgg-meta/tgg-india/associate/modules/links') ? 'active' : '' }}">
                                     <i class="fas fa-link"></i> Links
                                 </a>
-                            @endif
+                            {{--@endif--}}
 
-                            {{-- VIDEOS --}}
-                            @if ($hasVideos)
-                                <a href="{{ route('tgg-india.advisor.modules.videos') }}?module_instance_id={{ $moduleInstanceId }}"
-                                    class="{{ request()->is('tgg-meta/tgg-india/advisor/modules/videos') ? 'active' : '' }}">
+                            {{-- VIDEOS --}} 
+                             {{-- @if ($hasVideos) --}}
+                                <a href="{{ route('tgg-india.associate.modules.videos') }}?module_instance_id={{  $module_instance_id }}"
+                                    class="{{ request()->is('tgg-meta/tgg-india/associate/modules/videos') ? 'active' : '' }}">
                                     <i class="fas fa-video"></i> Videos
                                 </a>
-                            @endif
+                              {{--@endif --}}
                         </div>
                     </div>
                 @endforeach
@@ -266,22 +276,22 @@
 
     <div class="dropdown">
         <a href="#referrallink"
-            class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-meta/tgg-india/advisor/referral/program*') || request()->is('tgg-india/admin/referral/tracking*') ? 'active' : '' }}"
+            class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-meta/tgg-india/associate/referral/program*') || request()->is('tgg-india/admin/referral/tracking*') ? 'active' : '' }}"
             data-bs-toggle="collapse" role="button"
-            aria-expanded="{{ request()->is('tgg-meta/tgg-india/advisor/referral/program*') || request()->is('tgg-india/admin/referral/tracking*') ? 'true' : 'false' }}"
+            aria-expanded="{{ request()->is('tgg-meta/tgg-india/associate/referral/program*') || request()->is('tgg-india/admin/referral/tracking*') ? 'true' : 'false' }}"
             aria-controls="referrallink">
             <span><i class="fas fa-share-alt me-2"></i>Referral</span>
             <i class="fas fa-caret-down"></i>
         </a>
 
         <div id="referrallink"
-            class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/advisor/referral/program*') || request()->is('tgg-india/admin/referral/tracking*') ? 'show' : '' }}">
-            <a href="{{ route('tgg-india.advisor.referral.program') }}"
-                class="d-block py-1 {{ request()->is('tgg-meta/tgg-india/advisor/referral/program*') ? 'active' : '' }}">
+            class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/associate/referral/program*') || request()->is('tgg-india/admin/referral/tracking*') ? 'show' : '' }}">
+            <a href="{{ route('tgg-india.associate.referral.program') }}"
+                class="d-block py-1 {{ request()->is('tgg-meta/tgg-india/associate/referral/program*') ? 'active' : '' }}">
                 <i class="fas fa-project-diagram me-2"></i>Referral Program
             </a>
 
-            <a href="{{ route('tgg-india.advisor.referral.tracking') }}"
+            <a href="{{ route('tgg-india.associate.referral.tracking') }}"
                 class="d-block py-1 {{ request()->is('tgg-india/admin/referral/tracking*') ? 'active' : '' }}">
                 <i class="fas fa-chart-line me-2"></i>Referral Tracking
             </a>
@@ -291,7 +301,7 @@
 
     <a href="{{ route('tgg-india.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>
 
-    @if (url()->current() === url('tgg-meta/tgg-india/advisor/dashboard'))
+    @if (url()->current() === url('tgg-meta/tgg-india/associate/dashboard'))
         <div class="card tgg_news">
             <h3 class="card-title">TGG NEWS</h3>
             <div class="card-inner">

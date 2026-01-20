@@ -11,10 +11,10 @@
                 <form action="{{ route('tgg-india.trainer.feature-limits.setPrice') }}" method="POST"
                     class="d-flex align-items-center gap-2">
                     @csrf
-                    <input type="number" title="This is the price advisors will need to pay once they exceed their free limit." name="price" class="form-control" placeholder="Set Price" style="width: 120px;"
+                    <input type="number" title="This is the price associates will need to pay once they exceed their free limit." name="price" class="form-control" placeholder="Set Price" style="width: 120px;"
                     @if (!$featureLimits[0] || $featureLimits[0]->created_by !== Auth('web2')->id()) disabled @endif value="{{ $featureLimits[0]->price ?? '' }}">
                     <input type="hidden" name="created_by" value="{{ $featureLimits[0]->created_by ?? '' }}">
-                    <button type="submit" title="This is the price advisors will need to pay once they exceed their free limit." class="btn btn-primary create-button" @if (!$featureLimits[0] || $featureLimits[0]->created_by !== Auth('web2')->id()) disabled @endif>
+                    <button type="submit" title="This is the price associates will need to pay once they exceed their free limit." class="btn btn-primary create-button" @if (!$featureLimits[0] || $featureLimits[0]->created_by !== Auth('web2')->id()) disabled @endif>
                         Save
                     </button>
                 </form>

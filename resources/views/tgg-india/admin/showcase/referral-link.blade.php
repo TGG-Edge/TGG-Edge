@@ -33,7 +33,7 @@
                             <!-- Hero Section -->
                             <h1 class="text-center text-primary">TGG India Referral Program</h1>
                             <p class="text-center" style="font-size:14px; max-width: 700px; margin: auto;">
-                            As a proud advisor and  <strong> co-creator </strong> of TGG India, you are part of a transformative movement toward self-reliance and ethical entrepreneurship. Now, you can extend this opportunity to others across India.
+                            As a proud associate and  <strong> co-creator </strong> of TGG India, you are part of a transformative movement toward self-reliance and ethical entrepreneurship. Now, you can extend this opportunity to others across India.
                             </p>
                             <hr>
 
@@ -50,7 +50,7 @@
                             <!-- What is Referral Program -->
                             <h2>What is the TGG India Referral Program?</h2>
                             <p>
-                            The TGG India Referral Program is a gateway to collective prosperity. It empowers advisors to expand their network by inviting others to join a sustainable income generation initiative rooted in transparency and ethicality.
+                            The TGG India Referral Program is a gateway to collective prosperity. It empowers associates to expand their network by inviting others to join a sustainable income generation initiative rooted in transparency and ethicality.
                             </p>
                             <p>
                                 For every successful referral — when your invitee registers and their account is verified — you receive a ₹500 reward directly in your account.
