@@ -63,6 +63,49 @@
 
     <div class="dropdown">
         <a href="#"
+            class="dropdown-toggle d-flex justify-content-between align-items-center
+            {{ request()->is('tgg-meta/tgg-india/*/templates*') ? 'active' : '' }}"
+            data-bs-toggle="collapse"
+            data-bs-target="#campaignDropdown"
+            aria-expanded="{{ request()->is('tgg-meta/tgg-india/*/templates*') ? 'true' : 'false' }}">
+            
+            <span>
+                <i class="fas fa-bullhorn me-2"></i> Campaign
+            </span>
+            <i class="fas fa-caret-down"></i>
+        </a>
+
+        <div class="collapse ps-3
+            {{ request()->is('tgg-meta/tgg-india/*/templates*') ? 'show' : '' }}"
+            id="campaignDropdown">
+
+            {{-- Templates --}}
+            {{-- <a href="{{ route('tgg-india.templates.index', 'facilitator') }}"
+            class="d-block py-1
+            {{ request()->is('tgg-meta/tgg-india/*/templates') ? 'active' : '' }}">
+                <i class="fas fa-envelope-open-text me-2"></i> Templates
+            </a> --}}
+
+            {{-- Future (campaigns, logs, reports) --}}
+            
+            <a href="{{ route('tgg-india.campaigns.index', 'facilitator') }}"
+                class="d-block py-1
+                {{ request()->is('tgg-meta/tgg-india/*/campaigns*') ? 'active' : '' }}">
+                    <i class="fas fa-paper-plane me-2"></i> Campaigns
+            </a>
+        
+            <a href="{{ route('tgg-india.email-check.index', 'facilitator') }}"
+            class="d-block py-1
+            {{ request()->is('tgg-meta/tgg-india/*/email-check*') ? 'active' : '' }}">
+                <i class="fas fa-envelope-circle-check me-2"></i> Email Check
+            </a>
+
+
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <a href="#"
             class="dropdown-toggle d-flex justify-content-between align-items-center 
         {{ request()->is('tgg-meta/tgg-india/facilitator/incentives*') || request()->is('tgg-meta/tgg-india/facilitator/rewards*') || request()->is('tgg-meta/tgg-india/facilitator/invoices*') || request()->is('tgg-meta/tgg-india/facilitator/receipts*') ? 'active' : '' }}"
             data-bs-toggle="collapse" data-bs-target="#advancementDropdown"
@@ -84,16 +127,16 @@
 
     <div class="dropdown">
         <a href="#referrallink"
-            class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-meta/tgg-india/facilitator/referral/program*') || request()->is('tgg-india/admin/referral/tracking*') ? 'active' : '' }}"
+            class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('tgg-meta/tgg-india/facilitator/referral/program*') || request()->is('tgg-india/facilitator/referral/tracking*') ? 'active' : '' }}"
             data-bs-toggle="collapse" role="button"
-            aria-expanded="{{ request()->is('tgg-meta/tgg-india/facilitator/referral/program*') || request()->is('tgg-india/admin/referral/tracking*') ? 'true' : 'false' }}"
+            aria-expanded="{{ request()->is('tgg-meta/tgg-india/facilitator/referral/program*') || request()->is('tgg-india/facilitator/referral/tracking*') ? 'true' : 'false' }}"
             aria-controls="referrallink">
             <span><i class="fas fa-share-alt me-2"></i>Lead Generate</span>
             <i class="fas fa-caret-down"></i>
         </a>
 
         <div id="referrallink"
-            class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/facilitator/referral/program*') || request()->is('tgg-india/admin/referral/tracking*') ? 'show' : '' }}">
+            class="collapse ps-3 {{ request()->is('tgg-meta/tgg-india/facilitator/referral/program*') || request()->is('tgg-india/facilitator/referral/tracking*') ? 'show' : '' }}">
             <a href="{{ route('tgg-india.facilitator.referral.program') }}"
                 class="d-block py-1 {{ request()->is('tgg-meta/tgg-india/facilitator/referral/program*') ? 'active' : '' }}">
                 <i class="fas fa-project-diagram me-2"></i>Lead Referral Link

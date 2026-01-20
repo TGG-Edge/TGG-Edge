@@ -20,7 +20,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Slug</th>
+                    <th>Created By</th>
                     <th>Assigned Users</th>
                     <th>Assigned Features</th>
                     <th>Created At</th>
@@ -32,12 +32,24 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $module->name }}</td>
-                        <td>{{ $module->slug }}</td>
-
+                            <td> {{ optional($module->moduleInstances->first()?->user)->name ?? 'N/A' }}
+                            </td>
                         <td>
-                            @if($module->users->count())
+                            @php
+                            $moduleInstanceId = \App\Models\ModuleInstance::where('module_id', $module->id)
+                            ->orderBy('id')
+                            ->value('id');
+                            $assigns = \App\Models\ModuleInstanceAssign::whereJsonContains(
+                                'module_instance_ids',
+                                $moduleInstanceId
+                            )->get();
+                            $userIds = $assigns->pluck('user_id')->unique()->values();
+                            $users = \App\Models\UserSecondary::whereIn('id', $userIds)->get();
+
+                            @endphp
+                            @if($users->count())
                                 <ul class="mb-0 ps-3">
-                                    @foreach($module->users as $user)
+                                    @foreach($users as $user)
                                         <li>{{ $user->name }}</li>
                                     @endforeach
                                 </ul>

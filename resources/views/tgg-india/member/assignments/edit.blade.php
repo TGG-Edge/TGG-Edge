@@ -8,7 +8,7 @@
     <h4 class="mb-3 trainer-heading">Edit Assignment</h4>
 
     <div class="card p-3 mb-4">
-        <form action="{{ route('tgg-india.advisor.assignments.update', $assignment->id) }}" method="POST">
+        <form action="{{ route('tgg-india.associate.assignments.update', $assignment->id) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -46,7 +46,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary save-button">Update</button>
-            <a href="{{ route('tgg-india.advisor.assignments.index') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('tgg-india.associate.assignments.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>

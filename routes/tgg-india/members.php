@@ -25,8 +25,8 @@ use App\Models\Reward;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->group(function () {
-     //advisor
-  Route::middleware('advisor')->prefix('advisor')->name('advisor.')->group(function () {
+     //associate
+  Route::middleware('associate')->prefix('associate')->name('associate.')->group(function () {
       Route::get('/dashboard', [\App\Http\Controllers\TggIndia\Member\DashboardController::class, 'index'])->name('dashboard');
 
     // Route::get('/dashboard', function () {

@@ -64,54 +64,54 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
   
 
   //dynamic routes based on modules
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
     ->get('/{role}/templates', [TemplateController::class, 'index'])->name('templates.index');
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
     ->get('/{role}/templates/create', [TemplateController::class, 'create'])->name('templates.create');
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
   ->get('/{role}/templates/edit', [TemplateController::class, 'edit'])->name('templates.edit');
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
   ->get('/{role}/templates/show', [TemplateController::class, 'show'])->name('templates.show');
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
   ->get('/templates/delete/{id}', [TemplateController::class, 'destroy'])->name('templates.destroy');
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
   ->post('/templates/store', [TemplateController::class, 'store'])->name('templates.store');
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
   ->post('/templates/update/{id}', [TemplateController::class, 'update'])->name('templates.update');
 
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
       ->get('/{role}/campaigns', [CampaignController::class, 'index'])
       ->name('campaigns.index');
 
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
       ->get('/{role}/campaigns/create', [CampaignController::class, 'create'])
       ->name('campaigns.create');
 
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
       ->post('/campaigns/store', [CampaignController::class, 'store'])
       ->name('campaigns.store');
 
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
       ->get('/{role}/campaigns/edit/{id}', [CampaignController::class, 'edit'])
       ->name('campaigns.edit');
 
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
       ->post('/campaigns/update/{id}', [CampaignController::class, 'update'])
       ->name('campaigns.update');
 
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
       ->get('/{role}/campaigns/show/{id}', [CampaignController::class, 'show'])
       ->name('campaigns.show');
 
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
       ->get('/campaigns/delete/{id}', [CampaignController::class, 'destroy'])
       ->name('campaigns.delete');
       
-  Route::middleware(['dynamic_role:1,6'])
+  Route::middleware(['dynamic_role:1,6,8'])
     ->get('/{role}/campaigns/{id}', [CampaignController::class, 'show'])
     ->name('campaigns.show');
 
-  Route::middleware(['dynamic_role:1,6'])->group(function () {
+  Route::middleware(['dynamic_role:1,6,8'])->group(function () {
 
       Route::get('/{role}/email-check', 
           [EmailCheckController::class, 'index']

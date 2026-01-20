@@ -43,7 +43,7 @@ class AssignmentController extends Controller
             'created_by'  => auth('web2')->id(), // in this case user created it for themselves
         ]);
 
-        return redirect()->route('tgg-india.advisor.assignments.index')->with('success', 'Assignment created successfully.');
+        return redirect()->route('tgg-india.associate.assignments.index')->with('success', 'Assignment created successfully.');
     }
 
     public function edit(AssignmentSecondary $assignment)
@@ -67,7 +67,7 @@ class AssignmentController extends Controller
 
         $assignment->update($request->all());
 
-        return redirect()->route('tgg-india.advisor.assignments.index')->with('success', 'Assignment updated successfully.');
+        return redirect()->route('tgg-india.associate.assignments.index')->with('success', 'Assignment updated successfully.');
     }
 
     private function authorizeAssignment(AssignmentSecondary $assignment)

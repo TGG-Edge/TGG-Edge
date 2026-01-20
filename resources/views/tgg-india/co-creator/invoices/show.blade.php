@@ -92,7 +92,9 @@
             <td>
                 <h2>Invoice</h2>
                 <strong>{{ $invoice->source?->name }}</strong><br>
-                {{ $invoice->source?->address ?? 'Address not provided' }}<br>
+                <p style="max-width: 350px; white-space: normal; word-break: break-word;">
+                    {{ $invoice->source?->address ?? 'Address not provided' }}<br>
+                </p>
                 India<br>
                  @php
                 $idProof = \App\Models\UserIdProofSecondary::where('user_id', $invoice->source->id)->first();
@@ -101,7 +103,7 @@
                 <br>
                 GST No: {{ $invoice->source?->gst_no ?? 'N/A' }}
                 <br>
-                Type Of Service: {{ $invoice->source?->type_of_engagement ?? 'N/A' }}
+                Type Of Service: {{ getTypeOfEngagementOptions()[$invoice->source?->type_of_engagement] ?? 'N/A' }}
             </td>
             <td class="right">
                 <strong>INVOICE #{{ $invoice->invoice_number }}</strong><br>
@@ -112,7 +114,7 @@
 
     {{-- BILLING INFO --}}
     <div class="info">
-            <p><strong>Billed To:</strong> {{  $invoice->target?->address ?? 'TGG Eco Ventures Pvt. Ltd. #677, 1st
+            <p style="max-width: 350px; white-space: normal; word-break: break-word;"><strong>Billed To:</strong> {{  $invoice->target?->address ?? 'TGG Eco Ventures Pvt. Ltd. #677, 1st
                 Floor, 27th Main 13th Cross, Sector-1,
                 HSR Layout, Bangalore-560102,
                 Karnataka, India' }}</p>

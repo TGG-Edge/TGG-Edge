@@ -42,8 +42,8 @@ class UserSecondary extends Authenticatable
             'key'  => 'trainer'
         ],
         3 => [
-            'name' => 'Advisor',
-            'key'  => 'advisor'
+            'name' => 'Associate',
+            'key'  => 'associate'
         ],
         4 => [
             'name' => 'RHM Club',

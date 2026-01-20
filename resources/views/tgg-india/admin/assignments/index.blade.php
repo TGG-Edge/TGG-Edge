@@ -34,7 +34,7 @@
                     <th>Title</th>
                     <th>Task Type</th>
                     <th>Status</th>
-                    <th>Advisor</th>
+                    <th>Associate</th>
                     <th>Due Date</th>
                     <th>Fee</th>
                     <th>Childs</th>
@@ -48,7 +48,7 @@
                     <td>{{ $assignment->title }}</td>
                     <td>{{ $assignment->task_type }}</td>
                     <td>{!! statusWithColor($assignment->status) !!}</td>
-                    <td>{{ $assignment->advisor?->name }}</td>
+                    <td>{{ $assignment->associate?->name }}</td>
                     <td>{{ $assignment->due_date ?? 'N/A' }}</td>
                     <td>{{ $assignment->price ?? '0' }}</td>
 

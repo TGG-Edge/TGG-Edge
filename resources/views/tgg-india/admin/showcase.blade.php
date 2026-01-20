@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="welcome_note_member" class="form-label">Welcome Note For Advisor</label>
+                    <label for="welcome_note_member" class="form-label">Welcome Note For Associate</label>
                     <textarea id="welcome_note_member" name="welcome_note_member" class="form-control js-ckeditor" rows="5">
                 {!! old('welcome_note_member', $showcase?->welcome_note_member ?? '') !!}
             </textarea>

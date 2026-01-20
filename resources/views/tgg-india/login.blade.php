@@ -7,7 +7,7 @@
     {{-- Top Description --}}
     <div class="text-center mb-4">
         <h2 class="fw-bold">WELCOME TO TGG'S ECO-ENTREPRENEURSHIP DEVELOPMENT PROGRAM</h2>
-        <p class="text-muted">Your gateway to purposeful collective action and transformative growth within the TGG Family. Anchored in the vision of TGG, this platform empowers advisors to explore eco entrepreneurship, cultivate investment habits, engage in regenerative travel, and build meaningful networks across borders. With a strong focus on revenue generation for passive income, alongside health and responsible investments, TGG-Meta offers structured learning, mentorship, and real-world application. It’s a living ecosystem where values meet action—enabling every advisor to evolve into a self-reliant changemaker contributing to a sustainable, inclusive future.</p>
+        <p class="text-muted">Your gateway to purposeful collective action and transformative growth within the TGG Family. Anchored in the vision of TGG, this platform empowers associates to explore eco entrepreneurship, cultivate investment habits, engage in regenerative travel, and build meaningful networks across borders. With a strong focus on revenue generation for passive income, alongside health and responsible investments, TGG-Meta offers structured learning, mentorship, and real-world application. It’s a living ecosystem where values meet action—enabling every associate to evolve into a self-reliant changemaker contributing to a sustainable, inclusive future.</p>
     </div>
 
     {{-- Split Layout --}}

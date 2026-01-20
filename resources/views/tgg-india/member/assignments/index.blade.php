@@ -1,13 +1,13 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Assignments Advisor | TGG Meta | TGG India')
+@section('title', 'Assignments Associate | TGG Meta | TGG India')
 
 @section('content')
 <div class="admin-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-3 trainer-heading">My Assignments</h4>
         <div class="d-flex align-items-center gap-2">
-            {{-- <a href="{{ route('tgg-india.advisor.assignments.create') }}" class="btn btn-primary assignment-button"><i class="bi bi-plus-lg"></i>New Assignment</a> --}}
+            {{-- <a href="{{ route('tgg-india.associate.assignments.create') }}" class="btn btn-primary assignment-button"><i class="bi bi-plus-lg"></i>New Assignment</a> --}}
         </div>
     </div>
     @include('tgg-india.layouts.includes.message') 
@@ -34,7 +34,7 @@
                    <td>{{ $assignment->price }}</td>
                 <td>
                     <div class="d-flex align-items-center justify-content-center">
-                    <a href="{{ route('tgg-india.advisor.assignments.edit', $assignment) }}" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
+                    <a href="{{ route('tgg-india.associate.assignments.edit', $assignment) }}" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center p-0 me-2" 
                             style="width: 28px; height: 28px;">
                                 <i class="fas fa-edit"></i>
                     </a>
@@ -46,7 +46,7 @@
                         $invoiceExists = false;
                     @endphp
 
-                    <a href="{{ $invoiceExists ? '#' : route('tgg-india.advisor.invoices.global-store', [
+                    <a href="{{ $invoiceExists ? '#' : route('tgg-india.associate.invoices.global-store', [
                         'model_type' => 'App\Models\Assignment',
                         'model_id'   => $assignment->id,
                         'source_id'  => auth()->id(),      // Optional: current user as source

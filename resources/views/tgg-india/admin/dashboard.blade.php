@@ -31,10 +31,11 @@ $referralCount = Referral::count();
 // ✅ Safe amount calculations
 $incentiveAmount = Incentive::sum('amount');
 $rewardAmount    = Reward::sum('amount');
-$invoiceAmount   = Schema::hasColumn('invoices', 'amount') ? Invoice::sum('amount') : 0;
-$receiptAmount   = Schema::hasColumn('receipts', 'amount') ? Receipt::sum('amount') : 0;
+$invoiceAmount   = Schema::connection('mysql2')->hasColumn('invoices', 'amount') ? Invoice::sum('amount') : 0;
+$receiptAmount   = Schema::connection('mysql2')->hasColumn('receipts', 'amount') ? Receipt::sum('amount') : 0;
+$donationAmount  = Schema::connection('mysql2')->hasColumn('donations', 'amount') ? Donation::sum('amount') : 0;
+$paymentAmount = Schema::connection('mysql2')->hasColumn('payments', 'amount') ? Payment::sum('amount') : 0;
 @endphp
-
 @section('content')
 <div class="admin-container">
             @include('tgg-india.layouts.includes.message')
@@ -70,8 +71,8 @@ $receiptAmount   = Schema::hasColumn('receipts', 'amount') ? Receipt::sum('amoun
         $summary = [
             ['title' => 'Incentives', 'count' => array_sum($incentiveStatus), 'icon' => 'bi-gift', 'color' => 'primary', 'statuses' => $incentiveStatus, 'amount'=>$incentiveAmount],
             ['title' => 'Rewards', 'count' => $rewardCount, 'icon' => 'bi-trophy', 'color' => 'success','amount'=>$rewardAmount],
-            ['title' => 'Donations', 'count' => $donationCount, 'icon' => 'bi-heart', 'color' => 'danger'],
-            ['title' => 'Payments', 'count' => array_sum($paymentStatus), 'icon' => 'bi-cash-coin', 'color' => 'info', 'statuses' => $paymentStatus],
+            ['title' => 'Donations', 'count' => $donationCount, 'icon' => 'bi-heart', 'color' => 'danger','amount'=>$donationAmount],
+            ['title' => 'Payments', 'count' => array_sum($paymentStatus), 'icon' => 'bi-cash-coin', 'color' => 'info','amount'=>$paymentAmount, 'statuses' => $paymentStatus],
             ['title' => 'Invoices', 'count' => array_sum($invoiceStatus), 'icon' => 'bi-receipt', 'color' => 'warning', 'statuses' => $invoiceStatus,'amount'=>$invoiceAmount],
             ['title' => 'Receipts', 'count' => array_sum($receiptStatus), 'icon' => 'bi-file-earmark-text', 'color' => 'secondary', 'statuses' => $receiptStatus,'amount'=>$receiptAmount],
             ['title' => 'Referrals', 'count' => $referralCount, 'icon' => 'bi-people', 'color' => 'dark'],
@@ -91,7 +92,11 @@ $receiptAmount   = Schema::hasColumn('receipts', 'amount') ? Receipt::sum('amoun
                         </div>
                         <h2 class="fw-bold text-dark mb-1">{{ $item['count'] }}</h2>
                         @if(isset($item['amount']))
-                            <p class="text-muted small mb-3">Total Amount: ₹{{ number_format($item['amount'],2) }}</p>
+                            @if( $item['title'] == 'Rewards')
+                                <p class="text-muted small mb-3">Total Points: {{ number_format($item['amount'],0) }}</p>
+                            @else
+                                <p class="text-muted small mb-3">Total Amount: ₹{{ number_format($item['amount'],2) }}</p>
+                            @endif
                         @else
                             <p class="text-muted small mb-3">{{ $item['title'] }} Total</p>
                         @endif

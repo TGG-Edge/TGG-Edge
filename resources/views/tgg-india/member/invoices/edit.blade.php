@@ -11,7 +11,7 @@
 
     <div class="card p-3 mb-4">
 
-        <form action="{{ route('tgg-india.advisor.invoices.update', $invoice->id) }}" method="POST">
+        <form action="{{ route('tgg-india.associate.invoices.update', $invoice->id) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -78,7 +78,7 @@
             {{-- BUTTONS --}}
             <div class="mt-4 d-flex flex-wrap gap-2">
                 <button type="submit" class="btn btn-primary save-button">Update</button>
-                <a href="{{ route('tgg-india.advisor.invoices.index') }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{ route('tgg-india.associate.invoices.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
 
         </form>

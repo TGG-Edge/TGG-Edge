@@ -4,21 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ModuleInstance extends Model
+class ModuleInstanceAssign extends Model
 {
     //
     protected $connection = 'mysql2';
-    protected $table = 'module_instances';
+    protected $table = 'module_instance_assigns';
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'module_instance_ids' => 'array',
+    ];
 
     public function module()
     {
         return $this->belongsTo(Module::class);
     }
 
-    public function moduleInstanceAssign()
+    public function moduleInstance()
     {
-        return $this->belongsTo(ModuleInstanceAssign::class);
+        return $this->belongsTo(ModuleInstance::class);
     }
 
     // Each instance belongs to a user

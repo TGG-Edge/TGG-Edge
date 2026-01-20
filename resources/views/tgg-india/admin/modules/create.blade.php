@@ -13,6 +13,13 @@
                 <label>Name:</label>
                 <input type="text" name="name" class="form-control">
 
+                <label class="mt-2">Created By:</label>
+                <select name="user_id" placeholder="Select User who create this module" class="form-control mb-2">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+
                 <label>Assign Users:</label>
                 <select name="users[]" multiple placeholder="Select Users">
                     @foreach ($users as $user)

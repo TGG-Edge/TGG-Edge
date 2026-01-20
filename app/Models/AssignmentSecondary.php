@@ -13,7 +13,7 @@ class AssignmentSecondary extends Model
     protected $table = 'assignments';
     protected $guarded = ['id'];
 
-    public function advisor()
+    public function associate()
     {
         return $this->belongsTo(UserSecondary::class, 'assigned_to');
     }

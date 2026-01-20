@@ -61,6 +61,11 @@
 
         <hr>
 
+        @php
+            $user = auth('web2')->user();
+            $idProof = \App\Models\UserIdProofSecondary::where('user_id', $user->id)->first();
+            $bankDetail = \App\Models\UserBankDetailSecondary::where('user_id', $user->id)->first();
+        @endphp
        {{-- ===================== ID PROOF SECTION ===================== --}}
         <h5 class="page-heading mt-4">ID Proof Details</h5>
         <div class="row">

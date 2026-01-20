@@ -19,7 +19,7 @@ class CampaignController extends Controller
      public function index()
     {
         $campaigns = Campaign::with('template')->latest()->paginate(10);
-        if(auth('web2')->user()->role_key == 'freelancer'){
+        if(auth('web2')->user()->role_key == 'freelancer' || auth('web2')->user()->role_key == 'facilitator'){
             $campaigns = Campaign::with('template')
                 ->where('created_by', auth('web2')->id())
                 ->latest()
