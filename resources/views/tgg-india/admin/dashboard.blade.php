@@ -128,18 +128,110 @@ $paymentAmount = Schema::connection('mysql2')->hasColumn('payments', 'amount') ?
 
 @php
 $services = [
-    ['title'=>'Website Development','image'=>'images/Website_Development.png','content'=>'Static ₹5,000 (5 pages)<br>Non-Member ₹7,000<br>Dynamic: Ask for quote'],
-    ['title'=>'Digital Marketing','image'=>'images/Digital_Marketing.jpg','content'=>'Member ₹8,000/month<br>Non-Member ₹10,000/month'],
-    ['title'=>'TGG News','image'=>'images/News.jpg','content'=>'AI Podcast / Video Promotion<br>Members only ₹4,000'],
-    ['title'=>'Business Development Support','image'=>'images/Business_Development_Support.jpg','content'=>'Members only<br>₹8,000 / month'],
-    ['title'=>'Incorporation Support','image'=>'images/Incorporation_Support.png','content'=>'Members only<br>Pricing varies'],
-    ['title'=>'Accounting & Auditing Support','image'=>'images/Accounting_Auditing_Support.jpg','content'=>'Only for members'],
-    ['title'=>'Legal Support','image'=>'images/Legal_Support.jpg','content'=>'Only for members'],
-    ['title'=>'AI Powered Problem Solving','image'=>'images/AI_Powered_Problem_Solving.jpg','content'=>'Instant solutions<br>TGG Family only'],
-    ['title'=>'App Development','image'=>'images/App_Development.jpg','content'=>'Member ₹10,000<br>Non-Member ₹15,000'],
-    ['title'=>'Custom Software','image'=>'images/Custom_Software.jpg','content'=>'Member ₹10,000<br>Non-Member ₹15,000'],
+    [
+        'title' => 'Website Development',
+        'icon' => 'bi-code-slash',
+        'logo' => 'images/services/web-development.svg',
+        'points' => [
+            'Static & dynamic websites',
+            'Responsive & SEO friendly',
+            'Secure and scalable build',
+        ],
+    ],
+    [
+        'title' => 'Digital Marketing',
+        'icon' => 'bi-megaphone',
+        'logo' => 'images/services/digital-marketing.svg',
+        'points' => [
+            'SEO & social media campaigns',
+            'Content & brand promotion',
+            'Analytics & reporting',
+        ],
+    ],
+    [
+        'title' => 'TGG News',
+        'icon' => 'bi-broadcast',
+        'logo' => 'images/services/news.svg',
+        'points' => [
+            'AI podcast & video promotion',
+            'Monthly media exposure',
+            'Community outreach',
+        ],
+    ],
+    [
+        'title' => 'Business Development Support',
+        'icon' => 'bi-briefcase',
+        'logo' => 'images/services/business.svg',
+        'points' => [
+            'Market strategy planning',
+            'Growth & partnerships',
+            'Operational consulting',
+        ],
+    ],
+    [
+        'title' => 'Incorporation Support',
+        'icon' => 'bi-building',
+        'logo' => 'images/services/incorporation.svg',
+        'points' => [
+            'Company registration',
+            'Compliance assistance',
+            'Location-based guidance',
+        ],
+    ],
+    [
+        'title' => 'Accounting & Auditing Support',
+        'icon' => 'bi-calculator',
+        'logo' => 'images/services/accounting.svg',
+        'points' => [
+            'Bookkeeping & audits',
+            'Financial compliance',
+            'Reporting & review',
+        ],
+    ],
+    [
+        'title' => 'Legal Support',
+        'icon' => 'bi-shield-check',
+        'logo' => 'images/services/legal.svg',
+        'points' => [
+            'Legal documentation',
+            'Contracts & policies',
+            'Regulatory guidance',
+        ],
+    ],
+    [
+        'title' => 'AI Powered Problem Solving',
+        'icon' => 'bi-cpu',
+        'logo' => 'images/services/ai.svg',
+        'points' => [
+            'Instant AI-based solutions',
+            'Decision support',
+            'Knowledge assistance',
+        ],
+    ],
+    [
+        'title' => 'App Development',
+        'icon' => 'bi-phone',
+        'logo' => 'images/services/app.svg',
+        'points' => [
+            'Android & iOS apps',
+            'User-friendly UI/UX',
+            'Performance optimized',
+        ],
+    ],
+    [
+        'title' => 'Custom Software',
+        'icon' => 'bi-gear',
+        'logo' => 'images/services/software.svg',
+        'points' => [
+            'Tailor-made solutions',
+            'Process automation',
+            'Secure & scalable systems',
+        ],
+    ],
 ];
+
 @endphp
+
 
 @php
 $perSlide = 3;
@@ -166,22 +258,28 @@ if ($remainder !== 0) {
             <div class="row g-4">
                 @foreach($chunk as $service)
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-lg rounded-4 service-card text-center">
-                        <div class="card-body p-4 service-card-body">
+                    <div class="card border-0 rounded-4 service-mini-card h-100">
+                        <div class="card-body p-4">
 
-                            <img
-                                src="{{ asset($service['image']) }}"
-                                alt="{{ $service['title'] }}"
-                                class="service-img mb-3"
-                            >
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="service-icon me-3">
+                                    @if(isset($service['logo']))
+                                        <img src="{{ asset($service['logo']) }}" alt="{{ $service['title'] }}">
+                                    @else
+                                        <i class="bi {{ $service['icon'] }}"></i>
+                                    @endif
+                                </div>
 
-                            <h6 class="fw-semibold mb-2 text-center">
-                                {{ $service['title'] }}
-                            </h6>
+                                <h6 class="fw-semibold mb-0">
+                                    {{ $service['title'] }}
+                                </h6>
+                            </div>
 
-                            <p class="text-muted small mb-0 text-center">
-                                {!! $service['content'] !!}
-                            </p>
+                            <ul class="service-points mb-0">
+                                @foreach($service['points'] as $point)
+                                    <li>{{ $point }}</li>
+                                @endforeach
+                            </ul>
 
                         </div>
                     </div>
