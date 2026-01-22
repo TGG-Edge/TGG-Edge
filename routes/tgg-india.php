@@ -61,6 +61,11 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
   Route::get('/download-excel/{model}', [ExportController::class, 'downloadExcel'])
     ->name('download.excel');
+
+   Route::get('/{role}/venture-bench-services', function(){
+      return view('tgg-india.venture-bench-services');
+   })
+    ->name('venture-bench-services.index');
   
 
   //dynamic routes based on modules

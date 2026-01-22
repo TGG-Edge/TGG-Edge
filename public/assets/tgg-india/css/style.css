@@ -2213,3 +2213,56 @@ body {
     display: block;
     margin-bottom: 4px;
 }
+
+
+
+.vb-support-section {
+    background-color: #f5f9f5;
+    border: 1px solid #d9d9d9;
+}
+
+.vb-title {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.vb-service-card {
+    background: #ffffff;
+    padding: 30px 20px;
+    height: 100%;
+    transition: 0.3s ease;
+}
+
+.vb-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.vb-service-image img {
+    max-width: 70px;
+    height: auto;
+}
+
+.vb-service-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.vb-see-more-btn {
+    background-color: #000;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.vb-see-more-btn:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+
+.checkout-vb-service-btn:hover{
+  background-color: #0056b3;
+}

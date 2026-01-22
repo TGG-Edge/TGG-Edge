@@ -155,6 +155,11 @@
     <i class="fas fa-clipboard-list"></i> Assignments
 </a>
 
+<a href="{{ route('tgg-india.venture-bench-services.index',['role' => auth('web2')->user()->role_key ]) }}"
+    class="{{ request()->is('tgg-meta/tgg-india/venture-bench-services') ? 'active' : '' }}">
+    <i class="fas fa-clipboard-check"></i> Venture Bench Services
+</a>
+
 @php
     $isAdvancementActive =
         request()->is('tgg-meta/tgg-india/admin/incentives*') ||

@@ -225,6 +225,41 @@
                     </div>
                 </div>
             </div>
+
+            {{-- =================== VENTURE BENCH SUPPORT =================== --}}
+            <section class="vb-support-section rounded-4 mt-4">
+                <h3 class="card-title p-3">VENTURE BENCH SUPPORT</h3>
+
+                <div class="container">
+                    <div class="row g-4">
+
+                        @foreach (getVentureBenchSupportDashbaordData() as $service)
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="vb-service-card text-center rounded-4">
+
+                                    <div class="vb-service-image">
+                                        <img src="{{ asset($service['logo']) }}" alt="{{ $service['title'] }}">
+                                    </div>
+
+                                    <h6 class="fw-bold text-dark my-3">
+                                        {{ strtoupper($service['title']) }}
+                                    </h6>
+
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+
+                    {{-- See More Button --}}
+                    <div class="text-center py-3 d-flex justify-content-center">
+                        <a href="{{ route('tgg-india.venture-bench-services.index', ['role' => auth('web2')->user()->role_key]) }}"
+                            class="btn-outline small text-white checkout-vb-service-btn" style="text-decoration: none;">
+                            See More Details
+                        </a>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 

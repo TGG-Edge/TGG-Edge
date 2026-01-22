@@ -301,3 +301,71 @@ if (!function_exists('appraisal_plan')) {
         return $default;
     }
 }
+
+
+
+function getVentureBenchSupportDashbaordData(){
+  
+        return   $services = [
+                [
+                    'title' => 'Website Development',
+                    'icon' => 'bi-code-slash',
+                    'logo' => 'images/services/web-development.svg',
+                    'points' => ['Static & dynamic websites', 'Responsive & SEO friendly', 'Secure and scalable build'],
+                ],
+                [
+                    'title' => 'Digital Marketing',
+                    'icon' => 'bi-megaphone',
+                    'logo' => 'images/services/digital-marketing.svg',
+                    'points' => ['SEO & social media campaigns', 'Content & brand promotion', 'Analytics & reporting'],
+                ],
+                [
+                    'title' => 'TGG News',
+                    'icon' => 'bi-broadcast',
+                    'logo' => 'images/services/news.svg',
+                    'points' => ['AI podcast & video promotion', 'Monthly media exposure', 'Community outreach'],
+                ],
+                [
+                    'title' => 'Business Development Support',
+                    'icon' => 'bi-briefcase',
+                    'logo' => 'images/services/business.svg',
+                    'points' => ['Market strategy planning', 'Growth & partnerships', 'Operational consulting'],
+                ],
+                [
+                    'title' => 'Incorporation Support',
+                    'icon' => 'bi-building',
+                    'logo' => 'images/services/incorporation.svg',
+                    'points' => ['Company registration', 'Compliance assistance', 'Location-based guidance'],
+                ],
+                [
+                    'title' => 'Accounting & Auditing Support',
+                    'icon' => 'bi-calculator',
+                    'logo' => 'images/services/accounting.svg',
+                    'points' => ['Bookkeeping & audits', 'Financial compliance', 'Reporting & review'],
+                ],
+                [
+                    'title' => 'Legal Support',
+                    'icon' => 'bi-shield-check',
+                    'logo' => 'images/services/legal.svg',
+                    'points' => ['Legal documentation', 'Contracts & policies', 'Regulatory guidance'],
+                ],
+                [
+                    'title' => 'AI Powered Problem Solving',
+                    'icon' => 'bi-cpu',
+                    'logo' => 'images/services/ai.svg',
+                    'points' => ['Instant AI-based solutions', 'Decision support', 'Knowledge assistance'],
+                ],
+                [
+                    'title' => 'App Development',
+                    'icon' => 'bi-phone',
+                    'logo' => 'images/services/app.svg',
+                    'points' => ['Android & iOS apps', 'User-friendly UI/UX', 'Performance optimized'],
+                ],
+                [
+                    'title' => 'Custom Software',
+                    'icon' => 'bi-gear',
+                    'logo' => 'images/services/software.svg',
+                    'points' => ['Tailor-made solutions', 'Process automation', 'Secure & scalable systems'],
+                ],
+            ];
+}

@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
         <h4 class="mb-3 trainer-heading">Feature Limits</h4>
         <div class="d-flex align-items-center gap-2">
-            <a href="{{ route('tgg-india.admin.feature-limits.create') }}" class="btn btn-primary create-button">
+            <a href="{{ route('tgg-india.admin.feature-limits.create') }}" class="btn btn-primary assignment-button">
                 <i class="bi bi-plus-lg"></i> Create New
             </a>
         </div>

@@ -12,19 +12,18 @@
         }
 
         .btn-inside-model {
-                background: #265475;
-                 color: #fff;
+            background: #265475;
+            color: #fff;
         }
 
         .btn-inside-model:hover {
             background-color: #0056b3 !important;
             color: #fff !important;
         }
-        
-         .checkout-btn-tgg_foundation:hover {
+
+        .checkout-btn-tgg_foundation:hover {
             background-color: #0056b3 !important;
         }
-        
     </style>
     <div class="admin-container">
         @include('tgg-india.layouts.includes.message')
@@ -32,16 +31,19 @@
 
             <!-- Welcome Note -->
             <div class="dashboard-grid-welcome">
-                 @php
+                @php
                     $user = \App\Models\UserSecondary::find(auth('web2')->id());
-                    $mainApplicant = \App\Models\UserSecondary::where('rhm_number', $user->parent_rhm_number ?? '')->first();
+                    $mainApplicant = \App\Models\UserSecondary::where(
+                        'rhm_number',
+                        $user->parent_rhm_number ?? '',
+                    )->first();
                 @endphp
 
                 <div class="d-flex justify-content-end align-items-center flex-wrap gap-3 mb-2">
                     <span><strong>Name:</strong> {{ $user->name ?? 'N/A' }}</span>
                     <span><strong>Role:</strong> {{ $user->role_name ?? 'N/A' }}</span>
                     <span><strong>RHM No:</strong> {{ $user->rhm_number ?? 'N/A' }}</span>
-                    
+
                 </div>
                 <section class="welcome-note card">
                     <div class="card-inner-welcome">
@@ -49,7 +51,7 @@
                             {{ $showcase->welcome_note_member ??
                                 'Welcome to the Volunteer Dashboard! Explore the Woodperker collections, review entrepreneurship opportunities, and keep an eye on the latest updates below.' }}
                         </p>
-                         <span id="toggleExpandWelcome" class="text-primary"
+                        <span id="toggleExpandWelcome" class="text-primary"
                             style="cursor:pointer; display:none; font-weight:600;">
                             Read More
                         </span>
@@ -114,7 +116,7 @@
                                         $filename = basename($img);
 
                                         // Re-assign $imgPath based on environment
-                                        $img =  $img;
+                                        $img = $img;
                                     @endphp
                                     <div class="slide">
                                         <img src="{{ asset($img) }}" alt="Woodperker Image" class="card-img" />
@@ -138,7 +140,7 @@
                                     $filename = basename($img);
 
                                     // Re-assign $imgPath based on environment
-                                    $img =  $img;
+                                    $img = $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
                                     <button style="width: 100%;" type="button" class="btn-outline small checkout-btn"
@@ -192,7 +194,7 @@
                                         $filename = basename($img);
 
                                         // Re-assign $imgPath based on environment
-                                        $img =  $img;
+                                        $img = $img;
                                     @endphp
                                     <div class="slide">
                                         <img src="{{ asset($img) }}" alt="Event Image" class="card-img" />
@@ -216,7 +218,7 @@
                                     $filename = basename($img);
 
                                     // Re-assign $imgPath based on environment
-                                    $img =  $img;
+                                    $img = $img;
                                 @endphp
                                 <div class="slide" style="height: 30px">
                                     <button
@@ -251,7 +253,7 @@
                                         $filename = basename($img);
 
                                         // Re-assign $imgPath based on environment
-                                        $img =  $img;
+                                        $img = $img;
                                     @endphp
                                     <div class="slide">
                                         <img src="{{ asset($img) }}" alt="TGG Foundation Image" class="card-img" />
@@ -283,7 +285,8 @@
                                         width: 100%;
                                         "
                                         type="button" class="btn-outline small checkout-btn-tgg_foundation"
-                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}"  data-link="{{ $item['link'] ?? '' }}"  data-html="1">Checkout</button>
+                                        data-note="{!! htmlspecialchars($note, ENT_QUOTES) !!}" data-link="{{ $item['link'] ?? '' }}"
+                                        data-html="1">Checkout</button>
 
                                 </div>
                             @endforeach
@@ -297,6 +300,41 @@
             </div>
         </main>
     </div>
+
+    {{-- =================== VENTURE BENCH SUPPORT =================== --}}
+    <section class="vb-support-section rounded-4 mt-4">
+        <h3 class="card-title p-3">VENTURE BENCH SUPPORT</h3>
+
+        <div class="container">
+            <div class="row g-4">
+
+                @foreach (getVentureBenchSupportDashbaordData() as $service)
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="vb-service-card text-center rounded-4">
+
+                            <div class="vb-service-image">
+                                <img src="{{ asset($service['logo']) }}" alt="{{ $service['title'] }}">
+                            </div>
+
+                            <h6 class="fw-bold text-dark my-3">
+                                {{ strtoupper($service['title']) }}
+                            </h6>
+
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+
+            {{-- See More Button --}}
+            <div class="text-center py-3 d-flex justify-content-center">
+                <a href="{{ route('tgg-india.venture-bench-services.index', ['role' => auth('web2')->user()->role_key]) }}"
+                    class="btn-outline small text-white checkout-vb-service-btn" style="text-decoration: none;">
+                    See More Details
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Checkout Modal -->
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
@@ -364,29 +402,29 @@
         });
 
         document.querySelectorAll('.checkout-btn-tgg_foundation').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const note = this.dataset.note || '';
-        const link = this.dataset.link || '';
-        const isHtml = this.dataset.html === '1';
-        const checkoutModalBody = document.getElementById('checkoutModalBody');
+            btn.addEventListener('click', function() {
+                const note = this.dataset.note || '';
+                const link = this.dataset.link || '';
+                const isHtml = this.dataset.html === '1';
+                const checkoutModalBody = document.getElementById('checkoutModalBody');
 
-        let content = '';
-        if (isHtml) {
-            content = note;
-        } else {
-            content = `<p>${note || 'No details available.'}</p>`;
-        }
+                let content = '';
+                if (isHtml) {
+                    content = note;
+                } else {
+                    content = `<p>${note || 'No details available.'}</p>`;
+                }
 
-        if (link) {
-            content += `<div class="mt-3 text-center">
+                if (link) {
+                    content += `<div class="mt-3 text-center">
                 <a href="${link}" target="_blank" class="btn btn-inside-model">Donate</a>
             </div>`;
-        }
+                }
 
-        checkoutModalBody.innerHTML = content;
-        checkoutModal.show();
-    });
-});
+                checkoutModalBody.innerHTML = content;
+                checkoutModal.show();
+            });
+        });
 
 
 
