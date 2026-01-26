@@ -82,6 +82,58 @@
         font-size: 10px;
         padding: 2px 5px;
     }
+
+    /* Main header layout */
+.header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+/* Logo */
+.header-flex .col-md-3:first-child {
+    flex: 0 0 auto;
+}
+
+/* Navigation */
+nav.col-md-6 {
+    flex: 1;
+}
+
+.menu-container ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: -5px !important;
+    white-space: nowrap;
+    margin-right:-125px;
+}
+
+/* Social icons move to right corner */
+.cartnew {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    margin-right: -50px;
+}
+
+/* Icon spacing */
+.cartnew .d-flex {
+    gap: 10px !important;
+}
+
+/* Remove Bootstrap column width force */
+.col-md-3,
+.col-md-6 {
+    width: auto !important;
+}
+
+/* Prevent wrapping */
+.nav {
+    flex-wrap: nowrap !important;
+}
+
 </style>
 
 <header class="py-5 shadow-sm bg-white sticky-top header-padding">
@@ -90,12 +142,12 @@
         <!-- Logo -->
         <div class="col-md-3 text-center text-md-start mb-2 mb-md-0" style="margin-left: -60px;">
             <a href="{{ url('https://tggindia.com/') }}">
-                <img src="https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-1024x281.png" alt="TGG India Logo" class="img-fluid tgg-meta-logo-header" style="height: 73px;">
+                <img src="https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-1024x281.png" alt="TGG India Logo" class="img-fluid tgg-meta-logo-header" style="height: 65px;">
             </a>
         </div>
 
         <!-- Navigation -->
-        <nav class="col-md-6 d-flex flex-column align-items-center" style="margin-right: 25px;">
+        <nav class="col-md-6 d-flex flex-column align-items-center" style="margin-left: 30px;">
         
          <button class="mobile-menu-toggle" aria-label="Toggle menu">
             <i class="fas fa-bars"></i>
@@ -116,7 +168,7 @@
         </nav>
 
         <!-- Cart & Social Icons -->
-        <div class="col-md-3 d-flex justify-content-between align-items-center gap-5 cartnew">
+        <div class="cartnew">
             <!-- Cart -->
             {{-- <a href="#" class="btn btn-dark position-relative d-flex align-items-center cart-btn-ipad" style="margin-left: 110px;">
                 <i class="fas fa-shopping-cart"></i>

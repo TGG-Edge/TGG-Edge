@@ -387,13 +387,19 @@ html, body {
 /* new CSS TGG India */
 /* Header */
 
-header {
+/* header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
     background: #fff;
-    height: 95px;
+    height: 70px !important;
+} */
+
+.header-padding {
+    height: 85px !important;
+    padding-top: 6px !important;     /* small top padding */
+    padding-bottom: 6px !important;  /* small bottom padding */
 }
 
 .header-container {
@@ -822,8 +828,25 @@ header {
 }
 
 .tgg-meta-logo-header {
-    margin-left: 35px;
+    margin-left: 20px;
 }
+
+.menu-container ul.nav {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .menu-container ul li {
+    width: 100%;
+  }
+
+  .menu-container ul li a {
+    display: block;
+    width: 100%;
+    padding: 7px 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+  }
  
 /* .justify-content-center{
     margin-left: 10px !important;
@@ -1074,7 +1097,7 @@ header {
     color: #000;
     display: block;
     width: 100%;
-    padding: 8px 0;
+    padding: 8px 10px;
     text-align: left;
     border-bottom: 1px solid #eee;
   }
@@ -1094,12 +1117,12 @@ header {
     }
     
    .tgg-meta-logo-header{
-    height: 100px !important ;
+    height: 60px !important ;
     max-width: 350px !important ;
     margin: 0px !important;
     padding: 0px !important;
-    margin-bottom: 60px !important;
-    margin-left: 100px !important;
+    margin-bottom: 80px !important;
+    margin-left: 80px !important;
    } 
 
    .cartnew {
