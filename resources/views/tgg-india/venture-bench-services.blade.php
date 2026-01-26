@@ -1,13 +1,13 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Venture Bench Services | TGG Meta | TGG India')
+@section('title', 'Venture Bench Support | TGG Meta | TGG India')
 
 @section('content')
 <div class="admin-container">
 
     {{-- Page Header (Like Feature Limits) --}}
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
-        <h4 class="mb-3 trainer-heading">Venture Bench Services</h4>
+        <h4 class="mb-3 trainer-heading">Venture Bench Support</h4>
     </div>
 
     {{-- @php

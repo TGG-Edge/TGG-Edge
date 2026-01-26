@@ -157,7 +157,7 @@
 
 <a href="{{ route('tgg-india.venture-bench-services.index',['role' => auth('web2')->user()->role_key ]) }}"
     class="{{ request()->is('tgg-meta/tgg-india/venture-bench-services') ? 'active' : '' }}">
-    <i class="fas fa-clipboard-check"></i> Venture Bench Services
+    <i class="fas fa-clipboard-check"></i> Venture Bench Support
 </a>
 
 @php
@@ -189,9 +189,9 @@
         <a href="{{ route('tgg-india.admin.donations.index') }}" class="d-block py-1">
             <i class="fas fa-donate me-2"></i> Donation
         </a>
-        <a href="{{ route('tgg-india.admin.payments.index') }}" class="d-block py-1">
+        {{-- <a href="{{ route('tgg-india.admin.payments.index') }}" class="d-block py-1">
             <i class="fas fa-credit-card me-2"></i> Payment
-        </a>
+        </a> --}}
         <a href="{{ route('tgg-india.admin.invoices.index') }}" class="d-block py-1">
             <i class="fas fa-file-invoice me-2"></i> Invoice
         </a>

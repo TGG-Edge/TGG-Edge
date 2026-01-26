@@ -39,10 +39,24 @@
     // ✅ Safe amount calculations
     $incentiveAmount = Incentive::sum('amount');
     $rewardAmount = Reward::sum('amount');
-    $invoiceAmount = Schema::connection('mysql2')->hasColumn('invoices', 'amount') ? Invoice::sum('amount') : 0;
+    // $invoiceAmount = Schema::connection('mysql2')->hasColumn('invoices', 'amount') ? Invoice::sum('amount') : 0;
+
+    if (Schema::connection('mysql2')->hasColumn('invoices', 'items')) {
+        $invoiceAmount = Invoice::get()
+            ->sum(function ($invoice) {
+                $items = $invoice->items;
+                if (is_array($items)) {
+                    return collect($items)->sum('amount');
+                }
+                return 0;
+            });
+    } else {
+        $invoiceAmount = 0;
+    }
+
     $receiptAmount = Schema::connection('mysql2')->hasColumn('receipts', 'amount') ? Receipt::sum('amount') : 0;
     $donationAmount = Schema::connection('mysql2')->hasColumn('donations', 'amount') ? Donation::sum('amount') : 0;
-    $paymentAmount = Schema::hasColumn('payments', 'amount') ? Payment::sum('amount') : 0;
+    $paymentAmount = Schema::connection('mysql2')->hasColumn('payments', 'amount') ? Payment::sum('amount') : 0;
 @endphp
 @section('content')
     <div class="admin-container">
@@ -105,14 +119,14 @@
                     'color' => 'danger',
                     'amount' => $donationAmount,
                 ],
-                [
-                    'title' => 'Payments',
-                    'count' => array_sum($paymentStatus),
-                    'icon' => 'bi-cash-coin',
-                    'color' => 'info',
-                    'amount' => $paymentAmount,
-                    'statuses' => $paymentStatus,
-                ],
+                // [
+                //     'title' => 'Payments',
+                //     'count' => array_sum($paymentStatus),
+                //     'icon' => 'bi-cash-coin',
+                //     'color' => 'info',
+                //     'amount' => $paymentAmount,
+                //     'statuses' => $paymentStatus,
+                // ],
                 [
                     'title' => 'Invoices',
                     'count' => array_sum($invoiceStatus),

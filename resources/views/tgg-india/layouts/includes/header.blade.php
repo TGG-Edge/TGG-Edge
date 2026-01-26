@@ -105,6 +105,7 @@
             <ul class="nav justify-content-center">
                 <li class="nav-item"><a class="nav-link fw-bold text-dark" href="{{ url('https://tggindia.com/') }}">Home</a></li>
                 <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://tggindia.com/about-us/">About Us</a></li>
+                <li class="nav-item"><a class="nav-link fw-bold text-dark" href="http://tggindia.com/our-services/">Our Services</a></li>
                 <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://tggindia.com/journey-with-tgg/">Journey with TGG</a></li>
                 <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://tggindia.com/blog-post/">Blog</a></li>
                 <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://thegoldengreens.com/tgg-meta/tgg-india/login/XCJBDSNJK43RWEFSKDJCXNFL34KRN3DKL3MREFWLMNKL32M">Login</a></li>
@@ -117,13 +118,13 @@
         <!-- Cart & Social Icons -->
         <div class="col-md-3 d-flex justify-content-between align-items-center gap-5 cartnew">
             <!-- Cart -->
-            <a href="#" class="btn btn-dark position-relative d-flex align-items-center cart-btn-ipad" style="margin-left: 110px;">
+            {{-- <a href="#" class="btn btn-dark position-relative d-flex align-items-center cart-btn-ipad" style="margin-left: 110px;">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="ms-2">₹0.00</span>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 0
                 </span>
-            </a>
+            </a> --}}
 
             <!-- Social Icons -->
             <div class="d-flex gap-1 align-items-center ms-2">

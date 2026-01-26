@@ -33,6 +33,7 @@
         <ul>
             <li><a href="https://tggindia.com/">Home</a></li>
             <li><a href="https://tggindia.com/about-us/">About Us</a></li>
+            <li><a href="http://tggindia.com/our-services/">Our Services</a></li>
             <li><a href="https://tggindia.com/journey-with-tgg/">Journey with TGG</a></li>
             <li><a href="https://tggindia.com/contact-us/">Contact Us</a></li>
             <li><a href="https://tggindia.com/terms-conditions-2/">Privacy Policy</a></li>

@@ -340,12 +340,12 @@
                     </div>
 
                     {{-- See More Button --}}
-                    <div class="text-center py-3 d-flex justify-content-center">
+                    {{-- <div class="text-center py-3 d-flex justify-content-center">
                         <a href="{{ route('tgg-india.venture-bench-services.index', ['role' => auth('web2')->user()->role_key]) }}"
                             class="btn-outline small text-white checkout-vb-service-btn" style="text-decoration: none;">
                             See More Details
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </section>
 
