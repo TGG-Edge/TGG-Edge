@@ -149,7 +149,7 @@
 
 
     {{-- WhatsApp Message Admin Box --}}
-    <div class="mt-4 p-4 border rounded bg-light text-center shadow-sm" style="min-height: 220px;">
+    <div class="mt-4 p-4 border rounded bg-light text-center shadow-sm whatsapp-box" style="min-height: 220px;">
         <h6 class="fw-bold mb-3 text-dark">
             <i class="fab fa-whatsapp text-success me-1"></i> Message Admin
         </h6>

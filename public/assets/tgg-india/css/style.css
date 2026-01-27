@@ -2266,3 +2266,24 @@ body {
 .checkout-vb-service-btn:hover{
   background-color: #0056b3;
 }
+
+.tgg_news{
+    max-width: 300px;   /* adjust: 350px / 380px / 420px */
+}
+
+.whatsapp-box{
+    max-width: 300px;   /* change to 300px / 380px if needed */
+}
+
+@media (min-width: 768px) {
+    .col-md-9 {
+        flex: 0 0 auto;
+        width: 74% !important;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+    .col-md-9 {
+        width: 100% !important;
+    }
+}
