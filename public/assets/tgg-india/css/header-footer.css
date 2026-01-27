@@ -393,7 +393,7 @@ header {
     align-items: center;
     padding: 0 30px;
     background: #fff;
-    height: 95px;
+    height: 90px !important;
 }
 
 .header-container {
@@ -1090,16 +1090,17 @@ header {
     }
 
     .header-container-ipad{
-        height: 180px;
+        height: 100px;
     }
     
    .tgg-meta-logo-header{
-    height: 100px !important ;
+    height: 60px !important ;
     max-width: 350px !important ;
     margin: 0px !important;
     padding: 0px !important;
-    margin-bottom: 60px !important;
-    margin-left: 100px !important;
+    margin-bottom: 50px !important;
+    margin-left: 60px !important;
+    margin-top: 10px !important;
    } 
 
    .cartnew {
@@ -1359,5 +1360,75 @@ header {
   }
   .footer-b{
     margin-left: 5px;
+  }
+}
+
+/* =========================
+   DESKTOP HEADER FIX (ONLY)
+   ========================= */
+@media (min-width: 1025px) {
+    
+
+  /* Force header in one row */
+  .header-container-ipad {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 60px;
+  }
+
+  nav {
+    flex: 1 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .menu-container {
+    display: block !important;
+    margin-left: 15px !important ;
+  }
+
+  .menu-container ul {
+    display: flex !important;
+    flex-wrap: nowrap !important;   /* KEY FIX */
+    white-space: nowrap !important; /* prevents line break */
+    align-items: center !important;
+    margin-left: 160px !important;
+  }
+
+  .menu-container ul li {
+    float: none !important;
+  }
+
+  /* Remove Bootstrap column width forcing wrap */
+  nav.col-md-6,
+  .cartnew.col-md-3,
+  .col-md-3 {
+    width: auto !important;
+    flex: unset !important;
+  }
+
+  /* Hide hamburger on desktop */
+  .mobile-menu-toggle {
+    display: none !important;
+  }
+
+  /* Logo spacing fix */
+  .tgg-meta-logo-header {
+    margin: 0 !important;
+    height: 60px !important;
+    margin-top: -10px !important;
+  }
+
+  /* Social icons right aligned */
+  .cartnew {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
   }
 }
