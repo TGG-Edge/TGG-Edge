@@ -333,7 +333,7 @@
     </div>
 
     {{-- =================== VENTURE BENCH SUPPORT =================== --}}
-    <section class="vb-support-section rounded-4 mt-4">
+    {{-- <section class="vb-support-section rounded-4 mt-4">
         <h3 class="card-title p-3">VENTURE BENCH SUPPORT</h3>
 
         <div class="container">
@@ -357,15 +357,14 @@
 
             </div>
 
-            {{-- See More Button --}}
-            {{-- <div class="text-center py-3 d-flex justify-content-center">
+            <div class="text-center py-3 d-flex justify-content-center">
                 <a href="{{ route('tgg-india.venture-bench-services.index', ['role' => auth('web2')->user()->role_key]) }}"
                     class="btn-outline small text-white checkout-vb-service-btn" style="text-decoration: none;">
                     See More Details
                 </a>
-            </div> --}}
+            </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Checkout Modal -->
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">

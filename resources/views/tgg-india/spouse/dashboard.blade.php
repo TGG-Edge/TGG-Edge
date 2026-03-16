@@ -38,7 +38,7 @@
                     $mainApplicant = \App\Models\UserSecondary::where('rhm_number', $user->parent_rhm_number ?? '')->first();
                 @endphp
 
-                <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 mb-2">
+                <div class="d-flex justify-content-end align-items-end flex-wrap gap-3 mb-2">
                     <span><strong>Name:</strong> {{ $user->name ?? 'N/A' }}</span>
                     <span><strong>Role:</strong> {{ $user->role_name ?? 'N/A' }}</span>
                     <span><strong>RHM No:</strong> {{ $user->rhm_number ?? 'N/A' }}</span>
@@ -227,7 +227,7 @@
             </div>
 
             {{-- =================== VENTURE BENCH SUPPORT =================== --}}
-            <section class="vb-support-section rounded-4 mt-4">
+            {{-- <section class="vb-support-section rounded-4 mt-4">
                 <h3 class="card-title p-3">VENTURE BENCH SUPPORT</h3>
 
                 <div class="container">
@@ -251,7 +251,7 @@
 
                     </div>
 
-                    {{-- See More Button --}}
+                    
                     <div class="text-center py-3 d-flex justify-content-center">
                         <a href="{{ route('tgg-india.venture-bench-services.index', ['role' => auth('web2')->user()->role_key]) }}"
                             class="btn-outline small text-white checkout-vb-service-btn" style="text-decoration: none;">
@@ -259,7 +259,7 @@
                         </a>
                     </div>
                 </div>
-            </section>
+            </section> --}}
         </main>
     </div>
 

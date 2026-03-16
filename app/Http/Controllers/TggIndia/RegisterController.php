@@ -212,6 +212,7 @@ class RegisterController extends Controller
         if (!in_array(1, $modules)) {
             $modules[] = 1;
         }
+
         foreach ($modules as $moduleId) {
             ModuleInstance::create([
                 'module_id' => $moduleId,
@@ -219,7 +220,7 @@ class RegisterController extends Controller
             ]);
         }
 
-         if (!empty($request['referral_code'])) {
+        if (!empty($request['referral_code'])) {
             $referrerUser = UserSecondary::where('referral_code', $request['referral_code'])->first();
             if ($referrerUser) {
                 Referral::create([

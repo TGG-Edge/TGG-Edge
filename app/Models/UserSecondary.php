@@ -28,47 +28,56 @@ class UserSecondary extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
+        // 'password',
         'remember_token',
     ];
 
     public static $user_types = [
         1 => [
             'name' => 'Admin',
-            'key'  => 'admin'
+            'key'  => 'admin',
+            'onboarding_amount' => 0
         ],
         2 => [
             'name' => 'Trainer',
-            'key'  => 'trainer'
+            'key'  => 'trainer',
+            'onboarding_amount' => 10000
         ],
         3 => [
             'name' => 'Associate',
-            'key'  => 'associate'
+            'key'  => 'associate',
+            'onboarding_amount' => 43000
         ],
         4 => [
             'name' => 'RHM Club',
-            'key'  => 'rhm-club'
+            'key'  => 'rhm-club',
+            'onboarding_amount' => 5000
         ],
         5 => [
             'name' => 'Nomad Community',
-            'key'  => 'nomad-community'
+            'key'  => 'nomad-community',
+            'onboarding_amount' => 5000
         ],
         7 => [
             'name' => 'Co Creator',
-            'key'  => 'co-creator'
+            'key'  => 'co-creator',
+            'onboarding_amount' => 10000
         ],
         8 => [
             'name' => 'Facilitator',
-            'key'  => 'facilitator'
+            'key'  => 'facilitator',
+            'onboarding_amount' => 5000
         ],
         6 => [
             'name' => 'Freelancer',
-            'key'  => 'freelancer'
+            'key'  => 'freelancer',
+            'onboarding_amount' => 2500
         ],
         
         9 => [
             'name' => 'Spouse',
-            'key'  => 'spouse'
+            'key'  => 'spouse',
+            'onboarding_amount' => 0
         ],
     ];
     /**

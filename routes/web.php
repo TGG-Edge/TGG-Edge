@@ -11,6 +11,7 @@ use Xguard\Kanban\Models\Board;
 use Xguard\LaravelKanban\Models\Board as ModelsBoard;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Hash;
 use App\Models\UserSecondary;
 
@@ -129,3 +130,11 @@ Route::get('/phpinfo', function () {
     return phpinfo();
 });
 
+
+// Route::get('/report-builder', function () {
+//     return view('tgg-india.reports.builder');
+// });
+Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+Route::get('/reports/models', [ReportController::class,'models']);
+Route::post('/reports/relations', [ReportController::class,'relations']);
+Route::post('/reports/generate', [ReportController::class,'generate']);

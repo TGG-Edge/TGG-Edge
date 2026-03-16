@@ -18,7 +18,7 @@
             <ul class="list-group">
                 @foreach($groups as $group)
                     <a href="{{ route('tgg-india.admin.settings.index', ['group' => $group]) }}"
-                       class="list-group-item {{ $activeGroup == $group ? 'active' : '' }} btn btn-primary assignment-button">
+                       class="list-group-item {{ $activeGroup == $group ? 'active' : '' }} btn btn-primary assignment-button my-1">
                         {{ ucfirst($group) }}
                     </a>
                 @endforeach
@@ -45,6 +45,16 @@
                             </div>
                         @endif
 
+                         @if($setting->type === 'description')
+                            <div class="mb-3">
+                                <label class="form-label">{{ $setting->label }}</label>
+                                {{-- <input type="description"
+                                       name="settings[{{ $setting->id }}]"
+                                       value="{{ $setting->value }}"
+                                       class="form-control"> --}}
+                                <textarea name="settings[{{ $setting->id }}]" id="" class="form-control-textarea">{{ $setting->value }}</textarea>
+                            </div>
+                        @endif
                         {{-- JSON RULE EDITOR --}}
                         @if($setting->type === 'json')
                             <div class="mb-4">

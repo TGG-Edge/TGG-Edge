@@ -145,6 +145,58 @@
         <!-- END REFERRAL PROGRAM -->
         <!-- ========================= -->
 
+
+        <!-- ========================= -->
+        <!--   ONBOARDING LINKS DROPDOWN  -->
+        <!-- ========================= -->
+        <div class="dropdown">
+            <a href="#"
+            class="dropdown-toggle d-flex justify-content-between align-items-center py-1"
+            data-bs-toggle="collapse"
+            data-bs-target="#onboardingDropdown">
+            
+                <span>
+                    <i class="fas fa-user-plus me-2"></i> Onboarding Links
+                </span>
+                <i class="fas fa-caret-down"></i>
+            </a>
+
+            <div class="collapse ps-3" id="onboardingDropdown">
+
+                {{-- Associate --}}
+                <a href="https://thegoldengreens.com/tgg-meta/tgg-india/onboarding/DKJSFH3489SDFLSJDFPLKLDSJFL75934RU/3"
+                target="_blank"
+                class="d-block py-1">
+                    <i class="fas fa-user-friends me-2"></i> Associate
+                </a>
+
+                {{-- Freelancer --}}
+                <a href="https://thegoldengreens.com/tgg-meta/tgg-india/onboarding/DKJSFH3489SDFLSJDFPLKLDSJFL75934RU/6"
+                target="_blank"
+                class="d-block py-1">
+                    <i class="fas fa-laptop-code me-2"></i> Freelancer
+                </a>
+
+                {{-- Co Creator --}}
+                <a href="https://thegoldengreens.com/tgg-meta/tgg-india/onboarding/DKJSFH3489SDFLSJDFPLKLDSJFL75934RU/7"
+                target="_blank"
+                class="d-block py-1">
+                    <i class="fas fa-lightbulb me-2"></i> Co Creator
+                </a>
+
+                {{-- Facilitator --}}
+                <a href="https://thegoldengreens.com/tgg-meta/tgg-india/onboarding/DKJSFH3489SDFLSJDFPLKLDSJFL75934RU/8"
+                target="_blank"
+                class="d-block py-1">
+                    <i class="fas fa-chalkboard-teacher me-2"></i> Facilitator
+                </a>
+
+            </div>
+        </div>
+        <!-- END ONBOARDING LINKS -->
+        <!-- ========================= -->
+
+
     </div>
 </div>
 
@@ -331,6 +383,7 @@
 </a>
 
 
+
 <div class="dropdown">
     <a href="#"
         class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'active' : '' }}"
@@ -374,6 +427,50 @@
         </a>
     </div>
 </div>
+
+<div class="dropdown">
+
+    <a href="#"
+        class="dropdown-toggle d-flex justify-content-between align-items-center 
+        {{ request()->is('tgg-india/admin/faq*') ? 'active' : '' }}"
+        data-bs-toggle="collapse"
+        data-bs-target="#faqDropdown"
+        aria-expanded="{{ request()->is('tgg-india/admin/faq*') ? 'true' : 'false' }}">
+
+        <span>
+            <i class="fas fa-question-circle me-2"></i> FAQ Management
+        </span>
+
+        <i class="fas fa-caret-down"></i>
+    </a>
+
+    <div class="collapse ps-3 
+        {{ request()->is('tgg-meta/tgg-india/admin/faq*') ? 'show' : '' }}"
+        id="faqDropdown">
+
+        <!-- FAQ Categories -->
+        <a href="{{ route('tgg-india.admin.faq-categories.index') }}"
+           class="d-block py-1 
+           {{ request()->is('tgg-meta/tgg-india/admin/faq-categories*') ? 'active' : '' }}">
+            <i class="fas fa-folder me-2"></i> Categories
+        </a>
+
+        <!-- FAQs -->
+        <a href="{{ route('tgg-india.admin.faqs.index') }}"
+           class="d-block py-1 
+           {{ request()->is('tgg-meta/tgg-india/admin/faqs*') ? 'active' : '' }}">
+            <i class="fas fa-circle-question me-2"></i> All FAQs
+        </a>
+
+    </div>
+
+</div>
+
+
+<a href="{{ route('tgg-india.report-builder') }}"
+    class="{{ request()->is('tgg-meta/tgg-india/report-builder') ? 'active' : '' }}">
+    <i class="fas fa-chart-bar"></i> Report Builder
+</a>
 
 <a href="{{ route('tgg-india.admin.settings.index') }}"
    class="{{ request()->is('tgg-meta/tgg-india/settings*') ? 'active' : '' }}">

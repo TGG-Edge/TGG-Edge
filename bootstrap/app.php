@@ -16,6 +16,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\Middleware\AuthenticateSession;
@@ -34,6 +35,10 @@ return Application::configure(basePath: dirname(__DIR__))
             require base_path('routes/tgg-india/spouse.php');
             require base_path('routes/tgg-india/freelancer.php');
             require base_path('routes/tgg-fct.php');
+            Route::prefix('api')->group(
+            function () {
+                    require base_path('routes/api.php');
+            });
         },
         commands: base_path('routes/console.php'),
         health: '/up',

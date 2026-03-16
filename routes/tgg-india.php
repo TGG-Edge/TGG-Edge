@@ -24,11 +24,42 @@ use App\Models\Incentive;
 use App\Models\Reward;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TemplateController;
+use App\Models\UserSecondary;
 
 Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->group(function () {
 
  
+    Route::get('/report-builder', function () {
+        return view('tgg-india.reports.builder');
+    })->name('report-builder');
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/models', [ReportController::class,'models']);
+    Route::post('/reports/relations', [ReportController::class,'relations']);
+    Route::post('/reports/generate', [ReportController::class,'generate']);
+
+
+  Route::get('/onboarding/KJSDFH4839FRHCWH98E4UCN394FH8C3ENM0934E90N',function(){
+    return view('tgg-india.onboarding');
+  } )->name('onboarding');
+
+  Route::get('/onboarding/DKJSFH3489SDFLSJDFPLKLDSJFL75934RU/{user_type}',function($user_type){
+
+    $userTypes = UserSecondary::$user_types;
+
+    // Allowed user types only
+    $allowedTypes = [3, 6, 7, 8];
+
+    // Check:
+    // 1. Key exists in user_types
+    if (!array_key_exists($user_type, $userTypes) || !in_array($user_type, $allowedTypes)) {
+        abort(404, 'Invalid User Type Selected.');
+    }
+    
+    return view('tgg-india.onboarding');
+  } )->name('onboarding.user.type');
 
   Route::get('/login/XCJBDSNJK43RWEFSKDJCXNFL34KRN3DKL3MREFWLMNKL32M', [LoginController::class, 'show'])->name('show');
   Route::post('/login', [LoginController::class, 'login'])->name('login');

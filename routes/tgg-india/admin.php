@@ -33,6 +33,8 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
     })->name('dashboard');
 
     Route::resource('assignments', \App\Http\Controllers\TggIndia\Admin\AssignmentController::class);
+    Route::resource('faq-categories', \App\Http\Controllers\TggIndia\Admin\FaqCategoryController::class);
+    Route::resource('faqs', \App\Http\Controllers\TggIndia\Admin\FaqController::class);
 
 
     Route::prefix('profile')->name('profile.')->group(function () {

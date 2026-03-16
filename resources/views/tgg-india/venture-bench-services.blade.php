@@ -279,6 +279,46 @@
             'member_price' => '₹10,000',
             'non_member_price' => '₹15,000',
         ],
+        [
+            'title' => 'Travel Services',
+            'image' => 'images/Travel_Services.jpg',
+            'short_description' => 'Integrated travel booking solutions through verified partners<br>Domestic and international travel coordination<br>Reward points earned on every booking within TGG Meta ecosystem',
+            'description' => '
+                Our Travel Services platform connects members with multiple verified travel partners under one unified system.
+                <ul>
+                    <li>Access to domestic and international flight bookings</li>
+                    <li>Hotel reservations and accommodation management</li>
+                    <li>Corporate and group travel coordination</li>
+                    <li>Seamless booking experience through trusted travel providers</li>
+                    <li>Reward points credited for every successful booking within TGG Meta</li>
+                    <li>Transparent pricing and structured service support</li>
+                </ul>
+                Through our integrated ecosystem, members not only manage their travel efficiently but also accumulate loyalty rewards that enhance long-term value within the TGG network.
+            ',
+            'member_price' => '₹5,000',
+            'non_member_price' => 'TGG Family Only',
+        ],
+        
+        [
+            'title' => 'Loyalty Program',
+            'image' => 'images/Loyalty_Program.jpg',
+            'short_description' => 'Unified loyalty ecosystem connecting multiple businesses and opportunities<br>Centralized reward tracking and redemption system<br>Points-based engagement model reflecting across the TGG network',
+            'description' => '
+                Our Loyalty Program is a structured rewards ecosystem designed to connect multiple businesses and opportunities within one centralized platform.
+                <ul>
+                    <li>Integration with diverse partner businesses and service providers</li>
+                    <li>Centralized dashboard to track earned reward points</li>
+                    <li>Points accumulation through transactions and engagement activities</li>
+                    <li>Transparent reward reflection within the TGG system</li>
+                    <li>Redemption opportunities across connected services</li>
+                    <li>Scalable framework designed for long-term ecosystem growth</li>
+                </ul>
+                This program enhances member engagement by ensuring that every interaction within the TGG ecosystem contributes to measurable value and structured rewards.
+            ',
+            'member_price' => '₹5,000',
+            'non_member_price' => 'TGG Family Only',
+        ],
+
     ];
     @endphp
 

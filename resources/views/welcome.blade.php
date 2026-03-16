@@ -13,9 +13,6 @@
         body {
             font-family: 'Segoe UI', sans-serif;
         }
-
-
-
         
         .hero {
             background-color: #15789A;

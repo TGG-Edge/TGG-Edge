@@ -4,6 +4,7 @@
   <title>@yield('title', 'TGG Edge | TGG India Dashboard')</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="icon" href="{{ asset('assets/tgg-india/images/tgg-india-fav.jpg') }}" type="image/x-icon">
 
   <!-- Fonts and Styles --> 
@@ -14,6 +15,15 @@
   <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/tgg-india/css/header-footer.css') }}">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  @if(!request()->routeIs('tgg-india.show') && !request()->routeIs('tgg-india.register.show') && !request()->routeIs('tgg-india.register.show'))
+  <link rel="stylesheet" href="{{ asset('chatbot/css/chat-widget.css') }}">
+  <script src="{{ asset('chatbot/js/chat-widget.js') }}"></script>
+  <script src="{{ asset('chatbot/js/faqs.js') }}"></script>
+  <script defer src="https://unpkg.com/alpinejs"></script>
+  <!-- <script src="https://unpkg.com/alpinejs" defer></script>  -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  @endif
 
 
   <!-- Choices.js CSS -->

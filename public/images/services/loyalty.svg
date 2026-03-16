@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="loyaltyGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="240" fill="url(#loyaltyGradient)" opacity="0.1"/>
+  <rect x="128" y="208" width="256" height="176" rx="20" fill="url(#loyaltyGradient)"/>
+  <rect x="128" y="176" width="256" height="64" rx="20" fill="url(#loyaltyGradient)"/>
+  <rect x="232" y="176" width="48" height="208" fill="#ffffff" opacity="0.9"/>
+  <path d="M256 120c-40-40-96 0-48 40 16 14 32 8 48-8 16 16 32 22 48 8 48-40-8-80-48-40z"
+        fill="url(#loyaltyGradient)"/>
+</svg>

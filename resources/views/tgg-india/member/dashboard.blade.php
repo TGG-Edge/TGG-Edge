@@ -51,7 +51,6 @@
                     <span><strong>Name:</strong> {{ $user->name ?? 'N/A' }}</span>
                     <span><strong>Role:</strong> {{ $user->role_name ?? 'N/A' }}</span>
                     <span><strong>RHM No:</strong> {{ $user->rhm_number ?? 'N/A' }}</span>
-
                 </div>
                 <section class="welcome-note card">
                     <div class="card-inner-welcome">

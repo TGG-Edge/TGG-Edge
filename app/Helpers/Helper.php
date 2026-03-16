@@ -241,6 +241,15 @@ function getDonationType()
     ];
 }
 
+function  getChatMessageType()
+{
+    return [
+        0 => 'general',
+        1 => 'onboarding',
+        2 => 'technology',
+    ];
+}
+
 
 if (!function_exists('setting')) {
 
@@ -366,6 +375,29 @@ function getVentureBenchSupportDashbaordData(){
                     'icon' => 'bi-gear',
                     'logo' => 'images/services/software.svg',
                     'points' => ['Tailor-made solutions', 'Process automation', 'Secure & scalable systems'],
+                ],
+                // ✅ New Service 1
+                [
+                    'title' => 'Travel Services',
+                    'icon' => 'bi-airplane',
+                    'logo' => 'images/services/travel.svg',
+                    'points' => [
+                        'Domestic & international bookings',
+                        'Corporate travel management',
+                        'Visa & travel assistance'
+                    ],
+                ],
+
+                // ✅ New Service 2
+                [
+                    'title' => 'Loyalty Program',
+                    'icon' => 'bi-gift',
+                    'logo' => 'images/services/loyalty.svg',
+                    'points' => [
+                        'Reward & referral programs',
+                        'Customer engagement strategies',
+                        'Point-based incentive systems'
+                    ],
                 ],
             ];
 }

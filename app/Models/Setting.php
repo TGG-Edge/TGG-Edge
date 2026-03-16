@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     //
-     protected $connection = 'mysql2';
+    protected $connection = 'mysql2';
     protected $table = 'settings';
     protected $guarded = ['id'];
 
