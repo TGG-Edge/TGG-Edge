@@ -1,154 +1,199 @@
-<link href="https://fonts.googleapis.com/css2?family=Belleza&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
 <style>
-    .nav-link {
-        /* padding: 10px 12px; */
-        font-family: "Belleza", Sans-serif;
-        font-weight: 600 !important;
-            font-size: 16px;
-        color: #000;
-        position: relative;
-        transition: color 0.3s ease;
-        text-decoration: none;
-    }
+.custom-tgg-header {
+z-index: 10;
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #02010175;
+    padding: 15px 20px;
+    width: 100%;
+}
 
-     .nav-link:hover,
-    .nav-link.active {
-        color: #00aaff !important; /* Light blue text */
-    }
-    /* Hover underline effect only */
-    .nav-link::after {
-        content: "";
-        display: block;
-        width: 0%;
-        height: 3px;
-        background: #008cff !important;
-        margin: auto;
-        transition: width 0.3s ease;
-    }
-
-    .nav-link:hover::after {
-        width: 100%;
-    }
-
-    .nav-item {
-        font-size: medium;
-        position: relative;
-        list-style: none !important;
-        margin: 0;
-        padding: 0;
-    }
-
-    .social-icon {
-      display: flex;
+.header-container {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    width: 25px !important;
-    height: 25px !important;
-    background: #222;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 15px !important;
-    text-decoration: none;
-    }
-    
-    /* .social-icon:hover {
-        transform: scale(1.1);
-    } */
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 1rem;
+    gap: 50px;
+}
 
-    .cart-button {
-        position: relative;
-        background-color: #000;
-        color: #fff;
-        border: none;
-        padding: 6px 14px;
-        border-radius: 5px;
-        font-weight: bold;
-        font-size: 14px;
+.nav-social-contianer {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+
+
+/* Logo */
+.header-logo img {
+    height: 40px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Top Navigation Links */
+.header-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 25px;
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: #212529;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.2s ease-in-out;
+}
+
+.nav-list a:hover {
+    color: #0d6efd;
+    /* Highlight color on hover */
+}
+
+/* Social Icons */
+.header-social {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-icon {
+    color: #262626;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.social-icon:hover {
+    color: #0d6efd;
+}
+
+.icon {
+    color: #262626;
+    width: 25px;
+    height: 25px
+}
+
+.menu-icon {
+    width: 25px;
+    height: 25px;
+    color: #101828;
+}
+
+.mobile-sidebar-toggle {
+    width: 25px;
+    height: 25px;
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #212529;
+    cursor: pointer;
+    padding: 5px;
+}
+
+
+
+/* --- Responsive Rules (Mobile & Tablet) --- */
+@media (max-width: 991.98px) {
+
+    /* Hide the top text navigation on mobile */
+    .header-nav {
+        display: none;
+    }
+
+    /* Show the hamburger menu button */
+    .mobile-sidebar-toggle {
+        display: block;
+    }
+
+    /* Reorder items on mobile so toggle is on left, logo center, social right */
+    .header-container {
+        justify-content: space-between;
+    }
+
+    .header-logo {
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        width: 100%;
     }
+}
 
-    .cart-button .fa-shopping-cart {
-        margin-left: 6px;
-        font-size: 13px;
+/* Extra small screens fix to hide social icons if it gets too crowded */
+@media (max-width: 400px) {
+    .header-social {
+        display: none;
     }
-
-    .cart-button .badge {
-        position: absolute;
-        top: -6px;
-        left: 4px;
-        font-size: 10px;
-        padding: 2px 5px;
-    }
+}
 </style>
 
-<header class="shadow-sm bg-white sticky-top header-padding">
-    <div class="container d-flex align-items-center justify-content-between flex-wrap header-container-ipad">
-        
-        <!-- Logo -->
-        <div class="col-md-3 text-center text-md-start mb-2 mb-md-0" style="margin-left: -60px;">
+
+
+<header class="custom-tgg-header">
+    <div class="header-container">
+
+        <!-- 1. Mobile Sidebar Toggle Button (Shows ONLY on small screens) -->
+
+
+        <!-- 2. Logo -->
+        <div class="header-logo">
             <a href="{{ url('https://tggindia.com/') }}">
-                <img src="https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-1024x281.png" alt="TGG India Logo" class="img-fluid tgg-meta-logo-header">
+                <img src="https://tggindia.com/wp-content/uploads/2020/09/cropped-logo_png_final-1024x281.png"
+                    alt="TGG India Logo">
             </a>
+
+            <button id="mobileSidebarToggle" class="mobile-sidebar-toggle" aria-label="Open Sidebar">
+                <x-eva-menu class="menu-icon" />
+            </button>
         </div>
 
-        <!-- Navigation -->
-        <nav class="col-md-6 d-flex flex-column align-items-center" style="margin-right: 25px;">
-        
-         <button class="mobile-menu-toggle" aria-label="Toggle menu">
-            <i class="fas fa-bars"></i>
-        </button>
 
-        <div class="menu-container">    
-            <ul class="nav justify-content-center">
-                <li class="nav-item"><a class="nav-link fw-bold text-dark" href="{{ url('https://tggindia.com/') }}">Home</a></li>
-                <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://tggindia.com/about-us/">About Us</a></li>
-                <li class="nav-item"><a class="nav-link fw-bold text-dark" href="http://tggindia.com/our-services/">Our Services</a></li>
-                <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://tggindia.com/journey-with-tgg/">Journey with TGG</a></li>
-                <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://tggindia.com/blog-post/">Blog</a></li>
-                <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://thegoldengreens.com/tgg-meta/tgg-india/login/XCJBDSNJK43RWEFSKDJCXNFL34KRN3DKL3MREFWLMNKL32M">Login</a></li>
-                 <li class="nav-item"><a class="nav-link fw-bold text-dark" href="https://tggindia.com/contact-us/">Contact Us</a></li>
-            </ul>
-        </div>
-           
-        </nav>
 
-        <!-- Cart & Social Icons -->
-        <div class="col-md-3 d-flex justify-content-between align-items-center gap-5 cartnew">
-            <!-- Cart -->
-            {{-- <a href="#" class="btn btn-dark position-relative d-flex align-items-center cart-btn-ipad" style="margin-left: 110px;">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="ms-2">₹0.00</span>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                0
-                </span>
-            </a> --}}
+        <!-- 3. Navigation Links and Social Icons  -->
+        <div class="nav-social-contianer">
+            <!-- 3. Navigation Links (Hidden on small screens) -->
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li><a href="{{ url('https://tggindia.com/') }}">Home</a></li>
+                    <li><a href="https://tggindia.com/about-us/">About Us</a></li>
+                    <li><a href="http://tggindia.com/our-services/">Our Services</a></li>
+                    <li><a href="https://tggindia.com/journey-with-tgg/">Journey with TGG</a></li>
+                    <li><a href="https://tggindia.com/blog-post/">Blog</a></li>
+                    <li><a
+                            href="https://thegoldengreens.com/tgg-meta/tgg-india/login/XCJBDSNJK43RWEFSKDJCXNFL34KRN3DKL3MREFWLMNKL32M">Login</a>
+                    </li>
+                    <li><a href="https://tggindia.com/contact-us/">Contact Us</a></li>
+                </ul>
+            </nav>
 
-            <!-- Social Icons -->
-            <div class="d-flex gap-1 align-items-center ms-2">
+            <!-- 4. Social Icons -->
+            <div class="header-social">
                 <a href="https://www.instagram.com/tggfamily/" class="social-icon" target="_blank">
-                    <i class="fab fa-instagram"></i>
+                    <x-entypo-instagram-with-circle class="icon" />
                 </a>
                 <a href="https://www.facebook.com/TGGIndia" class="social-icon" target="_blank">
-                    <i class="fab fa-facebook-f"></i>
+                    <x-entypo-facebook-with-circle class="icon" />
                 </a>
                 <a href="https://www.youtube.com/@tggindia" class="social-icon" target="_blank">
-                    <i class="fab fa-youtube"></i>
+                    <x-entypo-youtube-with-circle class="icon" />
                 </a>
             </div>
         </div>
+
+
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const toggle = document.querySelector(".mobile-menu-toggle");
-            const menu = document.querySelector(".menu-container");
-
-            toggle.addEventListener("click", function() {
-                menu.classList.toggle("active");
-            });
-        });
-    </script>
-
 </header>
