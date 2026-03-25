@@ -70,22 +70,34 @@ z-index: 10;
     gap: 15px;
 }
 
+.social-icon > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: #262626;
+}
+
 .social-icon {
-    color: #262626;
+    color: #FFFFFF;
     font-size: 1.2rem;
     text-decoration: none;
     transition: color 0.2s ease-in-out;
 }
 
-.social-icon:hover {
+
+.icon {
+    color: #FFFFFF;
+    width: 18px;
+    height: 18px;
+}
+
+.social-icon:hover  .icon{
     color: #0d6efd;
 }
 
-.icon {
-    color: #262626;
-    width: 25px;
-    height: 25px
-}
 
 .menu-icon {
     width: 25px;
@@ -157,7 +169,7 @@ z-index: 10;
             </a>
 
             <button id="mobileSidebarToggle" class="mobile-sidebar-toggle" aria-label="Open Sidebar">
-                <x-eva-menu class="menu-icon" />
+                 <x-ri-menu-line class="menu-icon" />
             </button>
         </div>
 
@@ -183,13 +195,15 @@ z-index: 10;
             <!-- 4. Social Icons -->
             <div class="header-social">
                 <a href="https://www.instagram.com/tggfamily/" class="social-icon" target="_blank">
-                    <x-entypo-instagram-with-circle class="icon" />
+                   <span><x-ri-instagram-line class="icon" /></span>
                 </a>
                 <a href="https://www.facebook.com/TGGIndia" class="social-icon" target="_blank">
-                    <x-entypo-facebook-with-circle class="icon" />
+                    <span><x-ri-facebook-line class="icon" /></span>
+                    
                 </a>
                 <a href="https://www.youtube.com/@tggindia" class="social-icon" target="_blank">
-                    <x-entypo-youtube-with-circle class="icon" />
+                    <span> <x-ri-youtube-line class="icon" /></span>
+                   
                 </a>
             </div>
         </div>

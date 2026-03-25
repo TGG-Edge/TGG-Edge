@@ -3,41 +3,25 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
         "andreiio/blade-remix-icon": "^3.9",
-        "barryvdh/laravel-dompdf": "^3.1",
         "blade-ui-kit/blade-heroicons": "^2.7",
-        "blade-ui-kit/blade-icons": "^1.9",
-        "brunocfalcao/blade-feather-icons": "^5.0",
-        "codeat3/blade-carbon-icons": "^2.38",
-        "codeat3/blade-evil-icons": "^1.6",
-        "codeat3/blade-fontisto-icons": "^1.5",
-        "codeat3/blade-google-material-design-icons": "^1.20",
-        "codeat3/blade-line-awesome-icons": "^1.5",
-        "codeat3/blade-phosphor-icons": "^2.3",
-        "codeat3/blade-simple-line-icons": "^1.5",
-        "codeat3/blade-system-uicons": "^1.8",
-        "codeat3/blade-teeny-icons": "^1.11",
-        "codeat3/blade-unicons": "^1.9",
-        "davidhsianturi/blade-bootstrap-icons": "^2.1",
+        "barryvdh/laravel-dompdf": "^3.1",
         "dyrynda/laravel-cascade-soft-deletes": "^4.5",
-        "faisal50x/blade-ionicons": "^1.1",
         "guzzlehttp/guzzle": "^7.10",
-        "hasnayeen/blade-eva-icons": "^2.1",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "lorisleiva/laravel-actions": "2.9",
         "maatwebsite/excel": "^3.1",
-        "mallardduck/blade-lucide-icons": "^1.26",
         "myclabs/php-enum": "^1.8",
         "nesbot/carbon": "^3.10",
-        "owenvoke/blade-entypo": "^2.3",
-        "owenvoke/blade-fontawesome": "^3.2",
         "razorpay/razorpay": "^2.9",
-        "saade/blade-iconsax": "^1.2",
         "symfony/css-selector": "^7.3",
         "symfony/dom-crawler": "^7.3",
         "unisharp/laravel-filemanager": "^2.11"
@@ -56,9 +40,9 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
-         "files": [
-        "app/Helpers/Helper.php"
-    ]
+        "files": [
+            "app/Helpers/Helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

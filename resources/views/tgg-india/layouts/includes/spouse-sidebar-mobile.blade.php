@@ -10,7 +10,7 @@
 
         </div>
         <button id="mobileSidebarClose" class="m-close-btn" aria-label="Close menu">
-            <x-fontisto-close class="close-icon" />
+            <x-ri-close-circle-line class="close-icon" />
         </button>
     </div>
 
@@ -21,12 +21,12 @@
         <ul class="m-sidebar-nav">
             <li class="m-sidebar-item">
                 <a href="" class="m-sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <x-ri-dashboard-line class="icon" /> Dashboard
+                    <x-ri-dashboard-line class="sidebar-icon" /> Dashboard
                 </a>
             </li>
             <li class="m-sidebar-item">
                 <a href="" class="m-sidebar-link">
-                    <x-iconsax-lin-profile class="icon" /> My Profile
+                    <x-ri-user-line class="sidebar-icon" /> My Profile
                 </a>
             </li>
 
@@ -35,24 +35,24 @@
                 <a href="javascript:void(0)" class="m-sidebar-link  dropdown-toggle">
                     <div class="dropdown-left">
                         <!-- <i class="fas fa-chart-line"></i> -->
-                        <x-heroicon-o-arrow-trending-up class="icon" />
+                        <x-heroicon-o-arrow-trending-up class="sidebar-icon" />
 
                         <span>Advancement</span>
 
 
                     </div>
-                    <x-eva-arrow-ios-forward-outline class="icon" />
+                    <x-ri-arrow-right-s-line class="sidebar-icon" />
 
                 </a>
                 <ul class="submenu">
                     <li>
-                        <a href="#" class="submenu-link">
-                            <x-tni-invoice-o class="submenu-icon" /> Invoices
+                        <a  href="{{ route('tgg-india.spouse.invoices.index') }}"  class="submenu-link">
+                            <x-ri-bill-line class="submenu-icon" /> Invoices
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="submenu-link">
-                            <x-lucide-receipt class="submenu-icon" /> Receipt
+                        <a href="{{ route('tgg-india.spouse.receipts.index') }}"  class="submenu-link">
+                            <x-ri-receipt-line class="submenu-icon" /> Receipt
                         </a>
                     </li>
                 </ul>
@@ -62,26 +62,21 @@
             <li class="m-sidebar-item has-dropdown">
                 <a href="javascript:void(0)" class="m-sidebar-link  dropdown-toggle">
                     <div class="dropdown-left">
-
-
-                        <x-carbon-bullhorn class="icon" />
+                        <x-ri-megaphone-2-line class="sidebar-icon" />
                         <span>Campaign</span>
-
-
-
                     </div>
-                    <x-eva-arrow-ios-forward-outline class="icon" />
+                    <x-ri-arrow-right-s-line class="sidebar-icon" />
 
                 </a>
                 <ul class="submenu">
                     <li>
                         <a href="#" class="submenu-link">
-                            <x-carbon-bullhorn class="submenu-icon" /> Campaigns
+                            <x-ri-megaphone-2-line class="submenu-icon" /> Campaigns
                         </a>
                     </li>
                     <li>
                         <a href="#" class="submenu-link">
-                            <x-eva-email-outline class="submenu-icon" /> Email check
+                            <x-ri-mail-check-line class="submenu-icon" /> Email check
                         </a>
                     </li>
                 </ul>
@@ -91,23 +86,22 @@
             <li class="m-sidebar-item has-dropdown">
                 <a href="javascript:void(0)" class="m-sidebar-link  dropdown-toggle">
                     <div class="dropdown-left">
-
-                        <x-simpleline-people class="icon" />
+                        <x-ri-group-line  class="sidebar-icon" />
                         <span>Lead Generation</span>
 
                     </div>
-                    <x-eva-arrow-ios-forward-outline class="icon" />
+                    <x-ri-arrow-right-s-line class="sidebar-icon" />
 
                 </a>
                 <ul class="submenu">
                     <li>
                         <a href="#" class="submenu-link">
-                            <x-eva-person-add-outline class="submenu-icon" /> Lead Referral
+                            <x-ri-user-add-line class="submenu-icon" /> Lead Referral
                         </a>
                     </li>
                     <li>
                         <a href="#" class="submenu-link">
-                            <x-sui-graph-bar class="submenu-icon" /> Lead Generating Tracking
+                            <x-ri-bar-chart-grouped-line class="submenu-icon" /> Lead Generating Tracking
                         </a>
                     </li>
                 </ul>
@@ -135,13 +129,13 @@
         <p class="m-footer-title">Follow Us</p>
         <div class="m-social-links">
             <a href="https://www.instagram.com/tggfamily/" class="m-social-icon" target="_blank">
-                <x-entypo-instagram-with-circle />
+                <x-ri-instagram-fill />
             </a>
             <a href="https://www.facebook.com/TGGIndia" class="m-social-icon" target="_blank">
-                <x-entypo-facebook-with-circle />
+                <x-ri-facebook-fill />
             </a>
             <a href="https://www.youtube.com/@tggindia" class="m-social-icon" target="_blank">
-                <x-entypo-youtube-with-circle />
+                <x-ri-youtube-fill />
             </a>
         </div>
     </div>

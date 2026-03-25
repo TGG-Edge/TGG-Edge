@@ -1,3 +1,7 @@
+li {
+    list-style: none;
+}
+
 .heading-container {
     display: flex;
     width: 100%;
@@ -97,7 +101,7 @@
     color: #101828;
 }
 
-.badge {
+.active-badge {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -112,24 +116,22 @@
 }
 
 /* The Outer Circle */
-.badge::before {
+.active-badge::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-
-    /* Green border and faint green background */
-    border: 2px solid #28a745; /* Success Green */
-    background-color: rgba(40, 167, 69, 0.1); /* Light green tint */
+    border: 2px solid #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
     border-radius: 50%;
 
     box-sizing: border-box;
 }
 
 /* The Inner Dot */
-.badge::after {
+.active-badge::after {
     content: "";
     /* position: absolute; */
 
@@ -140,7 +142,7 @@
     border-radius: 50%;
 }
 
-.badge-status-text {
+.active-badge-status-text {
     font-size: 0.8rem;
     color: #6a7282;
     font-weight: 500;
@@ -932,16 +934,27 @@
 
 .see-more {
     display: flex;
+    align-items: center;
     gap: 10px;
     color: #1f3c88;
     font-weight: 400;
     font-size: 0.8rem;
 }
 
-.see-more-icon {
+.see-more-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 16px;
     height: 16px;
-    color: #1f3c88;
+    background-color: #1f3c88;
+    border-radius: 50%;
+}
+
+.see-more-icon {
+    width: 14px;
+    height: 14px;
+    color: #ffffff;
 }
 
 /* The List Container */
@@ -1010,6 +1023,12 @@
     line-height: 1.4;
 }
 
+.freelance-opportunity-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
 .freelance-list-item .icon {
     width: 20px;
     height: 20px;
@@ -1041,7 +1060,6 @@
     border-radius: 12px;
     cursor: pointer;
     width: 100%;
-    margin-top: 2rem;
 }
 
 /*Latest Blogs and news  */

@@ -1,5 +1,5 @@
 @extends('tgg-india.layouts.app', [
-'pageCss' => 'resources/css/pages/dashboard.css'
+'pageCss' => '/TGG-Edge/public/assets/tgg-india/css/dashboard.css'
 ])
 
 @section('title', 'Dashboard | TGG Meta | TGG India')
@@ -9,28 +9,28 @@
 @php
 $summaryStats = [
 [
-'icon' => 'simpleline-people',
+'icon' => 'ri-group-line',
 'count' => '10',
 'label' => 'Pending Orders',
 'color' => '#155DFC',
 'bg' => '#EFF6FF'
 ],
 [
-'icon' => 'uni-rupee-sign-o',
+'icon' => 'ri-money-rupee-circle-line',
 'count' => '45',
 'label' => 'Completed Orders',
 'color' => '#9810FA',
 'bg' => '#FAF5FF'
 ],
 [
-'icon' => 'phosphor-handshake-duotone',
+'icon' => 'ri-shake-hands-line',
 'count' => '08',
 'label' => 'Vendors',
 'color' => '#00A63E',
 'bg' => '#F0FDF4'
 ],
 [
-'icon' => 'phosphor-handshake-duotone',
+'icon' => 'ri-shake-hands-line',
 'count' => '57',
 'label' => 'Total Orders',
 'color' => '#00A63E',
@@ -59,38 +59,37 @@ $announcements = [
 $recentOrders = [
 [
 'order_number' => 'Order#001',
-'icon' => 'ei-cart',
+'icon' => 'ri-shopping-cart-2-line',
 'customer' => 'Rahul',
-'date' => now()->format('M d, Y'), // Renders today's date
+'date' => now()->format('M d, Y'), 
 'status' => 'Pending',
-'text_color' => '#b45309', // Dark Orange
-'bg_color' => '#fef3c7', // Light Yellow/Orange
+'text_color' => '#b45309', 
+'bg_color' => '#fef3c7', 
 ],
 [
 'order_number' => 'Order#002',
-'icon' => 'ei-cart',
+'icon' => 'ri-shopping-cart-2-line',
 'customer' => 'Priya',
 'date' => now()->format('M d, Y'),
 'status' => 'Completed',
-'text_color' => '#15803d', // Dark Green
-'bg_color' => '#dcfce7', // Light Green
+'text_color' => '#15803d', 
+'bg_color' => '#dcfce7', 
 ],
 [
 'order_number' => 'Order#003',
-'icon' => 'ei-cart',
+'icon' => 'ri-shopping-cart-2-line',
 'customer' => 'Amit',
 'date' => now()->format('M d, Y'),
 'status' => 'Processing',
-'text_color' => '#1d4ed8', // Dark Blue
-'bg_color' => '#dbeafe', // Light Blue
+'text_color' => '#1d4ed8', 
+'bg_color' => '#dbeafe', 
 ]
 ];
 
 $happinessProgram = [
-    // Card 1: Meditation & Mindset
     [
         'card-image' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80',
-        'icon'       => 'heroicon-o-gift',
+        'icon'       => 'ri-gift-line',
         'icon-color' => '#E60076',
         'heading'    => 'Art Of Gifting',
         'para'       => 'Discover curated gift collections and meaningful presents to...',
@@ -100,7 +99,7 @@ $happinessProgram = [
     // Card 2: Breathwork (The "Sky" or "Sudarshan Kriya" style)
     [
         'card-image' => 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=600&q=80',
-        'icon'       => 'lucide-plane',
+        'icon'       => 'ri-flight-takeoff-line',
         'icon-color' => '#155DFC',
         'heading'    => 'Travel News and Updates',
         'para'       => 'Stay informed with the latest travel deals, destination guides,',
@@ -110,7 +109,7 @@ $happinessProgram = [
     // Card 3: Community & Connection
     [
         'card-image' => 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80',
-        'icon'       => 'lineawesome-hand-holding-usd-solid',
+        'icon'       => 'ri-hand-heart-line',
         'icon-color' => '#000000',
         'heading'    => 'Upcoming Projects',
         'para'       => 'Stay informed with the latest travel deals, destination guides',
@@ -121,38 +120,47 @@ $happinessProgram = [
 
 $RevenueReadyKitData = [
     [
-        'icon'       => 'lineawesome-hand-holding-usd-solid',
+        'icon'       => 'ri-price-tag-3-line',
         'bg'    => '#1F3C88',
         'color' => '#FFFFFF', 
-        'title'      => 'Lorem ipsum dolor sit amet',
-        'desc'       => 'Consectetur adipiscing elit.',
+        'title'      => 'Direct Selling',
+        'desc'       => 'Your Journey to Purposeful Prosperity Begins Here...',
         'link'       => '#',
-        'link-icon'  => 'heroicon-o-arrow-up-right'
+        'link-icon'  => 'ri-arrow-right-up-line'
     ],
     [
-        'icon'       => 'lineawesome-hand-holding-usd-solid',
+        'icon'       => 'ri-bank-line',
         'bg'    => '#1F3C88',
         'color' => '#FFFFFF',
-        'title'      => 'Duis aute irure dolor in',
-        'desc'       => 'Reprehenderit in voluptate velit esse',
+        'title'      => 'Investments',
+        'desc'       => 'Your Journey to Purposeful Prosperity Begins Here...',
         'link'       => '#',
-        'link-icon'  => 'heroicon-o-arrow-up-right'
+        'link-icon'  => 'ri-arrow-right-up-line'
     ],
     [
-        'icon'       => 'lineawesome-hand-holding-usd-solid',
+        'icon'       => 'ri-hand-coin-line',
         'bg'    => '#1F3C88',
         'color' => '#FFFFFF',
-        'title'      => 'Sunt in culpa qui officia',
-        'desc'       => 'Deserunt mollit anim id est laborum.',
+        'title'      => 'Insurance',
+        'desc'       => 'Your Journey to Purposeful Prosperity Begins Here...',
         'link'       => '#',
-        'link-icon'  => 'heroicon-o-arrow-up-right'
+        'link-icon'  => 'ri-arrow-right-up-line'
+    ],
+        [
+        'icon'       => 'ri-group-line',
+        'bg'    => '#1F3C88',
+        'color' => '#FFFFFF',
+        'title'      => 'Social ',
+        'desc'       => 'Your Journey to Purposeful Prosperity Begins Here...',
+        'link'       => '#',
+        'link-icon'  => 'ri-arrow-right-up-line'
     ]
 ];
 
 
 $servicesData = [
     [
-        'icon'      => 'lineawesome-hand-holding-usd-solid',
+        'icon'      => 'ri-code-line',
         'bg'        => '#EFF6FF',
         'color'     => '#155DFC',
         'title'     => 'Web Development',
@@ -160,7 +168,7 @@ $servicesData = [
         'link'      => '#',
     ],
     [
-        'icon'      => 'lineawesome-hand-holding-usd-solid',
+        'icon'      => 'ri-megaphone-line',
         'bg'        => '#FDF2F8',
         'color'     => '#E60076',
         'title'     => 'Digital Marketing',
@@ -168,7 +176,7 @@ $servicesData = [
         'link'      => '#',
     ],
     [
-        'icon'      => 'lineawesome-hand-holding-usd-solid',
+        'icon'      => 'ri-shield-line',
         'bg'        => '#DBEAFE',
         'color'     => '#033576',
         'title'     => 'Legal Support',
@@ -176,11 +184,19 @@ $servicesData = [
         'link'      => '#',
     ],
     [
-        'icon'      => 'lineawesome-hand-holding-usd-solid',
-        'bg'        => '#00A63E1A', // Includes alpha transparency (1A), perfectly valid in modern CSS
+        'icon'      => 'ri-news-line',
+        'bg'        => '#00A63E1A',
         'color'     => '#00A63E',
         'title'     => 'TGG News',
         'desc'      => 'Our core non-profit initiative for sustainable development.',
+        'link'      => '#',
+    ],
+      [
+        'icon'      => 'ri-flight-takeoff-line',
+        'bg'        => '#DBEAFE',
+        'color'     => '#1F3C88',
+        'title'     => 'Travel Services',
+        'desc'      => 'Comprehensive insurance solutions for individuals and businesses.',
         'link'      => '#',
     ],
  
@@ -189,7 +205,7 @@ $servicesData = [
 
 $freelanceOpportunity = [
     [
-        'icon'      => 'lineawesome-hand-holding-usd-solid', 
+        'icon'      => 'ri-linkedin-box-line', 
         'bg'        => '#DBEAFE',
         'color'     => '#033576',
         'title'     => 'LinkedIn Promotion',
@@ -197,7 +213,7 @@ $freelanceOpportunity = [
         'link'      => '#',
     ],
     [
-        'icon'      => 'lineawesome-hand-holding-usd-solid',
+        'icon'      => 'ri-fire-line',
         'bg'        => '#FFEDD4',
         'color'     => '#F54900',
         'title'     => 'IRDA License Holder',
@@ -205,7 +221,7 @@ $freelanceOpportunity = [
         'link'      => '#',
     ],
     [
-        'icon'      => 'lineawesome-hand-holding-usd-solid',
+        'icon'      => 'ri-group-line',
         'bg'        => '#F3E8FF',
         'color'     => '#9810FA',
         'title'     => 'Trainer - Biz Dev',
@@ -213,7 +229,7 @@ $freelanceOpportunity = [
         'link'      => '#',
     ],
     [
-        'icon'      => 'lineawesome-hand-holding-usd-solid',
+        'icon'      => 'ri-edit-line',
         'bg'        => '#DCFCE7',
         'color'     => '#00A63E',
         'title'     => 'Content Writer',
@@ -250,7 +266,7 @@ $newsArticles = [
     <div class="heading-container">
         <h1>Dashboard</h1>
         <p>
-            <x-uni-calender-thin class="icon" /> Today: {{ now()->format('M d, Y') }}
+            <x-ri-calendar-line class="icon" /> Today: {{ now()->format('M d, Y') }}
         </p>
     </div>
 
@@ -270,7 +286,7 @@ $newsArticles = [
                 <ul class="active-projects-list">
                     <li>
                         <h4>Your ongoing Projects</h4>
-                        <div><span class="badge"></span> <span class="badge-status-text">2 Active</span></div>
+                        <div><span class="active-badge"></span> <span class="active-badge-status-text">2 Active</span></div>
                     </li>
                 </ul>
             </div>
@@ -289,7 +305,7 @@ $newsArticles = [
                     <h4 style="margin: 0 0 5px 0;">{{ $announcement['title'] }}</h4>
 
                     <div class="date-views-container">
-                        <x-uni-calender-thin class="calender-icon" />
+                        <x-ri-calendar-line class="calender-icon" />
                         <span class="date">{{ $announcement['date']->format('M j, Y') }}</span>
                         <span class="dot"></span>
                         <span class="views">{{ number_format($announcement['views']) }} views</span>
@@ -353,12 +369,12 @@ $newsArticles = [
                     <div class="customer-date-order-container">
                         <!-- Customer Name -->
                         <p class="order-customer">
-                            <x-iconsax-lin-profile class="order-stats-icon" />
+                            <x-ri-user-line class="order-stats-icon" />
                             Customer:<span>{{ $order['customer'] }}</span>
                         </p>
                         <!-- Order Date -->
                         <p class="order-date">
-                            <x-uni-calender-thin class="order-stats-icon" /> Date:<span>{{ $order['date'] }}</span>
+                            <x-ri-calendar-schedule-line class="order-stats-icon" /> Date:<span>{{ $order['date'] }}</span>
                         </p>
                     </div>
                 </div>
@@ -424,8 +440,7 @@ $newsArticles = [
 <div class="future-service-widget">
     <div class="widget-content-stack">
         <div class="widget-icon-box">
-            <!-- Assuming you are using Blade/Alpine or similar for the Heroicon -->
-            <x-heroicon-o-plus class="icon-svg" />
+            <x-ri-add-line class="icon-svg" />
         </div>
         <h3 class="widget-title">More Services Coming Soon</h3>
         <p class="widget-text">We're constantly adding new benefits to enhance your experience.</p>      
@@ -528,7 +543,8 @@ $newsArticles = [
         </div>
 
 
-        <div class="freelance-opportunity-list">
+ <div class="freelance-opportunity-list-container">
+<div class="freelance-opportunity-list">
     @foreach($freelanceOpportunity as $item)
         <div class="freelance-list-item">
             
@@ -544,13 +560,14 @@ $newsArticles = [
                 <p class="list-desc">{{ $item['desc'] }}</p>
             </div>
             
-             <x-eva-arrow-ios-forward-outline class="icon" />
+             <x-ri-arrow-right-s-line class="icon" />
         </div>
     @endforeach
 </div>
+<a class="view-all-opportunities-btn" href="">View All Opportunities</a>
+ </div>
 
-
- <a class="view-all-opportunities-btn" href="">View All Opportunities</a>
+ 
 </div>
 
 <!-- Upcoming Projects Sections  -->
@@ -576,7 +593,7 @@ $newsArticles = [
             <div class="card-action-row">
                 <a href="{{ $item['link'] }}" class="see-more">
                     See More
-                    <x-bi-arrow-up-right-circle-fill class="see-more-icon" />
+                   <span class="see-more-icon-wrapper"> <x-ri-arrow-right-up-long-fill class="see-more-icon" /></span>
                 </a>
 
             </div>
@@ -613,7 +630,7 @@ $newsArticles = [
             </div>
             
             <!-- Right Arrow -->
-            <x-eva-arrow-ios-forward-outline class="news-arrow-icon" />
+            <x-ri-arrow-right-s-line class="news-arrow-icon" />
             
         </a>
     @endforeach
