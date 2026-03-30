@@ -606,7 +606,11 @@ $newsArticles = [
 </div>
 
 <!--  Latest Blogs & News Section -->
-<div class="section-container">
+
+
+<div class="latest_Blogs_News_Section_container" >
+
+<div class="section-container latest_Blogs_News_Section">
     <div class="heading-container">
             <div>
                 <h2>Latest Blogs & News</h2>
@@ -637,6 +641,20 @@ $newsArticles = [
 </div>
 </div>
 
+
+<div class="need_help_box">
+
+<div class="need_help_box_icon">
+     <x-ri-customer-service-line class="need_help_icon" />
+</div>
+
+    <h5>Need Help?</h5>
+    <p>Contact your dedicated relationship manager for instant support</p>
+
+    <button class="start_chat_btn" ><x-ri-whatsapp-line class="start_chat_icon" /> Start Chat</button>
+</div>
+
+</div>
 </main>
 
 @endsection
