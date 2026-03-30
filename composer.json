@@ -3,10 +3,15 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "andreiio/blade-remix-icon": "^3.9",
+        "blade-ui-kit/blade-heroicons": "^2.7",
         "barryvdh/laravel-dompdf": "^3.1",
         "dyrynda/laravel-cascade-soft-deletes": "^4.5",
         "guzzlehttp/guzzle": "^7.10",
@@ -35,9 +40,9 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
-         "files": [
-        "app/Helpers/Helper.php"
-    ]
+        "files": [
+            "app/Helpers/Helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
