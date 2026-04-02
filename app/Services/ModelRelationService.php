@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Reports\Registry\ModelRegistry;
 use ReflectionClass;
 use ReflectionMethod;
 use Illuminate\Database\Eloquent\Relations\Relation;
