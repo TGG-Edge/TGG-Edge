@@ -1,5 +1,4 @@
 <header class="d-flex justify-content-between align-items-center">
-
     {{-- Logo --}}
     <div class="logo">
         <a href="https://tggindia.com/">
@@ -15,9 +14,12 @@
                 sizes="(max-width: 800px) 100vw, 800px">
         </a>
     </div>
+    <div class="mobile-only">
+        <button class="mobile-menu-toggle">&#9776;</button>
+    </div>
 
     {{-- Navigation Menu --}}
-    <nav class="menu">
+    <nav class="menu menu-container">
         <ul class="nav hfe-nav-menu">
             <li><a href="https://tggindia.com/">Home</a></li>
             <li><a href="https://tggindia.com/about-us/">About Us</a></li>
@@ -66,3 +68,10 @@
     </div>
 
 </header>
+<script>
+    document.querySelector('.mobile-menu-toggle')
+        .addEventListener('click', function() {
+            document.querySelector('.menu-container')
+                .classList.toggle('active');
+        });
+</script>

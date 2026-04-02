@@ -433,7 +433,7 @@ header {
     padding: 0 !important;
     margin: 0;
     gap: 28px;
-    font-family: "Belleza", Sans-serif;
+    font-family: "Bellefair", Sans-serif;
     font-weight: 600;
     margin-right: 20px;
     padding-bottom: 5px;
@@ -448,15 +448,25 @@ header {
     position: relative;
 }
 
-.menu ul li a.active::after,
-.menu ul li a:hover::after {
+/* underline base */
+.menu ul li a::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -3px;
-    width: 100%;
-    height: 3px;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
     background: #2d9cff;
+}
+
+/* FIRST MENU ITEM ALWAYS ACTIVE */
+.menu ul li:first-child a::after {
+    width: 100%;
+}
+
+/* optional: color highlight */
+.menu ul li:first-child a {
+    color: #111;
 }
 
 /* Right Section */
@@ -773,93 +783,86 @@ header {
 
 
 /* === Mobile Navigation === */
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 26px;
-    cursor: pointer;
-    color: #746666;
-    position: absolute;
-    top: 5px;
-    right: -10px;
-    z-index: 1000;
-    margin-right: 60px;
+/* ============================= */
+/* ===== MOBILE DROPDOWN FIX ===== */
+/* ============================= */
+
+/* Parent must be relative */
+.header {
+    position: relative;
 }
 
+/* Default (desktop) */
 .menu-container {
-    display: block;
+    display: flex;
+    justify-content: center;
 }
 
-/* On small screens, hide menu and show toggle button */
-@media (max-width: 480px) {
-    .mobile-menu-toggle {
-        display: block;
-    }
+.menu-container ul {
+    display: flex;
+    gap: 20px;
+}
 
+/* ============================= */
+/* ===== MOBILE VIEW ===== */
+/* ============================= */
+@media (max-width: 768px) {
+
+    /* Hide menu initially */
     .menu-container {
         display: none;
-        width: 100%;
-        background: #fff;
-        text-align: center;
-        margin-top: 10px;
-    }
-
-    .menu-container.active {
-        display: block;
-    }
-
-    /* Two-column layout for menu items */
-    .menu-container ul {
         position: absolute;
         top: 100%;
-        /* opens downward */
+        /* below header */
         left: 0;
         width: 100%;
         background: #fff;
         z-index: 999;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
     }
 
-    .menu-container ul li {
-        list-style: none;
-        width: 100%;
+    /* Show when active */
+    .menu-container.active {
+        display: block;
     }
 
-    .menu-container ul li a {
-        font-size: 15px;
-        font-weight: 900;
-        color: #000;
+    /* UL full width */
+    .menu-container ul {
         display: block;
         width: 100%;
-        padding: 8px 0;
-        text-align: left;
+    }
+
+    /* Each item full width */
+    .menu-container ul li {
+        width: 100%;
+        list-style: none;
+    }
+
+    /* Link styling */
+    .menu-container ul li a {
+        display: block;
+        width: 100%;
+        padding: 14px 18px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #111;
+        text-decoration: none;
         border-bottom: 1px solid #eee;
+        transition: 0.3s;
     }
 
+    /* Hover effect */
     .menu-container ul li a:hover {
+        background: #f5f5f5;
         color: #008cff;
+        padding-left: 22px;
     }
 }
-
-.tgg-meta-logo-header {
-    margin-left: 35px;
-}
-
-/* .justify-content-center{
-    margin-left: 10px !important;
-} */
-
-.contact-ipad {
-    display: none;
-}
-
 
 /* =============================
    MOBILE-SPECIFIC ADJUSTMENTS for HEADER + FOOTER
    ============================= */
 
-@media (max-width: 480px) {
+@media (max-width: 1000px) {
     /* HEADER */
     @media (max-width: 480px) {
 
@@ -902,9 +905,10 @@ header {
         }
 
         .logo img {
+            margin-right: 200px;
             display: block;
             /* Reduced logo size for better fit on mobile screens */
-            width: 100vw;
+            /* width: 100vw; */
             /* Adjusted from 160px for smaller screen size */
             height: auto;
             margin: 0 auto 10px;
@@ -1050,35 +1054,72 @@ header {
 } */
 
 /* Extra small phones (≤360px) */
-@media (max-width: 360px) {
-    .logo img {
-        width: 150px;
-    }
+/* ============================= */
+/* ===== MOBILE DROPDOWN FIX ===== */
+/* ============================= */
 
-    .menu ul li a {
-        font-size: 13px;
-    }
-
-    .cart a {
-        font-size: 13px;
-        padding: 6px 10px;
-    }
-
-    .footer-column-contactus h3,
-    .footer-column-pages h3 {
-        font-size: 15px;
-    }
-
-    .footer-column-pages ul li,
-    .footer-column-pages ul li a {
-        font-size: 12px;
-    }
-
-    .footer-bottom {
-        font-size: 12px;
-    }
+/* Parent must be relative */
+/* ===== FORCE MOBILE MENU RESET ===== */
+/* ===== MOBILE MENU FIX (FOR YOUR HTML) ===== */
+/* ===== TOGGLE BUTTON ===== */
+/* Hide by default (desktop) */
+.mobile-only {
+    display: none;
 }
 
+/* Show only on mobile */
+@media (max-width: 768px) {
+    .mobile-only {
+        display: block;
+        position: absolute;
+        top: 15px;
+        z-index: 1000;
+    }
+
+    .mobile-menu-toggle {
+        font-size: 26px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #111;
+        padding: 5px 10px;
+    }
+
+    /* Hide menu initially */
+    .menu-container {
+        display: none;
+        width: 100%;
+        background: #fff;
+    }
+
+    /* Show when active */
+    .menu-container.active {
+        display: block;
+    }
+
+    /* 🔥 FORCE VERTICAL MENU */
+    .menu-container ul.nav.hfe-nav-menu {
+        display: block !important;
+        width: 100% !important;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-container ul.nav.hfe-nav-menu li {
+        display: block !important;
+    }
+
+    .menu-container ul.nav.hfe-nav-menu li a {
+        display: block;
+        width: 100%;
+        padding: 14px 16px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+        font-size: 15px;
+        font-weight: 600;
+        color: #000;
+    }
+}
 
 /* =============================
    TABLET VIEW (iPad) STYLES
@@ -1130,7 +1171,7 @@ header {
     }
 
     .mobile-menu-toggle {
-        display: block !important;
+        display: flex !important;
         margin-top: 30px !important;
         max-width: 100px !important;
     }
@@ -1419,18 +1460,17 @@ header {
 /* =========================
    DESKTOP HEADER FIX (ONLY)
    ========================= */
-@media (min-width: 1025px) {
+@media (min-width: 740px) {
 
 
     /* Force header in one row */
     .header-container-ipad {
-        display: flex !important;
-        flex-wrap: nowrap !important;
+        display: fixed !important;
+        flex-wrap: wrap !important;
         align-items: center !important;
         justify-content: space-between !important;
         padding: 0px;
         margin: 0px;
-        margin-left: 60px;
     }
 
     nav {
@@ -1445,8 +1485,8 @@ header {
         margin-left: 15px !important;
     }
 
-    .menu-container ul {
-        display: flex !important;
+    .menu-container {
+        display: block !important;
         flex-wrap: nowrap !important;
         /* KEY FIX */
         white-space: nowrap !important;
@@ -1455,7 +1495,7 @@ header {
         margin-left: 160px !important;
     }
 
-    .menu-container ul li {
+    .menu-container {
         float: none !important;
     }
 
@@ -1468,9 +1508,9 @@ header {
     }
 
     /* Hide hamburger on desktop */
-    .mobile-menu-toggle {
-        display: none !important;
-    }
+    /* .mobile-menu-toggle {
+        display: flex !important;
+    } */
 
     /* Logo spacing fix */
     .tgg-meta-logo-header {
@@ -1552,7 +1592,6 @@ header {
 .mobile-menu-toggle {
     position: fixed;
     top: 15px;
-    left: 15px;
     /* keep inside sidebar */
     z-index: 9999;
     /* VERY IMPORTANT */
