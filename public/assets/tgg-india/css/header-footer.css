@@ -1620,3 +1620,10 @@ body.collapsed header {
 body.collapsed .tgg-content {
     margin-left: var(--sidebar-collapsed);
 }
+
+.heading-container>h1 {
+    font-size: 1.5rem;
+    color: #101828;
+    font-weight: 500;
+    margin-top: 9%;
+}
