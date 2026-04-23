@@ -537,4 +537,11 @@ function getVentureBenchSupportDashbaordData(){
             'color' => '#D81B60',
         ],
     ];
+
+}
+
+
+function getLatestAnnouncements(){
+    $showcase = \App\Models\ShowCase::first();
+    return  $opportunities = $showcase->latest_announcements ?? [];
 }

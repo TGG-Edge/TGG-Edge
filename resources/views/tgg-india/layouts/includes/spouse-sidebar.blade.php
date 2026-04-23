@@ -26,15 +26,15 @@
 <aside class="sidebar">
 
     <!-- 1. TOGGLE BUTTON -->
-    <!-- <div class="toggle-btn-container">
-           <x-feathericon-sidebar class="sidebar-toggle-btn"/>
-    </div> -->
+    <div class="toggle-btn-container">
+        <x-ri-menu-line class="sidebar-toggle-btn"/>
+    </div>
 
     <!-- 2. PROFILE CARD -->
     <div class="profile-section">
         <div class="bg-color">
             <div class="avatar-container"> 
-                <img src="{{ asset('images/avatar.jpg') }}" alt="User Avatar" class="profile-avatar" onerror="this.src='https://api.dicebear.com/9.x/lorelei/svg'">
+                <img src="{{ asset('images/avatar.jpg') }}" alt="User Avatar" class="profile-avatar" >
             </div>
         </div>
 
@@ -59,7 +59,7 @@
         <!-- Profile -->
         <li class="nav-item {{ request()->routeIs('tgg-india.spouse.profile.index') ? 'active' : '' }}">
             <a href="{{ route('tgg-india.spouse.profile.index') }}" class="nav-link sidebar-nav-link">
-                <x-iconsax-lin-profile class="icon" />
+                <x-ri-user-line class="sidebar-icon" />
                 <span class="nav-label">Profile</span>
             </a>
         </li>
@@ -71,19 +71,19 @@
                     <x-heroicon-o-arrow-trending-up class="icon" />
                     <span class="nav-label">Advancement</span>
                 </div>
-                <x-eva-arrow-ios-forward-outline class="icon chevron-icon" />
+               <x-heroicon-o-chevron-right class="icon chevron-icon"/>
             </a>
             <ul class="submenu">
                 <li>
-                    <a href="#" class="submenu-link">
-                        <x-tni-invoice-o class="submenu-icon" /> 
+                    <a href="{{ route('tgg-india.spouse.incentives.index') }}" class="submenu-link">
+                        <x-ri-bill-line class="submenu-icon" /> 
                         <span class="nav-label">Invoices</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="submenu-link">
-                        <x-lucide-receipt class="submenu-icon" /> 
-                        <span class="nav-label">Receipt</span>
+                    <a href="{{ route('tgg-india.spouse.rewards.index') }}" class="submenu-link">
+                        <x-ri-receipt-line class="submenu-icon" /> 
+                        <span class="nav-label">Reward</span>
                     </a>
                 </li>
             </ul>
@@ -93,21 +93,21 @@
         <li class="nav-item has-dropdown">
             <a href="javascript:void(0)" class="nav-link sidebar-nav-link dropdown-toggle">
                 <div class="dropdown-left">
-                    <x-carbon-bullhorn class="icon" />
+                    <x-ri-megaphone-2-line class="sidebar-icon" />
                     <span class="nav-label">Campaign</span>
                 </div>
-                <x-eva-arrow-ios-forward-outline class="icon chevron-icon" />
+                <x-heroicon-o-chevron-right class="icon chevron-icon"/>
             </a>
             <ul class="submenu">
                 <li>
                     <a href="#" class="submenu-link">
-                        <x-carbon-bullhorn class="submenu-icon" /> 
+                        <x-ri-megaphone-2-line class="submenu-icon" /> 
                         <span class="nav-label">Campaigns</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" class="submenu-link">
-                        <x-eva-email-outline class="submenu-icon" /> 
+                        <x-ri-mail-check-line class="submenu-icon" /> 
                         <span class="nav-label">Email check</span>
                     </a>
                 </li>
@@ -118,21 +118,21 @@
         <li class="nav-item has-dropdown">
             <a href="javascript:void(0)" class="nav-link sidebar-nav-link dropdown-toggle">
                 <div class="dropdown-left">
-                    <x-simpleline-people class="icon" />
+                    <x-ri-group-line  class="sidebar-icon" />
                     <span class="nav-label">Lead Generation</span>
                 </div>
-                <x-eva-arrow-ios-forward-outline class="icon chevron-icon" />
+                <x-heroicon-o-chevron-right class="icon chevron-icon"/>
             </a>
             <ul class="submenu">
                 <li>
                     <a href="#" class="submenu-link">
-                        <x-eva-person-add-outline class="submenu-icon" /> 
+                        <x-ri-user-add-line class="submenu-icon" /> 
                         <span class="nav-label">Lead Referral</span>
                     </a>
                 </li>
                 <li>
                     <a href="#" class="submenu-link">
-                        <x-sui-graph-bar class="submenu-icon" /> 
+                        <x-ri-bar-chart-grouped-line class="submenu-icon" /> 
                         <span class="nav-label">Lead Generating Tracking</span>
                     </a>
                 </li>
@@ -143,7 +143,7 @@
     <!-- 4. LOGOUT BUTTON -->
     <div class="logout-section">
         <a href="#" class="logout-btn">
-            <x-tni-logout-o class="logout-icon" />
+            <x-heroicon-o-arrow-right-on-rectangle class="logout-icon"/>
             <span class="nav-label">Log out</span>
         </a>
     </div>

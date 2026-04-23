@@ -91,6 +91,20 @@ class ShowCaseController extends Controller
         $source_type = 'reward';
         return view('tgg-india.admin.showcase.reward', compact('content', 'source_type'));
     }
+    
+    public function editLatestAnnouncements()
+    {
+        $showcase = Showcase::first();
+        return view('tgg-india.admin.showcase.latest-announcements', compact('showcase'));
+    }
+
+    
+    public function editLatestBlogsAndNews()
+    {
+        $showcase = Showcase::first();
+        return view('tgg-india.admin.showcase.latest-blogs-and-news', compact('showcase'));
+    }
+
 
     public function editLeadReferral()
     {
@@ -198,6 +212,39 @@ class ShowCaseController extends Controller
         // ✅ Freelancing opportunities
         if ($request->has('investment_opportunities')) {
             $data['investment_opportunities'] = $request->input('investment_opportunities', []);
+        }
+
+        if ($request->has('latest_announcements')) {
+            $data['latest_announcements'] = $request->input('latest_announcements', []);
+        }
+
+        // if ($request->has('latest_blogs_and_news')) {
+        //     $data['latest_blogs_and_news'] = $request->input('latest_blogs_and_news', []);
+        // }
+        if ($request->has('latest_blogs_and_news')) {
+            $blogs = $request->input('latest_blogs_and_news', []);
+
+            foreach ($blogs as $i => $blog) {
+
+                // Handle image upload
+                if ($request->hasFile("latest_blogs_and_news.$i.image")) {
+                    $file = $request->file("latest_blogs_and_news.$i.image");
+
+                    $filename = time() . '_' . $i . '.' . $file->getClientOriginalExtension();
+
+                    $path = $file->storeAs('uploads/showcase', $filename, 'public');
+
+                    $blogs[$i]['image'] = $path;
+                } else {
+                    // Keep old image if exists
+                    $blogs[$i]['image'] = $data['latest_blogs_and_news'][$i]['image'] ?? null;
+                }
+
+                // Optional: update timestamp
+                $blogs[$i]['updated_at'] = now();
+            }
+
+            $data['latest_blogs_and_news'] = $blogs;
         }
 
         // ✅ Image fields

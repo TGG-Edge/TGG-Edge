@@ -75,6 +75,12 @@
                 <li><a href="{{ route('tgg-india.admin.showcases.reward.edit') }}#freelance-opportunities" class="submenu-link">
                     <span class="nav-label">Reward Program Content</span></a></li>
 
+                <li><a href="{{ route('tgg-india.admin.showcases.latest-announcements.edit') }}#announcements" class="submenu-link">
+                    <span class="nav-label">Latest Announcements</span></a></li>
+
+                <li><a href="{{ route('tgg-india.admin.showcases.latest-blogs-and-news.edit') }}#announcements" class="submenu-link">
+                    <span class="nav-label">Latest Blogs & News</span></a></li>
+
                 <!-- Referral Program -->
                 <li class="nav-item has-dropdown">
                     <a href="javascript:void(0)" class="submenu-link nav-link sidebar-nav-link dropdown-toggle">

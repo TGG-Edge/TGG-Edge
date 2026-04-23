@@ -46,7 +46,7 @@ class UserSecondary extends Authenticatable
         3 => [
             'name' => 'Associate',
             'key'  => 'associate',
-            'onboarding_amount' => 43000
+            'onboarding_amount' => 43000,
         ],
         4 => [
             'name' => 'RHM Club',
