@@ -53,6 +53,10 @@
                     <li><a href="{{ route('tgg-india.admin.showcases.main-projects.edit') }}#main-projects" class="submenu-link">Main Projects</a></li>
                     <li><a href="{{ route('tgg-india.admin.showcases.freelance-opportunities.edit') }}#freelance-opportunities" class="submenu-link">Freelance Opportunities</a></li>
                     <li><a href="{{ route('tgg-india.admin.showcases.reward.edit') }}#freelance-opportunities" class="submenu-link">Reward Program Content</a></li>
+                    <li><a href="{{ route('tgg-india.admin.showcases.latest-announcements.edit') }}#announcements" class="submenu-link">
+                    Latest Announcements</a></li>
+                    <li><a href="{{ route('tgg-india.admin.showcases.latest-blogs-and-news.edit') }}#announcements" class="submenu-link">
+                    Latest Blogs & News</a></li>
 
                     <!-- Referral Program -->
                     <li class="has-dropdown">

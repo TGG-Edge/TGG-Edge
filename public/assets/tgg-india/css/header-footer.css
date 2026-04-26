@@ -158,12 +158,17 @@ html, body {
     color: #ffffff !important;
 }
 
-.navbar-nav .nav-link:hover {
+.navbar-nav .nav-link:hover, .navbar-nav  .nav-link.active {
     color: #9faf94 !important;
 }
 
 .navbar-nav .nav-link.active {
     color: #9faf94 !important;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+  width: 100%;
 }
 /*Navbar buttons*/
 .my_navbar_outer .navbar_buttons .nav_btn {

@@ -537,4 +537,82 @@ function getVentureBenchSupportDashbaordData(){
             'color' => '#D81B60',
         ],
     ];
+
+}
+
+
+function getLatestAnnouncements(){
+    $showcase = \App\Models\ShowCase::first();
+    return  $opportunities = $showcase->latest_announcements ?? [];
+}
+
+
+function getRevenueReadyKit(){
+    $showcase = \App\Models\ShowCase::first();
+    return $RevenueReadyKitData = [
+        'direct_selling' => [
+            'icon' => 'ri-shopping-bag-3-line',
+            'bg' => '#1F3C88',
+            'color' => '#FFFFFF',
+            'title' => 'Direct Selling',
+            'key' => 'direct_selling',
+            'desc' => 'Sell directly and earn through personal networks.',
+            'link' => route('tgg-india.revenue-ready-kit.index',[auth('web2')->user()->role_key, 'direct-selling']),
+            'link-icon' => 'ri-arrow-right-up-line',
+            'details'   => [
+                [
+                    'image' => 'assets/tgg-india/images/Modicare.png',
+                    'title' => 'MODICARE',
+                    'key' => 'modicare_checkout',
+                    'link' => 'https://www.modicare.com/sign-in',
+                    'description' => $showcase->modicare_checkout ?? '',
+                ]
+            ]
+        ],
+        'investments' => [
+            'icon' => 'ri-line-chart-line',
+            'bg' => '#1F3C88',
+            'color' => '#FFFFFF',
+            'title' => 'Investments',
+            'key' => 'investments',
+            'desc' => 'Grow your wealth with smart investment choices.',
+            'link' => route('tgg-india.revenue-ready-kit.index',[auth('web2')->user()->role_key, 'investments']),
+            'link-icon' => 'ri-arrow-right-up-line',
+            'details'   => [
+                [
+                    'image' => 'assets/tgg-india/images/Motilal.png',
+                    'title' => 'MOTILAL OSWAL',
+                    'key' => 'motilal_checkout',
+                    'link' => 'https://invest.motilaloswal.com/',
+                    'description' => $showcase->motilal_checkout ?? '',
+                ],
+                [
+                    'image' => 'assets/tgg-india/images/tgg-foundation.png',
+                    'title' => 'TGG FOUNDATION',
+                    'key' => 'tgg_foundation_checkout',
+                    'link' => 'https://thegoldengreens.com/user/login',
+                    'description' => $showcase->tgg_foundation_checkout ?? '',
+                ]
+            ]
+        ],
+        'insurance' => [
+            'icon' => 'ri-hand-heart-line',
+            'bg' => '#1F3C88',
+            'color' => '#FFFFFF',
+            'title' => 'Insurance',
+            'key' => 'insurance',
+            'desc' => 'Secure your future with reliable protection plans.',
+            'link' => route('tgg-india.revenue-ready-kit.index',[auth('web2')->user()->role_key, 'insurance']),
+            'link-icon' => 'ri-arrow-right-up-line',
+            'details'   => [
+                [
+                    'image' => 'assets/tgg-india/images/india-insure.png',
+                    'title' => 'INDIA INSURE',
+                    'key' => 'india_insure_checkout',
+                    'link' => 'https://pos.insureeasy.in/',
+                    'description' => $showcase->india_insure_checkout ?? '',
+                ]
+            ]
+        ]
+    ];
 }

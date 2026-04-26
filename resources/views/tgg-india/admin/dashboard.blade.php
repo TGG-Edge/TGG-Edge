@@ -116,23 +116,7 @@
         ],
     ];
 
-    $announcements = [
-        [
-            'title' => 'New Partner Program Launch, Checkout for more details',
-            'date' => \Carbon\Carbon::parse('2026-03-01'),
-            'views' => 200
-        ],
-        [
-            'title' => 'TGG new Service added',
-            'date' => \Carbon\Carbon::parse('2026-03-01'),
-            'views' => 200
-        ],
-        [
-            'title' => 'Lets save the world with TGG',
-            'date' => \Carbon\Carbon::parse('2026-03-01'),
-            'views' => 200
-        ]
-    ];
+    
 
     $recentOrders = [
         [
@@ -164,32 +148,7 @@
         ]
     ];
 
-    $happinessProgram = [
-        [
-            'card-image' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80',
-            'icon' => 'ri-gift-line',
-            'icon-color' => '#E60076',
-            'heading' => 'Art Of Gifting',
-            'para' => 'Discover curated gift collections and meaningful presents to...',
-            'link' => 'https://happiness.org/meditation'
-        ],
-        [
-            'card-image' => 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=600&q=80',
-            'icon' => 'ri-flight-takeoff-line',
-            'icon-color' => '#155DFC',
-            'heading' => 'Travel News and Updates',
-            'para' => 'Stay informed with the latest travel deals, destination guides,',
-            'link' => 'https://happiness.org/breathwork'
-        ],
-        [
-            'card-image' => 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80',
-            'icon' => 'ri-hand-heart-line',
-            'icon-color' => '#000000',
-            'heading' => 'Upcoming Projects',
-            'para' => 'Stay informed with the latest travel deals, destination guides',
-            'link' => 'https://happiness.org/community'
-        ]
-    ];
+   
 
     $RevenueReadyKitData = [
         [
@@ -355,26 +314,7 @@
             </div>
         </div>
 
-        <div class="top-section-container-right">
-            <div class="announcement-header">
-                <h2>Latest Announcements</h2>
-                <a href="">View All</a>
-            </div>
-
-            <ul class="latest-announcements-list">
-                @foreach($announcements as $announcement)
-                <li>
-                    <h4 style="margin: 0 0 5px 0;">{{ $announcement['title'] }}</h4>
-                    <div class="date-views-container">
-                        <x-ri-calendar-event-line class="calender-icon" />
-                        <span class="date">{{ $announcement['date']->format('M j, Y') }}</span>
-                        <span class="dot"></span>
-                        <span class="views">{{ number_format($announcement['views']) }} views</span>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
-        </div>
+        <x-latest-announcements />
     </div>
 
     <!-- My Project Section -->

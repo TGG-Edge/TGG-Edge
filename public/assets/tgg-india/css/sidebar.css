@@ -339,3 +339,9 @@ a {
     color: var(--text-main);
     transition: color 0.2s ease;
 }
+
+
+
+.logout-section .logout-btn, .nav-link.sidebar-nav-link.dropdown-toggle{
+    justify-content: left !important;
+}

@@ -97,6 +97,12 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       return view('tgg-india.venture-bench-services');
    })
     ->name('venture-bench-services.index');
+    
+
+   Route::get('/{role}/revenue-ready-kit/{slug}', function(){
+      return view('tgg-india.revenue-ready-kit');
+   })
+    ->name('revenue-ready-kit.index');
   
 
   //dynamic routes based on modules

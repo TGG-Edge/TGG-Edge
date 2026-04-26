@@ -133,23 +133,7 @@
 
     $user = \App\Models\UserSecondary::find(auth('web2')->id());
     
-    $announcements = [
-        [
-            'title' => 'New Partner Program Launch, Checkout for more details',
-            'date' => \Carbon\Carbon::parse('2026-03-01'),
-            'views' => 200
-        ],
-        [
-            'title' => 'TGG new Service added',
-            'date' => \Carbon\Carbon::parse('2026-03-01'),
-            'views' => 200
-        ],
-        [
-            'title' => 'Lets save the world with TGG',
-            'date' => \Carbon\Carbon::parse('2026-03-01'),
-            'views' => 200
-        ]
-    ];
+   
 
     $recentOrders = [
         [
@@ -181,32 +165,6 @@
         ]
     ];
 
-    $happinessProgram = [
-        [
-            'card-image' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80',
-            'icon' => 'ri-gift-line',
-            'icon-color' => '#E60076',
-            'heading' => 'Art Of Gifting',
-            'para' => 'Discover curated gift collections and meaningful presents to...',
-            'link' => 'https://happiness.org/meditation'
-        ],
-        [
-            'card-image' => 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=600&q=80',
-            'icon' => 'ri-flight-takeoff-line',
-            'icon-color' => '#155DFC',
-            'heading' => 'Travel News and Updates',
-            'para' => 'Stay informed with the latest travel deals, destination guides,',
-            'link' => 'https://happiness.org/breathwork'
-        ],
-        [
-            'card-image' => 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80',
-            'icon' => 'ri-hand-heart-line',
-            'icon-color' => '#000000',
-            'heading' => 'Upcoming Projects',
-            'para' => 'Stay informed with the latest travel deals, destination guides',
-            'link' => 'https://happiness.org/community'
-        ]
-    ];
 
     $RevenueReadyKitData = [
         [
@@ -342,7 +300,7 @@
     <div class="top-section">
         <div class="top-section-container-left">
             <div class="welcome-card">
-                <h2>Welcome to {{ $user->name ?? 'Associate' }}</h2>
+                <h2>Hello {{ $user->name ?? 'Associate' }}</h2>
                 <p><span>Welcome to TGG Meta—</span>
                     {!! $showcase->welcome_note_member ?? 'a space for responsible humans to transform their lives through ethical entrepreneurship and collective action. Anchor your journey in The Power of 5 and The Art of Gifting.' !!}</p>
             </div>
@@ -357,163 +315,15 @@
             </div> -->
         </div>
 
-        <div class="top-section-container-right">
-            <div class="announcement-header">
-                <h2>Latest Announcements</h2>
-                <a href="">View All</a>
-            </div>
-
-            <ul class="latest-announcements-list">
-                @foreach($announcements as $announcement)
-                <li>
-                    <h4 style="margin: 0 0 5px 0;">{{ $announcement['title'] }}</h4>
-                    <div class="date-views-container">
-                        <x-ri-calendar-event-line class="calender-icon" />
-                        <span class="date">{{ $announcement['date']->format('M j, Y') }}</span>
-                        <span class="dot"></span>
-                        <span class="views">{{ number_format($announcement['views']) }} views</span>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
-        </div>
+        <x-latest-announcements />
     </div>
 
 
-    <!-- Revenue Ready Kit -->
-    <div class="section-container">
-        <div class="heading-container">
-            <div>
-                <h2>Revenue Ready Kit</h2>
-
-            </div>
-            <a href="">View All</a>
-        </div>
-
-        <div class="revenue-ready-kit">
-            @foreach($RevenueReadyKitData as $item)
-            <div class="revenue-card">
-
-                <div class="icon-wrapper main-icon"
-                    style="background-color: {{ $item['bg'] }}; color: {{ $item['color'] }};">
-                    <x-dynamic-component :component="  $item['icon']" class="stat-icon"
-                        style="color: {{  $item['color'] }}; " />
-                </div>
-
-                <h3 class="title">{{ $item['title'] }}</h3>
-                <p class="desc">{{ $item['desc'] }}</p>
-
-                <div class="card-action-row">
-
-                    <a href="{{ $item['link'] }}" class="get-more-btn">
-                        <span class="btn-text">Get More</span>
-                    </a>
-
-
-                    <div class="icon-wrapper btn-icon"
-                        style="background-color: {{ $item['bg'] }}; color: {{ $item['color'] }};">
-                        <x-dynamic-component :component="$item['link-icon']" class="stat-icon"
-                            style="color: {{ $item['color'] }};" />
-                    </div>
-                </div>
-
-            </div>
-            @endforeach
-        </div>
-
-    </div>
+    
 
 
     <!-- Happiness Program  Section -->
-    <div class="section-container">
-
-        <div class="happiness-program-heading-container">
-            <div class="heading-container-text">
-                <h2>Happiness Program</h2>
-                <p>Enhance your lifestyle with exclusive member benefits and personalized services</p>
-            </div>
-
-
-            <div class="heading-container-more">
-                <p><span> Services Available</span></p>
-                <span>
-                    <x-ri-arrow-up-s-line class="card-icon" />
-                </span>
-            </div>
-
-        </div>
-
-        <!-- 1. Dynamic Cards Loop -->
-        <div class="happiness-program-card-container">
-            @php
-                // Define the collections with optional icons and colors
-                $collections = [
-                    'woodpecker_collection' => [
-                        'title' => 'Woodpecker Collection',
-                        'icon' => 'ri-gift-line',
-                        'icon_color' => '#FF5733'
-                    ],
-                    'travel_and_events' => [
-                        'title' => 'Travel & Events',
-                        'icon' => 'ri-flight-takeoff-line',
-                        'icon_color' => '#337AFF'
-                    ],
-                    'tgg_foundation' => [
-                        'title' => 'TGG Foundation',
-                        'icon' => 'ri-hand-heart-line',
-                        'icon_color' => '#33FF77'
-                    ]
-                ];
-            @endphp
-
-            @foreach($collections as $key => $collection)
-                @if(!empty($showcase->$key) && is_array($showcase->$key))
-                    @foreach($showcase->$key as $item)
-                        <div class="happiness-card">
-                            <div class="card-image-wrapper">
-                                <img src="{{ $item['img'] }}" alt="{{ $collection['title'] }}">
-                                
-                                {{-- Floating icon for the collection --}}
-                                <div class="floating-icon">
-                                    <x-dynamic-component 
-                                        :component="$collection['icon'] ?? 'ri-gift-line'" 
-                                        class="card-icon" 
-                                        style="color: {{ $collection['icon_color'] ?? '#000' }};" 
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="card-content">
-                                {{-- Use note if exists, else fallback title --}}
-                                @if(!empty($item['note']))
-                                    <h3 class="card-heading">{{ \Illuminate\Support\Str::limit(strip_tags($item['note']), 25) }}</h3>
-                                @else
-                                    <h3 class="card-heading">{{ $collection['title'] }}</h3>
-                                @endif
-                                <p class="card-desc">{{ $collection['title'] }}</p>
-                                @if(!empty($item['link']))
-                                    <a href="{{ $item['link'] }}" class="card-link">Explore &rarr;</a>
-                                @endif
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-            @endforeach
-        </div>
-
-        <!-- 2. Static "Coming Soon" Card -->
-        <div class="future-service-widget">
-            <div class="widget-content-stack">
-                <div class="widget-icon-box">
-                    <!-- Assuming you are using Blade/Alpine or similar for the Heroicon -->
-                    <x-heroicon-o-plus class="icon-svg" />
-                </div>
-                <h3 class="widget-title">More Services Coming Soon</h3>
-                <p class="widget-text">We're constantly adding new benefits to enhance your experience.</p>
-            </div>
-        </div>
-
-    </div>
+    <x-happiness-program :showcase="$showcase" />
 
     <!-- Freelancing Opportunities and Upcoming Projects Section -->
     <div class="bottom-section">
@@ -622,7 +432,7 @@
                 <!-- <a href="">View All</a> -->
             </div>
 
-            <div class="news-list-container">
+            <div class="news-list-container" style="max-width: 100%;">
                 <div class="card-inner">
                     <div class="slider" style="height: 220px !important; max-width: 100% !important">
                         @if (!empty($showcase->tgg_news))

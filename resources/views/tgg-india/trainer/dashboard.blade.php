@@ -138,23 +138,6 @@
 
     $user = \App\Models\UserSecondary::find(auth('web2')->id());
     
-    $announcements = [
-        [
-            'title' => 'New Partner Program Launch, Checkout for more details',
-            'date' => \Carbon\Carbon::parse('2026-03-01'),
-            'views' => 200
-        ],
-        [
-            'title' => 'TGG new Service added',
-            'date' => \Carbon\Carbon::parse('2026-03-01'),
-            'views' => 200
-        ],
-        [
-            'title' => 'Lets save the world with TGG',
-            'date' => \Carbon\Carbon::parse('2026-03-01'),
-            'views' => 200
-        ]
-    ];
 
     $newsArticles = [
         [
@@ -188,9 +171,9 @@
     </div>
 
     <div class="top-section">
-        <div class="top-section-container-left">
+        <div class="top-section-container-left">    
             <div class="welcome-card">
-                <h2>Welcome to {{ $user->name ?? 'Trainer' }}</h2>
+                <h2>Hello {{ $user->name ?? 'Trainer' }}</h2>
                 <p><span>Welcome to TGG Meta—</span>
                     {!! $showcase->welcome_note_trainer ?? 'a space for responsible humans to transform their lives through ethical entrepreneurship and collective action. Anchor your journey in The Power of 5 and The Art of Gifting.' !!}</p>
             </div>
@@ -205,26 +188,7 @@
             </div> -->
         </div>
 
-        <div class="top-section-container-right">
-            <div class="announcement-header">
-                <h2>Latest Announcements</h2>
-                <a href="">View All</a>
-            </div>
-
-            <ul class="latest-announcements-list">
-                @foreach($announcements as $announcement)
-                <li>
-                    <h4 style="margin: 0 0 5px 0;">{{ $announcement['title'] }}</h4>
-                    <div class="date-views-container">
-                        <x-ri-calendar-event-line class="calender-icon" />
-                        <span class="date">{{ $announcement['date']->format('M j, Y') }}</span>
-                        <span class="dot"></span>
-                        <span class="views">{{ number_format($announcement['views']) }} views</span>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
-        </div>
+        <x-latest-announcements />
     </div>
 
     <!-- My Project Section -->

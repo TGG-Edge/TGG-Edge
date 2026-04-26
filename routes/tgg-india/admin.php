@@ -79,6 +79,12 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
 
     Route::get('/reward/edit', [ShowCaseController::class, 'editReward'])
         ->name('reward.edit');
+    Route::get('/latest-announcements/edit', [ShowCaseController::class, 'editLatestAnnouncements'])
+        ->name('latest-announcements.edit'); 
+
+    Route::get('/latest-blogs-and-news/edit', [ShowCaseController::class, 'editLatestBlogsAndNews'])
+        ->name('latest-blogs-and-news.edit');       
+
     Route::get('/lead-referral/edit', [ShowCaseController::class, 'editLeadReferral'])
         ->name('lead-referral.edit');
     Route::get('/spouse-referral/edit', [ShowCaseController::class, 'editSpouseReferral'])

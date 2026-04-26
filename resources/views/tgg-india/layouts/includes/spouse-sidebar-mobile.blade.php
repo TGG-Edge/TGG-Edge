@@ -10,7 +10,7 @@
 
         </div>
         <button id="mobileSidebarClose" class="m-close-btn" aria-label="Close menu">
-            <x-fontisto-close class="close-icon" />
+            <x-ri-close-circle-line class="close-icon" />
         </button>
     </div>
 
@@ -26,7 +26,7 @@
             </li>
             <li class="m-sidebar-item">
                 <a href="" class="m-sidebar-link">
-                    <x-iconsax-lin-profile class="icon" /> My Profile
+                    <x-ri-user-line class="sidebar-icon" /> My Profile
                 </a>
             </li>
 
@@ -41,18 +41,18 @@
 
 
                     </div>
-                    <x-eva-arrow-ios-forward-outline class="icon" />
+                    <x-ri-arrow-right-s-line class="sidebar-icon" />
 
                 </a>
                 <ul class="submenu">
                     <li>
                         <a href="#" class="submenu-link">
-                            <x-tni-invoice-o class="submenu-icon" /> Invoices
+                            <x-ri-bill-line class="submenu-icon" /> Invoices
                         </a>
                     </li>
                     <li>
                         <a href="#" class="submenu-link">
-                            <x-lucide-receipt class="submenu-icon" /> Receipt
+                            <x-ri-receipt-line class="submenu-icon" /> Receipt
                         </a>
                     </li>
                 </ul>
@@ -64,24 +64,24 @@
                     <div class="dropdown-left">
 
 
-                        <x-carbon-bullhorn class="icon" />
+                        <x-ri-megaphone-2-line class="sidebar-icon" />
                         <span>Campaign</span>
 
 
 
                     </div>
-                    <x-eva-arrow-ios-forward-outline class="icon" />
+                    <x-ri-arrow-right-s-line class="sidebar-icon" />
 
                 </a>
                 <ul class="submenu">
                     <li>
                         <a href="#" class="submenu-link">
-                            <x-carbon-bullhorn class="submenu-icon" /> Campaigns
+                            <x-ri-megaphone-2-line class="submenu-icon" /> Campaigns
                         </a>
                     </li>
                     <li>
                         <a href="#" class="submenu-link">
-                            <x-eva-email-outline class="submenu-icon" /> Email check
+                            <x-ri-mail-check-line class="submenu-icon" /> Email check
                         </a>
                     </li>
                 </ul>
@@ -92,22 +92,22 @@
                 <a href="javascript:void(0)" class="m-sidebar-link  dropdown-toggle">
                     <div class="dropdown-left">
 
-                        <x-simpleline-people class="icon" />
+                        <x-ri-group-line  class="sidebar-icon" />
                         <span>Lead Generation</span>
 
                     </div>
-                    <x-eva-arrow-ios-forward-outline class="icon" />
+                    <x-ri-arrow-right-s-line class="sidebar-icon" />
 
                 </a>
                 <ul class="submenu">
                     <li>
                         <a href="#" class="submenu-link">
-                            <x-eva-person-add-outline class="submenu-icon" /> Lead Referral
+                            <x-ri-user-add-line class="submenu-icon" /> Lead Referral
                         </a>
                     </li>
                     <li>
                         <a href="#" class="submenu-link">
-                            <x-sui-graph-bar class="submenu-icon" /> Lead Generating Tracking
+                            <x-ri-bar-chart-grouped-line class="submenu-icon" /> Lead Generating Tracking
                         </a>
                     </li>
                 </ul>
@@ -135,13 +135,13 @@
         <p class="m-footer-title">Follow Us</p>
         <div class="m-social-links">
             <a href="https://www.instagram.com/tggfamily/" class="m-social-icon" target="_blank">
-                <x-entypo-instagram-with-circle />
+                <x-ri-instagram-fill />
             </a>
             <a href="https://www.facebook.com/TGGIndia" class="m-social-icon" target="_blank">
-                <x-entypo-facebook-with-circle />
+                <x-ri-facebook-fill />
             </a>
             <a href="https://www.youtube.com/@tggindia" class="m-social-icon" target="_blank">
-                <x-entypo-youtube-with-circle />
+                <x-ri-youtube-fill />
             </a>
         </div>
     </div>
@@ -160,27 +160,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const parentItem = this.closest('.has-dropdown');
             const submenu = parentItem.querySelector('.submenu');
 
-            // 1. IF ALREADY OPEN: Close it smoothly
             if (parentItem.classList.contains('active')) {
-                // Temporarily set height to explicit pixels before crushing it to 0
                 submenu.style.height = submenu.scrollHeight + 'px';
-
-                // Force the browser to reflow so it registers the pixel height
                 void submenu.offsetHeight;
-
-                // Now trigger the animation to 0
                 submenu.style.height = '0px';
                 parentItem.classList.remove('active');
-            }
-
-            // 2. IF CLOSED: Open it smoothly
-            else {
+            } else {
                 parentItem.classList.add('active');
-                // Calculate actual height of the hidden content and animate to it
                 submenu.style.height = submenu.scrollHeight + 'px';
 
-                // Optional cleanup: Once the animation finishes, switch height to 'auto' 
-                // just in case the screen resizes and the content wraps/grows
                 submenu.addEventListener('transitionend', function handler() {
                     if (parentItem.classList.contains('active')) {
                         submenu.style.height = 'auto';
