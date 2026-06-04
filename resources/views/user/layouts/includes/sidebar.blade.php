@@ -1,40 +1,18 @@
+
 @php
-    $userRole = auth()->user()->user_role;
+    if(auth()->user()->user_role == 1){
+        $dashboardRoute = route('user.admin-dashboard'); 
 
-    if($userRole == 1){
-        $dashboardRoute = route('user.admin-dashboard');
-        $roleName = 'Admin';
-        $roleIcon = 'fas fa-user-shield';
-        $roleBadgeClass = 'bg-danger';
-    } elseif($userRole == 2){
-        $dashboardRoute = route('user.researcher-dashboard');
-        $roleName = 'Researcher';
-        $roleIcon = 'fas fa-flask';
-        $roleBadgeClass = 'bg-primary';
-    } elseif($userRole == 3){
-        $dashboardRoute = route('user.volunteer-dashboard');
-        $roleName = 'Volunteer';
-        $roleIcon = 'fas fa-hands-helping';
-        $roleBadgeClass = 'bg-success';
-    } else {
-        $dashboardRoute = route('user.dashboard');
-        $roleName = 'Spouse';
-        $roleIcon = 'fas fa-heart';
-        $roleBadgeClass = 'bg-secondary';
-    }
+    }elseif(auth()->user()->user_role == 2){
+        $dashboardRoute = route('user.researcher-dashboard'); 
+
+    }elseif(auth()->user()->user_role == 3){
+        $dashboardRoute = route('user.volunteer-dashboard'); 
+
+    }else{
+        $dashboardRoute = route('user.dashboard'); 
+    } 
 @endphp
-
-{{-- Dynamic User Info & Role Badge --}}
-<div class="sidebar-user-info mb-3 p-2 text-center border-bottom">
-    <div class="mb-1">
-        <i class="{{ $roleIcon }} fa-2x"></i>
-    </div>
-    <div class="fw-bold">{{ auth()->user()->name }}</div>
-    <span class="badge {{ $roleBadgeClass }} mt-1 px-2 py-1">
-        <i class="{{ $roleIcon }} me-1"></i>{{ $roleName }}
-    </span>
-</div>
-
 <a href="{{ $dashboardRoute }}" class="{{ request()->is('user/dashboard') ? 'active' : '' }}">
     <i class="fas fa-tachometer-alt"></i> Dashboard
 </a>
@@ -56,6 +34,7 @@
     </div>
 </div>
 @endif
+
 
 <a href="{{ route('user.knowledge-research.index') }}" class="{{ request()->is('user/knowledge-research') ? 'active' : '' }}">
     <i class="fas fa-book"></i> Knowledge and Research
@@ -86,6 +65,9 @@
     </div>
 </div>
 
+
+
+
 <div class="dropdown">
     <a href="#"
        class="dropdown-toggle d-flex justify-content-between align-items-center {{ request()->is('user/new-applications*') || request()->is('user/processed-applications*') ? 'active' : '' }}"
@@ -115,16 +97,21 @@
         <span><i class="fas fa-folder-open me-2"></i> Projects</span>
         <i class="fas fa-caret-down"></i>
     </a>
+
     <div class="collapse ps-3 {{ request()->is('user/researcher-projects*') || request()->is('user/volunteer-projects*') ? 'show' : '' }}"
          id="projectDropdown">
         <a href="{{ route('user.researcher-projects') }}" class="d-block py-1">
             <i class="fas fa-flask me-2"></i> Researcher Projects
         </a>
+        
         <a href="{{ route('user.volunteer-projects') }}" class="d-block py-1">
             <i class="fas fa-hands-helping me-2"></i> Volunteer Projects
         </a>
     </div>
 </div>
+
+
 @endif
+
 
 <a href="{{ route('user.logout') }}"><i class="fas fa-sign-out-alt"></i> Log out</a>
