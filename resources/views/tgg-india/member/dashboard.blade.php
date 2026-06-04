@@ -291,49 +291,7 @@
 
 
     <!-- Revenue Ready Kit -->
-    <div class="section-container">
-        <div class="heading-container">
-            <div>
-                <h2>Revenue Ready Kit</h2>
-
-            </div>
-            <a href="">View All</a>
-        </div>
-
-        <div class="revenue-ready-kit">
-            @foreach(getRevenueReadyKit() as $item)
-            <div class="revenue-card">
-
-                <div class="icon-wrapper main-icon"
-                    style="background-color: {{ $item['bg'] }}; color: {{ $item['color'] }};">
-                    <x-dynamic-component :component="  $item['icon']" class="stat-icon"
-                        style="color: {{  $item['color'] }}; " />
-                </div>
-
-                <h3 class="title">{{ $item['title'] }}</h3>
-                <p class="desc">{{ $item['desc'] }}</p>
-
-                <div class="card-action-row">
-
-                    <a href="{{ $item['link'] }}" class="get-more-btn">
-                        <span class="btn-text">Get More</span>
-                    </a>
-
-
-                    <a href="{{ $item['link'] }}">
-                    <div class="icon-wrapper btn-icon"
-                        style="background-color: {{ $item['bg'] }}; color: {{ $item['color'] }};">
-                        <x-dynamic-component :component="$item['link-icon']" class="stat-icon"
-                            style="color: {{ $item['color'] }};" />
-                    </div>
-                    </a>
-                </div>
-
-            </div>
-            @endforeach
-        </div>
-
-    </div>
+    <x-revenue-ready-kit :items="getRevenueReadyKit()"   title="Revenue Ready Kit" view-all-link="#"/>
 
 
     <!-- Happiness Program  Section -->
@@ -376,96 +334,11 @@
     </div>
 
     <!-- Venture Bench Support -->
-    <div class="section-container">
-        <div class="heading-container">
-            <div>
-                <h2>Venture Bench Support</h2>
-            </div>
-            <a href="{{ route('tgg-india.venture-bench-services.index', ['role' => auth('web2')->user()->role_key]) }}">View All</a>
-        </div>
-
-        <div class="venture-bench-support">
-            @foreach(getVentureBenchSupportDashbaordData() as $item)
-            <div class="venture-bench-card">
-                <div class="icon-wrapper main-icon"
-                    style="background-color: {{ $item['bg'] }}; color: {{ $item['color'] }};">
-                    <x-dynamic-component :component="$item['icon']" class="stat-icon"
-                        style="color: {{ $item['color'] }};" />
-                </div>
-                <div class="venture-bench-card-text-info">
-                    <h3 class="title">{{ $item['title'] }}</h3>
-                    @php
-                       $item['desc'] = implode(', ', $item['points']);
-                    @endphp
-                    <p class="desc">{{ $item['desc'] }}</p>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
+    <x-venture-bench-support />
 
     
     <!--  Latest Blogs & News Section -->
-    <div class="latest_Blogs_News_Section_container" >
-        <div class="section-container latest_Blogs_News_Section">
-            <div class="heading-container">
-                <div>
-                    <h2>Latest Blogs & News</h2>
-
-                </div>
-                <a href="">View All</a>
-            </div>
-
-            <div class="news-list-container">
-                @foreach($newsArticles as $article)
-                <a href="{{ $article['link'] }}" class="news-list-item">
-
-                    <!-- Thumbnail Image -->
-                    <div class="news-image-wrapper">
-                        <img src="{{ $article['image'] }}" alt="{{ $article['title'] }}" class="news-thumbnail">
-                    </div>
-
-                    <!-- Text Content (Title Only) -->
-                    <div class="news-content">
-                        <h4 class="news-title">{{ $article['title'] }}</h4>
-                    </div>
-
-                    <!-- Right Arrow -->
-                    <x-ri-arrow-right-s-line class="news-arrow-icon" />
-
-                </a>
-                @endforeach
-            </div>
-
-            <!-- tgg news -->
-            <div class="heading-container mt-3">
-                <div>
-                    <h2>TGG News</h2>
-
-                </div>
-                <!-- <a href="">View All</a> -->
-            </div>
-
-            <div class="news-list-container">
-                <div class="card-inner">
-                    <div class="slider" style="height: 220px !important; max-width: 100% !important">
-                        @if (!empty($showcase->tgg_news))
-                            @foreach ($showcase->tgg_news as $news)
-                                <div class="slide news-list-item">
-                                    <iframe width="100%" height="200" src="{{ getEmbedUrl($news) }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                                </div>
-                            @endforeach
-                        @else
-                            <p>No news available</p>
-                        @endif
-                    </div>
-                </div>  
-            </div>
-
-
-        </div>
-        <x-need-help-box />
-    </div>
+    <x-latest-blogs-news :latest_blogs_and_news="$showcase->latest_blogs_and_news" />
 </main>
 @endsection
 

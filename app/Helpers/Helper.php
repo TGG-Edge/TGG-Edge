@@ -562,10 +562,17 @@ function getRevenueReadyKit(){
             'details'   => [
                 [
                     'image' => 'assets/tgg-india/images/Modicare.png',
-                    'title' => 'MODICARE',
+                    'title' => 'Community Building',
                     'key' => 'modicare_checkout',
                     'link' => 'https://www.modicare.com/sign-in',
                     'description' => $showcase->modicare_checkout ?? '',
+                ],
+                [
+                    'image' => 'assets/tgg-india/images/vestige-team-work.png',
+                    'title' => 'Team Building',
+                    'key' => 'vestige_team_work_checkout',
+                    'link' => 'https://www.myvestige.com/login',
+                    'description' => $showcase->vestige_team_work_checkout ?? '',
                 ]
             ]
         ],
@@ -581,14 +588,14 @@ function getRevenueReadyKit(){
             'details'   => [
                 [
                     'image' => 'assets/tgg-india/images/Motilal.png',
-                    'title' => 'MOTILAL OSWAL',
+                    'title' => 'Investment',
                     'key' => 'motilal_checkout',
                     'link' => 'https://invest.motilaloswal.com/',
                     'description' => $showcase->motilal_checkout ?? '',
                 ],
                 [
-                    'image' => 'assets/tgg-india/images/tgg-foundation.png',
-                    'title' => 'TGG FOUNDATION',
+                    'image' => 'assets/tgg-india/images/tgg-asset-and-investments-pvt-ltd.png',
+                    'title' => 'Venture Capital Funding',
                     'key' => 'tgg_foundation_checkout',
                     'link' => 'https://thegoldengreens.com/user/login',
                     'description' => $showcase->tgg_foundation_checkout ?? '',
@@ -607,12 +614,39 @@ function getRevenueReadyKit(){
             'details'   => [
                 [
                     'image' => 'assets/tgg-india/images/india-insure.png',
-                    'title' => 'INDIA INSURE',
+                    'title' => 'Insurance',
                     'key' => 'india_insure_checkout',
                     'link' => 'https://pos.insureeasy.in/',
                     'description' => $showcase->india_insure_checkout ?? '',
                 ]
             ]
-        ]
+        ],
+        'travel' => [
+            'icon' => 'ri-flight-takeoff-line',
+            'bg' => '#1F3C88',
+            'color' => '#FFFFFF',
+            'title' => 'Travel',
+            'key' => 'travel',
+            'desc' => 'Book flights, hotels, and travel packages easily.',
+            'link' => route('tgg-india.revenue-ready-kit.index', [
+                auth('web2')->user()->role_key,
+                'travel'
+            ]),
+            'link-icon' => 'ri-arrow-right-up-line',
+            'details' => [
+                [
+                    'image' => 'assets/tgg-india/images/via-travel.png',
+                    'title' => 'Travel Services',
+                    'key' => 'via_travel_checkout',
+                    'link' => 'https://corp.via.com/enterprise#/login',
+                    'description' => $showcase->via_travel_checkout ?? '',
+                ]
+            ]
+        ],
     ];
+}
+
+
+function isAdmin(){
+    return auth('web2')->user()->role_key == 'admin' ? true : false;    
 }

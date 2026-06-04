@@ -2444,8 +2444,6 @@ body {
     .modal-img {
         max-height: 200px;
     }
-
-    
 }
 
 
@@ -2478,6 +2476,3 @@ body {
 .dashboard-read-more-btn:hover{
     background: transparent;
 }
-
-
-

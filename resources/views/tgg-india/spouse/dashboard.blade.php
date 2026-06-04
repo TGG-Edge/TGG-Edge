@@ -313,71 +313,10 @@
     <!-- Happiness Program  Section -->
     <x-happiness-program :showcase="$showcase" />
 
-    <!-- Venture Bench Support -->
-    <div class="section-container">
-        <div class="heading-container">
-            <div>
-                <h2>Venture Bench Support</h2>
-            </div>
-            <a href="{{ route('tgg-india.venture-bench-services.index', ['role' => auth('web2')->user()->role_key]) }}">View All</a>
-        </div>
-
-        <div class="venture-bench-support">
-            @foreach(getVentureBenchSupportDashbaordData() as $item)
-            <div class="venture-bench-card">
-                <div class="icon-wrapper main-icon"
-                    style="background-color: {{ $item['bg'] }}; color: {{ $item['color'] }};">
-                    <x-dynamic-component :component="$item['icon']" class="stat-icon"
-                        style="color: {{ $item['color'] }};" />
-                </div>
-                <div class="venture-bench-card-text-info">
-                    <h3 class="title">{{ $item['title'] }}</h3>
-                    @php
-                       $item['desc'] = implode(', ', $item['points']);
-                    @endphp
-                    <p class="desc">{{ $item['desc'] }}</p>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
+    
 
     <!--  Latest Blogs & News Section -->
-    <div class="latest_Blogs_News_Section_container">
-        <div class="section-container latest_Blogs_News_Section">
-            <div class="heading-container">
-                <div>
-                    <h2>Latest Blogs & News</h2>
-
-                </div>
-                <a href="">View All</a>
-            </div>
-
-            <div class="news-list-container">
-                @foreach($newsArticles as $article)
-                <a href="{{ $article['link'] }}" class="news-list-item">
-
-                    <!-- Thumbnail Image -->
-                    <div class="news-image-wrapper">
-                        <img src="{{ $article['image'] }}" alt="{{ $article['title'] }}" class="news-thumbnail">
-                    </div>
-
-                    <!-- Text Content (Title Only) -->
-                    <div class="news-content">
-                        <h4 class="news-title">{{ $article['title'] }}</h4>
-                    </div>
-
-                    <!-- Right Arrow -->
-                    <x-ri-arrow-right-s-line class="news-arrow-icon" />
-
-                </a>
-                @endforeach
-            </div>
-
-
-        </div>
-        <x-need-help-box />
-    </div>
+        <x-latest-blogs-news :latest_blogs_and_news="$showcase->latest_blogs_and_news" />
 
 </main>
 @endsection
