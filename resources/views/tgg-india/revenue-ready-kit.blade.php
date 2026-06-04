@@ -28,9 +28,9 @@
                             {{ $item['title'] }}
                         </h5>
 
-                        <p class="text-muted small mb-3">
+                        <!-- <p class="text-muted small mb-3">
                             {!! $item['description'] ?? '' !!}
-                        </p>
+                        </p> -->
                         <!-- Modicare -->
                             <div class="mt-auto d-flex gap-2">
                                 <a href="{{$item['link']}}"  class="get-more-btn"><span class="btn-text">Login</span> </a>

@@ -1,61 +1,122 @@
 @extends('tgg-india.layouts.app')
 
-@section('title', 'Assignment Details | TGG Meta | TGG India')
+@section('title', 'Create Assignment | TGG Meta | TGG India')
 
 @section('content')
-<div class="container">
-    <h2>Create Assignment</h2>
+<div class="admin-container">
 
-    <form action="{{ route('tgg-india.facilitator.assignments.store') }}" method="POST">
-        @csrf
+    <!-- Page Title -->
+    <h4 class="mb-3 trainer-heading">Create Assignment</h4>
 
-         @if(request()->has('parent_id'))
-            <input type="hidden" value="{{ request()->parent_id}}" name="parent_id">
-         @endif
-    
-        <div class="mb-3">
-            <label class="form-label">Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
-            @error('title') <small class="text-danger">{{ $message }}</small> @enderror
-        </div>
+    @include('tgg-india.layouts.includes.message')
 
-        <div class="mb-3">
-            <label class="form-label">Description</label>
-            <textarea name="description" class="form-control" rows="3">{{ old('description') }}</textarea>
-            @error('description') <small class="text-danger">{{ $message }}</small> @enderror
-        </div>
+    <!-- Responsive Card -->
+    <div class="card p-3 p-md-4 mb-4">
 
-        <div class="mb-3">
-            <label class="form-label">Task Type</label>
-            <select name="task_type" class="form-control" required>
-                @foreach(taskTypes() as $key => $label)
-                    <option value="{{ $key }}" {{ old('task_type') == $key ? 'selected' : '' }}>
-                        {{ $label }}
-                    </option>
-                @endforeach
+        <form action="{{ route('tgg-india.facilitator.assignments.store') }}" method="POST">
+            @csrf
 
-            </select>
-            @error('task_type') <small class="text-danger">{{ $message }}</small> @enderror
-        </div>
+            @if(request()->has('parent_id'))
+                <input type="hidden" value="{{ request()->parent_id }}" name="parent_id">
+            @endif
 
-        <div class="mb-3">
-            <label class="form-label">Status</label>
-            <select name="status" class="form-control" required>
-                <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                <option value="in_progress" {{ old('status') == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>Completed</option>
-            </select>
-            @error('status') <small class="text-danger">{{ $message }}</small> @enderror
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Project</label>
+                <select name="project_id" class="form-control select2">
+                    @php
+                    $projects = \App\Models\ProjectSecondary::query();
+                        if(auth('web2')->user()->id != 1){
+                            $userId = auth('web2')->user()->id;
 
-        <div class="mb-3">
-            <label class="form-label">Due Date</label>
-            <input type="date" name="due_date" class="form-control" value="{{ old('due_date') }}">
-            @error('due_date') <small class="text-danger">{{ $message }}</small> @enderror
-        </div>
+                            $projects->where(function ($query) use ($userId) {
+                                $query->where('created_by', $userId)
+                                        ->orWhereHas('members', function ($q) use ($userId) {
+                                            $q->where('user_id', $userId);
+                                        });
+                            });
+                        }
+                        $projects =  $projects->get();
+                    @endphp
+                    @foreach($projects as $project)
+                        <option value="{{ $project->id }}">
+                            {{ $project->title }}
+                        </option>
+                    @endforeach
 
-        <button type="submit" class="btn btn-success">Create</button>
-        <a href="{{ route('tgg-india.facilitator.assignments.index') }}" class="btn btn-secondary">Cancel</a>
-    </form>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" 
+                       name="title" 
+                       class="form-control" 
+                       required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea id="description" 
+                          name="description" 
+                          class="form-control js-ckeditor" 
+                          rows="5">
+                    {!! old('description', $assignment->description ?? '') !!}
+                </textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Task Type</label>
+                <select name="task_type" class="form-control" required>
+                    @foreach(taskTypes() as $key => $label)
+                        <option value="{{ $key }}" {{ old('task_type') == $key ? 'selected' : '' }}>
+                            {{ $label }}
+                        </option>
+                    @endforeach
+                </select>   
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-control">
+                    <option value="pending">Pending</option>
+                    <option value="in_progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Assign To</label>
+                <select name="assigned_to" class="form-control">
+                    <option value="">-- Unassigned --</option>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">
+                            {{ $user->name }} ({{ $user->email }}) - ({{ $user->skills ?? 'No skills specified' }})
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Due Date</label>
+                <input type="date" 
+                       name="due_date" 
+                       class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Fee</label>
+                <input type="number" 
+                       name="price" 
+                       class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary save-button mt-2">
+                Save
+            </button>
+
+        </form>
+
+    </div>
+
 </div>
 @endsection

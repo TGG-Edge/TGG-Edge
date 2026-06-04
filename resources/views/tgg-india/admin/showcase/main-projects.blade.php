@@ -54,24 +54,30 @@
                                 @endphp
 
                                 <div class="col-12 col-sm-6 col-md-6 col-lg-6 mb-3">
-                                <div class="position-relative m-1 p-2 border rounded col-12 col-sm-6 col-lg-12" style="width:100%;">
-                                        <img src="{{ $imgPath }}" width="200" class="rounded shadow mb-1 custom-margin">
-                                        <label class="d-block text-center small mb-1">
-                                            <input type="checkbox" name="remove_{{ $field }}[]" value="{{ $imgPath }}"> Remove
-                                        </label>
+                                    <div class="position-relative m-1 p-2 border rounded col-12 col-sm-6 col-lg-12" style="width:100%;">
+                                            <img src="{{ $imgPath }}" width="200" class="rounded shadow mb-1 custom-margin">
+                                            <label class="d-block text-center small mb-1">
+                                                <input type="checkbox" name="remove_{{ $field }}[]" value="{{ $imgPath }}"> Remove
+                                            </label>
 
-                                    <textarea name="{{ $field }}_notes[]" class="js-ckeditor form-control form-control-sm " rows="2"
-                                        placeholder="Checkout note (for this image)">{{ $note }}</textarea>
-                                   
-                                   @if ($field === 'tgg_foundation')
-                                        <input type="text" name="{{ $field }}_links[]" 
-                                            class="form-control form-control-sm mt-1"
-                                            placeholder="Enter donate link (optional)" 
-                                            value="{{ is_array($item) ? ($item['link'] ?? '') : '' }}">
-                                    @endif
-                                    <input type="hidden" name="{{ $field }}_existing[]"
-                                        value="{{ $imgPath }}">
-                                </div>
+
+                                        <input type="text" name="{{ $field }}_titles[]" 
+                                                class="form-control form-control-sm mt-1 mb-1"
+                                                placeholder="Enter Title" 
+                                                value="{{ is_array($item) ? ($item['title'] ?? '') : '' }}">
+
+                                        <textarea name="{{ $field }}_notes[]" class="js-ckeditor form-control form-control-sm " rows="2"
+                                            placeholder="Checkout note (for this image)">{{ $note }}</textarea>
+                                    
+                                    <!-- @if ($field === 'tgg_foundation') -->
+                                            <input type="text" name="{{ $field }}_links[]" 
+                                                class="form-control form-control-sm mt-1"
+                                                placeholder="Enter link (optional)" 
+                                                value="{{ is_array($item) ? ($item['link'] ?? '') : '' }}">
+                                        <!-- @endif -->
+                                        <input type="hidden" name="{{ $field }}_existing[]"
+                                            value="{{ $imgPath }}">
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -84,12 +90,12 @@
                 @endforeach
 
                 <!-- TGG NEWS -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="tgg_news" class="form-label">TGG News (YouTube URLs, comma separated)</label>
                     <input type="text" name="tgg_news" class="form-control"
                         value="{{ old('tgg_news', implode(',', $showcase->tgg_news ?? [])) }}">
-                </div>
-
+                </div> -->
+                <!-- https://www.youtube.com/watch?v=-ofgoJAolAI -->
                
 
                 <button type="submit" class="btn btn-primary">Update Showcase</button>
@@ -126,14 +132,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 ta.className = 'form-control form-control-sm mb-1';
                 wrapper.appendChild(ta);
 
-                if (field === 'tgg_foundation') {
+                const title = document.createElement('input');
+                    title.type = 'text';
+                    title.name = field + '_new_titles[]';
+                    title.placeholder = 'Enter Title';
+                    title.className = 'form-control form-control-sm mb-1';
+                    wrapper.appendChild(title);
+
+
+                // if (field === 'tgg_foundation') {
                     const link = document.createElement('input');
                     link.type = 'text';
                     link.name = field + '_new_links[]';
-                    link.placeholder = 'Enter donate link (optional)';
+                    link.placeholder = 'Enter link (optional)';
                     link.className = 'form-control form-control-sm mb-1';
                     wrapper.appendChild(link);
-                }
+                // }
 
 
                 container.appendChild(wrapper);

@@ -20,7 +20,7 @@
 
                 <!-- Single checkout textareas for Modicare & Motilal -->
                 <div class="mb-3">
-                    <label for="modicare_checkout" class="form-label">Modicare Information Note</label>
+                    <label for="modicare_checkout" class="form-label">Modicare (Community Building) Information Note </label>
                     <textarea id="modicare_checkout" name="modicare_checkout" class="form-control js-ckeditor" rows="3">{{ old('modicare_checkout', $showcase->modicare_checkout ?? '') }}</textarea>
                 </div>
 
@@ -37,8 +37,25 @@
                             rows="3">{{ old('india_insure_checkout', $showcase->india_insure_checkout ?? '') }}</textarea>
                 </div>
 
+           
                 <div class="mb-3">
-                    <label for="tgg_foundation_checkout" class="form-label">TGG Foundation Information Note</label>
+                    <label for="vestige_team_work_checkout" class="form-label">Vestige (Team Building) Information Note</label>
+                    <textarea id="vestige_team_work_checkout"
+                            name="vestige_team_work_checkout"
+                            class="form-control js-ckeditor"
+                            rows="3">{{ old('vestige_team_work_checkout', $showcase->vestige_team_work_checkout ?? '') }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="via_travel_checkout" class="form-label">Via Travel Information Note</label>
+                    <textarea id="via_travel_checkout"
+                            name="via_travel_checkout"
+                            class="form-control js-ckeditor"
+                            rows="3">{{ old('via_travel_checkout', $showcase->via_travel_checkout ?? '') }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tgg_foundation_checkout" class="form-label">TGG Asset & Investments pvt ltd Information Note</label>
                     <textarea id="tgg_foundation_checkout"
                             name="tgg_foundation_checkout"
                             class="form-control js-ckeditor"

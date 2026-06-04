@@ -9,11 +9,13 @@
         </div>
 
         <div class="news-list-container">
-            @foreach($latestBlogsAndNews as $latestBlogsAndNew)
+            @foreach(array_slice(array_reverse($latestBlogsAndNews), 0, 4) as $latestBlogsAndNew)
                 <div class="news-list-item"
                     data-modal
                     data-title="{{ $latestBlogsAndNew['title'] }}"
-                    data-img="{{ asset('storage/' . $latestBlogsAndNew['image']) }}"
+                    @if(empty($latestBlogsAndNew['youtube_video_link']) || $latestBlogsAndNew['youtube_video_link'] == null )
+                        data-img="{{ asset('storage/' . $latestBlogsAndNew['image']) }}"
+                    @endif
                     data-video="{{ $latestBlogsAndNew['youtube_video_link'] }}"
                 >
 

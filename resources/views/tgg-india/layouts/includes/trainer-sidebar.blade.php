@@ -22,7 +22,7 @@
     <div class="profile-section">
         <div class="bg-color">
             <div class="avatar-container">
-                <img src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}" class="profile-avatar">
+                <img src="{{ asset($image) }}" class="profile-avatar">
             </div>
         </div>
 

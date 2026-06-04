@@ -155,4 +155,15 @@ class UserSecondary extends Authenticatable
     {
         return $this->hasMany(Enquiry::class, 'referral_code', 'referral_code');
     }
+
+    
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function productOrders()
+    {
+        return $this->hasMany(ProductOrder::class);
+    }
 }

@@ -21,6 +21,21 @@
             @endif
 
             <div class="mb-3">
+                <label class="form-label">Project</label>
+                <select name="project_id" class="form-control select2">
+                    @php
+                      $projects = \App\Models\ProjectSecondary::all();
+                    @endphp
+                    @foreach($projects as $project)
+                        <option value="{{ $project->id }}">
+                            {{ $project->title }}
+                        </option>
+                    @endforeach
+
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Title</label>
                 <input type="text" 
                        name="title" 
@@ -64,7 +79,7 @@
                     <option value="">-- Unassigned --</option>
                     @foreach($users as $user)
                         <option value="{{ $user->id }}">
-                            {{ $user->name }} ({{ $user->email }})
+                            {{ $user->name }} ({{ $user->email }}) - ({{ $user->skills ?? 'No skills specified' }})
                         </option>
                     @endforeach
                 </select>

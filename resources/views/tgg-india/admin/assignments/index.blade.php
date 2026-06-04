@@ -32,6 +32,8 @@
             <thead class="table-dark">
                 <tr>
                     <th>Title</th>
+                    <th>Business</th>
+                    <th>Project</th>
                     <th>Task Type</th>
                     <th>Status</th>
                     <th>Associate</th>
@@ -46,6 +48,8 @@
                 @foreach($assignments as $assignment)
                 <tr>
                     <td>{{ $assignment->title }}</td>
+                    <td>{{ $assignment->project->business->title ?? 'N/A' }}</td>
+                    <td>{{ $assignment->project->title ?? 'N/A' }}</td>
                     <td>{{ $assignment->task_type }}</td>
                     <td>{!! statusWithColor($assignment->status) !!}</td>
                     <td>{{ $assignment->associate?->name }}</td>

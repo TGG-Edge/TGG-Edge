@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('linkedin_profile')->nullable()->after('responsible_human_mission');
             $table->boolean('consent_declaration')->default(0)->after('linkedin_profile');
             $table->string('pin_code')->nullable(); 
+            $table->text('skills')->nullable(); 
+
         });
     }
 

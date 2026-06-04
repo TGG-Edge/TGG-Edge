@@ -30,7 +30,7 @@
         <div class="m-sidebar-logo">
             <a class="mobile-logo-link" href="{{ url('https://tggindia.com/') }}">
                 <img class="mobile-logo"
-                    src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}"
+                    src="{{ asset($image) }}"
                     alt="TGG India Logo">
             </a>
         </div>
@@ -86,17 +86,24 @@
             </li>
             @endif
 
+            <li class="m-sidebar-item">
+                <a href="{{ route('tgg-india.projects.index', ['role' => auth('web2')->user()->role_key]) }}" class="m-sidebar-link {{ request()->is('tgg-meta/tgg-india/*/projects*') ? 'active' : '' }}">
+                    <x-heroicon-o-folder class="icon"/>
+                    <span class="nav-label">Projects</span>
+                </a>
+            </li>
+            
             <!-- Assignments -->
-            @if ($assignments->count() > 0)
+            {{-- @if ($assignments->count() > 0) --}}
             <li class="m-sidebar-item">
                 <a href="{{ route('tgg-india.facilitator.assignments.index') }}"
                    class="m-sidebar-link {{ request()->is('tgg-edge/tgg-fct/assignee/assignments*') ? 'active' : '' }}">
                     <x-heroicon-o-clipboard-document-list class="icon"/> Assignments
                 </a>
             </li>
-            @endif
+            {{-- @endif --}}
 
-            <!-- Campaign -->
+            <!-- Campaign -->   
             <li class="m-sidebar-item has-dropdown 
                 {{ request()->is('tgg-meta/tgg-india/*/templates*') ? 'active' : '' }}">
                 

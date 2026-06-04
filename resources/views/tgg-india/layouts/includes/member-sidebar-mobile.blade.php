@@ -30,7 +30,7 @@
     <div class="m-sidebar-header">
         <div class="m-sidebar-logo">
             <a class="mobile-logo-link" href="{{ url('https://tggindia.com/') }}">
-                <img class="mobile-logo" src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}" alt="TGG India Logo">
+                <img class="mobile-logo" src="{{ asset($image) }}" alt="TGG India Logo">
             </a>
         </div>
         <button id="mobileSidebarClose" class="m-close-btn" aria-label="Close menu">
@@ -41,7 +41,7 @@
     <!-- PROFILE SECTION (mirroring desktop) -->
     <div class="m-profile-section">
         <div class="m-avatar-container">
-            <img src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}" class="m-profile-avatar">
+            <img src="{{ asset($image) }}" class="m-profile-avatar">
         </div>
         <div class="m-profile-card">
             <h3 class="m-profile-name">{{ $user->name ?? 'Member' }}</h3>
@@ -91,6 +91,20 @@
                 </li>
             @endif
 
+            <!-- Business -->
+            <li class="m-sidebar-item">
+                <a href="{{ route('tgg-india.businesses.index', ['role' => auth('web2')->user()->role_key]) }}" class="m-sidebar-link {{ request()->is('tgg-meta/tgg-india/*/businesses*') ? 'active' : '' }}">
+                    <x-heroicon-o-briefcase class="icon"/>
+                    <span class="nav-label">Business</span>
+                </a>
+            </li>
+            <li class="m-sidebar-item">
+                <a href="{{ route('tgg-india.projects.index', ['role' => auth('web2')->user()->role_key]) }}" class="m-sidebar-link {{ request()->is('tgg-meta/tgg-india/*/projects*') ? 'active' : '' }}">
+                    <x-heroicon-o-folder class="icon"/>
+                    <span class="nav-label">Projects</span>
+                </a>
+            </li>
+            
             <!-- Assignments (if any) -->
             @if ($assignments->count() > 0)
                 <li class="m-sidebar-item">

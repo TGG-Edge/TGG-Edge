@@ -30,19 +30,21 @@
                 </a>
             </li>
 
+            <li class="m-sidebar-item {{ request()->routeIs('tgg-india.products.index') ? 'active' : '' }}">
+                <a href="{{ route('tgg-india.products.index', ['role' => auth('web2')->user()->role_key]) }}" class="m-sidebar-link">
+                    <x-ri-shopping-bag-line class="icon"/> Products
+                </a>
+            </li>
+
             <!-- Advancement (Dropdown) -->
             <li class="m-sidebar-item has-dropdown">
                 <a href="javascript:void(0)" class="m-sidebar-link  dropdown-toggle">
                     <div class="dropdown-left">
                         <!-- <i class="fas fa-chart-line"></i> -->
                         <x-heroicon-o-arrow-trending-up class="icon" />
-
                         <span>Advancement</span>
-
-
                     </div>
                     <x-ri-arrow-right-s-line class="sidebar-icon" />
-
                 </a>
                 <ul class="submenu">
                     <li>

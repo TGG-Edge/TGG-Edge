@@ -193,6 +193,8 @@ class ShowCaseController extends Controller
             'modicare_checkout',
             'motilal_checkout',
             'india_insure_checkout',
+            'vestige_team_work_checkout',
+            'via_travel_checkout',
             'tgg_foundation_checkout',
         ] as $field) {
             if ($request->has($field)) {
@@ -263,6 +265,7 @@ class ShowCaseController extends Controller
                         $link = ($field === 'tgg_foundation') ? ($request->input("{$field}_links")[$i] ?? '') : '';
                         $existing[] = [
                             'img' => $imgPath,
+                            'title' => $request->input("{$field}_titles")[$i] ?? '',
                             'note' => $note,
                             'link' => $link,
                         ];
@@ -276,6 +279,7 @@ class ShowCaseController extends Controller
                         $link = ($field === 'tgg_foundation') ? ($request->input("{$field}_new_links")[$i] ?? '') : '';
                         $existing[] = [
                             'img' => '/storage/' . $path,
+                            'title' => $request->input("{$field}_new_titles")[$i] ?? '',
                             'note' => $note,
                             'link' => $link,
                         ];

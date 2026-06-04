@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\TggIndia\BusinessController;
+use App\Http\Controllers\TggIndia\ProjectController;
 use App\Models\UserSecondary;
 
 Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->group(function () {
@@ -179,7 +181,21 @@ Route::middleware('web')->prefix('tgg-meta/tgg-india')->name('tgg-india.')->grou
       ->name('email-check.delete');
   });
 
+  Route::middleware(['dynamic_role:1,3,7,8,6'])->group(function () {
+    Route::resource('{role}/businesses', BusinessController::class);
+  });
 
+  Route::middleware(['dynamic_role:1,3,7,8,6'])->group(function () {
+    Route::resource('{role}/projects', App\Http\Controllers\TggIndia\ProjectController::class);
+  });
+
+  Route::middleware(['dynamic_role:1,3,7,8,6,9'])->group(function () {
+      Route::resource('{role}/products', App\Http\Controllers\TggIndia\ProductController::class);
+  });
+
+  Route::get('products/spouse/{spouse}',
+        [App\Http\Controllers\TggIndia\ProductController::class, 'spouseProducts']
+    )->name('tgg-india.products.spouse');
   
 
 });

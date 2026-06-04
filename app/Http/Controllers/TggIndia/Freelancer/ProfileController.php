@@ -75,6 +75,7 @@ class ProfileController extends Controller
             // Password validation
             'current_password'          => 'nullable|required_with:new_password',
             'new_password'              => 'nullable|string|min:6|confirmed',
+            'skills'                => 'nullable|string',
         ]);
 
         // ======== EXTRA REGEX VALIDATION USING HELPER ========
@@ -123,6 +124,7 @@ class ProfileController extends Controller
             'rhm_number'      => $request->rhm_number,
             'type_of_engagement' => $request->type_of_engagement,
             'gst_no'          => $request->gst_no,
+            'skills'          => $request->skills,
         ]);
 
         // Update image

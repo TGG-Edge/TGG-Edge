@@ -19,7 +19,7 @@
     <div class="profile-section">
         <div class="bg-color">
             <div class="avatar-container">
-                <img src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}" class="profile-avatar">
+                <img src="{{ asset($image) }}" class="profile-avatar">
             </div>
         </div>
 
@@ -122,6 +122,22 @@
             </ul>
         </li>
 
+        <!-- Business -->
+        <li class="nav-item">
+            <a href="{{ route('tgg-india.businesses.index', ['role' => auth('web2')->user()->role_key]) }}" class="nav-link sidebar-nav-link">
+                <x-heroicon-o-briefcase class="icon"/>
+                <span class="nav-label">Business</span>
+            </a>
+        </li>
+
+        <!-- project -->
+        <li class="nav-item">
+            <a href="{{ route('tgg-india.projects.index', ['role' => auth('web2')->user()->role_key]) }}" class="nav-link sidebar-nav-link">
+                <x-heroicon-o-folder class="icon"/>
+                <span class="nav-label">Projects</span>
+            </a>
+        </li>
+        
         <!-- Assignments -->
         <li class="nav-item">
             <a href="{{ route('tgg-india.admin.assignments.index') }}" class="nav-link sidebar-nav-link">
@@ -129,6 +145,8 @@
                 <span class="nav-label">Assignments</span>
             </a>
         </li>
+
+        
 
         <!-- Venture -->
         <li class="nav-item">

@@ -27,7 +27,7 @@
     <div class="m-sidebar-header">
         <div class="m-sidebar-logo">
             <a class="mobile-logo-link" href="{{ url('https://tggindia.com/') }}">
-                <img class="mobile-logo" src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}" alt="TGG India Logo">
+                <img class="mobile-logo" src="{{ asset($image) }}" alt="TGG India Logo">
             </a>
         </div>
         <button id="mobileSidebarClose" class="m-close-btn" aria-label="Close menu">
@@ -38,7 +38,7 @@
     <!-- PROFILE SECTION -->
     <div class="m-profile-section">
         <div class="m-avatar-container">
-            <img src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}" class="m-profile-avatar">
+            <img src="{{ asset($image) }}" class="m-profile-avatar">
         </div>
         <div class="m-profile-card">
             <h3 class="m-profile-name">{{ $user->name ?? 'Co-Creator' }}</h3>
@@ -88,6 +88,19 @@
                 </li>
             @endif
 
+            <!-- Business -->
+            <li class="m-sidebar-item">
+                <a href="{{ route('tgg-india.businesses.index', ['role' => auth('web2')->user()->role_key]) }}" class="m-sidebar-link {{ request()->is('tgg-meta/tgg-india/*/businesses*') ? 'active' : '' }}">
+                    <x-heroicon-o-briefcase class="icon"/>
+                    <span class="nav-label">Business</span>
+                </a>
+            </li>
+            <li class="m-sidebar-item">
+                <a href="{{ route('tgg-india.projects.index', ['role' => auth('web2')->user()->role_key]) }}" class="m-sidebar-link {{ request()->is('tgg-meta/tgg-india/*/projects*') ? 'active' : '' }}">
+                    <x-heroicon-o-folder class="icon"/>
+                    <span class="nav-label">Projects</span>
+                </a>
+            </li>
             <!-- Assignments -->
             @if ($assignments->count() > 0)
                 <li class="m-sidebar-item">
@@ -96,6 +109,8 @@
                     </a>
                 </li>
             @endif
+
+            
 
             <!-- Advancement Dropdown -->
             @php
@@ -121,7 +136,7 @@
             </li>
 
             <!-- Links (Sitemap) Dropdown -->
-            <li class="m-sidebar-item has-dropdown">
+            {{-- <li class="m-sidebar-item has-dropdown">
                 <a href="javascript:void(0)" class="m-sidebar-link dropdown-toggle">
                     <div class="dropdown-left">
                         <x-ri-map-line class="icon"/>
@@ -132,7 +147,7 @@
                 <ul class="submenu">
                     <li><a href="https://tggindia.com/my-account/" class="submenu-link" target="_blank">Journey with TGG Login</a></li>
                 </ul>
-            </li>
+            </li> --}}
 
             <!-- Modules Dropdown (dynamic) -->
             @if ($user->modules->isNotEmpty())

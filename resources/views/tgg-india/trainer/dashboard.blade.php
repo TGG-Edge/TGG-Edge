@@ -171,7 +171,7 @@
     </div>
 
     <div class="top-section">
-        <div class="top-section-container-left">    
+        <div class="top-section-container-left">
             <div class="welcome-card">
                 <h2>Hello {{ $user->name ?? 'Trainer' }}</h2>
                 <p><span>Welcome to TGG Meta—</span>

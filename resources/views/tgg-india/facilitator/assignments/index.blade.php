@@ -10,6 +10,11 @@
         <div class="d-flex align-items-center gap-2">
             @if(request()->has('parent_id'))
             <a href="{{ route('tgg-india.facilitator.assignments.create',[ 'parent_id' => request()->parent_id]) }}" class="btn btn-primary assignment-button"><i class="bi bi-plus-lg"></i>New Assignment</a>
+            @else
+                <a href="{{ route('tgg-india.facilitator.assignments.create') }}" 
+                   class="btn btn-primary assignment-button">
+                    <i class="bi bi-plus-lg"></i> New Assignment
+                </a>
             @endif
         </div>
     </div>

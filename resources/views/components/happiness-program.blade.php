@@ -58,12 +58,13 @@
 
                         <div class="card-content">
                             {{-- Use note if exists, else fallback title --}}
-                            @if(!empty($item['note']))
-                                <h3 class="card-heading">{{ \Illuminate\Support\Str::limit(strip_tags($item['note']), 25) }}</h3>
-                            @else
-                                <h3 class="card-heading">{{ $collection['title'] }}</h3>
+                            {{-- <h3 class="card-heading">{{ $item['title'] ?? 'N/A'  }}</h3> --}}
+
+                            @if(!empty($item['title']))
+                            <span class="date">{{ $item['title']  }}</span>
                             @endif
-                            <p class="card-desc">{{ $collection['title'] }}</p>
+                            
+                            <!-- <p class="card-desc">{{ $collection['title'] }}</p> -->
                             <div class="d-flex justify-content-between align-items-center">
                                 @if(!empty($item['link']))
                                     <a href="{{ $item['link'] }}" class="card-link">Explore &rarr;</a>

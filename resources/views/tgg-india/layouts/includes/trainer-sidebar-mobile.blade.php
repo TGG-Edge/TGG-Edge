@@ -22,7 +22,7 @@
     <div class="m-sidebar-header">
         <div class="m-sidebar-logo">
             <a class="mobile-logo-link" href="{{ url('https://tggindia.com/') }}">
-                <img class="mobile-logo" src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}" alt="TGG India Logo">
+                <img class="mobile-logo" src="{{ asset($image) }}" alt="TGG India Logo">
             </a>
         </div>
         <button id="mobileSidebarClose" class="m-close-btn" aria-label="Close menu">
@@ -33,7 +33,7 @@
     <!-- PROFILE SECTION -->
     <div class="m-profile-section">
         <div class="m-avatar-container">
-            <img src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}" class="m-profile-avatar">
+            <img src="{{ asset($image) }}" class="m-profile-avatar">
         </div>
         <div class="m-profile-card">
             <h3 class="m-profile-name">{{ $user->name ?? 'Trainer' }}</h3>

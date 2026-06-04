@@ -17,6 +17,19 @@
 
         <div class="row">
             <div class="col-md-6 mb-3 page-text">
+                <label>Image:</label>
+
+                <input type="file" name="image" class="form-control page-inputtext" accept="image/*">
+
+                @if(!empty($user->image))
+                    <div class="mt-2">
+                        <img src="{{ asset('storage/' . $user->image) }}"
+                            style="width: 80px; height: 80px; object-fit: fill; border-radius: 8px;">
+                    </div>
+                @endif
+            </div>
+
+            <div class="col-md-6 mb-3 page-text">
                 <label>Name:</label>
                 <input type="text" name="name" class="form-control page-inputtext" value="{{ $user->name }}">
             </div>

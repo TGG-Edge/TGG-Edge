@@ -11,7 +11,7 @@ class AssignmentController extends Controller
 {
     public function index(Request $request)
     {
-         $query = AssignmentSecondary::query()
+        $query = AssignmentSecondary::query()
         ->where('assigned_to', auth('web2')->id())
         ->latest();
 

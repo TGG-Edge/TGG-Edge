@@ -284,7 +284,7 @@
     <div class="top-section">
         <div class="top-section-container-left">
             <div class="welcome-card">
-                <h2>Welcome to {{ $user->name ?? 'Admin' }}</h2>
+                <h2>Hello {{ $user->name ?? 'Admin' }}</h2>
                 <p><span>Welcome to TGG Meta—</span>
                     It is a dynamic hub where ethical research meets grassroots action. This is where your inquiries, insights, and efforts converge to shape meaningful change through collaborative, well-coordinated projects.
                     As a volunteer or researcher, you are part of a unified ecosystem committed to experiential learning, rigorous documentation, and outcome-oriented exploration. Here, you’ll find streamlined tools to manage assignments, exchange knowledge, and align your work with the broader values of sustainability, compassion, and community empowerment.
@@ -368,32 +368,6 @@
     </div>
 
     <!-- Venture Bench Support -->
-    <div class="section-container">
-        <div class="heading-container">
-            <div>
-                <h2>Venture Bench Support</h2>
-            </div>
-            <a href="{{ route('tgg-india.venture-bench-services.index', ['role' => auth('web2')->user()->role_key]) }}">View All</a>
-        </div>
-
-        <div class="venture-bench-support">
-            @foreach(getVentureBenchSupportDashbaordData() as $item)
-            <div class="venture-bench-card">
-                <div class="icon-wrapper main-icon"
-                    style="background-color: {{ $item['bg'] }}; color: {{ $item['color'] }};">
-                    <x-dynamic-component :component="$item['icon']" class="stat-icon"
-                        style="color: {{ $item['color'] }};" />
-                </div>
-                <div class="venture-bench-card-text-info">
-                    <h3 class="title">{{ $item['title'] }}</h3>
-                    @php
-                       $item['desc'] = implode(', ', $item['points']);
-                    @endphp
-                    <p class="desc">{{ $item['desc'] }}</p>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
+    <x-venture-bench-support />
 </main>
 @endsection

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
             $table->foreignId('assigned_to')->constrained('users')->onDelete('cascade'); // assignee
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');  // admin/system
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
             $table->date('due_date')->nullable();
             $table->timestamps();
         });

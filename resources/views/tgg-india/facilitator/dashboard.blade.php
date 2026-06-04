@@ -135,7 +135,23 @@
 
     $user = \App\Models\UserSecondary::find(auth('web2')->id());
     
-    
+    $projects = \App\Models\ProjectSecondary::query();
+
+    if (auth('web2')->user()->id != 1) {
+
+        $userId = auth('web2')->user()->id;
+
+        $projects->where(function ($query) use ($userId) {
+            $query->where('created_by', $userId)
+                    ->orWhereHas('members', function ($q) use ($userId) {
+                        $q->where('user_id', $userId);
+                    });
+        });
+    }
+
+    $projects = $projects->with('owner')
+                     ->latest()
+                     ->get();
 
     $recentOrders = [
         [
@@ -306,15 +322,7 @@
                 <p><span>Welcome to TGG Meta—</span>
                     {!! $showcase->welcome_note_facilitator ?? 'a space for responsible humans to transform their lives through ethical entrepreneurship and collective action. Anchor your journey in The Power of 5 and The Art of Gifting.' !!}</p>
             </div>
-            <div class="active-projects">
-                <h2>Project Summary</h2>
-                <ul class="active-projects-list">
-                    <li>
-                        <h4>Your ongoing Projects</h4>
-                        <div><span class="badge"></span> <span class="badge-status-text">{{ $mainAssignmentCount }} Active</span></div>
-                    </li>
-                </ul>
-            </div>
+            <x-project-summary  />
         </div>
 
         <x-latest-announcements />
@@ -349,7 +357,7 @@
             @endforeach
         </div>
 
-        <!-- Order Stats -->
+        {{-- <!-- Order Stats -->
         <div class="orders-grid">
             @foreach($recentOrders as $order)
             <div class="order-box">
@@ -391,10 +399,72 @@
 
             </div>
             @endforeach
+        </div> --}}
+
+        <div class="orders-grid">
+            @foreach($projects as $project)
+            <div class="order-box">
+
+                <div class="order-info">
+
+                    <div class="orders-stats-actions-container">
+                        <div class="orders-stats-icon-container">
+                            <x-heroicon-o-briefcase class="order-icon" />
+                        </div>
+
+                        <x-ri-more-2-line class="orders-stats-more-icon" />
+                    </div>
+
+                    <strong class="order-number">
+                        {{ $project->title }}
+                    </strong>
+
+                    <div class="customer-date-order-container">
+
+                        <p class="order-customer">
+                            <x-heroicon-o-user class="order-stats-icon" />
+                            Owner:
+                            <span>{{ optional($project->owner)->name }}</span>
+                        </p>
+
+                        <p class="order-date">
+                            <x-ri-calendar-event-line class="order-stats-icon" />
+                            Start:
+                            <span>{{ $project->start_date }}</span>
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="order-status-wrapper">
+                    <span>Status:</span>
+
+                    @php
+                        $statusColors = [
+                            'pending' => ['#FFF3CD', '#856404'],
+                            'started' => ['#D1ECF1', '#0C5460'],
+                            'completed' => ['#D4EDDA', '#155724'],
+                            'hold' => ['#F8D7DA', '#721C24'],
+                            'rejected' => ['#F8D7DA', '#721C24'],
+                        ];
+
+                        [$bg, $text] = $statusColors[$project->status] ?? ['#EEE', '#333'];
+                    @endphp
+
+                    <div class="order-status"
+                        style="background-color: {{ $bg }}; color: {{ $text }};">
+                        {{ ucfirst($project->status) }}
+                    </div>
+                </div>
+
+            </div>
+            @endforeach
         </div>
 
     </div>
 
+
+    <x-revenue-ready-kit :items="getRevenueReadyKit()" title="Revenue Ready Kit" view-all-link="#"/>
 
     <!-- Happiness Program  Section -->
     <x-happiness-program :showcase="$showcase" />

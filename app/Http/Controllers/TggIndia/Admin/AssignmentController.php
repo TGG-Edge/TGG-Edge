@@ -56,8 +56,9 @@ class AssignmentController extends Controller
             'assigned_to' => $request->assigned_to,
             'created_by'  => Auth('web2')->id(),
             'due_date'    => $request->due_date,
-            'price'    => $request->price,
+            'price'    => $request->price,  
             'parent_id'   => $request->parent_id ?? null,
+            'project_id' =>  $request->project_id ?? null,
         ]);
 
         if ($request->filled('parent_id')) {

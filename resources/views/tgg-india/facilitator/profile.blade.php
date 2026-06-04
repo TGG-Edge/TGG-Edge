@@ -28,6 +28,18 @@
 
         <div class="row">
             <div class="col-md-6 mb-3 page-text">
+                <label>Image:</label>
+
+                <input type="file" name="image" class="form-control page-inputtext" accept="image/*">
+
+                @if(!empty($user->image))
+                    <div class="mt-2">
+                        <img src="{{ asset('storage/' . $user->image) }}"
+                            style="width: 80px; height: 80px; object-fit: fill; border-radius: 8px;">
+                    </div>
+                @endif
+            </div>
+            <div class="col-md-6 mb-3 page-text">
                 <label>Name:</label>
                 <input type="text" name="name" class="form-control page-inputtext" value="{{ $user->name }}">
             </div>
@@ -54,6 +66,12 @@
                 <input type="text" name="gst_no" class="form-control page-inputtext" value="{{ $user->gst_no }}">
             </div>
             
+            <div class="col-md-6 mb-3 page-text">
+                <label>Skills:</label>
+                <input type="text" name="skills" class="form-control page-inputtext" value="{{ $user->skills ?? '' }}" placeholder="Enter comma separated skills">
+            </div>
+
+
             <div class="col-md-6 mb-3 page-text">
                 <label>Type of Engagement:</label>
                 <select name="type_of_engagement" class="form-control page-inputtext">

@@ -3,19 +3,18 @@
 
         <div class="heading-container">
             <div>
-                <h2>Freelancing Opportunities</h2>
+                <h2>Freelance Opportunities</h2>
                 <p>Earn extra by leveraging your skills</p>
             </div>
         </div>
 
         <div class="freelance-opportunity-list">
             @if (!empty($opportunities))
-                @foreach($opportunities as $item)
-
+                @foreach(array_slice(array_reverse($opportunities), 0, 4) as $item)
                     <div class="freelance-list-item"
                          data-modal
                          data-title="{{ $item['title'] }}"
-                         data-note='@json($item["note"] ?? "")'
+                         data-note="{{ $item['note'] ?? ''}}"
                          data-img="{{ $item['img'] ?? '' }}"
                          data-link="{{ $item['link'] ?? '' }}"
                     >

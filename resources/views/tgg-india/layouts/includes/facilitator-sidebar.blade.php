@@ -29,7 +29,7 @@
     <div class="profile-section">
         <div class="bg-color">
             <div class="avatar-container">
-                <img src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}" class="profile-avatar">
+                <img src="{{ asset($image) }}" class="profile-avatar">
             </div>
         </div>
 
@@ -85,15 +85,22 @@
         </li>
         @endif
 
+        <li class="nav-item">
+            <a href="{{ route('tgg-india.projects.index', ['role' => auth('web2')->user()->role_key]) }}" class="nav-link sidebar-nav-link">
+                <x-heroicon-o-folder class="icon"/>
+                <span class="nav-label">Projects</span>
+            </a>
+        </li>
+        
         <!-- Assignments -->
-        @if ($assignments->count() > 0)
+        {{-- @if ($assignments->count() > 0) --}}
         <li class="nav-item {{ request()->is('tgg-meta/tgg-india/facilitator/assignee/assignments*') ? 'active' : '' }}">
             <a href="{{ route('tgg-india.facilitator.assignments.index') }}" class="nav-link sidebar-nav-link">
                 <x-heroicon-o-clipboard-document-list class="icon"/>
                 <span class="nav-label">Assignments</span>
             </a>
         </li>
-        @endif
+        {{-- @endif --}}
 
         <!-- Campaign -->
         <li class="nav-item has-dropdown {{ request()->is('tgg-meta/tgg-india/facilitator/*/templates*') ? 'active is-open' : '' }}">

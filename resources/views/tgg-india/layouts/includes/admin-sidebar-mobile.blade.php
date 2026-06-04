@@ -5,7 +5,7 @@
         <div class="m-sidebar-logo">
             <a class="mobile-logo-link" href="{{ url('https://tggindia.com/') }}">
                 <img class="mobile-logo"
-                    src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}"
+                    src="{{ asset($image) }}"
                     alt="TGG India Logo">
             </a>
         </div>
@@ -97,6 +97,21 @@
                     </li>
 
                 </ul>
+            </li>
+
+            <!-- Business -->
+            <li class="m-sidebar-item">
+                <a href="{{ route('tgg-india.businesses.index', ['role' => auth('web2')->user()->role_key]) }}" class="m-sidebar-link {{ request()->is('tgg-meta/tgg-india/*/businesses*') ? 'active' : '' }}">
+                    <x-heroicon-o-briefcase class="icon"/>
+                    Business    
+                </a>
+            </li>
+
+            <li class="m-sidebar-item">
+                <a href="{{ route('tgg-india.projects.index', ['role' => auth('web2')->user()->role_key]) }}" class="m-sidebar-link {{ request()->is('tgg-meta/tgg-india/*/projects*') ? 'active' : '' }}">
+                    <x-heroicon-o-folder class="icon"/>
+                    Projects
+                </a>
             </li>
 
             <!-- Assignments -->

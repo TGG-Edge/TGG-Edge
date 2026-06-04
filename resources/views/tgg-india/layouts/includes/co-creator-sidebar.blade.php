@@ -27,7 +27,7 @@
     <div class="profile-section">
         <div class="bg-color">
             <div class="avatar-container">
-                <img src="{{ asset('assets/tgg-india/images/svg-viewer.svg') }}" class="profile-avatar">
+                <img src="{{ asset($image) }}" class="profile-avatar">
             </div>
         </div>
 
@@ -79,6 +79,19 @@
             </li>
         @endif
 
+        <!-- Business -->
+        <li class="nav-item">
+            <a href="{{ route('tgg-india.businesses.index', ['role' => auth('web2')->user()->role_key]) }}" class="nav-link sidebar-nav-link">
+                <x-heroicon-o-briefcase class="icon"/>
+                <span class="nav-label">Business</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('tgg-india.projects.index', ['role' => auth('web2')->user()->role_key]) }}" class="nav-link sidebar-nav-link">
+                <x-heroicon-o-folder class="icon"/>
+                <span class="nav-label">Projects</span>
+            </a>
+        </li>
         <!-- Assignments -->
         @if ($assignments->count() > 0)
             <li class="nav-item {{ request()->is('tgg-edge/tgg-fct/assignee/assignments*') ? 'active' : '' }}">
@@ -88,6 +101,8 @@
                 </a>
             </li>
         @endif
+
+        
 
         <!-- Advancement Dropdown (Incentive, Reward, Invoice, Receipt) -->
         @php
@@ -113,7 +128,7 @@
         </li>
 
         <!-- Links (Sitemap) Dropdown -->
-        <li class="nav-item has-dropdown">
+        {{-- <li class="nav-item has-dropdown">
             <a href="javascript:void(0)" class="nav-link sidebar-nav-link dropdown-toggle">
                 <div class="dropdown-left">
                     <x-ri-map-line class="icon"/>
@@ -124,7 +139,7 @@
             <ul class="submenu">
                 <li><a href="https://tggindia.com/my-account/" class="submenu-link" target="_blank">Journey with TGG Login</a></li>
             </ul>
-        </li>
+        </li> --}}
 
         <!-- Modules Dropdown (dynamic) -->
         @if ($user->modules->isNotEmpty())

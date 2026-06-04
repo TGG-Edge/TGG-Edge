@@ -208,7 +208,18 @@
         </p>
     </div>
 
+    <div class="top-section">
+        <div class="top-section-container-left">
+            <div class="welcome-card">
+                <h2>Hello {{ $user->name ?? 'Facilitator' }}</h2>
+                <p><span>Welcome to TGG Meta—</span>
+                    {!! $showcase->welcome_note_facilitator ?? 'a space for responsible humans to transform their lives through ethical entrepreneurship and collective action. Anchor your journey in The Power of 5 and The Art of Gifting.' !!}</p>
+            </div>
+            <x-project-summary  />
+        </div>
     <x-latest-announcements />
+
+    </div>
 
     <!-- My Project Section -->
     <div class="section-container">
@@ -290,36 +301,7 @@
     </div>
 
     <!--  Latest Blogs & News Section -->
-    <div class="section-container">
-        <div class="heading-container">
-            <div>
-                <h2>Latest Blogs & News</h2>
-
-            </div>
-            <a href="">View All</a>
-        </div>
-
-        <div class="news-list-container">
-            @foreach($newsArticles as $article)
-            <a href="{{ $article['link'] }}" class="news-list-item">
-
-                <!-- Thumbnail Image -->
-                <div class="news-image-wrapper">
-                    <img src="{{ $article['image'] }}" alt="{{ $article['title'] }}" class="news-thumbnail">
-                </div>
-
-                <!-- Text Content (Title Only) -->
-                <div class="news-content">
-                    <h4 class="news-title">{{ $article['title'] }}</h4>
-                </div>
-
-                <!-- Right Arrow -->
-                <x-ri-arrow-right-s-line class="icon" />
-
-            </a>
-            @endforeach
-        </div>
-    </div>
+        <x-latest-blogs-news :latest_blogs_and_news="$showcase->latest_blogs_and_news" />
 </main>
 @endsection
 

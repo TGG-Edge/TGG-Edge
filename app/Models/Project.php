@@ -16,5 +16,10 @@ class Project extends Model
     // 2. A Project HAS MANY volunteer collaborations
     public function collaborations() {
         return $this->hasMany(ProjectCollaboration::class, 'project_id', 'id');
+    }   
+
+    public function assignments()
+    {
+        return $this->hasMany(AssignmentSecondary::class, 'project_id');
     }
 }

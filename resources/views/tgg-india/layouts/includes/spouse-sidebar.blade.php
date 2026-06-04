@@ -27,7 +27,7 @@
 
     <!-- 1. TOGGLE BUTTON -->
     <div class="toggle-btn-container">
-        <x-ri-menu-line class="sidebar-toggle-btn"/>
+        <x-ri-menu-line class="sidebar-toggle-btn "/>
     </div>
 
     <!-- 2. PROFILE CARD -->
@@ -59,8 +59,15 @@
         <!-- Profile -->
         <li class="nav-item {{ request()->routeIs('tgg-india.spouse.profile.index') ? 'active' : '' }}">
             <a href="{{ route('tgg-india.spouse.profile.index') }}" class="nav-link sidebar-nav-link">
-                <x-ri-user-line class="sidebar-icon" />
+                <x-ri-user-line class="sidebar-icon"/>
                 <span class="nav-label">Profile</span>
+            </a>
+        </li>
+
+        <li class="nav-item {{ request()->routeIs('tgg-india.products.index') ? 'active' : '' }}">
+            <a href="{{ route('tgg-india.products.index', ['role' => auth('web2')->user()->role_key]) }}" class="nav-link sidebar-nav-link">
+                <x-ri-shopping-bag-line class="icon"/>
+                <span class="nav-label">Products</span>
             </a>
         </li>
 

@@ -35,8 +35,10 @@
                                 value="{{ $opportunity['link'] ?? '' }}">
 
                             <input type="hidden" name="latest_announcements[{{ $i }}][updated_at]"
-                                class="form-control my-1" placeholder="Opportunity updated_at"
-                                value="{{ now() }}">
+                                class="form-control my-1" placeholder="Opportunity updated at"
+                                value="{{ $opportunity['updated_at'] ?? now() }}">
+
+                            
                         </div>
                     @endforeach
                 </div>
@@ -155,6 +157,10 @@
 
                 <input type="url" name="latest_announcements[${index}][link]" 
                     class="form-control my-1" placeholder="Opportunity Link">
+
+                <input type="hidden" name="latest_announcements[${index}][updated_at]"
+                    class="form-control my-1" placeholder="Opportunity updated at"
+                    value="{{ now() }}">
             `;
             wrapper.appendChild(div);
 

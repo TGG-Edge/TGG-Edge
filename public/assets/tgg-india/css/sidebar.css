@@ -109,7 +109,8 @@ a {
     border-radius: 50%;
     border: 2px solid var(--bg-white);
     margin-bottom: 12px;
-    object-fit: cover;
+    object-fit: fill;
+    height: 100%;
 }
 
 .profile-name {
@@ -338,10 +339,4 @@ a {
     height: 22px;
     color: var(--text-main);
     transition: color 0.2s ease;
-}
-
-
-
-.logout-section .logout-btn, .nav-link.sidebar-nav-link.dropdown-toggle{
-    justify-content: left !important;
 }

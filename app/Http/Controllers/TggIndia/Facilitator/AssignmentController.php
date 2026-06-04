@@ -5,13 +5,14 @@ namespace App\Http\Controllers\TggIndia\Facilitator;
 use App\Http\Controllers\Controller;
 use App\Models\Assignment;
 use App\Models\AssignmentSecondary;
+use App\Models\UserSecondary;
 use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
 {
     public function index(Request $request)
     {
-         $query = AssignmentSecondary::query()
+        $query = AssignmentSecondary::query()
         ->where('assigned_to', auth('web2')->id())
         ->latest();
 
@@ -30,7 +31,8 @@ class AssignmentController extends Controller
 
     public function create()
     {
-        return view('tgg-india.facilitator.assignments.create');
+        $users = UserSecondary::whereIn('user_role',[2,3,7,8,6])->get();
+        return view('tgg-india.facilitator.assignments.create', ['users' => $users]);
     }
 
     public function store(Request $request)
@@ -53,6 +55,7 @@ class AssignmentController extends Controller
             'due_date'    => $request->due_date,
             'price'    => $request->price,
             'parent_id'   => $request->parent_id ?? null,
+            'project_id' =>  $request->project_id ?? null,
         ]);
 
         if ($request->filled('parent_id')) {
@@ -67,8 +70,8 @@ class AssignmentController extends Controller
     public function edit(AssignmentSecondary $assignment)
     {
         $this->authorizeAssignment($assignment);
-
-        return view('tgg-india.facilitator.assignments.edit', compact('assignment'));
+        $users = UserSecondary::whereIn('user_role',[2,3,7,8,6])->get();
+        return view('tgg-india.facilitator.assignments.edit', compact('assignment','users'));
     }
 
     public function update(Request $request, AssignmentSecondary $assignment)

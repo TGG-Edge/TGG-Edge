@@ -38,4 +38,14 @@ class AssignmentSecondary extends Model
     {
         return $this->children()->with('allChildren');
     }
+
+    public function business()
+    {
+        return $this->belongsTo(Business::class, 'business_id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(ProjectSecondary::class, 'project_id');
+    }
 }

@@ -1,11 +1,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Bellefair&display=swap" rel="stylesheet">
-<div class="footer-top-meta">
+<div class="footer-top-meta d-none">
     <p style="margin: 0 auto;">
         <img src="{{ asset('assets/tgg-india/images/TGG_Meta.png') }}" alt="TGG-META Logo" class="tgg-meta-logo">
     </p>
-</div>
+</div>  
 
-<div class="footer-container">
+<div class="footer-container d-none ">
 
     <!-- Logo -->
     <div class="footer-column">
@@ -80,4 +80,3 @@
         <p>© TGG INDIA 2026 I All rights reserved</p>
     </div>
 </div>
-

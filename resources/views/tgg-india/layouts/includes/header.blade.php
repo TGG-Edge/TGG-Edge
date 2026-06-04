@@ -2,23 +2,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
-    .nav-link {
+    .site-header .nav-link {
         /* padding: 10px 12px; */
         font-family: "Belleza", Sans-serif;
         font-weight: 600 !important;
-            font-size: 16px;
+        font-size: 16px;
         color: #000;
         position: relative;
         transition: color 0.3s ease;
         text-decoration: none;
     }
 
-     .nav-link:hover,
-    .nav-link.active {
+    .site-header .nav-link:hover,
+    .site-header .nav-link.active {
         color: #00aaff !important; /* Light blue text */
     }
     /* Hover underline effect only */
-    .nav-link::after {
+    .site-header .nav-link::after {
         content: "";
         display: block;
         width: 0%;
@@ -28,11 +28,11 @@
         transition: width 0.3s ease;
     }
 
-    .nav-link:hover::after {
+    .site-header .nav-link:hover::after {
         width: 100%;
     }
 
-    .nav-item {
+    .site-header .nav-item {
         font-size: medium;
         position: relative;
         list-style: none !important;
@@ -84,7 +84,7 @@
     }
 </style>
 
-<header class="shadow-sm bg-white sticky-top header-padding">
+<header class="site-header shadow-sm bg-white sticky-top header-padding">
     <div class="container d-flex align-items-center justify-content-between flex-wrap header-container-ipad">
         
         <!-- Logo -->

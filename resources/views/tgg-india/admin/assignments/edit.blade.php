@@ -60,7 +60,7 @@
                     @foreach($users as $user)
                         <option value="{{ $user->id }}" 
                                 @if($assignment->assigned_to == $user->id) selected @endif>
-                            {{ $user->name }} ({{ $user->email }})
+                            {{ $user->name }} ({{ $user->email }}) - ({{ $user->skills ?? 'No skills specified' }})
                         </option>
                     @endforeach
                 </select>

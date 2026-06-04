@@ -63,14 +63,13 @@
 
         .sidebar-toggle-btn {
             color: #000;
-            ;
         }
 
         .toggle-btn-container {
             position: absolute;
             top: 30px;
             transform: translateY(-50%);
-            right: -16px;
+            right: -10px;
             z-index: 1050;
             cursor: pointer;
             background: #fff;
@@ -80,8 +79,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
         }
 
         .tgg-sidebar-wrapper::-webkit-scrollbar {
@@ -202,6 +201,7 @@
                 padding: 0 !important;
             }
         }
+        
     </style>
 
 
@@ -256,7 +256,13 @@
             // Define both Desktop and Mobile views
             $sidebarView = 'tgg-india.layouts.includes.' . $baseSidebar;
             $mobileSidebarView = 'tgg-india.layouts.includes.' . $baseSidebar . '-mobile';
+
+            $image = auth('web2')->user()->image
+            ? 'storage/' . auth('web2')->user()->image
+            : 'assets/tgg-india/images/svg-viewer.svg';
         }
+
+        
     @endphp
 
     {{-- MODERN FLEXBOX LAYOUT WRAPPER --}}
@@ -269,13 +275,17 @@
             {{-- DESKTOP SIDEBAR --}}
             <aside class="tgg-sidebar-wrapper d-none d-lg-flex" id="mainSidebar">
 
-                <div class="sidebar-inner-scroll" style="overflow-y: auto; height: 100%; width: 100%;">
+                <div class="sidebar-inner-scroll" style="overflow-y: auto; height: 100%; width: 100%;"> 
                     @include($sidebarView)
                 </div>
 
 
+                <!-- <div class="toggle-btn-container" id="sidebarToggle">
+                    <x-ri-menu-line class="sidebar-toggle-btn" />
+                </div> -->
                 <div class="toggle-btn-container" id="sidebarToggle">
-                    <ri-menu-line class="sidebar-toggle-btn" />
+                    <x-heroicon-o-arrow-left id="iconLeft" class="sidebar-toggle-btn p-1" />
+                    <x-heroicon-o-arrow-right id="iconRight" class="sidebar-toggle-btn p-1 d-none" />
                 </div>
             </aside>
 
@@ -304,56 +314,56 @@
 
 
 
-    <!-- @push('scripts') -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const wrapper = document.getElementById('layoutWrapper');
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const wrapper = document.getElementById('layoutWrapper');
 
-                // --- DESKTOP Toggle Logic ---
-                document.addEventListener('click', function(e) {
-                    if (e.target.closest('#sidebarToggle') || e.target.closest('.desktop-toggle')) {
-                        wrapper.classList.toggle('collapsed');
-                        const isCollapsed = wrapper.classList.contains('collapsed');
-                        localStorage.setItem('sidebar-state', isCollapsed ? 'collapsed' : 'open');
-                    }
-                });
-
-                // Desktop Persistence
-                const savedState = localStorage.getItem('sidebar-state');
-                if (savedState === 'collapsed') {
-                    wrapper.classList.add('collapsed');
+            // --- DESKTOP Toggle Logic ---
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('#sidebarToggle') || e.target.closest('.desktop-toggle')) {
+                    wrapper.classList.toggle('collapsed');
+                    const isCollapsed = wrapper.classList.contains('collapsed');
+                    localStorage.setItem('sidebar-state', isCollapsed ? 'collapsed' : 'open');
                 }
+            });
 
-                // --- MOBILE Sidebar Logic (Fixed Overlay) ---
-                document.addEventListener('click', function(e) {
+            // Desktop Persistence
+            const savedState = localStorage.getItem('sidebar-state');
+            if (savedState === 'collapsed') {
+                wrapper.classList.add('collapsed');
+            }
 
+            // --- MOBILE Sidebar Logic (Fixed Overlay) ---
+            document.addEventListener('click', function(e) {
+
+                const mobileSidebar = document.getElementById('mobileSidebar');
+                const mobileOverlay = document.getElementById('mobileOverlay');
+                const mobToggle = document.getElementById('mobileSidebarToggle');
+                const mobClose = document.getElementById('mobileSidebarClose');
+
+                // 1. Did they click the Open Button? (or an icon inside it)
+                if (e.target.closest('#mobileSidebarToggle')) {
+                    e.preventDefault(); // Stop default button behavior
                     const mobileSidebar = document.getElementById('mobileSidebar');
                     const mobileOverlay = document.getElementById('mobileOverlay');
-                    const mobToggle = document.getElementById('mobileSidebarToggle');
-                    const mobClose = document.getElementById('mobileSidebarClose');
 
-                    // 1. Did they click the Open Button? (or an icon inside it)
-                    if (e.target.closest('#mobileSidebarToggle')) {
-                        e.preventDefault(); // Stop default button behavior
-                        const mobileSidebar = document.getElementById('mobileSidebar');
-                        const mobileOverlay = document.getElementById('mobileOverlay');
+                    if (mobileSidebar) mobileSidebar.classList.add('active');
+                    if (mobileOverlay) mobileOverlay.classList.add('active');
+                }
 
-                        if (mobileSidebar) mobileSidebar.classList.add('active');
-                        if (mobileOverlay) mobileOverlay.classList.add('active');
-                    }
+                // 2. Did they click the Overlay OR the Close Button?
+                if (e.target.closest('#mobileOverlay') || e.target.closest('#mobileSidebarClose')) {
+                    const mobileSidebar = document.getElementById('mobileSidebar');
+                    const mobileOverlay = document.getElementById('mobileOverlay');
 
-                    // 2. Did they click the Overlay OR the Close Button?
-                    if (e.target.closest('#mobileOverlay') || e.target.closest('#mobileSidebarClose')) {
-                        const mobileSidebar = document.getElementById('mobileSidebar');
-                        const mobileOverlay = document.getElementById('mobileOverlay');
-
-                        if (mobileSidebar) mobileSidebar.classList.remove('active');
-                        if (mobileOverlay) mobileOverlay.classList.remove('active');
-                    }
-                });
+                    if (mobileSidebar) mobileSidebar.classList.remove('active');
+                    if (mobileOverlay) mobileOverlay.classList.remove('active');
+                }
             });
-        </script>
-    <!-- @endpush -->
+        });
+    </script>
+    
 
 
 
@@ -549,6 +559,10 @@
                             embedUrl = "https://www.youtube.com/embed/" + url.pathname.slice(1);
                         }
 
+                        else if (url.pathname.includes("/shorts/")) {
+                            embedUrl = "https://www.youtube.com/embed/" + url.pathname.split("/shorts/")[1];
+                        }
+                        
                         // Handle watch?v= links
                         else if (url.searchParams.get("v")) {
                             embedUrl = "https://www.youtube.com/embed/" + url.searchParams.get("v");
@@ -577,6 +591,20 @@
         });
     </script>
 
+
+    <script>
+        const sidebar = document.getElementById('mainSidebar');
+        const toggleBtn = document.getElementById('sidebarToggle');
+        const leftIcon = document.getElementById('iconLeft');
+        const rightIcon = document.getElementById('iconRight');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+
+            leftIcon.classList.toggle('d-none');
+            rightIcon.classList.toggle('d-none');
+        });
+    </script>
     @stack('scripts')
 </body>
 
