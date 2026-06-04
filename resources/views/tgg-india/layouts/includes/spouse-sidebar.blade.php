@@ -1,4 +1,4 @@
-<!-- @php
+@php
     $user = auth('web2')->user();
     $modules = $user->modules;
     $host = request()->getHost();
@@ -21,7 +21,9 @@
     $otherAccounts = \App\Models\UserSecondary::where('email', $user->email)->where('id', '!=', $user->id)->get();
     $literatures = \App\Models\Literature::get();
     $assignments = \App\Models\AssignmentSecondary::where('assigned_to', $user->id)->get();
-@endphp -->
+
+    $roleName = ucfirst($user->role_name ?? $user->role_key ?? 'Spouse');
+@endphp
 
 <aside class="sidebar">
 
@@ -39,9 +41,9 @@
         </div>
 
         <div class="profile-card">
-            <h3 class="profile-name">{{ Auth::user()->name ?? 'Ravi Kumar' }}</h3>
-            <p class="profile-role">Role <span>Associate</span> </p>
-            <p class="profile-id">RHM No: <span>RHM/KL/QLN/9999</span></p>
+            <h3 class="profile-name">{{ $user->name ?? 'User' }}</h3>
+            <p class="profile-role">Role <span>{{ $roleName }}</span></p>
+            <p class="profile-id">RHM No: <span>{{ $user->rhm_number ?? 'N/A' }}</span></p>
         </div>
     </div>
 
@@ -149,7 +151,7 @@
 
     <!-- 4. LOGOUT BUTTON -->
     <div class="logout-section">
-        <a href="#" class="logout-btn">
+        <a href="{{ route('tgg-india.logout') }}" class="logout-btn">
             <x-heroicon-o-arrow-right-on-rectangle class="logout-icon"/>
             <span class="nav-label">Log out</span>
         </a>
@@ -169,12 +171,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (!parentItem || !submenu) return;
 
-            // 1. CLOSING (Now checking for 'is-open' instead of 'active')
+            // 1. CLOSING
             if (parentItem.classList.contains('is-open')) {
                 submenu.style.height = submenu.scrollHeight + 'px';
-                void submenu.offsetHeight; // Force reflow
+                void submenu.offsetHeight;
 
-                // Wait 1 frame for ultra-smooth closing
                 requestAnimationFrame(() => {
                     submenu.style.height = '0px';
                 });
@@ -193,8 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 submenu.addEventListener('transitionend', function handler(e) {
-                    if (e.propertyName === 'height' && parentItem.classList.contains(
-                            'is-open')) {
+                    if (e.propertyName === 'height' && parentItem.classList.contains('is-open')) {
                         submenu.style.height = 'auto';
                     }
                     submenu.removeEventListener('transitionend', handler);
@@ -204,4 +204,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
